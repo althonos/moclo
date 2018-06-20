@@ -10,6 +10,7 @@ from Bio.Seq import Seq
 from Bio.SeqFeature import SeqFeature, FeatureLocation, CompoundLocation
 from Bio.SeqRecord import SeqRecord
 
+
 def _ambiguous(func):
     @functools.wraps(func)
     def newfunc(self, *args, **kwargs):
