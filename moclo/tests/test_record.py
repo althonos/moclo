@@ -7,13 +7,13 @@ import unittest
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
-from automoclo.record import CircularRecord
+from moclo.record import CircularRecord
 
 
 class TestCircularRecord(unittest.TestCase):
 
     def test_init(self):
-        """Check a `CircularRecord` can be created from a `SeqRecord`.
+        """Assert a `CircularRecord` can be created from a `SeqRecord`.
         """
         sr = SeqRecord(seq=Seq("ATGCATGCATGC"), id="test_init")
         cr = CircularRecord(sr)
@@ -24,6 +24,8 @@ class TestCircularRecord(unittest.TestCase):
         self.assertEqual(cr.id, sr.id)
 
     def test_shift_seq(self):
+        """Assert a `CircularRecord` shifts its sequence as intended.
+        """
         cr = CircularRecord(seq=Seq("ATGCATGCATGC"), id="test_shift_seq")
 
         self.assertEqual((cr >> 2).seq, Seq("GCATGCATGCAT"))
@@ -36,3 +38,4 @@ class TestCircularRecord(unittest.TestCase):
         self.assertEqual((cr << 14).seq, "GCATGCATGCAT")
         self.assertEqual((cr << 0).seq, cr.seq)
         self.assertEqual((cr << len(cr)).seq, cr.seq)
+        self.assertEqual((cr << -5).seq, (cr >> 5).seq)
