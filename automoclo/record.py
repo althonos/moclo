@@ -6,7 +6,6 @@ import copy
 import functools
 
 import six
-from Bio.Seq import Seq
 from Bio.SeqFeature import SeqFeature, FeatureLocation, CompoundLocation
 from Bio.SeqRecord import SeqRecord
 
@@ -58,24 +57,22 @@ class CircularRecord(SeqRecord):
                 annotations,
                 letter_annotations)
 
-
     # Patch methods that are ambiguous with a non-linear sequence.
 
     @_ambiguous
-    def __add__(self, other):
+    def __add__(self, other):   # noqa: D105
         pass
 
     @_ambiguous
-    def __radd__(self, other):
+    def __radd__(self, other):   # noqa: D105
         pass
-
 
     # Patch other methods to work as intended
 
-    def __contains__(self, char):
-        return char in str(self.seq)*2   # FIXME ?
+    def __contains__(self, char):  # noqa: D105
+        return char in str(self.seq) * 2   # FIXME ?
 
-    def __getitem__(self, index):
+    def __getitem__(self, index):  # noqa: D105
         rec = super(CircularRecord, self).__getitem__(index)
         return SeqRecord(
             rec.seq,
@@ -87,7 +84,6 @@ class CircularRecord(SeqRecord):
             copy.deepcopy(rec.annotations),
             copy.deepcopy(rec.letter_annotations))
 
-
     # Additional methods
 
     def __lshift__(self, index):
@@ -98,7 +94,6 @@ class CircularRecord(SeqRecord):
     def __rshift__(self, index):
         """Rotate the sequence clockwise, preserving annotations.
         """
-
         index %= len(self.seq)  # avoid unnecessary cycles
 
         if index == 0:
@@ -110,7 +105,7 @@ class CircularRecord(SeqRecord):
         newfeats = []
         newletan = {
             k: v[index:] + v[:index]
-                for k, v in six.iteritems(self.letter_annotations)
+            for k, v in six.iteritems(self.letter_annotations)
         }
 
         for feature in self.features:
