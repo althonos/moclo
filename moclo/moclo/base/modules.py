@@ -7,10 +7,10 @@ import six
 from Bio.Seq import Seq
 
 from ..record import CircularRecord
-from ..utils import _StructuredRecord
+from ._structured import StructuredRecord
 
 
-class AbstractModule(_StructuredRecord):
+class AbstractModule(StructuredRecord):
     """An abstract molecular cloning module.
     """
 

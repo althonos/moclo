@@ -10,7 +10,7 @@ from ..regex import DNARegex
 
 
 @six.add_metaclass(abc.ABCMeta)
-class _StructuredRecord(object):
+class StructuredRecord(object):
 
     _structure = NotImplemented
     _regex = None

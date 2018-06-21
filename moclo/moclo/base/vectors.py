@@ -9,13 +9,13 @@ from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
 from ..record import CircularRecord
-from ..utils import _StructuredRecord
+from ._structured import StructuredRecord
 
 if typing.TYPE_CHECKING:
     from .modules import AbstractModule
 
 
-class AbstractVector(_StructuredRecord):
+class AbstractVector(StructuredRecord):
     """An abstract molecular cloning vector.
     """
     _level = None
@@ -89,5 +89,5 @@ class CassetteVector(AbstractVector):
 class MultigeneVector(AbstractVector):
     """Level 2 vector.
     """
-    
+
     _level = 2
