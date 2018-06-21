@@ -34,3 +34,5 @@ class TestCircularRecord(unittest.TestCase):
 
         self.assertEqual((cr << 1).seq, "TGCATGCATGCA")
         self.assertEqual((cr << 14).seq, "GCATGCATGCAT")
+        self.assertEqual((cr << 0).seq, cr.seq)
+        self.assertEqual((cr << len(cr)).seq, cr.seq)

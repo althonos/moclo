@@ -47,7 +47,7 @@ class CircularRecord(SeqRecord):
             if annotations is not None:
                 topology = annotations.get('topology', 'circular')
                 if topology.lower() != 'circular':
-                    raise ValueError("record does not describe a circular sequence")
+                    raise ValueError('record does not describe a circular sequence')
             super(CircularRecord, self).__init__(
                 seq,
                 id,
@@ -69,29 +69,37 @@ class CircularRecord(SeqRecord):
     def __radd__(self, other):
         pass
 
+
     # Patch other methods to work as intended
 
     def __contains__(self, char):
-        return char in str(self.seq)*2
+        return char in str(self.seq)*2   # FIXME ?
 
-    # def __getitem__(self, index):  # TODO
-    #     return super(CircularRecord, self).__getitem__(index)
+    def __getitem__(self, index):
+        rec = super(CircularRecord, self).__getitem__(index)
+        return SeqRecord(
+            rec.seq,
+            rec.id,
+            rec.name,
+            rec.description,
+            copy.deepcopy(rec.dbxrefs),
+            copy.deepcopy(rec.features),
+            copy.deepcopy(rec.annotations),
+            copy.deepcopy(rec.letter_annotations))
 
 
     # Additional methods
 
     def __lshift__(self, index):
-        """Rotate the sequence to the left, preserving annotations.
+        """Rotate the sequence counter-clokwise, preserving annotations.
         """
         return self >> (-index % len(self.seq))
 
     def __rshift__(self, index):
-        """Rotate the sequence to the right, preserving annotations.
+        """Rotate the sequence clockwise, preserving annotations.
         """
-        # FIXME: possible issue with CompoundLocation when operator
-        #        is not join
 
-        index %= len(self.seq)
+        index %= len(self.seq)  # avoid unnecessary cycles
 
         if index == 0:
             return self
@@ -111,24 +119,12 @@ class CircularRecord(SeqRecord):
             else:
                 _newloc = []
                 for part in (feature.location + index).parts:
-                    if part.end > len(newseq) and part.start > len(newseq):
-                        _newloc.append(FeatureLocation(
-                            start=part.start % len(newseq),
-                            end=part.end % len(newseq),
-                            strand=part.strand,
-                            ref=part.ref,
-                            ref_db=part.ref_db))
-                    elif part.start < len(newseq) and part.end > len(newseq):
-                        _newloc.append(FeatureLocation(
-                            start=part.start,
-                            end=len(newseq),
-                            strand=part.strand,
-                            ref=part.ref,
-                            ref_db=part.ref_db))
-                        _newloc.append(FeatureLocation(
-                            start=0,
-                            end=part.end % len(newseq),
-                            strand=part.strand,
+                    if part.end >= len(newseq) and part.start >= len(newseq):
+                        r = part.start // len(newseq)             # remainder is used to
+                        _newloc.append(FeatureLocation(           # make sure that part.end
+                            start=part.start - r * len(newseq),   # is always after part.start
+                            end=part.end - r * len(newseq),       # even on additional end
+                            strand=part.strand,                   # overlap
                             ref=part.ref,
                             ref_db=part.ref_db))
                     else:
