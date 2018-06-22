@@ -8,7 +8,6 @@ try:
 
 except ImportError:
 
-    import fs
     import importlib
     import os
     import sys
