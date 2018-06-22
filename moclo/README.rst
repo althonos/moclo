@@ -1,10 +1,9 @@
 ``moclo``
 =========
 
-*Modular cloning with the `MoClo <https://www.addgene.org/cloning/moclo/>`_ framework*.
+*Modular cloning with the* `MoClo <https://www.addgene.org/cloning/moclo/>`_ *framework*.
 
-|Source| |PyPI| |Conda| |Travis| |Codecov| |Codacy| |Format| |License|
-
+|Source| |PyPI| |Travis| |Codecov| |Codacy| |Format| |License|
 
 .. |Codacy| image:: https://img.shields.io/codacy/grade/9734bea6ec004cc4914a377d9e9f54bd/master.svg?style=flat-square&maxAge=300
    :target: https://www.codacy.com/app/althonos/fs.sshfs/dashboard
@@ -15,8 +14,8 @@
 .. |PyPI| image:: https://img.shields.io/pypi/v/moclo.svg?style=flat-square&maxAge=300
    :target: https://pypi.python.org/pypi/moclo
 
-.. .. |Conda| image:: https://anaconda.org/conda-forge/fs.sshfs/badges/installer/conda.svg
-..    :target: https://anaconda.org/conda-forge/fs.sshfs
+.. |Travis| image:: https://img.shields.io/travis/althonos/moclo.svg?style=flat&maxAge=3600
+   :target: https://travis-ci.org/althonos/moclo
 
 .. |Format| image:: https://img.shields.io/pypi/format/moclo.svg?style=flat-square&maxAge=300
    :target: https://pypi.python.org/pypi/moclo
