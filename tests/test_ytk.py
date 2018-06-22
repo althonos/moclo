@@ -42,7 +42,7 @@ def _part_doc_name(func, name, params):
     if params.args[1] not in ('cassette', 'entry vector'):
         doc = "Check that {} is identified as a YTK Type {} part.\n"
     else:
-        doc = "Check that {} is identified as a YTK {} part.\n"
+        doc = "Check that {} is identified as a YTK {}.\n"
     return doc.format(params.args[0], params.args[1])
 
 

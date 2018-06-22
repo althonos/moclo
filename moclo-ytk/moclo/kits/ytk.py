@@ -34,9 +34,6 @@ class YTKEntryVector(vectors.EntryVector):
         BsaI restriction site enclosing the placeholder sequence. As such,
         YTK Level -1 modules must embed the a BsaI binding site.
 
-    See Also:
-        `YTKProduct`.
-
     """
 
     _structure = (
@@ -58,7 +55,7 @@ class YTKCassetteVector(vectors.CassetteVector):
     assembly of parts 2, 3 and 4. Part 8, 8a and 678 are also considered
     to be cassette vectors.
 
-    See Also:
+    References:
         *Lee et al.*, Figure 2.
 
     """
@@ -90,7 +87,7 @@ class YTKProduct(modules.Product):  # FIXME ?
         that do not proceed like so won't be considered a valid product,
         although they contain the required *BsaI* site.
 
-    See Also:
+    References:
         *Lee et al.*, Supplementary Figure S19.
 
     """
