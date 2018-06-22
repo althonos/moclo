@@ -16,7 +16,7 @@ if typing.TYPE_CHECKING:
 
 
 class AbstractVector(StructuredRecord):
-    """An abstract molecular cloning vector.
+    """An abstract modular cloning vector.
     """
     _level = None
 

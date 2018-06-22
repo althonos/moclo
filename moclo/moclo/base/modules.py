@@ -11,7 +11,7 @@ from ._structured import StructuredRecord
 
 
 class AbstractModule(StructuredRecord):
-    """An abstract molecular cloning module.
+    """An abstract modular cloning module.
     """
 
     _level = None

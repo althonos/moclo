@@ -87,7 +87,7 @@ class CircularRecord(SeqRecord):
     # Additional methods
 
     def __lshift__(self, index):
-        """Rotate the sequence counter-clokwise, preserving annotations.
+        """Rotate the sequence counter-clockwise, preserving annotations.
         """
         return self >> (-index % len(self.seq))
 
