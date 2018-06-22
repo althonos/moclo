@@ -67,9 +67,9 @@ class AbstractVector(StructuredRecord):
             raise RuntimeError('not all parts were used!')
 
         # Replace placeholder in the vector while keeping annotations
-        ph_start, ph_end = self._match.span(2)
+        ph_start, ph_end = self._match.span(0)
         rec = (self.record << ph_start)
-        return CircularRecord(rec[ph_end - ph_start + 1:] + assembly)
+        return CircularRecord(assembly + rec[ph_end - ph_start:])
 
 
 class EntryVector(AbstractVector):
