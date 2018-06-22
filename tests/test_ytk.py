@@ -25,7 +25,7 @@ except ImportError:
 PLASMIDS_FILE = \
     os.path.abspath(os.path.join(__file__, '..', 'ytk.csv.xz'))
 PLASMIDS = (
-    line.split('\t')
+    line.strip().split('\t')
     for line in io.TextIOWrapper(lzma.open(PLASMIDS_FILE))
     if not line.startswith('Plasmid Name')
 )
