@@ -34,12 +34,12 @@ PLASMIDS = (
 
 def _part_func_name(func, name, params):
     if params.args[1] not in ('cassette', 'entry vector'):
-        return "test_type_{}_is_type{}".format(params.args[0], params.args[1])
+        return str("test_type_{}_is_type{}".format(params.args[0], params.args[1]))
     else:
-        return "test_type_{}_is_{}".format(params.args[0], params.args[1])
+        return str("test_type_{}_is_{}".format(params.args[0], params.args[1]))
 
 def _part_doc_name(func, name, params):
-    if params[1] not in ('cassette', 'entry vector'):
+    if params.args[1] not in ('cassette', 'entry vector'):
         doc = "Check that {} is identified as a YTK Type {} part.\n"
     else:
         doc = "Check that {} is identified as a YTK {} part.\n"
@@ -73,7 +73,7 @@ class TestYTKPlasmids(unittest.TestCase):
     }
 
     @parameterized.expand(PLASMIDS, _part_func_name, _part_doc_name)
-    def test(self, id_, type_, name, desc, seq):
+    def test_plasmid(self, id_, type_, name, desc, seq):
 
         record = CircularRecord(seq=Seq(seq), name=name, id=id_)
         part_cls = self.parts[type_]
