@@ -1,0 +1,2 @@
+parameterized
+backports.lzma  ;  python_version < '3.3'
