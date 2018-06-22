@@ -20,7 +20,7 @@ class YTKEntryVector(vectors.EntryVector):
         To the contrary of the usual MoClo entry vectors described in the
         *Weber et al.* paper, the YTK entry vectors do not provide another
         BsaI restriction site enclosing the placeholder sequence. As such,
-        YTK Level -1 modules must embbed the a BsaI binding site.
+        YTK Level -1 modules must embed the a BsaI binding site.
 
     See Also:
         `YTKProduct`.
@@ -98,7 +98,8 @@ class YTKCassette(modules.Cassette):
 
 ### PARTS
 
-_st = "GGTCTCN({start})(N*?)({end})NGAGACC"
+_ent = 'GGTCTCN({start})(N*?)({end})NGAGACC'
+_vec = '({end})(NGAGACCN*?GGTCTCN)({start})'
 
 @six.add_metaclass(abc.ABCMeta)
 class YTKPart(object):
@@ -128,75 +129,71 @@ class YTKPart(object):
 
 
 class YTKPart1(YTKPart, YTKEntry):
-    _structure = _st.format(start='CCCT', end='AACG')
+    _structure = _ent.format(start='CCCT', end='AACG')
 
 
 class YTKPart2(YTKPart, YTKEntry):
-    _structure = _st.format(start='AACG', end='TATG')
+    _structure = _ent.format(start='AACG', end='TATG')
 
 
 class YTKPart3(YTKPart, YTKEntry):
-    _structure = _st.format(start='TATG', end='ATCC')
+    _structure = _ent.format(start='TATG', end='ATCC')
 
 
 class YTKPart3a(YTKPart, YTKEntry):
-    _structure = _st.format(start='TATG', end='TTCT')
+    _structure = _ent.format(start='TATG', end='TTCT')
 
 
 class YTKPart3b(YTKPart, YTKEntry):
-    _structure = _st.format(start='TTCT', end='ATCC')
+    _structure = _ent.format(start='TTCT', end='ATCC')
 
 
 class YTKPart4(YTKPart, YTKEntry):
-    _structure = _st.format(start='ATCC', end='GCTG')
+    _structure = _ent.format(start='ATCC', end='GCTG')
 
 
 class YTKPart4a(YTKPart, YTKEntry):
-    _structure = _st.format(start='ATCC', end='TGGC')
+    _structure = _ent.format(start='ATCC', end='TGGC')
 
 
 class YTKPart4b(YTKPart, YTKEntry):
-    _structure = _st.format(start='TGGC', end='GCTG')
+    _structure = _ent.format(start='TGGC', end='GCTG')
 
 
 class YTKPart234(YTKPart, YTKEntry):
-    _structure = _st.format(start='AACG', end='GCTG')
+    _structure = _ent.format(start='AACG', end='GCTG')
 
 
 class YTKPart234r(YTKPart, YTKEntry):
-    _structure = (
-        "(AACG)" # Restriction site (start)
-        "(N"
-        "GAGACC" # BsaI
-        "N*?"    # Placeholder sequence
-        "GGTCTC" # BsaI
-        "N)"
-        "(GCTG)" # Restriction site (end)
-    )
-
+    _structure = _vec.format(start='GCTG', end='AACG')
 
 class YTKPart5(YTKPart, YTKEntry):
-    _structure = _st.format(start='GCTG', end='TACA')
+    _structure = _ent.format(start='GCTG', end='TACA')
 
 
 class YTKPart6(YTKPart, YTKEntry):
-    _structure = _st.format(start='TACA', end='GAGT')
+    _structure = _ent.format(start='TACA', end='GAGT')
 
 
 class YTKPart7(YTKPart, YTKEntry):
-    _structure = _st.format(start='GAGT', end='CCGA')
+    _structure = _ent.format(start='GAGT', end='CCGA')
 
 
 class YTKPart8(YTKPart, YTKCassetteVector):
-    _structure = '(CCCT)(NGAGACCN*?GGTCTCN)(CCGA)'
+    _structure = _vec.format(start='CCGA', end='CCCT')
 
 
 class YTKPart8a(YTKPart, YTKCassetteVector):
-    _structure = '(CAAT)(NGAGACCN*?GGTCTCN)(CCGA)'
+    _structure = _vec.format(start='CCGA', end='CAAT')
 
 
 class YTKPart8b(YTKPart, YTKEntry):
-    _structure = _st.format(start='CAAT', end='CCGA')
+    _structure = _ent.format(start='CAAT', end='CCCT')
+
 
 class YTKPart678(YTKPart, YTKCassetteVector):
-    _structure = '(CCGA)(NGAGACCN*?GGTCTCN)(TACA)'
+    _structure = _vec.format(start='TACA', end='CCCT')
+
+
+del _vec
+del _ent
