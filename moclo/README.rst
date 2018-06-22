@@ -1,7 +1,7 @@
 ``moclo``
 =========
 
-*Modular cloning with the* `MoClo <https://www.addgene.org/cloning/moclo/>`_ *framework*.
+*Modular cloning with the* `*MoClo* <https://www.addgene.org/cloning/moclo/>`__ *framework*.
 
 |Source| |PyPI| |Travis| |Codecov| |Codacy| |Format| |License|
 
