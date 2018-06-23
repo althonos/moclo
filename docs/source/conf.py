@@ -222,6 +222,15 @@ texinfo_documents = [
 
 # -- Extension configuration -------------------------------------------------
 
+# -- Options for napoleon extension ------------------------------------------
+
+napoleon_include_init_with_doc = True
+napoleon_include_special_with_doc = True
+napoleon_include_private_with_doc = True
+napoleon_use_admonition_for_examples = True
+napoleon_use_admonition_for_notes = True
+napoleon_use_admonition_for_references = True
+
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
