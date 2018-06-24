@@ -3,9 +3,10 @@ Yeast ToolKit
 
 .. currentmodule:: moclo.kits.ytk
 
+.. automodule:: moclo.kits.ytk
 
-Level -1
---------
+**Level -1**
+------------
 
 Module
 ^^^^^^

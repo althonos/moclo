@@ -8,12 +8,13 @@
 
 # -- Imports -----------------------------------------------------------------
 
+import configparser
 import os
 import sys
 # import shutil
 # import collections
-# import datetime
-# import semantic_version
+import datetime
+import semantic_version
 import sphinx_bootstrap_theme
 
 
@@ -42,14 +43,26 @@ moclo.kits.__path__.append(os.path.join(project_dir, 'moclo-ytk', 'moclo', 'kits
 
 # -- Project information -----------------------------------------------------
 
-project = 'moclo'
-copyright = '2018, Martin Larralde'
-author = 'Martin Larralde'
+# General information
+project = moclo.__name__
+copyright = '2018-{}, {}'.format(datetime.date.today().year, moclo.__author__)
+author = moclo.__author__
 
+# The parsed semantic version
+semver = semantic_version.Version.coerce(moclo.__version__)
 # The short X.Y version
-version = ''
+version = '{v.major}.{v.minor}.{v.patch}'.format(v=semver)
 # The full version, including alpha/beta/rc tags
-release = ''
+release = str(semver)
+
+# Project URLs
+_parser = configparser.ConfigParser()
+_parser.read(os.path.join(project_dir, 'moclo', 'setup.cfg'))
+project_urls = dict(
+    map(str.strip, line.split(' = ', 1))
+    for line in _parser.get('metadata', 'project_urls').splitlines()
+    if line.strip()
+)
 
 
 # -- General configuration ---------------------------------------------------
@@ -67,7 +80,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.napoleon',
     # 'sphinx.ext.todo',
-    # 'sphinx.ext.coverage',
+    'sphinx.ext.coverage',
     'sphinx.ext.mathjax',
     # 'sphinx.ext.ifconfig',
     # 'sphinx.ext.viewcode',
@@ -141,8 +154,10 @@ html_theme_options = {
 
     # A list of tuples containing pages or urls to link to.
     'navbar_links': [
-        # ("GitHub", "https://github.com/althonos/moclo", True),
-        # ("PyPI", "https://pypi.org/project/moclo", True),
+        ('GitHub', _parser.get('metadata', 'home-page').strip())
+    ] + [
+        (k, v, True) for k, v in project_urls.items()
+        if k != 'Documentation'
     ],
 
 }
@@ -160,7 +175,10 @@ html_static_path = ['_static']
 # default: ``['localtoc.html', 'relations.html', 'sourcelink.html',
 # 'searchbox.html']``.
 #
-# html_sidebars = {}
+html_sidebars = {
+    "*": ['localtoc.html'],
+    os.path.join("kits", "*"): ['localtoc.html'],
+}
 
 
 # -- Options for HTMLHelp output ---------------------------------------------

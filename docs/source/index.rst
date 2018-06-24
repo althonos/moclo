@@ -3,14 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-MoClo - modular cloning simulation in Python
-============================================
+MoClo
+=====
 
 The MoClo system is a standard for molecular cloning that relies on the Golden
 Gate Assembly technique.
 
 
-.. rubric:: Kits
+Kits
+----
 
 .. toctree::
   :maxdepth: 1
@@ -19,15 +20,8 @@ Gate Assembly technique.
 
 
 
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-
-
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`modindex`
