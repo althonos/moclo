@@ -3,7 +3,7 @@
 
 *Modular cloning with the* `*MoClo* <https://www.addgene.org/cloning/moclo/>`__ *framework*.
 
-|Source| |PyPI| |Travis| |Codecov| |Codacy| |Format| |License|
+|Source| |PyPI| |Travis| |Docs| |Codecov| |Codacy| |Format| |License|
 
 .. |Codacy| image:: https://img.shields.io/codacy/grade/5b29a9c0d91f4e82944a46997bd9a480/master.svg?style=flat-square&maxAge=300
    :target: https://www.codacy.com/app/althonos/moclo
@@ -28,3 +28,6 @@
 
 .. |Source| image:: https://img.shields.io/badge/source-GitHub-303030.svg?maxAge=3600&style=flat-square
    :target: https://github.com/althonos/moclo/tree/master/moclo
+
+.. |Docs| image:: https://img.shields.io/readthedocs/moclo.svg?maxAge=3600&style=flat-square
+   :target: https://moclo.readthedocs.io/
