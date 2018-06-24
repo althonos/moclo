@@ -5,8 +5,8 @@ Yeast ToolKit
 
 .. automodule:: moclo.kits.ytk
 
-**Level -1**
-------------
+Level -1
+--------
 
 Module
 ^^^^^^
