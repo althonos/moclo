@@ -7,10 +7,31 @@ Yeast ToolKit
 Level -1
 --------
 
+Module
+^^^^^^
+.. autoclass:: YTKProduct
 
-.. rubric:: Vector
+
+Vector
+^^^^^^
 .. autoclass:: YTKEntryVector
 
 
-.. rubric:: Product
-.. autoclass:: YTKProduct
+
+Level 0
+-------
+
+Module
+^^^^^^
+.. autoclass:: YTKEntry
+
+
+Vector
+^^^^^^
+.. autoclass:: YTKCassetteVector
+
+
+Parts
+^^^^^
+.. autoclass:: YTKPart1
+.. autoclass:: YTKPart2
