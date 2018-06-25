@@ -5,10 +5,12 @@ import abc
 import cached_property
 import six
 import typing
+from Bio import BiopythonWarning
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
 from ..record import CircularRecord
+from ..utils import catch_warnings
 from ._structured import StructuredRecord
 
 if typing.TYPE_CHECKING:
@@ -29,6 +31,7 @@ class AbstractVector(StructuredRecord):
     def placeholder_sequence(self):
         return self._match.group(2)
 
+    @catch_warnings('ignore', category=BiopythonWarning)
     def insert(self, module, *modules):
         # type: (AbstractModule, *AbstractModule) -> SeqRecord
 
