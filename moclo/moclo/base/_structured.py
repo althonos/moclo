@@ -13,7 +13,7 @@ from ..regex import DNARegex
 class StructuredRecord(object):
 
     _structure = NotImplemented
-    _regex = None
+    _regexes = {}
 
     def __init__(self, record):
         self.record = record
@@ -21,10 +21,11 @@ class StructuredRecord(object):
 
     @cached_property.cached_property
     def _match(self):
-        if self._regex is None:
+        regex = self._regexes.get(type(self))
+        if regex is None:
             topology = self.record.annotations.get('topology', 'circular').lower()
-            self._regex = DNARegex(self._structure, linear=topology != 'circular')
-        match = self._regex.search(self.record)
+            regex = self._regexes[type(self)] = DNARegex(self._structure, linear=topology != 'circular')
+        match = regex.search(self.record)
         if match is None:
             msg = "'{}' does not match the expected structure !"
             raise ValueError(msg.format(self.record.name or self.record.id))
