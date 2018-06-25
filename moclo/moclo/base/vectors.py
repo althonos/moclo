@@ -32,7 +32,7 @@ class AbstractVector(StructuredRecord):
         return self._match.group(2)
 
     @catch_warnings('ignore', category=BiopythonWarning)
-    def insert(self, module, *modules):
+    def assemble(self, module, *modules):
         # type: (AbstractModule, *AbstractModule) -> SeqRecord
 
         # FIXME
