@@ -27,21 +27,26 @@ class AbstractModule(StructuredRecord):
 
 
 class Product(AbstractModule):
-    """Level -1 module.
+    """A level -1 module, often obtained as a PCR product.
     """
 
     _level = -1
 
 
 class Entry(AbstractModule):
-    """Level 0 module.
+    """A level 0 module.
     """
 
     _level = 0
 
 
 class Cassette(AbstractModule):
-    """Level 1 module.
+    """A level 1 module, also refered as a Transcriptional Unit.
+
+    Modules of this level are able to express genes in their target organism,
+    but can also be assembled into *multigene* modules for expressing many
+    genes at once.
+
     """
 
     _level = 1
