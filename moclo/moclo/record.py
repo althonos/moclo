@@ -61,11 +61,11 @@ class CircularRecord(SeqRecord):
 
     @_ambiguous
     def __add__(self, other):   # noqa: D105
-        pass
+        return NotImplemented
 
     @_ambiguous
     def __radd__(self, other):   # noqa: D105
-        pass
+        return NotImplemented
 
     # Patch other methods to work as intended
 

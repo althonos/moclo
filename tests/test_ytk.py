@@ -33,22 +33,11 @@ def plasmids():
                 yield line.strip().split('\t')
 
 
-### Parameterized format functions
-
-
-
-    # if params.args[1] not in ('cassette', 'entry vector'):
-    #     doc =
-    # else:
-    #     doc =
-    # return doc.format(params.args[0], params.args[1])
-
-
 ### Test Yeast ToolKit plasmids
 
 # Metaclass for test cases: create a test case per type with a method per
 # plasmid that will check if that plasmid is recognized as the test case
-# part or not.
+# part or not rightfully.
 def test_ytk_part(_cls, _name, exclude=set()):
 
     def func(func, name, params):
@@ -65,17 +54,23 @@ def test_ytk_part(_cls, _name, exclude=set()):
             doc = "Check that {} ('{}') is not a YTK Type {} part.\n"
         return doc.format(params.args[0], params.args[2], _name)
 
+    test_plasmids = (p for p in plasmids() if not p[0] in exclude)
+
     class Test(unittest.TestCase):
         _part_cls = _cls
         _part_type = _name
 
-        @parameterized.expand(plasmids(), func, doc)
+        @parameterized.expand(test_plasmids, func, doc)
         def _test_plasmid(self, id_, type_, name, desc, seq):
             record = CircularRecord(Seq(seq), name=name, id=id_)
             if type_ == self._part_type:
-                self.assertTrue(self._part_cls(record).is_valid())
+                self.assertTrue(
+                    self._part_cls(record).is_valid(),
+                    '{} is not a valid Type {} but should be!'
+                )
             else:
                 self.assertFalse(self._part_cls(record).is_valid())
+
     Test.__name__ = str('Test{}'.format(_cls.__name__))
     return Test
 
@@ -88,63 +83,15 @@ TestYTKPart3b = test_ytk_part(ytk.YTKPart3b, '3b')
 TestYTKPart4 = test_ytk_part(ytk.YTKPart4, '4')
 TestYTKPart4a = test_ytk_part(ytk.YTKPart4a, '4a')
 TestYTKPart4b = test_ytk_part(ytk.YTKPart4b, '4b')
+TestYTKPart234 = test_ytk_part(ytk.YTKPart234, '234')
+TestYTKPart234r = test_ytk_part(ytk.YTKPart234r, '234r', exclude={'pYTK096'})
 TestYTKPart5 = test_ytk_part(ytk.YTKPart5, '5')
 TestYTKPart6 = test_ytk_part(ytk.YTKPart6, '6')
 TestYTKPart7 = test_ytk_part(ytk.YTKPart7, '7')
 TestYTKPart8 = test_ytk_part(ytk.YTKPart8, '8')
 TestYTKPart8a = test_ytk_part(ytk.YTKPart8a, '8a')
 TestYTKPart8b = test_ytk_part(ytk.YTKPart8b, '8b')
-
-# class TestYTKPlasmids(unittest.TestCase):
-#
-#     parts = {
-#         '1': ytk.YTKPart1,
-#         '2': ytk.YTKPart2,
-#         '3': ytk.YTKPart3,
-#         '3a': ytk.YTKPart3a,
-#         '3b': ytk.YTKPart3b,
-#         '4': ytk.YTKPart4,
-#         '4a': ytk.YTKPart4a,
-#         '4b': ytk.YTKPart4b,
-#         '234': ytk.YTKPart234,
-#         '234r': ytk.YTKPart234r,
-#         '5': ytk.YTKPart5,
-#         '6': ytk.YTKPart6,
-#         '7': ytk.YTKPart7,
-#         '8': ytk.YTKPart8,
-#         '8a': ytk.YTKPart8a,
-#         '8b': ytk.YTKPart8b,
-#         '678': ytk.YTKPart678,
-#         'entry vector': ytk.YTKEntryVector,
-#         'cassette': ytk.YTKCassetteVector,
-#     }
-#
-#     @parameterized.expand(plasmids(), _part_func_name, _part_doc_name)
-#     def test_plasmid(self, id_, type_, name, desc, seq):
-#
-#         record = CircularRecord(seq=Seq(seq), name=name, id=id_)
-#         part_cls = self.parts[type_]
-#
-#         for part in six.itervalues(self.parts):
-#             # Check the part is valid
-#             if part is self.parts[type_]:
-#                 self.assertTrue(
-#                     part(record).is_valid(),
-#                     "{} is not a valid {} but should be!".format(type_, part)
-#                 )
-#             # A cassette can be mistaken for a YTKPart234r
-#             elif type_ == 'cassette' and part in (ytk.YTKPart234r, ytk.YTKEntryVector):
-#                 continue
-#             # Part 234 can be mistaken for an entry vector
-#             elif type_ == '234' and part is ytk.YTKEntryVector:
-#                 continue
-#             # All parts are also cassette vectors
-#             elif part is not ytk.YTKCassetteVector:
-#                 self.assertFalse(
-#                     part(record).is_valid(),
-#                     "{} is a valid {} but should not be!".format(type_, part)
-#                 )
-
+TestYTKPart678 = test_ytk_part(ytk.YTKPart678, '678')
 
 
 ###

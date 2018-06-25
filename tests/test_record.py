@@ -39,3 +39,13 @@ class TestCircularRecord(unittest.TestCase):
         self.assertEqual((cr << 0).seq, cr.seq)
         self.assertEqual((cr << len(cr)).seq, cr.seq)
         self.assertEqual((cr << -5).seq, (cr >> 5).seq)
+
+    def test_add(self):
+        cr = CircularRecord(seq=Seq("ATGCATGCATGC"), id="test_shift_seq")
+        with self.assertRaises(TypeError):
+            _ = cr + cr
+
+    def test_radd(self):
+        cr = CircularRecord(seq=Seq("ATGCATGCATGC"), id="test_shift_seq")
+        with self.assertRaises(TypeError):
+            cr += cr
