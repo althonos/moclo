@@ -22,7 +22,8 @@ class StructuredRecord(object):
     @cached_property.cached_property
     def _match(self):
         if self._regex is None:
-            self._regex = DNARegex(self._structure)
+            topology = self.record.annotations.get('topology', 'circular').lower()
+            self._regex = DNARegex(self._structure, linear=topology != 'circular')
         match = self._regex.search(self.record)
         if match is None:
             msg = "'{}' does not match the expected structure !"

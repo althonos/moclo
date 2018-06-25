@@ -17,17 +17,13 @@ class AbstractModule(StructuredRecord):
     _level = None
 
     def overhang_start(self):
-        return Seq(self._match.group(1))
+        return self._match.group(1).seq
 
     def overhang_end(self):
-        return Seq(self._match.group(3))
+        return self._match.group(3).seq
 
     def target_sequence(self):
-        start, end = self._match.span(2)
-        if isinstance(self.record, CircularRecord):
-            return (self.record << start)[:end-start]
-        else:
-            return self.record[start:end]
+        return self._match.group(2)
 
 
 class Product(AbstractModule):

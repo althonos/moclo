@@ -2,6 +2,7 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
+import array
 import re
 import typing
 
@@ -13,6 +14,34 @@ from .record import CircularRecord
 
 if typing.TYPE_CHECKING:
     from typing import Mapping, Text
+
+
+
+class SeqMatch(object):
+
+    def __init__(self, match, rec, shift=0):
+        self.match = match
+        self.shift = shift
+        self.rec = rec
+
+    def end(self):
+        return self.match.end()
+
+    def start(self):
+        return self.match.start()
+
+    def span(self, index=0):
+        return self.match.span(index)
+
+    def group(self, index=0):
+        span = self.match.span(index)
+        if span[1] >= span[0] >= len(self.rec):
+            return self.rec[span[0] % len(self.rec) : span[1] % len(self.rec)]
+        elif span[1] >= len(self.rec) > span[0] :
+            return self.rec[span[0]:] + self.rec[:span[1] % len(self.rec)]
+        else:
+            return self.rec[span[0]:span[1]]
+
 
 
 class DNARegex(object):
@@ -49,11 +78,24 @@ class DNARegex(object):
         self.linear = True
 
     def search(self, string, pos=0, endpos=six.MAXSIZE):
-        if isinstance(string, CircularRecord):
-            return self.regex.search(str(string.seq) * 2)
-        elif isinstance(string, Bio.SeqRecord.SeqRecord):
-            return self.regex.search(str(string.seq) * (2 - self.linear))
-        elif isinstance(string, Bio.Seq.Seq):
-            return self.regex.search(str(string) * (2 - self.linear))
+
+        if not isinstance(string, (Bio.Seq.Seq, Bio.SeqRecord.SeqRecord)):
+            t = type(string).__name__
+            raise TypeError("can only match Seq or SeqRecord, not '{}'".format(t))
+
+        if isinstance(string, Bio.SeqRecord.SeqRecord):
+            rec = string
+            data = str(string.seq)
         else:
-            return self.regex.search(string * (2 - self.linear))
+            rec = Bio.SeqRecord.SeqRecord(string)
+            data = str(string)
+
+        if not self.linear or isinstance(string, CircularRecord):
+            data *= 2
+
+        for i in range(pos, min(len(string), endpos)):
+            match = self.regex.match(data, i, i + len(string))
+            if match is not None:
+                return SeqMatch(match, rec)
+
+        return None
