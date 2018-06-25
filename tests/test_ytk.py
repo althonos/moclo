@@ -77,18 +77,23 @@ class TestYTKPlasmids(unittest.TestCase):
 
         record = CircularRecord(seq=Seq(seq), name=name, id=id_)
         part_cls = self.parts[type_]
-        self.assertTrue(part_cls(record).is_valid())
 
-        # for part in six.itervalues(self.parts):
-            # if part is self.parts[type_]:
-                # self.assertTrue(part(record).is_valid())
-            # else:
-                # self.assertFalse(part(record).is_valid())
-
-        # info = self.parts[id_]
-        # record = CircularRecord(seq=info['seq'], name=info['name'], id=id_)
-        # part = ytk.YTKPart1(record)
-        # if info['type'] == '1':
-        #     self.assertTrue(part.is_valid())
-        # else:
-        #     self.assertFalse(part.is_valid())
+        for part in six.itervalues(self.parts):
+            # Check the part is valid
+            if part is self.parts[type_]:
+                self.assertTrue(
+                    part(record).is_valid(),
+                    "{} is not a valid {} but should be!".format(type_, part)
+                )
+            # A cassette can be mistaken for a YTKPart234r
+            elif type_ == 'cassette' and part in (ytk.YTKPart234r, ytk.YTKEntryVector):
+                continue
+            # Part 234 can be mistaken for an entry vector
+            elif type_ == '234' and part is ytk.YTKEntryVector:
+                continue
+            # All parts are also cassette vectors
+            elif part is not ytk.YTKCassetteVector:
+                self.assertFalse(
+                    part(record).is_valid(),
+                    "{} is a valid {} but should not be!".format(type_, part)
+                )
