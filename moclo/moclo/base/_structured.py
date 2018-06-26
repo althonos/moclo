@@ -6,6 +6,7 @@ import typing
 import cached_property
 import six
 
+from .. import errors
 from ..regex import DNARegex
 
 
@@ -27,12 +28,12 @@ class StructuredRecord(object):
             regex = self._regexes[type(self)] = DNARegex(self._structure, linear=topology != 'circular')
         match = regex.search(self.record)
         if match is None:
-            msg = "'{}' does not match the expected structure !"
-            raise ValueError(msg.format(self.record.name or self.record.id))
+            details = "does not match '{}' structure".format(type(self).__name__)
+            raise errors.InvalidSequence(self.record, details=details)
         return match
 
     def is_valid(self):
         try:
             return self._match is not None
-        except ValueError:
+        except errors.InvalidSequence:
             return False

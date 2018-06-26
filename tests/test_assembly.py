@@ -1,0 +1,93 @@
+# coding: utf-8
+from __future__ import absolute_import
+from __future__ import unicode_literals
+
+import unittest
+import warnings
+
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
+
+from moclo import errors
+from moclo.record import CircularRecord
+from moclo.base.vectors import AbstractVector
+from moclo.base.modules import AbstractModule
+
+
+class TestAssembly(unittest.TestCase):
+
+    class MockVector(AbstractVector):
+        _structure = (
+            "(NNNN)"
+            "(NN"
+            "GTCTTC"  # BpiI
+            "N*?"      # Placeholder
+            "GAAGAC"  # BpiI
+            "NN)"
+            "(NNNN)"
+        )
+
+    class MockModule(AbstractModule):
+        _structure = (
+            "GAAGAC"  # BpiI
+            "NN"
+            "(NNNN)"  # Product overhangs (start)
+            "(N*?)"      # Target
+            "(NNNN)"  # Product overhangs (end)
+            "NN"
+            "GTCTTC"  # BpiI
+        )
+
+    def test_invalid_vector(self):
+        """Assert an error is raised on a vector with invalid overhangs.
+        """
+        seqv = Seq("CCATGCTTGTCTTCCACAGAAGACTTATGCGG")
+        vector = self.MockVector(CircularRecord(seqv, "vector"))
+
+        seqm = Seq("GAAGACTTATGCCACAATGCTTGTCTTC")
+        module = self.MockModule(CircularRecord(seqm, "module"))
+
+        # vector is invalid because both overhangs are the same
+        self.assertRaises(errors.InvalidSequence, vector.assemble, module)
+
+    def test_duplicate_modules(self):
+        """Assert an error is raised when assembling with duplicate modules.
+        """
+        # ATGC ---- CGTA
+        seqv = Seq("CCATGCTTGTCTTCCACAGAAGACTTCGTAGG")
+        vector = self.MockVector(CircularRecord(seqv, "vector"))
+
+        # CGTA --- ATGC
+        seqm1 = Seq("GAAGACTTATGCCACACGTATTGTCTTC")
+        mod1 = self.MockModule(CircularRecord(seqm1, "mod1"))
+
+        # CGTA --- ATGC
+        seqm2 = Seq("GAAGACTTATGCTATACGTATTGTCTTC")
+        mod2 = self.MockModule(CircularRecord(seqm2, "mod2"))
+
+        with self.assertRaises(errors.DuplicateModules) as ctx:
+            vector.assemble(mod1, mod2)
+        self.assertEqual(set(ctx.exception.duplicates), {mod1, mod2})
+        self.assertEqual(ctx.exception.details, "same start overhang: 'ATGC'")
+
+    def test_unused_modules(self):
+        """Assert an error is raised on unused modules during assembly.
+        """
+        # ATGC ---- CGTA
+        seqv = Seq("CCATGCTTGTCTTCCACAGAAGACTTCGTAGG")
+        vector = self.MockVector(CircularRecord(seqv, "vector"))
+
+        # CGTA --- ATGC
+        seqm1 = Seq("GAAGACTTATGCTATACGTATTGTCTTC")
+        mod1 = self.MockModule(CircularRecord(seqm1, "mod1"))
+
+        # AAAA --- CCCC
+        seqm2 = Seq("GAAGACTTAAAACACACCCCTTGTCTTC")
+        mod2 = self.MockModule(CircularRecord(seqm2, "mod2"))
+
+        with warnings.catch_warnings(record=True) as captured:
+            vector.assemble(mod1, mod2)
+
+        self.assertEqual(len(captured), 1)
+        self.assertIsInstance(captured[0].message, errors.UnusedModules)
+        self.assertEqual(captured[0].message.remaining, (mod2,))

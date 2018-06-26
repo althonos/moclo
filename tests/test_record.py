@@ -41,11 +41,15 @@ class TestCircularRecord(unittest.TestCase):
         self.assertEqual((cr << -5).seq, (cr >> 5).seq)
 
     def test_add(self):
+        """Assert adding to a `CircularRecord` raises a type error.
+        """
         cr = CircularRecord(seq=Seq("ATGCATGCATGC"), id="test_shift_seq")
         with self.assertRaises(TypeError):
             _ = cr + cr
 
     def test_radd(self):
+        """Assert right-adding to a `CircularRecord` raises a type error.
+        """
         cr = CircularRecord(seq=Seq("ATGCATGCATGC"), id="test_shift_seq")
         with self.assertRaises(TypeError):
             cr += cr

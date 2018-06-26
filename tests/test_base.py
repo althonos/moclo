@@ -60,6 +60,7 @@ class TestEntryVector(unittest.TestCase):
         vector = self.MockEntryVector(CircularRecord(seqv, "vector"))
         self.assertFalse(vector.is_valid())
 
+
     # def test_insert_linear(self):
     #     # Non-circular sequence
     #     seqp = Seq("TTTTGAAGACTTATGCAAAAAAAACGTATTGTCTTCTTTT")

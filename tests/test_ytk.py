@@ -49,9 +49,9 @@ def test_ytk_part(_cls, _name, exclude=set()):
 
     def doc(func, name, params):
         if params.args[1] == _name:
-            doc = "Check that {} ('{}') is a YTK Type {} part.\n"
+            doc = 'Check that {} ({}) is a YTK Type {} part.\n'
         else:
-            doc = "Check that {} ('{}') is not a YTK Type {} part.\n"
+            doc = 'Check that {} ({}) is not a YTK Type {} part.\n'
         return doc.format(params.args[0], params.args[2], _name)
 
     test_plasmids = (p for p in plasmids() if not p[0] in exclude)
@@ -74,7 +74,7 @@ def test_ytk_part(_cls, _name, exclude=set()):
     Test.__name__ = str('Test{}'.format(_cls.__name__))
     return Test
 
-
+# Generated test cases
 TestYTKPart1 = test_ytk_part(ytk.YTKPart1, '1')
 TestYTKPart2 = test_ytk_part(ytk.YTKPart2, '2')
 TestYTKPart3 = test_ytk_part(ytk.YTKPart3, '3')
@@ -94,11 +94,13 @@ TestYTKPart8b = test_ytk_part(ytk.YTKPart8b, '8b')
 TestYTKPart678 = test_ytk_part(ytk.YTKPart678, '678')
 
 
-###
+### Test Yeast ToolKit reference paper construct
 
 class TestYTKConstruct(unittest.TestCase):
 
     def test_cassette_vector(self):
+        """Check the assembled YTK integration vector has the right sequence.
+        """
         records = {
             p[0]: CircularRecord(Seq(p[4]), id=p[0], name=p[0])
             for p in plasmids()

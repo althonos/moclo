@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import abc
+import warnings
 
 import cached_property
 import six
@@ -9,6 +10,7 @@ from Bio import BiopythonWarning
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
+from .. import errors
 from ..record import CircularRecord
 from ..utils import catch_warnings
 from ._structured import StructuredRecord
@@ -32,10 +34,14 @@ class AbstractVector(StructuredRecord):
         return self._match.group(2)
 
     @catch_warnings('ignore', category=BiopythonWarning)
-    def assemble(self, module, *modules):
+    def assemble(self, module, *modules, **kwargs):
         # type: (AbstractModule, *AbstractModule) -> SeqRecord
 
-        # FIXME
+        # If the start and end overhangs are the same, the assembly will
+        # not be the only stable product in the bioreactor.
+        if self.overhang_start() == self.overhang_end():
+            details = 'vector is not suitable for assembly'
+            raise errors.InvalidSequence(self, details=details)
 
         # Identify all modules by their respective overhangs, checking
         # for possible duplicates.
@@ -43,27 +49,26 @@ class AbstractVector(StructuredRecord):
         for mod in modules:
             mod2 = modmap.setdefault(mod.overhang_start(), mod)
             if mod2 is not mod:
-                msg = "'{}' and '{}' share the same start overhang: '{}'".format(
-                    mod2.record.name or mod2.record.id,
-                    mod.record.name or mod.record.id,
-                    mod.overhang_start())
-                raise RuntimeError(msg)
-
-        assert self.overhang_end() != self.overhang_start()
-        assert self.overhang_end() in modmap
+                details = "same start overhang: '{}'".format(mod.overhang_start())
+                raise errors.DuplicateModules(mod2, mod, details=details)
 
         # Generate the complete inserted sequence
-        overhang_next = self.overhang_end()
-        assembly = SeqRecord(overhang_next, id='assembly')
-        while overhang_next != self.overhang_start():
-            module = modmap.pop(overhang_next)
-            assembly += module.target_sequence()
-            overhang_next = module.overhang_end()
-            if overhang_next != self.overhang_end():
-                assembly += overhang_next
+        try:
+            overhang_next = self.overhang_end()
+            assembly = SeqRecord(overhang_next, id='assembly')
+            while overhang_next != self.overhang_start():
+                module = modmap.pop(overhang_next)
+                assembly += module.target_sequence()
+                overhang_next = module.overhang_end()
+                if overhang_next != self.overhang_end():
+                    assembly += overhang_next
+        except KeyError as ke:
+            # Raise the MissingModule error without the KeyError traceback
+            raise six.raise_from(errors.MissingModule(ke.args[0]), None)
 
+        # Check all modules were used
         if modmap:
-            raise RuntimeError('not all parts were used!')
+            warnings.warn(errors.UnusedModules(*modmap.values()))
 
         # Replace placeholder in the vector while keeping annotations
         ph_start, ph_end = self._match.span(0)
