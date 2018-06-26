@@ -4,6 +4,8 @@ configparser                           ; python_version < '3'
 semantic-version ~=2.6
 setuptools >=30.3
 six ~=1.10
-Sphinx ~=1.7
 sphinx-bootstrap-theme ~=0.6
 typing ~=3.6                           ; python_version < '3.6'
+
+# sphinx development version (1.8)
+https://github.com/sphinx-doc/Sphinx/archive/master.zip
