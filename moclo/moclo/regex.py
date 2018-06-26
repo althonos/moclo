@@ -13,34 +13,42 @@ import six
 from .record import CircularRecord
 
 if typing.TYPE_CHECKING:
-    from typing import Mapping, Text
+    from typing import Mapping, Match, Optional, Sequence, Text, Tuple
 
 
+# typing.TypeVar: a generic sequence
+_S = typing.TypeVar('_S', bound=typing.Sequence)
 
-class SeqMatch(object):
+
+class SeqMatch(typing.Generic[_S]):
 
     def __init__(self, match, rec, shift=0):
+        # type: (Match, _S, int) -> None  # type: ignore
         self.match = match
         self.shift = shift
-        self.rec = rec
+        self.rec = rec      # type: _S
 
     def end(self):
+        # type: () -> int
         return self.match.end()
 
     def start(self):
+        # type: () -> int
         return self.match.start()
 
     def span(self, index=0):
+        # type: (int) -> Tuple[int, int]
         return self.match.span(index)
 
     def group(self, index=0):
+        # type: (int) -> _S
         span = self.match.span(index)
         if span[1] >= span[0] >= len(self.rec):
-            return self.rec[span[0] % len(self.rec) : span[1] % len(self.rec)]
+            return self.rec[span[0] % len(self.rec) : span[1] % len(self.rec)]  # type: ignore
         elif span[1] >= len(self.rec) > span[0] :
-            return self.rec[span[0]:] + self.rec[:span[1] % len(self.rec)]
+            return self.rec[span[0]:] + self.rec[:span[1] % len(self.rec)]      # type: ignore
         else:
-            return self.rec[span[0]:span[1]]
+            return self.rec[span[0]:span[1]]  # type: ignore
 
 
 
@@ -78,16 +86,15 @@ class DNARegex(object):
         self.linear = True
 
     def search(self, string, pos=0, endpos=six.MAXSIZE):
+        # type: (_S, int, int) -> Optional[SeqMatch[_S]]
 
         if not isinstance(string, (Bio.Seq.Seq, Bio.SeqRecord.SeqRecord)):
             t = type(string).__name__
             raise TypeError("can only match Seq or SeqRecord, not '{}'".format(t))
 
         if isinstance(string, Bio.SeqRecord.SeqRecord):
-            rec = string
             data = str(string.seq)
         else:
-            rec = Bio.SeqRecord.SeqRecord(string)
             data = str(string)
 
         if not self.linear or isinstance(string, CircularRecord):
@@ -96,6 +103,6 @@ class DNARegex(object):
         for i in range(pos, min(len(string), endpos)):
             match = self.regex.match(data, i, i + len(string))
             if match is not None:
-                return SeqMatch(match, rec)
+                return SeqMatch(match, string)
 
         return None

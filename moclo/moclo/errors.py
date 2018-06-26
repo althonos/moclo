@@ -1,5 +1,12 @@
 # coding: utf-8
 
+import typing
+
+if typing.TYPE_CHECKING:
+    from typing import Any
+    from Bio.Seq import Seq
+    from .base.modules import AbstractModule
+
 
 class MocloError(Exception):
     pass
@@ -30,6 +37,7 @@ class DuplicateModules(AssemblyError):
     """
 
     def __init__(self, *duplicates, **options):
+        # type: (*AbstractModule, **Any) -> None
         self.duplicates = duplicates
         self.details = options.pop('details', None)
 

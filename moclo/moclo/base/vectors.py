@@ -16,26 +16,30 @@ from ..utils import catch_warnings
 from ._structured import StructuredRecord
 
 if typing.TYPE_CHECKING:
+    from typing import Any, MutableMapping, Union
     from .modules import AbstractModule
 
 
 class AbstractVector(StructuredRecord):
     """An abstract modular cloning vector.
     """
-    _level = None
+    _level = None  # type: Union[None, int]
 
     def overhang_start(self):
+        # type: () -> Seq
         return self._match.group(3).seq
 
     def overhang_end(self):
+        # type: () -> Seq
         return self._match.group(1).seq
 
     def placeholder_sequence(self):
+        # type: () -> SeqRecord
         return self._match.group(2)
 
     @catch_warnings('ignore', category=BiopythonWarning)
     def assemble(self, module, *modules, **kwargs):
-        # type: (AbstractModule, *AbstractModule) -> SeqRecord
+        # type: (AbstractModule, *AbstractModule, **Any) -> SeqRecord
 
         # If the start and end overhangs are the same, the assembly will
         # not be the only stable product in the bioreactor.
@@ -45,7 +49,7 @@ class AbstractVector(StructuredRecord):
 
         # Identify all modules by their respective overhangs, checking
         # for possible duplicates.
-        modmap = {module.overhang_start(): module}
+        modmap = {module.overhang_start(): module}  # type: MutableMapping[Seq, AbstractModule]
         for mod in modules:
             mod2 = modmap.setdefault(mod.overhang_start(), mod)
             if mod2 is not mod:

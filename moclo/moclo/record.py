@@ -4,10 +4,15 @@ from __future__ import unicode_literals
 
 import copy
 import functools
+import typing
 
 import six
 from Bio.SeqFeature import SeqFeature, FeatureLocation, CompoundLocation
 from Bio.SeqRecord import SeqRecord
+
+if typing.TYPE_CHECKING:
+    from typing import Text, Union
+    from Bio.Seq import Seq
 
 
 def _ambiguous(func):
@@ -23,14 +28,15 @@ class CircularRecord(SeqRecord):
     # a SeqRecord argument (other arguments are ignored).
 
     def __init__(self,
-                 seq,
-                 id='<unknown id>',
-                 name='<unknown name>',
-                 description='<unknown description>',
+                 seq,                                   # type: Union[Seq, SeqRecord]
+                 id='<unknown id>',                     # type: Text
+                 name='<unknown name>',                 # type: Text
+                 description='<unknown description>',   # type: Text
                  dbxrefs=None,
                  features=None,
                  annotations=None,
                  letter_annotations=None):
+        # type: (...) -> None
 
         if isinstance(seq, SeqRecord):
             self.__init__(

@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import abc
+import typing
 
 import cached_property
 import six
@@ -9,20 +10,27 @@ from Bio.Seq import Seq
 from ..record import CircularRecord
 from ._structured import StructuredRecord
 
+if typing.TYPE_CHECKING:
+    from typing import Union
+    from Bio import SeqRecord
+
 
 class AbstractModule(StructuredRecord):
     """An abstract modular cloning module.
     """
 
-    _level = None
+    _level = None  # type: Union[None, int]
 
     def overhang_start(self):
+        # type: () -> Seq
         return self._match.group(1).seq
 
     def overhang_end(self):
+        # type: () -> Seq
         return self._match.group(3).seq
 
     def target_sequence(self):
+        # type: () -> SeqRecord
         return self._match.group(2)
 
 
