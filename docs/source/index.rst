@@ -16,7 +16,7 @@ Kits
 .. toctree::
   :maxdepth: 1
 
-  Yeast ToolKit (YTK)  <kits/ytk>
+  Yeast ToolKit (YTK)  <kits/ytk/index.rst>
 
 
 

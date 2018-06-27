@@ -29,12 +29,17 @@ project_dir = os.path.dirname(os.path.dirname(docssrc_dir))
 
 # Setup path to main moclo directory
 sys.path.insert(0, os.path.join(project_dir, 'moclo'))
+sys.path.append(os.path.join(docssrc_dir))
 
 # Add path to moclo kits
 import moclo.kits
 moclo.kits.__path__.append(os.path.join(project_dir, 'moclo-ytk', 'moclo', 'kits'))
 
 # -- Files setup -------------------------------------------------------------
+
+# Generate SVG files from template SVG
+from _scripts import ytk_parts
+ytk_parts.generate_svg()
 
 # with open(os.path.join(project_dir, "CHANGELOG.rst"), 'rb') as src:
 #     with open(os.path.join(docsrc_dir, "changelog.rst"), 'wb') as dst:
@@ -177,7 +182,7 @@ html_static_path = ['_static']
 #
 html_sidebars = {
     "*": ['localtoc.html'],
-    os.path.join("kits", "*"): ['localtoc.html'],
+    os.path.join("kits", "*", "*"): ['localtoc.html'],
 }
 
 

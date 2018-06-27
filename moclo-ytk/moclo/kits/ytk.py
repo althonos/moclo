@@ -184,9 +184,13 @@ class YTKPart(object):
 class YTKPart1(YTKPart, YTKEntry):
     """A YTK Type 1 part (**Upstream assembly connector**).
 
+    .. image:: type1.svg
+       :align: center
+
     Parts of this type contains non-coding and non-regulatory sequences that
     are used to direct assembly of multigene plasmids, such as ligation sites
     for other Type IIS endonucleases (e.g. *BsmBI*).
+
 
     Note:
         Official toolkit Type 1 parts also include a *EcoRI* and *XbaI* site
@@ -198,6 +202,9 @@ class YTKPart1(YTKPart, YTKEntry):
 
 class YTKPart2(YTKPart, YTKEntry):
     """A YTK Type 2 part (**Promoter**).
+
+    .. image:: type2.svg
+       :align: center
 
     Parts of this type contain a promoter. The downstream overhang doubles as
     the start codon for the subsequent Type 3 or Type 3a coding sequence.
@@ -212,6 +219,9 @@ class YTKPart2(YTKPart, YTKEntry):
 
 class YTKPart3(YTKPart, YTKEntry):
     """A YTK Type 3 part (**Coding sequence**).
+
+    .. image:: type3.svg
+       :align: center
 
     Parts of this type contain a coding sequence, with the start codon located
     on the upstream overhang. If a stop codon is omitted from the part, and
@@ -228,12 +238,19 @@ class YTKPart3(YTKPart, YTKEntry):
 
 class YTKPart3a(YTKPart, YTKEntry):
     """A YTK Type 3a part (**N-terminal coding sequence**).
+
+    .. image:: type3a.svg
+       :align: center
+
     """
     _structure = _ent.format(start='TATG', end='TTCT')
 
 
 class YTKPart3b(YTKPart, YTKEntry):
     """A YTK Type 3b part (**C-terminal coding sequence**).
+
+    .. image:: type3b.svg
+       :align: center
 
     Note:
         As with Type 3 parts, official toolkits Type 3b parts also include a
@@ -245,6 +262,9 @@ class YTKPart3b(YTKPart, YTKEntry):
 
 class YTKPart4(YTKPart, YTKEntry):
     """A YTK Type 4 part (**Transcriptional terminator**).
+
+    .. image:: type4.svg
+       :align: center
 
     As Type 3 parts do not include a stop codon, parts of this type should
     encode an in-frame stop codon before the transcriptional terminator.
@@ -263,6 +283,9 @@ class YTKPart4(YTKPart, YTKEntry):
 
 class YTKPart4a(YTKPart, YTKEntry):
     """A YTK Type 4a part (**C-terminal tag sequence**).
+
+    .. image:: type4a.svg
+       :align: center
 
     Type 4a parts contain additional coding sequences that will be fused to
     the C-terminal extremity of the protein. These parts include, but are not
@@ -284,6 +307,9 @@ class YTKPart4a(YTKPart, YTKEntry):
 class YTKPart4b(YTKPart, YTKEntry):
     """A YTK Type 4b part (**Terminator sequence**).
 
+    .. image:: type4b.svg
+       :align: center
+
     Type 4b contain transcriptional terminators, but are not required to
     encode an in-frame start codon, as it should be located in the Type 4a
     part that precedes it.
@@ -293,6 +319,9 @@ class YTKPart4b(YTKPart, YTKEntry):
 
 class YTKPart234(YTKPart, YTKEntry):
     """A YTK Type 234 part (**Composite 2, 3, 4**).
+
+    .. image:: type234.svg
+       :align: center
 
     Type 234 parts are composed of a complete expression cassette (promoter,
     coding sequence, and terminator) fused into a single part, instead of
@@ -304,6 +333,9 @@ class YTKPart234(YTKPart, YTKEntry):
 class YTKPart234r(YTKPart, YTKEntry):
     """A YTK Type 234 part (**Composite 6, 7, 8**) with reversed BsaI sites.
 
+    .. image:: type234r.svg
+       :align: center
+
     Type 234r parts are designed so that the BsaI sites are kept within the
     final cassette. They are used to assemble canonical integration vectors,
     where the Type 234 part acts as a placeholder until replaced by actual
@@ -314,6 +346,9 @@ class YTKPart234r(YTKPart, YTKEntry):
 
 class YTKPart5(YTKPart, YTKEntry):
     """A YTK Type 5 part (**Downstream assembly connector**).
+
+    .. image:: type5.svg
+       :align: center
 
     As with Type 1 parts, parts of this type provide sequences such as
     restriction enzymes recognition sites, for instance in order to direct
@@ -331,6 +366,9 @@ class YTKPart5(YTKPart, YTKEntry):
 class YTKPart6(YTKPart, YTKEntry):
     """A YTK Type 6 part (**Yeast marker**).
 
+    .. image:: type6.svg
+       :align: center
+
     Parts of this type contain a selectable marker for *S. cerevisiae*, as
     a full expression cassette (promoter, ORF, and terminal) for conferring
     the selectable phenotype (such as drug-resistance or bioluminescence).
@@ -341,6 +379,9 @@ class YTKPart6(YTKPart, YTKEntry):
 class YTKPart7(YTKPart, YTKEntry):
     """A YTK Part Type 7 part (**Yeast origin** / **3' homology**).
 
+    .. image:: type7.svg
+       :align: center
+
     Depending on the expression organism (*E.coli* or *S. ceverisiae*), this
     sequence will either hold a yeast origin of replication, or a 3' homology
     sequence for integration in the bacterial genome.
@@ -350,6 +391,9 @@ class YTKPart7(YTKPart, YTKEntry):
 
 class YTKPart8(YTKPart, YTKCassetteVector):
     """A YTK Type 8 part (**Bacterial origin & marker**).
+
+    .. image:: type8.svg
+       :align: center
 
     Parts of this type contain a bacterial origin of replication, as well
     as an antibiotic resistance marker. They act as the Golden Gate Assembly
@@ -367,6 +411,9 @@ class YTKPart8(YTKPart, YTKCassetteVector):
 class YTKPart8a(YTKPart, YTKCassetteVector):
     """A YTK Part 8a part (**Bacterial origin & marker**).
 
+    .. image:: type8a.svg
+       :align: center
+
     Parts of this type, like Type 8 parts, include a bacterial origin of
     replication and an antibiotic resistance marker, and act as Assembly
     vectors.
@@ -383,6 +430,9 @@ class YTKPart8a(YTKPart, YTKCassetteVector):
 class YTKPart8b(YTKPart, YTKEntry):
     """A YTK Type 8b part (**5' homology**).
 
+    .. image:: type8b.svg
+       :align: center
+
     As with certain Type 7 parts, parts of this type contain long sequences
     of homology to the genome that is upstream of the target locus.
     """
@@ -391,6 +441,9 @@ class YTKPart8b(YTKPart, YTKEntry):
 
 class YTKPart678(YTKPart, YTKCassetteVector):
     """A YTK Type 678 part (**Composite 6, 7, 8**).
+
+    .. image:: type678.svg
+       :align: center
 
     Type 678 parts are used when there is no requirement for yeast markers
     and origins to be included in the final assembly, for instance when
