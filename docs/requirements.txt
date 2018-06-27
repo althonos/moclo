@@ -1,11 +1,21 @@
+# direct moclo dependencies
 biopython ~=1.71
 cached-property ~=1.4
 configparser                           ; python_version < '3'
 semantic-version ~=2.6
 setuptools >=30.3
 six ~=1.10
-sphinx-bootstrap-theme ~=0.6
 typing ~=3.6                           ; python_version < '3.6'
 
-# sphinx development version (1.8)
+# sphinx development version (1.8) and bootstrap theme
+sphinx-bootstrap-theme ~=0.6
 https://github.com/sphinx-doc/Sphinx/archive/master.zip
+
+# nbsphinx dependencies
+nbsphinx
+ipykernel
+IPython
+
+# visualisation
+dna_features_viewer
+matplotlib
