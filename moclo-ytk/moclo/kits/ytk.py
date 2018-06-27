@@ -291,7 +291,7 @@ class YTKPart4a(YTKPart, YTKEntry):
     the C-terminal extremity of the protein. These parts include, but are not
     limited to: localisation tags, purification tags, fluorescent proteins.
 
-    Attention:
+    Caution:
         In contrast to the Type 3 and 3b parts, the convention for 4a parts
         is to include the stop codon rather than enable read-through of the
         downstream overhang, although that convention it is not enforced.
