@@ -16,6 +16,7 @@ nbsphinx
 ipykernel
 IPython
 
-# visualisation
+# examples dependencies
+requests
 dna_features_viewer
 matplotlib
