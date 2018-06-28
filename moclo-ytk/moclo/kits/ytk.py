@@ -51,11 +51,11 @@ class YTKEntryVector(vectors.EntryVector):
 
     _structure = (
         "(NNNN)" # Vector overhang (start)
-        "(NN"
+        "(N"
         "GAGACG" # BsmBI
         "N*?"    # Placeholder sequence
         "CGTCTC" # BsmBI
-        "NN)"
+        "N)"
         "(NNNN)" # Vector overhang (end)
     )
 
@@ -115,8 +115,8 @@ class YTKProduct(modules.Product):  # FIXME ?
         "N*?"    # Template
         "NNNN"   # Type specific overhang (end)
         "N"
-         "GAGA)" # BsaI (last 2 nucleotides in the overhang)
-        "(CCNN)" # Entry overhangs (end)
+        "GA)"    # BsaI (last 4 nucleotides in the overhang)
+        "(GACC)" # Entry overhangs (end)
         "N"
         "GAGACG" # BsmBI
     )
