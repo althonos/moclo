@@ -27,19 +27,58 @@ class AbstractVector(StructuredRecord):
 
     def overhang_start(self):
         # type: () -> Seq
+        """Get the upstream overhang of the vector sequence.
+        """
         return self._match.group(3).seq
 
     def overhang_end(self):
         # type: () -> Seq
+        """Get the downstream overhang of the vector sequence.
+        """
         return self._match.group(1).seq
 
     def placeholder_sequence(self):
         # type: () -> SeqRecord
+        """Get the placeholder sequence in the vector.
+
+        The placeholder sequence is replaced by the concatenation of modules
+        during the assembly. It often contains a dropout sequence, such as a
+        GFP expression cassette that can be used to measure the progress of
+        the assembly.
+        """
         return self._match.group(2)
 
     @catch_warnings('ignore', category=BiopythonWarning)
     def assemble(self, module, *modules, **kwargs):
         # type: (AbstractModule, *AbstractModule, **Any) -> SeqRecord
+        """Assemble the provided modules into the vector.
+
+        Arguments:
+            module (`~moclo.base.AbstractModule`): a module to insert in the
+                vector.
+            modules (`~moclo.base.AbstractModule`, optional): additional
+                modules to insert in the vector. The order of the parameters
+                is not  important, since modules will be sorted by their start
+                overhang in the function.
+
+        Raises:
+            `~moclo.errors.DuplicateModules`: when two different modules share
+                the same start overhang, leading in possibly non-deterministic
+                constructs.
+            `~moclo.errors.MissingModule`: when a module has an end overhang
+                that is not shared by any other module, leading to a partial
+                construct only
+            `~moclo.errors.InvalidSequence`: when one of the modules does not
+                match the required module structure (missing site, wrong
+                overhang, etc.).
+
+        Warnings:
+            `~moclo.errors.UnusedModules`: when some modules were not used
+                during the assembly. This can be turned into an error using
+                a `warnings.simplefilter` decorator with ``action`` set to
+                ``"error"`` before calling the function.
+
+        """
 
         # If the start and end overhangs are the same, the assembly will
         # not be the only stable product in the bioreactor.

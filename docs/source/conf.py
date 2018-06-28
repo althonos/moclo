@@ -257,6 +257,12 @@ napoleon_use_admonition_for_examples = True
 napoleon_use_admonition_for_notes = True
 napoleon_use_admonition_for_references = True
 
+# -- Options for autodoc extension -------------------------------------------
+
+autoclass_content = 'class'
+
+
+
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
