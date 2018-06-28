@@ -46,7 +46,7 @@ class SeqMatch(typing.Generic[_S]):
         if span[1] >= span[0] >= len(self.rec):
             return self.rec[span[0] % len(self.rec) : span[1] % len(self.rec)]  # type: ignore
         elif span[1] >= len(self.rec) > span[0] :
-            return self.rec[span[0]:] + self.rec[:span[1] % len(self.rec)]      # type: ignore
+            return self.rec[:span[1] % len(self.rec)] + self.rec[span[0]:]      # type: ignore
         else:
             return self.rec[span[0]:span[1]]  # type: ignore
 
