@@ -46,21 +46,7 @@ Library
   :maxdepth: 1
 
   Installing  <install.rst>
-
-
-
-Examples
---------
-
-.. toctree::
-  :maxdepth: 1
-
-  Assemble the YTK integration vector <examples/ytk-vector.ipynb>
-
-
-
-
-
+  Examples    <examples/index.rst>
 
 
 Kits

@@ -5,14 +5,15 @@ The documentation of this module is mostly adapted from the *Lee et al.*
 supplementary data. Each item also has specific sections that are organized
 as follow:
 
-* **Note**: this section describes a behaviour that is not part of the YTK
+**Note**:
+    this section describes a behaviour that is not part of the YTK
     standard, but that is implemnted in all YTK official parts, and encouraged
     to follow by the YTK authors.
-* **Caution**: this section describes a behaviour that goes against the MoClo
-    standard, but which you are entitled to follow for your parts to be valid
-    YTK parts.
-* **Danger**: this section describes a quirk specific to the ``moclo-ytk``
-    library.
+**Caution**
+    this section describes a behaviour that goes against the MoClo standard,
+    but which you are entitled to follow for your parts to be valid YTK parts.
+**Danger**
+    this section describes a quirk specific to the ``moclo-ytk`` library.
 
 References:
     1. `Lee, M. E., DeLoache, W. C., Cervantes, B., Dueber, J. E. (2015).
@@ -342,7 +343,7 @@ class YTKPart234(YTKPart, YTKEntry):
 
 
 class YTKPart234r(YTKPart, YTKEntry):
-    """A YTK Type 234 part (**Composite 6, 7, 8**) with reversed BsaI sites.
+    """A YTK Type 234 part (**Composite 2, 3, 4**) with reversed BsaI sites.
 
     .. image:: type234r.svg
        :align: center
