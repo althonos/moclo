@@ -1,7 +1,7 @@
 ``moclo-ytk``
 =============
 
-*Yeast ToolKit implementation for the base* `moclo <https://github.com/althonos/moclo>`__ *library*.
+*Yeast ToolKit implementation for the base* `moclo <https://github.com/althonos/moclo/tree/master/moclo>`__ *library*.
 
 |Source| |PyPI| |Travis| |Docs| |Codecov| |Codacy| |Format| |License|
 

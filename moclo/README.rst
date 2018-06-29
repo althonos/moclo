@@ -1,7 +1,7 @@
 ``moclo``
 =========
 
-*Modular cloning with the* `MoClo <https://www.addgene.org/cloning/moclo/>`__ *framework*.
+*A Python implementation of the* `MoClo <https://www.addgene.org/cloning/moclo/>`__ *system logic.*
 
 |Source| |PyPI| |Travis| |Docs| |Codecov| |Codacy| |Format| |License|
 
@@ -31,3 +31,31 @@
 
 .. |Docs| image:: https://img.shields.io/readthedocs/moclo.svg?maxAge=3600&style=flat-square
    :target: https://moclo.readthedocs.io/
+
+
+Requirements
+------------
+
++---------------------+----------------------------+------------------------+--------------------------+---------------------------+
+| **cached-property** |  Cache validation results  | |PyPI cached-property| | |Source cached-property| | |License cached-property| |
++---------------------+----------------------------+------------------------+--------------------------+---------------------------+
+| **biopython**       |  Sequence handling         | |PyPI biopython|       | |Source biopython|       | |License biopython|       |
++---------------------+----------------------------+------------------------+--------------------------+---------------------------+
+
+.. |PyPI cached-property| image:: https://img.shields.io/pypi/v/cached-property.svg?style=flat-square&maxAge=600
+   :target: https://pypi.python.org/pypi/cached-property
+
+.. |PyPI biopython| image:: https://img.shields.io/pypi/v/biopython.svg?style=flat-square&maxAge=600
+   :target: https://pypi.org/project/biopython/
+
+.. |Source cached-property| image:: https://img.shields.io/badge/source-GitHub-303030.svg?style=flat-square&maxAge=600
+   :target: https://github.com/pydanny/cached-property
+
+.. |Source biopython| image:: https://img.shields.io/badge/source-GitHub-303030.svg?style=flat-square&maxAge=600
+   :target: https://github.com/biopython/biopython
+
+.. |License cached-property| image:: https://img.shields.io/pypi/l/cached-property.svg?style=flat-square&maxAge=600
+   :target: https://choosealicense.com/licenses/bsd-3-clause/
+
+.. |License biopython| image:: https://img.shields.io/badge/license-BSD%2FBioPython-303030.svg?style=flat-square&maxAge=600
+   :target: https://choosealicense.com/licenses/bsd-3-clause/

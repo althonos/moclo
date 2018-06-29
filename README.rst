@@ -1,7 +1,7 @@
 ``moclo``
 =========
 
-*A Python implementation of the MoClo system logic.*
+*A Python implementation of the* `MoClo <https://www.addgene.org/cloning/moclo/>`__ *system logic.*
 
 |Source| |Travis| |Docs| |Codecov| |Codacy| |License|
 
@@ -31,13 +31,30 @@ The documentation is hosted on ``readthedocs.org``, and built against the latest
 commit of the development repository. It contains a comprehensive API reference
 as well as examples compiled from Jupyter notebooks at each build.
 
+
+Base module
+-----------
+
+The base logic is handled by the core ``moclo`` module. It embbeds an object
+model of the MoClo system logic, but does not enforce any specific sequence
+structure, and is not usable alone. You must install a kit (listed below) to
+be able to validate and compute assemblies.
+
+
 Kits
 ----
 
+Additional kits can be installed separately depending on what's needed. The
+following implementations are available:
+
 * `Yeast ToolKit (moclo-ytk) <https://github.com/althonos/moclo/tree/master/moclo-ytk>`_
+
+Once installed, kits are available in the ``moclo.kits`` package namespace.
+`Kit-specific documentation <https://moclo.readthedocs.io/en/latest/#kits>`_ is
+available as well.
 
 
 License
 -------
 
-This library is licensed under the `MIT License <http://choosealicense.com/licenses/mit/>`_
+This library is licensed under the `MIT License <http://choosealicense.com/licenses/mit/>`_.
