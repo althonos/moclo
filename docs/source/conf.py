@@ -81,15 +81,17 @@ project_urls = dict(
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
     'sphinx.ext.napoleon',
-    # 'sphinx.ext.todo',
+    'sphinx.ext.todo',
     'sphinx.ext.coverage',
     'sphinx.ext.mathjax',
-    # 'sphinx.ext.ifconfig',
-    # 'sphinx.ext.viewcode',
-    # 'sphinx.ext.githubpages',
+    'sphinx.ext.ifconfig',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.githubpages',
+    'sphinx_bootstrap_theme',
     'nbsphinx',
     'IPython.sphinxext.ipython_console_highlighting',
 ]

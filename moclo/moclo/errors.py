@@ -9,6 +9,8 @@ if typing.TYPE_CHECKING:
 
 
 class MocloError(Exception):
+    """Base class for all MoClo-related exceptions.
+    """
     pass
 
 class InvalidSequence(ValueError, MocloError):
@@ -65,6 +67,10 @@ class MissingModule(AssemblyError):
 
 class AssemblyWarning(MocloError, Warning):
     """Assembly-specific run-time warning.
+
+    Warnings can be turned into errors using the `warnings.catch_warnings`
+    decorator combined to `warnings.simplefilter` with `action` set to
+    `"error"`.
     """
 
 

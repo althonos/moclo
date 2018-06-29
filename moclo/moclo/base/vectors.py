@@ -1,4 +1,11 @@
 # coding: utf-8
+"""MoClo vector classes.
+
+A vector is a plasmidic DNA sequence that can hold a combination of modules of
+the same level to create a single module of the following level. Vectors
+contain a placeholder sequence that is replaced by the concatenation of the
+modules during the Golden Gate assembly.
+"""
 
 import abc
 import warnings
@@ -71,12 +78,8 @@ class AbstractVector(StructuredRecord):
             `~moclo.errors.InvalidSequence`: when one of the modules does not
                 match the required module structure (missing site, wrong
                 overhang, etc.).
-
-        Warnings:
             `~moclo.errors.UnusedModules`: when some modules were not used
-                during the assembly. This can be turned into an error using
-                a `warnings.simplefilter` decorator with ``action`` set to
-                ``"error"`` before calling the function.
+                during the assembly. 
 
         """
 
