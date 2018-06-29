@@ -30,7 +30,7 @@ MoClo
    :target: https://choosealicense.com/licenses/mit/
 
 .. |Source| image:: https://img.shields.io/badge/source-GitHub-303030.svg?maxAge=3600&style=flat-square
-   :target: https://github.com/althonos/moclo/tree/master/moclo-ytk
+   :target: https://github.com/althonos/moclo
 
 .. |Docs| image:: https://img.shields.io/readthedocs/moclo.svg?maxAge=3600&style=flat-square
    :target: https://moclo.readthedocs.io/
