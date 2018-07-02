@@ -84,6 +84,27 @@ class YTKCassetteVector(vectors.CassetteVector):
     )
 
 
+class YTKMultigeneVector(vectors.MultigeneVector):
+    """A MoClo Yeast ToolKit multigene vector.
+
+    Parts of Type 1 and 5 are used to order the cassette plasmids within
+    the multigene assembly. The vector always contains a `ConLS` and `ConRE`
+    parts.
+
+    References:
+        *Lee et al.*, Supplementary Figure S21.
+
+    """
+    _structure = (
+        "(CTGA)" # ConLS
+        "(N"
+        "GAGACG" # BsmBI
+        "N*"     # Placeholder sequence
+        "CGTCTC" # BsmBI
+        "N)"
+        "(AGCA)" # ConRE
+    )
+
 
 ### MODULES
 
