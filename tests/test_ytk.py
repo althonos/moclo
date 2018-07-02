@@ -39,13 +39,16 @@ def plasmids(name):
 # part or not rightfully. The `_TestYTK` instance acts as a single test case.
 class _TestYTK(unittest.TestCase):
 
+    _plasmids = None
+
     @classmethod
     def make_suite(cls, part_cls, part_name, exclude=frozenset()):
-        test_plasmids = (p for p in plasmids('ytk.csv.xz') if not p[0] in exclude)
+        if cls._plasmids is None:
+            cls._plasmids = list(plasmids('ytk.csv.xz'))
         case_name = str('Test{}'.format(part_cls.__name__))
         tests = {
-            test.__name__:test
-            for plasmid in plasmids('ytk.csv.xz')
+            test.__name__: test
+            for plasmid in cls._plasmids
             if plasmid[0] not in exclude
             for test in (cls(*plasmid, part_cls=part_cls, part_name=part_name),)
         }
