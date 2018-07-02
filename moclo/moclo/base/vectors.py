@@ -60,15 +60,16 @@ class AbstractVector(StructuredRecord):
         """Assemble the provided modules into the vector.
 
         Arguments:
-            module (`~moclo.base.AbstractModule`): a module to insert in the
-                vector.
-            modules (`~moclo.base.AbstractModule`, optional): additional
+            module (`~moclo.base.modules.AbstractModule`): a module to insert
+                in the vector.
+            modules (`~moclo.base.modules.AbstractModule`, optional): additional
                 modules to insert in the vector. The order of the parameters
-                is not  important, since modules will be sorted by their start
+                is not important, since modules will be sorted by their start
                 overhang in the function.
 
         Returns:
-            SeqRecord: the assembled sequence with inherited annotations.
+            `~Bio.SeqRecord.SeqRecord`: the assembled sequence with sequence
+            annotations inherited from the vector and the modules.
 
         Raises:
             `~moclo.errors.DuplicateModules`: when two different modules share

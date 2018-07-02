@@ -3,14 +3,22 @@ Vectors
 
 .. automodule:: moclo.base.vectors
 
-.. autoclass:: AbstractVector
+.. autoclass:: AbstractVector(object)
    :members:
+   :inherited-members:
+   :special-members: __init__
 
-.. autoclass:: EntryVector
+.. autoclass:: EntryVector(AbstractVector)
    :members:
+   :inherited-members:
+   :special-members: __init__
 
-.. autoclass:: CassetteVector
+.. autoclass:: CassetteVector(AbstractVector)
    :members:
+   :inherited-members:
+   :special-members: __init__
 
-.. autoclass:: MultigeneVector
+.. autoclass:: MultigeneVector(AbstractVector)
    :members:
+   :inherited-members:
+   :special-members: __init__

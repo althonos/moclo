@@ -3,17 +3,27 @@ Modules
 
 .. automodule:: moclo.base.modules
 
-.. autoclass:: AbstractModule
+.. autoclass:: AbstractModule(object)
    :members:
-   
-.. autoclass:: Product
-   :members:
+   :inherited-members:
+   :special-members: __init__
 
-.. autoclass:: Entry
+.. autoclass:: Product(AbstractModule)
    :members:
+   :inherited-members:
+   :special-members: __init__
 
-.. autoclass:: Cassette
+.. autoclass:: Entry(AbstractModule)
    :members:
+   :inherited-members:
+   :special-members: __init__
 
-.. autoclass:: Multigene
+.. autoclass:: Cassette(AbstractModule)
    :members:
+   :inherited-members:
+   :special-members: __init__
+
+.. autoclass:: Multigene(AbstractModule)
+   :members:
+   :inherited-members:
+   :special-members: __init__

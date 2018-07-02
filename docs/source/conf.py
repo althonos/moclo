@@ -264,8 +264,6 @@ napoleon_use_admonition_for_references = True
 
 autoclass_content = 'class'
 
-
-
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
