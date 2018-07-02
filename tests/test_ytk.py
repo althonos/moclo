@@ -25,8 +25,8 @@ except ImportError:
 
 ### Plasmids from CSV loader
 
-def plasmids():
-    plasmids_file = os.path.join(__file__, '..', 'data', 'ytk.csv.xz')
+def plasmids(name):
+    plasmids_file = os.path.join(__file__, '..', 'data', name)
     with io.TextIOWrapper(lzma.open(os.path.abspath(plasmids_file))) as f:
         for line in f:
             if not line.startswith('Plasmid Name'):
@@ -54,7 +54,7 @@ def test_ytk_part(_cls, _name, exclude=set()):
             doc = 'Check that {} ({}) is not a YTK Type {} part.\n'
         return doc.format(params.args[0], params.args[2], _name)
 
-    test_plasmids = (p for p in plasmids() if not p[0] in exclude)
+    test_plasmids = (p for p in plasmids('ytk.csv.xz') if not p[0] in exclude)
 
     class Test(unittest.TestCase):
         _part_cls = _cls
@@ -103,7 +103,7 @@ class TestYTKConstruct(unittest.TestCase):
         """
         records = {
             p[0]: CircularRecord(Seq(p[4]), id=p[0], name=p[0])
-            for p in plasmids()
+            for p in plasmids('ytk.csv.xz')
         }
 
         part1 = ytk.YTKPart1(records['pYTK008'])
@@ -118,4 +118,31 @@ class TestYTKConstruct(unittest.TestCase):
         expected = records['pYTK096']
 
         self.assertEqual(len(assembly), len(expected), 'lengths differ')
-        self.assertIn(assembly.seq, expected.seq + expected.seq, 'sequences are not rotation of each other')
+        self.assertIn(assembly.seq, expected.seq + expected.seq, 'sequences differ')
+
+
+
+### Test Yeast ToolKit multigene assembly
+
+class TestYTKMultigene(unittest.TestCase):
+
+    def test_multigene_assembly(self):
+        """Check a YTK multigene assembly gives the expected result.
+        """
+        records = {
+            p[0]: CircularRecord(Seq(p[4]), id=p[0], name=p[0])
+            for p in plasmids('ytk-multigene.csv.xz')
+        }
+
+        print(records)
+
+        tu1 = ytk.YTKCassette(records['mCerulean'])
+        tu2 = ytk.YTKCassette(records['mNeonGreen'])
+        tu3 = ytk.YTKCassette(records['mScarlet'])
+        vec = ytk.YTKMultigeneVector(records['multigeneVec'])
+
+        assembly = vec.assemble(tu1, tu2, tu3)
+        expected = records['mCmNGmS']
+
+        self.assertEqual(len(assembly), len(expected), 'lengths differ')
+        self.assertIn(assembly.seq, expected.seq + expected.seq, 'sequences differ')

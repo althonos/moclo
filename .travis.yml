@@ -16,6 +16,7 @@ matrix:
   - python: pypy-5.3.1
 
 before_install:
+- ci/travis/decrypt-all.sh
 - pip install -U setuptools wheel
 
 install:
