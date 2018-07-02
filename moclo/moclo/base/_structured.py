@@ -32,7 +32,8 @@ class StructuredRecord(object):
         regex = self._regexes.get(type(self))
         if regex is None:
             topology = self.record.annotations.get('topology', 'circular').lower()
-            regex = self._regexes[type(self)] = DNARegex(self._structure, linear=topology != 'circular')
+            regex = DNARegex(self._structure, linear=topology != 'circular')
+            self._regexes[type(self)] = regex
         match = regex.search(self.record)
         if match is None:
             details = "does not match '{}' structure".format(type(self).__name__)
@@ -41,6 +42,12 @@ class StructuredRecord(object):
 
     def is_valid(self):
         # type: () -> bool
+        """Check if the wrapped record follows the required class structure.
+
+        Returns:
+            `bool`: `True` if the record is valid, `False` otherwise.
+
+        """
         try:
             return self._match is not None
         except errors.InvalidSequence:
