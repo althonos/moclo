@@ -37,9 +37,11 @@ Requirements
 ------------
 
 +---------------------+----------------------------+------------------------+--------------------------+---------------------------+
-| **cached-property** |  Cache validation results  | |PyPI cached-property| | |Source cached-property| | |License cached-property| |
-+---------------------+----------------------------+------------------------+--------------------------+---------------------------+
 | **biopython**       |  Sequence handling         | |PyPI biopython|       | |Source biopython|       | |License biopython|       |
++---------------------+----------------------------+------------------------+--------------------------+---------------------------+
+| **cached-property** |  Lazy regex evaluation     | |PyPI cached-property| | |Source cached-property| | |License cached-property| |
++---------------------+----------------------------+------------------------+--------------------------+---------------------------+
+| **six**             | Python 2/3 compatibility   | |PyPI six|             | |Source six|             | |License six|             |
 +---------------------+----------------------------+------------------------+--------------------------+---------------------------+
 
 .. |PyPI cached-property| image:: https://img.shields.io/pypi/v/cached-property.svg?style=flat-square&maxAge=600
@@ -48,14 +50,23 @@ Requirements
 .. |PyPI biopython| image:: https://img.shields.io/pypi/v/biopython.svg?style=flat-square&maxAge=600
    :target: https://pypi.org/project/biopython/
 
+.. |PyPI six| image:: https://img.shields.io/pypi/v/six.svg?style=flat-square&maxAge=600
+   :target: https://pypi.org/project/six/
+
 .. |Source cached-property| image:: https://img.shields.io/badge/source-GitHub-303030.svg?style=flat-square&maxAge=600
    :target: https://github.com/pydanny/cached-property
 
 .. |Source biopython| image:: https://img.shields.io/badge/source-GitHub-303030.svg?style=flat-square&maxAge=600
    :target: https://github.com/biopython/biopython
 
+.. |Source six| image:: https://img.shields.io/badge/source-GitHub-303030.svg?style=flat-square&maxAge=600
+   :target: https://github.com/benjaminp/six
+
 .. |License cached-property| image:: https://img.shields.io/pypi/l/cached-property.svg?style=flat-square&maxAge=600
    :target: https://choosealicense.com/licenses/bsd-3-clause/
 
-.. |License biopython| image:: https://img.shields.io/badge/license-BSD%2FBioPython-303030.svg?style=flat-square&maxAge=600
+.. |License biopython| image:: https://img.shields.io/badge/license-BSD%2FBioPython-blue.svg?style=flat-square&maxAge=600
    :target: https://choosealicense.com/licenses/bsd-3-clause/
+
+.. |License six| image:: https://img.shields.io/pypi/l/six.svg?style=flat-square&maxAge=600
+   :target: https://choosealicense.com/licenses/mit/
