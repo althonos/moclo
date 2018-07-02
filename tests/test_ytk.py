@@ -26,8 +26,8 @@ except ImportError:
 ### Plasmids from CSV loader
 
 def plasmids():
-    plasmids_file = os.path.abspath(os.path.join(__file__, '..', 'ytk.csv.xz'))
-    with io.TextIOWrapper(lzma.open(plasmids_file)) as f:
+    plasmids_file = os.path.join(__file__, '..', 'data', 'ytk.csv.xz')
+    with io.TextIOWrapper(lzma.open(os.path.abspath(plasmids_file))) as f:
         for line in f:
             if not line.startswith('Plasmid Name'):
                 yield line.strip().split('\t')
