@@ -50,13 +50,13 @@ class YTKEntryVector(vectors.EntryVector):
     """
 
     _structure = (
-        "(NNNN)" # Vector overhang (start)
-        "(N"
-        "GAGACG" # BsmBI
-        "N*?"    # Placeholder sequence
-        "CGTCTC" # BsmBI
-        "N)"
-        "(NNNN)" # Vector overhang (end)
+        '(NNNN)'  # Vector overhang (start)
+        '(N'
+        'GAGACG'  # BsmBI
+        'N*?'     # Placeholder sequence
+        'CGTCTC'  # BsmBI
+        'N)'
+        '(NNNN)'  # Vector overhang (end)
     )
 
 
@@ -74,13 +74,13 @@ class YTKCassetteVector(vectors.CassetteVector):
     """
 
     _structure = (
-        "(NNNN)" # Restriction site (start)
-        "(N"
-        "GAGACC" # BsaI
-        "N*?"    # Placeholder sequence
-        "GGTCTC" # BsaI
-        "N)"
-        "(NNNN)" # Restriction site (end)
+        '(NNNN)'  # Restriction site (start)
+        '(N'
+        'GAGACC'  # BsaI
+        'N*?'     # Placeholder sequence
+        'GGTCTC'  # BsaI
+        'N)'
+        '(NNNN)'  # Restriction site (end)
     )
 
 
@@ -95,14 +95,15 @@ class YTKMultigeneVector(vectors.MultigeneVector):
         *Lee et al.*, Supplementary Figure S21.
 
     """
+
     _structure = (
-        "(CTGA)" # ConLS
-        "(N"
-        "GAGACG" # BsmBI
-        "N*"     # Placeholder sequence
-        "CGTCTC" # BsmBI
-        "N)"
-        "(AGCA)" # ConRE
+        '(CTGA)'  # ConLS
+        '(N'
+        'GAGACG'  # BsmBI
+        'N*'      # Placeholder sequence
+        'CGTCTC'  # BsmBI
+        'N)'
+        '(AGCA)'  # ConRE
     )
 
 
@@ -127,19 +128,19 @@ class YTKProduct(modules.Product):  # FIXME ?
     """
 
     _structure = (
-        "CGTCTC"  # BsmBI
-        "N"
-        "(NNGG)"  # Product overhangs (start)
-         "(TCTC"  # BsaI (first 2 nucleotides in the overhang)
-        "N"
-        "NNNN"   # Type specific overhang (start)
-        "N*?"    # Template
-        "NNNN"   # Type specific overhang (end)
-        "N"
-        "GA)"    # BsaI (last 4 nucleotides in the overhang)
-        "(GACC)" # Entry overhangs (end)
-        "N"
-        "GAGACG" # BsmBI
+        'CGTCTC'  # BsmBI
+        'N'
+        '(NNGG)'  # Product overhangs (start)
+        '(TCTC'   # BsaI (first 2 nucleotides in the overhang)
+        'N'
+        'NNNN'    # Type specific overhang (start)
+        'N*?'     # Template
+        'NNNN'    # Type specific overhang (end)
+        'N'
+        'GA)'     # BsaI (last 4 nucleotides in the overhang)
+        '(GACC)'  # Entry overhangs (end)
+        'N'
+        'GAGACG'  # BsmBI
     )
 
 
@@ -162,13 +163,13 @@ class YTKEntry(modules.Entry):
     """
 
     _structure = (
-        "GGTCTC"  # BsaI
-        "N"
-        "(NNNN)"  # Type specific overhang (start)
-        "(N*?)"   # Target sequence
-        "(NNNN)"  # Type specific overhang (end)
-        "N"
-        "GAGACC"  # BsaI
+        'GGTCTC'  # BsaI
+        'N'
+        '(NNNN)'  # Type specific overhang (start)
+        '(N*?)'   # Target sequence
+        '(NNNN)'  # Type specific overhang (end)
+        'N'
+        'GAGACC'  # BsaI
     )
 
 
@@ -177,21 +178,21 @@ class YTKCassette(modules.Cassette):
     """
 
     _structure = (
-        "CGTCTC"  # BsmBI
-        "N"
-        "(NNNN)"  # Cassette overhang (start)
-        "(N*?)"   # Target sequence
-        "(NNNN)"  # Type specific overhang (end)
-        "N"
-        "GAGACG"  # BsmBI
+        'CGTCTC'  # BsmBI
+        'N'
+        '(NNNN)'  # Cassette overhang (start)
+        '(N*?)'   # Target sequence
+        '(NNNN)'  # Type specific overhang (end)
+        'N'
+        'GAGACG'  # BsmBI
     )
-
 
 
 ### PARTS
 
 _ent = 'GGTCTCN({start})(N*?)({end})NGAGACC'
 _vec = '({end})(NGAGACCN*?GGTCTCN)({start})'
+
 
 @six.add_metaclass(abc.ABCMeta)
 class YTKPart(object):
@@ -230,6 +231,7 @@ class YTKPart1(YTKPart, YTKEntry):
         just after the upstream overhang for BioBrick compatibility of the
         assembled cassettes and multi-gene plasmids.
     """
+
     _structure = _ent.format(start='CCCT', end='AACG')
 
 
@@ -247,6 +249,7 @@ class YTKPart2(YTKPart, YTKEntry):
         preceding the start codon (overlapping the downstream overhang) for
         BglBrick compatibility.
     """
+
     _structure = _ent.format(start='AACG', end='TATG')
 
 
@@ -266,6 +269,7 @@ class YTKPart3(YTKPart, YTKEntry):
         at the end of the included CDS (overlapping the downstream overhang)
         for BglBrick compatibility.
     """
+
     _structure = _ent.format(start='TATG', end='ATCC')
 
 
@@ -290,6 +294,7 @@ class YTKPart3b(YTKPart, YTKEntry):
         *BamHI* recognition site at the end of the included CDS (overlapping
         the downstream overhang) for BglBrick compatibility.
     """
+
     _structure = _ent.format(start='TTCT', end='ATCC')
 
 
@@ -311,6 +316,7 @@ class YTKPart4(YTKPart, YTKEntry):
         enables BglBrick compatibility, then followed by the terminator
         sequence itself.
     """
+
     _structure = _ent.format(start='ATCC', end='GCTG')
 
 
@@ -334,6 +340,7 @@ class YTKPart4a(YTKPart, YTKEntry):
         itself immediately followed by a *XhoI* recognition site just before
         the downstream overhang, for BglBrick compatibility.
     """
+
     _structure = _ent.format(start='ATCC', end='TGGC')
 
 
@@ -347,6 +354,7 @@ class YTKPart4b(YTKPart, YTKEntry):
     encode an in-frame start codon, as it should be located in the Type 4a
     part that precedes it.
     """
+
     _structure = _ent.format(start='TGGC', end='GCTG')
 
 
@@ -360,6 +368,7 @@ class YTKPart234(YTKPart, YTKEntry):
     coding sequence, and terminator) fused into a single part, instead of
     separate Type 2, 3 and 4 parts.
     """
+
     _structure = _ent.format(start='AACG', end='GCTG')
 
 
@@ -374,6 +383,7 @@ class YTKPart234r(YTKPart, YTKEntry):
     where the Type 234 part acts as a placeholder until replaced by actual
     Type 2, 3 and 4 parts in the final construct.
     """
+
     _structure = _vec.format(start='GCTG', end='AACG')
 
 
@@ -393,6 +403,7 @@ class YTKPart5(YTKPart, YTKEntry):
         cassettes and multi-gene plasmids.
 
     """
+
     _structure = _ent.format(start='GCTG', end='TACA')
 
 
@@ -406,6 +417,7 @@ class YTKPart6(YTKPart, YTKEntry):
     a full expression cassette (promoter, ORF, and terminal) for conferring
     the selectable phenotype (such as drug-resistance or bioluminescence).
     """
+
     _structure = _ent.format(start='TACA', end='GAGT')
 
 
@@ -419,6 +431,7 @@ class YTKPart7(YTKPart, YTKEntry):
     sequence will either hold a yeast origin of replication, or a 3' homology
     sequence for integration in the bacterial genome.
     """
+
     _structure = _ent.format(start='GAGT', end='CCGA')
 
 
@@ -438,6 +451,7 @@ class YTKPart8(YTKPart, YTKCassetteVector):
         and also include *NotI* restriction site at each end of the part to
         allow the verification of new assemblies.
     """
+
     _structure = _vec.format(start='CCGA', end='CCCT')
 
 
@@ -457,6 +471,7 @@ class YTKPart8a(YTKPart, YTKCassetteVector):
         the integration plasmid can be linearized prior to transformation
         into yeast.
     """
+
     _structure = _vec.format(start='CCGA', end='CAAT')
 
 
@@ -469,6 +484,7 @@ class YTKPart8b(YTKPart, YTKEntry):
     As with certain Type 7 parts, parts of this type contain long sequences
     of homology to the genome that is upstream of the target locus.
     """
+
     _structure = _ent.format(start='CAAT', end='CCCT')
 
 
@@ -483,6 +499,7 @@ class YTKPart678(YTKPart, YTKCassetteVector):
     assembling an intermediary plasmid acting as a vector for a multi-gene
     construct.
     """
+
     _structure = _vec.format(start='TACA', end='CCCT')
 
 

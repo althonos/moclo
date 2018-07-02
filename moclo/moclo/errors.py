@@ -3,9 +3,9 @@
 import typing
 
 if typing.TYPE_CHECKING:
-    from typing import Any
-    from Bio.Seq import Seq
-    from .base.modules import AbstractModule
+    from typing import Any                      # noqa: F401
+    from Bio.Seq import Seq                     # noqa: F401
+    from .base.modules import AbstractModule    # noqa: F401
 
 
 class MocloError(Exception):
@@ -85,5 +85,5 @@ class UnusedModules(AssemblyWarning):
     def __str__(self):
         s = 'unused: {}'
         if self.details is not None:
-            s = ''.join([s, ' ', '(', self.details, ')'])
+            s = ''.join([s, ' ', '(', str(self.details), ')'])
         return s.format(', '.join(map(str, self.remaining)))

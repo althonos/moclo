@@ -19,7 +19,6 @@ def catch_warnings(action, category=Warning, lineno=0, append=False):
         ... def are_you_scared():
         ...     warnings.warn("I'm warning you !")
         ...     return False
-
         >>> are_you_scared()
         False
 

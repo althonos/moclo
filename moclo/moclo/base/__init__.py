@@ -1,4 +1,5 @@
 # coding: utf-8
+# noqa: F401
 """MoClo object model and abstract classes.
 
 This module contains base classes that implement the Modular Cloning logic.
@@ -9,12 +10,11 @@ to clever sequence design to create genetic constructs in a simple and
 deterministic way.
 """
 from __future__ import absolute_import
-from __future__ import unicode_literals
 
 from .modules import AbstractModule, Cassette, Entry, Multigene, Product
 from .vectors import AbstractVector, CassetteVector, EntryVector, MultigeneVector
 
-__all__ = list(map(str, (
+__all__ = [
     'AbstractModule',
     'AbstractVector',
     'Cassette',
@@ -24,4 +24,4 @@ __all__ = list(map(str, (
     'Multigene',
     'MultigeneVector',
     'Product',
-)))
+]

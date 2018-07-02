@@ -7,14 +7,11 @@ contain a placeholder sequence that is replaced by the concatenation of the
 modules during the Golden Gate assembly.
 """
 
-import abc
 import warnings
 
-import cached_property
 import six
 import typing
 from Bio import BiopythonWarning
-from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
 from .. import errors
@@ -23,13 +20,15 @@ from ..utils import catch_warnings
 from ._structured import StructuredRecord
 
 if typing.TYPE_CHECKING:
-    from typing import Any, MutableMapping, Union
-    from .modules import AbstractModule
+    from typing import Any, MutableMapping, Union   # noqa: F401
+    from Bio.Seq import Seq                         # noqa: F401
+    from .modules import AbstractModule             # noqa: F401
 
 
 class AbstractVector(StructuredRecord):
     """An abstract modular cloning vector.
     """
+
     _level = None  # type: Union[None, int]
 
     def overhang_start(self):
@@ -68,6 +67,9 @@ class AbstractVector(StructuredRecord):
                 is not  important, since modules will be sorted by their start
                 overhang in the function.
 
+        Returns:
+            SeqRecord: the assembled sequence with inherited annotations.
+
         Raises:
             `~moclo.errors.DuplicateModules`: when two different modules share
                 the same start overhang, leading in possibly non-deterministic
@@ -79,10 +81,9 @@ class AbstractVector(StructuredRecord):
                 match the required module structure (missing site, wrong
                 overhang, etc.).
             `~moclo.errors.UnusedModules`: when some modules were not used
-                during the assembly. 
+                during the assembly.
 
         """
-
         # If the start and end overhangs are the same, the assembly will
         # not be the only stable product in the bioreactor.
         if self.overhang_start() == self.overhang_end():

@@ -13,7 +13,7 @@ import six
 from .record import CircularRecord
 
 if typing.TYPE_CHECKING:
-    from typing import Mapping, Match, Optional, Sequence, Text, Tuple
+    from typing import Mapping, Match, Optional, Sequence, Text, Tuple  # noqa: F401
 
 
 # typing.TypeVar: a generic sequence

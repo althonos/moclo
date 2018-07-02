@@ -11,8 +11,8 @@ from Bio.SeqFeature import SeqFeature, FeatureLocation, CompoundLocation
 from Bio.SeqRecord import SeqRecord
 
 if typing.TYPE_CHECKING:
-    from typing import Text, Union
-    from Bio.Seq import Seq
+    from typing import Dict, List, Text, Union  # noqa: F401
+    from Bio.Seq import Seq                     # noqa: F401
 
 
 def _ambiguous(func):
@@ -32,14 +32,15 @@ class CircularRecord(SeqRecord):
                  id='<unknown id>',                     # type: Text
                  name='<unknown name>',                 # type: Text
                  description='<unknown description>',   # type: Text
-                 dbxrefs=None,
-                 features=None,
-                 annotations=None,
-                 letter_annotations=None):
+                 dbxrefs=None,                          # type: List[Text]
+                 features=None,                         # type: List[SeqFeature]
+                 annotations=None,                      # type: Dict[Text, Any]
+                 letter_annotations=None
+                 ):
         # type: (...) -> None
 
         if isinstance(seq, SeqRecord):
-            self.__init__(
+            self.__init__(   # noqa: T484
                 seq.seq,
                 seq.id,
                 seq.name,

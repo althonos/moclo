@@ -8,19 +8,14 @@ target sequence with Type IIS restriction sites, which depend on the level of
 the module, as well as the chosen MoClo protocol.
 """
 
-import abc
 import typing
 
-import cached_property
-import six
-from Bio.Seq import Seq
-
-from ..record import CircularRecord
 from ._structured import StructuredRecord
 
 if typing.TYPE_CHECKING:
-    from typing import Union
-    from Bio import SeqRecord
+    from typing import Union             # noqa: F401
+    from Bio.Seq import Seq              # noqa: F401
+    from Bio.SeqRecord import SeqRecord  # noqa: F401
 
 
 class AbstractModule(StructuredRecord):
@@ -31,14 +26,41 @@ class AbstractModule(StructuredRecord):
 
     def overhang_start(self):
         # type: () -> Seq
+        """Get the upstream overhang of the target sequence.
+
+        Returns:
+            `~Bio.Seq.Seq`: the downstream overhang.
+
+        """
         return self._match.group(1).seq
 
     def overhang_end(self):
         # type: () -> Seq
+        """Get the downstream overhang of the target sequence.
+
+        Returns:
+            `~Bio.Seq.Seq`: the downstream overhang.
+
+        """
         return self._match.group(3).seq
 
     def target_sequence(self):
         # type: () -> SeqRecord
+        """Get the target sequence of the module.
+
+        Modules are often stored in a standardized way, and contain more than
+        the sequence of interest: for instance they can contain an antibiotic
+        marker, that will not be part of the assembly when that module is
+        assembled into a vector; only the target sequence is inserted.
+
+        Returns:
+            `~Bio.SeqRecord.SeqRecord`: the target sequence with annotations.
+
+        Danger:
+            The start and end overhangs are not included in the returned
+            sequence.
+
+        """
         return self._match.group(2)
 
 
@@ -70,6 +92,10 @@ class Cassette(AbstractModule):
 
 class Multigene(AbstractModule):
     """Level 2 module.
+
+    Modules of this level are assembled from several transcriptional units
+    so that they contain several genes that can be expressed all at once.
+
     """
 
     _level = 2
