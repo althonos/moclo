@@ -2,6 +2,8 @@
 
 import typing
 
+import six
+
 if typing.TYPE_CHECKING:
     from typing import Any                      # noqa: F401
     from Bio.Seq import Seq                     # noqa: F401
@@ -13,6 +15,8 @@ class MocloError(Exception):
     """
     pass
 
+
+@six.python_2_unicode_compatible
 class InvalidSequence(ValueError, MocloError):
     """Invalid sequence provided.
     """
@@ -29,11 +33,13 @@ class InvalidSequence(ValueError, MocloError):
         return s.format(self.sequence)
 
 
+@six.python_2_unicode_compatible
 class AssemblyError(MocloError, RuntimeError):
     """Assembly-specific run-time error.
     """
 
 
+@six.python_2_unicode_compatible
 class DuplicateModules(AssemblyError):
     """Several modules share the same overhangs.
     """
@@ -47,9 +53,10 @@ class DuplicateModules(AssemblyError):
         s = 'duplicate modules: {}'
         if self.details is not None:
             s = ''.join([s, ' ', '(', self.details, ')'])
-        return s.format(', '.join(self.duplicates))
+        return s.format(', '.join(d.record.id for d in self.duplicates))
 
 
+@six.python_2_unicode_compatible
 class MissingModule(AssemblyError):
     """A module is missing in the assembly.
     """
@@ -74,6 +81,7 @@ class AssemblyWarning(MocloError, Warning):
     """
 
 
+@six.python_2_unicode_compatible
 class UnusedModules(AssemblyWarning):
     """Not all modules were used during assembly.
     """
@@ -86,4 +94,4 @@ class UnusedModules(AssemblyWarning):
         s = 'unused: {}'
         if self.details is not None:
             s = ''.join([s, ' ', '(', str(self.details), ')'])
-        return s.format(', '.join(map(str, self.remaining)))
+        return s.format(', '.join(r.record.id for r in self.remaining))

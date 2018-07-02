@@ -69,6 +69,8 @@ class TestAssembly(unittest.TestCase):
             vector.assemble(mod1, mod2)
         self.assertEqual(set(ctx.exception.duplicates), {mod1, mod2})
         self.assertEqual(ctx.exception.details, "same start overhang: 'ATGC'")
+        msg = "duplicate modules: mod1, mod2 (same start overhang: 'ATGC')"
+        self.assertEqual(str(ctx.exception), msg)
 
     def test_unused_modules(self):
         """Assert an error is raised on unused modules during assembly.
@@ -91,3 +93,4 @@ class TestAssembly(unittest.TestCase):
         self.assertEqual(len(captured), 1)
         self.assertIsInstance(captured[0].message, errors.UnusedModules)
         self.assertEqual(captured[0].message.remaining, (mod2,))
+        self.assertEqual(str(captured[0].message), 'unused: mod2')
