@@ -33,7 +33,6 @@ class InvalidSequence(ValueError, MocloError):
         return s.format(self.sequence)
 
 
-@six.python_2_unicode_compatible
 class AssemblyError(MocloError, RuntimeError):
     """Assembly-specific run-time error.
     """
