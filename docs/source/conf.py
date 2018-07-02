@@ -186,6 +186,7 @@ html_static_path = ['_static']
 #
 html_sidebars = {
     "*": ['localtoc.html'],
+    os.path.join("api", "*"): ['localtoc.html'],
     os.path.join("examples", "*"): ['localtoc.html'],
     os.path.join("kits", "*", "*"): ['localtoc.html'],
 }
