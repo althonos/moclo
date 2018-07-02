@@ -11,7 +11,6 @@ import unittest
 
 import six
 from Bio.Seq import Seq
-from parameterized import parameterized
 
 from moclo.record import CircularRecord
 from moclo.kits import ytk
@@ -35,63 +34,88 @@ def plasmids(name):
 
 ### Test Yeast ToolKit plasmids
 
-# Metaclass for test cases: create a test case per type with a method per
-# plasmid that will check if that plasmid is recognized as the test case
-# part or not rightfully.
-def test_ytk_part(_cls, _name, exclude=set()):
+# Metaclass for test suites: create a test suite per type with a method per
+# plasmid that will check if that plasmid is recognized as the test suite
+# part or not rightfully. The `_TestYTK` instance acts as a single test case.
+class _TestYTK(unittest.TestCase):
 
-    def func(func, name, params):
-        if params.args[1] == _name:
+    @classmethod
+    def make_suite(cls, part_cls, part_name, exclude=frozenset()):
+        test_plasmids = (p for p in plasmids('ytk.csv.xz') if not p[0] in exclude)
+        case_name = str('Test{}'.format(part_cls.__name__))
+        tests = {
+            test.__name__:test
+            for plasmid in plasmids('ytk.csv.xz')
+            if plasmid[0] not in exclude
+            for test in (cls(*plasmid, part_cls=part_cls, part_name=part_name),)
+        }
+        return type(case_name, (unittest.TestCase,), tests)
+
+    def __init__(self, id_, type_, name, desc, seq, part_cls, part_name):
+        self.id = id_
+        self.type = type_
+        self.name = name
+        self.desc = desc
+        self.seq = seq
+        self.rec = CircularRecord(Seq(seq), name=name, id=id_)
+        self._part_cls = part_cls
+        self._part_type = part_name
+
+    def _assert_valid(self):
+        err = '{} is not a valid Type {} but should be!'
+        self.assertTrue(
+            self._part_cls(self.rec).is_valid(),
+            err.format(self.id, self._part_type)
+        )
+
+    def _assert_invalid(self):
+        err = '{} is a valid Type {} but should not be!'
+        self.assertFalse(
+            self._part_cls(self.rec).is_valid(),
+            err.format(self.id, self._part_type)
+        )
+
+    def __call__(self):
+        if self.type == self._part_type:
+            self._assert_valid()
+        else:
+            self._assert_invalid()
+
+    @property
+    def __name__(self):
+        if self.type == self._part_type:
             msg = "test_{}_is_type{}"
         else:
             msg = "test_{}_is_not_type{}"
-        return str(msg.format(params.args[0], _name))
+        return str(msg.format(self.id, self._part_type))
 
-    def doc(func, name, params):
-        if params.args[1] == _name:
+    @property
+    def __doc__(self):
+        if self.name == self._part_type:
             doc = 'Check that {} ({}) is a YTK Type {} part.\n'
         else:
             doc = 'Check that {} ({}) is not a YTK Type {} part.\n'
-        return doc.format(params.args[0], params.args[2], _name)
+        return doc.format(self.id, self.name, self._part_type)
 
-    test_plasmids = (p for p in plasmids('ytk.csv.xz') if not p[0] in exclude)
 
-    class Test(unittest.TestCase):
-        _part_cls = _cls
-        _part_type = _name
-
-        @parameterized.expand(test_plasmids, func, doc)
-        def _test_plasmid(self, id_, type_, name, desc, seq):
-            record = CircularRecord(Seq(seq), name=name, id=id_)
-            if type_ == self._part_type:
-                self.assertTrue(
-                    self._part_cls(record).is_valid(),
-                    '{} is not a valid Type {} but should be!'
-                )
-            else:
-                self.assertFalse(self._part_cls(record).is_valid())
-
-    Test.__name__ = str('Test{}'.format(_cls.__name__))
-    return Test
-
-# Generated test cases
-TestYTKPart1 = test_ytk_part(ytk.YTKPart1, '1')
-TestYTKPart2 = test_ytk_part(ytk.YTKPart2, '2')
-TestYTKPart3 = test_ytk_part(ytk.YTKPart3, '3')
-TestYTKPart3a = test_ytk_part(ytk.YTKPart3a, '3a')
-TestYTKPart3b = test_ytk_part(ytk.YTKPart3b, '3b')
-TestYTKPart4 = test_ytk_part(ytk.YTKPart4, '4')
-TestYTKPart4a = test_ytk_part(ytk.YTKPart4a, '4a')
-TestYTKPart4b = test_ytk_part(ytk.YTKPart4b, '4b')
-TestYTKPart234 = test_ytk_part(ytk.YTKPart234, '234')
-TestYTKPart234r = test_ytk_part(ytk.YTKPart234r, '234r', exclude={'pYTK096'})
-TestYTKPart5 = test_ytk_part(ytk.YTKPart5, '5')
-TestYTKPart6 = test_ytk_part(ytk.YTKPart6, '6')
-TestYTKPart7 = test_ytk_part(ytk.YTKPart7, '7')
-TestYTKPart8 = test_ytk_part(ytk.YTKPart8, '8')
-TestYTKPart8a = test_ytk_part(ytk.YTKPart8a, '8a')
-TestYTKPart8b = test_ytk_part(ytk.YTKPart8b, '8b')
-TestYTKPart678 = test_ytk_part(ytk.YTKPart678, '678')
+# Generate test cases
+TestYTKPart1 = _TestYTK.make_suite(ytk.YTKPart1, '1')
+TestYTKPart2 = _TestYTK.make_suite(ytk.YTKPart2, '2')
+TestYTKPart3 = _TestYTK.make_suite(ytk.YTKPart3, '3')
+TestYTKPart3a = _TestYTK.make_suite(ytk.YTKPart3a, '3a')
+TestYTKPart3b = _TestYTK.make_suite(ytk.YTKPart3b, '3b')
+TestYTKPart4 = _TestYTK.make_suite(ytk.YTKPart4, '4')
+TestYTKPart4a = _TestYTK.make_suite(ytk.YTKPart4a, '4a')
+TestYTKPart4b = _TestYTK.make_suite(ytk.YTKPart4b, '4b')
+TestYTKPart234 = _TestYTK.make_suite(ytk.YTKPart234, '234')
+TestYTKPart234r = _TestYTK.make_suite(ytk.YTKPart234r, '234r', exclude={'pYTK096'})
+TestYTKPart5 = _TestYTK.make_suite(ytk.YTKPart5, '5')
+TestYTKPart6 = _TestYTK.make_suite(ytk.YTKPart6, '6')
+TestYTKPart7 = _TestYTK.make_suite(ytk.YTKPart7, '7')
+TestYTKPart8 = _TestYTK.make_suite(ytk.YTKPart8, '8')
+TestYTKPart8a = _TestYTK.make_suite(ytk.YTKPart8a, '8a')
+TestYTKPart8b = _TestYTK.make_suite(ytk.YTKPart8b, '8b')
+TestYTKPart678 = _TestYTK.make_suite(ytk.YTKPart678, '678')
 
 
 ### Test Yeast ToolKit reference paper construct
@@ -121,7 +145,6 @@ class TestYTKConstruct(unittest.TestCase):
         self.assertIn(assembly.seq, expected.seq + expected.seq, 'sequences differ')
 
 
-
 ### Test Yeast ToolKit multigene assembly
 
 class TestYTKMultigene(unittest.TestCase):
@@ -133,8 +156,6 @@ class TestYTKMultigene(unittest.TestCase):
             p[0]: CircularRecord(Seq(p[4]), id=p[0], name=p[0])
             for p in plasmids('ytk-multigene.csv.xz')
         }
-
-        print(records)
 
         tu1 = ytk.YTKCassette(records['mCerulean'])
         tu2 = ytk.YTKCassette(records['mNeonGreen'])
