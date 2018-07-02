@@ -31,8 +31,9 @@ script:
 - green
 
 after_script:
-- pip install codecov
-- codecov
+- pip install codecov codacy-coverage
+- python -m codecov
+- python -m codacy
 
 before_deploy:
 - python setup.py check -rms
