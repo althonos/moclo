@@ -36,8 +36,8 @@ after_script:
 - python -m codacy
 
 before_deploy:
-- cd moclo;     python setup.py check -rms sdist bdist_wheel -d ../dist; cd ..
-- cd moclo-ytk; python setup.py check -rms sdist bdist_wheel -d ../dist; cd ..
+- cd moclo;     python setup.py check -rms sdist -d ../dist bdist_wheel -d ../dist; cd ..
+- cd moclo-ytk; python setup.py check -rms sdist -d ../dist bdist_wheel -d ../dist; cd ..
 
 deploy:
   provider: script
