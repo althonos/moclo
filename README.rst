@@ -54,15 +54,10 @@ Once installed, kits are available in the ``moclo.kits`` package namespace.
 available as well.
 
 
-License
--------
-
-This library is licensed under the `MIT License <http://choosealicense.com/licenses/mit/>`_.
-
-
 About
 -----
 
-This library was developed during a placement at the
+This project is licensed under the `MIT License <http://choosealicense.com/licenses/mit/>`_.
+It was developed during a placement at the
 `InBio team <https://research.pasteur.fr/en/team/experimental-and-computational-methods-for-modeling-cellular-processes/>`_
-at the Institut Pasteur during the summer of 2018.
+at the Institut Pasteur of Paris during the summer of 2018.
