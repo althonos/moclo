@@ -57,7 +57,7 @@ class TestAssembly(unittest.TestCase):
         seqv = Seq("CCATGCTTGTCTTCCACAGAAGACTTCGTAGG")
         vector = self.MockVector(CircularRecord(seqv, "vector"))
 
-        # CGTA --- ATGC
+        # ATGC --- CGTA
         seqm1 = Seq("GAAGACTTATGCCACACGTATTGTCTTC")
         mod1 = self.MockModule(CircularRecord(seqm1, "mod1"))
 
@@ -71,6 +71,23 @@ class TestAssembly(unittest.TestCase):
         self.assertEqual(ctx.exception.details, "same start overhang: 'ATGC'")
         msg = "duplicate modules: mod1, mod2 (same start overhang: 'ATGC')"
         self.assertEqual(str(ctx.exception), msg)
+
+    def test_missing_module(self):
+        """Assert an error is raised when a module is missing.
+        """
+        # ATGC ---- CGTA
+        seqv = Seq("CCATGCTTGTCTTCCACAGAAGACTTCGTAGG")
+        vector = self.MockVector(CircularRecord(seqv, "vector"))
+
+        # CGTA --- ATGA
+        seqm1 = Seq("GAAGACTTATGACACACGTATTGTCTTC")
+        mod1 = self.MockModule(CircularRecord(seqm1, "mod1"))
+
+        with self.assertRaises(errors.MissingModule) as ctx:
+            vector.assemble(mod1)
+        msg = "no module with 'ATGC' start overhang"
+        self.assertEqual(str(ctx.exception), msg)
+
 
     def test_unused_modules(self):
         """Assert an error is raised on unused modules during assembly.
