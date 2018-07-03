@@ -15,6 +15,20 @@ an OS which provides a package manager (such as ``aptitude`` on Debian, or even
 ``homebrew`` on Mac OSX).
 
 
+PyPI + ``pip`` |PyPI|
+---------------------
+
+.. |PyPI| image:: https://img.shields.io/pypi/v/moclo.svg?style=flat-square&maxAge=3600
+   :target: https://pypi.python.org/pypi/moclo
+
+To download the latest release from the Python Package Index:
+
+.. code-block:: console
+
+  $ pip install --user moclo
+  $ pip install --user moclo-ytk
+
+
 GitHub + ``pip`` |Travis|
 -------------------------
 
