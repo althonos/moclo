@@ -1,0 +1,7 @@
+codacy-coverage
+codecov 
+coverage
+green
+setuptools
+twine
+wheels
