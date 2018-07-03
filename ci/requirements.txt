@@ -1,7 +1,9 @@
 codacy-coverage
-codecov 
+codecov
 coverage
+docutils
 green
+Pygments
 setuptools
 twine
-wheels
+wheel
