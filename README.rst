@@ -35,10 +35,10 @@ as well as examples compiled from Jupyter notebooks at each build.
 Base module
 -----------
 
-The base logic is handled by the core ``moclo`` module. It embbeds an object
-model of the MoClo system logic, but does not enforce any specific sequence
-structure, and is not usable alone. You must install a kit (listed below) to
-be able to validate and compute assemblies.
+The base logic is handled by the core `moclo <https://github.com/althonos/moclo/tree/master/moclo-ytk>`_
+module. It embbeds an object model of the MoClo system logic, but does not enforce
+any specific sequence structure, and is not usable alone. You must install a kit
+(listed below) to be able to validate and compute assemblies.
 
 
 Kits
@@ -58,3 +58,11 @@ License
 -------
 
 This library is licensed under the `MIT License <http://choosealicense.com/licenses/mit/>`_.
+
+
+About
+-----
+
+This library was developed during a placement at the
+`InBio team <https://research.pasteur.fr/en/team/experimental-and-computational-methods-for-modeling-cellular-processes/>`_
+at the Institut Pasteur during the summer of 2018.

@@ -4,4 +4,9 @@ from __future__ import unicode_literals
 
 __author__ = 'Martin Larralde'
 __author_email__ = 'martin.larralde@ens-paris-saclay.fr'
-__version__ = '0.1.0'
+__version__ = (
+    __import__('pkg_resources')
+        .resource_string(__name__, '__version__.txt')
+        .strip()
+        .decode('ascii')
+)

@@ -31,6 +31,15 @@ import six
 
 from ..base import modules, vectors
 
+__author__ = 'Martin Larralde'
+__author_email__ = 'martin.larralde@ens-paris-saclay.fr'
+__version__ = (
+    __import__('pkg_resources')
+        .resource_string(__name__, '__version__.txt')
+        .strip()
+        .decode('ascii')
+)
+
 
 ### VECTORS
 
