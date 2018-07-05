@@ -18,10 +18,12 @@ as follow:
 References:
     1. `Lee, M. E., DeLoache, W. C., Cervantes, B., Dueber, J. E. (2015).
        A Highly Characterized Yeast Toolkit for Modular, Multipart Assembly.
-       ACS Synthetic Biology, 4(9), 975–986. <https://doi.org/10.1021/sb500366v>`_
+       ACS Synthetic Biology, 4(9), 975–986.
+       <https://doi.org/10.1021/sb500366v>`_
     2. `Weber, E., Engler, C., Gruetzner, R., Werner, S., Marillonnet, S. (2011).
        A Modular Cloning System for Standardized Assembly of Multigene Constructs.
-       PLOS ONE, 6(2), e16765. <https://doi.org/10.1371/journal.pone.0016765>`_
+       PLOS ONE, 6(2), e16765.
+       <https://doi.org/10.1371/journal.pone.0016765>`_
 
 """
 
@@ -226,7 +228,7 @@ class YTKPart1(YTKPart, YTKEntry):
     .. image:: type1.svg
        :align: center
 
-    Parts of this type contains non-coding and non-regulatory sequences that
+    Parts of this type contain non-coding and non-regulatory sequences that
     are used to direct assembly of multigene plasmids, such as ligation sites
     for other Type IIS endonucleases (e.g. *BsmBI*).
 
