@@ -82,5 +82,5 @@ Module
 
 Vector
 ^^^^^^
-.. autoclass:: YTKMultigeneVector(MultigeneVector)
+.. autoclass:: YTKDeviceVector(DeviceVector)
    :members:

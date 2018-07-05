@@ -63,7 +63,7 @@ Module
 
 Vector
 ^^^^^^
-.. autoclass:: CIDARDeviceVector(MultigeneVector)
+.. autoclass:: CIDARDeviceVector(DeviceVector)
    :members:
 
 
@@ -73,5 +73,5 @@ Level 2
 Module
 ^^^^^^
 
-.. autoclass:: CIDARDevice(Multigene)
+.. autoclass:: CIDARDevice(Device)
    :members:

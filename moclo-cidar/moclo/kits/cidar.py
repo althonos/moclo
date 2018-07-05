@@ -72,7 +72,7 @@ class CIDARCassetteVector(vectors.CassetteVector):
     )
 
 
-class CIDARDeviceVector(vectors.MultigeneVector):
+class CIDARDeviceVector(vectors.DeviceVector):
     """A CIDAR Moclo device vector.
 
     References:
@@ -133,7 +133,7 @@ class CIDARCassette(modules.Cassette):
     )
 
 
-class CIDARDevice(modules.Multigene):
+class CIDARDevice(modules.Device):
     """A CIDAR MoClo device.
     """
 

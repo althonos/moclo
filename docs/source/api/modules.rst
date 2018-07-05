@@ -42,7 +42,7 @@ Level 1
 Level 2
 -------
 
-.. autoclass:: Multigene(AbstractModule)
+.. autoclass:: Device(AbstractModule)
    :members:
    :inherited-members:
    :special-members: __init__

@@ -34,7 +34,7 @@ Level 0
 Level 1
 -------
 
-.. autoclass:: MultigeneVector(AbstractVector)
+.. autoclass:: DeviceVector(AbstractVector)
    :members:
    :inherited-members:
    :special-members: __init__

@@ -138,7 +138,7 @@ class CassetteVector(AbstractVector):
     _level = 1
 
 
-class MultigeneVector(AbstractVector):
+class DeviceVector(AbstractVector):
     """Level 2 vector.
     """
 

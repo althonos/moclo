@@ -90,8 +90,8 @@ class Cassette(AbstractModule):
     _level = 1
 
 
-class Multigene(AbstractModule):
-    """Level 2 module.
+class Device(AbstractModule):
+    """Level 2 module, also refered as a Multigene plasmid.
 
     Modules of this level are assembled from several transcriptional units
     so that they contain several genes that can be expressed all at once.

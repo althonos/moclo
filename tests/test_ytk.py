@@ -137,9 +137,9 @@ class TestYTKConstruct(unittest.TestCase):
 
 ### Test Yeast ToolKit multigene assembly
 
-class TestYTKMultigene(unittest.TestCase):
+class TestYTKDevice(unittest.TestCase):
 
-    def test_multigene_assembly(self):
+    def test_Device_assembly(self):
         """Check a YTK multigene assembly gives the expected result.
         """
         records = {
@@ -150,7 +150,7 @@ class TestYTKMultigene(unittest.TestCase):
         tu1 = ytk.YTKCassette(records['mCerulean'])
         tu2 = ytk.YTKCassette(records['mNeonGreen'])
         tu3 = ytk.YTKCassette(records['mScarlet'])
-        vec = ytk.YTKMultigeneVector(records['multigeneVec'])
+        vec = ytk.YTKDeviceVector(records['multigeneVec'])
 
         assembly = vec.assemble(tu1, tu2, tu3)
         expected = records['mCmNGmS']

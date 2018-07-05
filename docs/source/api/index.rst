@@ -22,7 +22,7 @@ Modules (`moclo.base.modules`)
    AbstractModule
    Entry
    Cassette
-   Multigene
+   Device
 
 
 Vectors (`moclo.base.vectors`)
@@ -35,7 +35,7 @@ Vectors (`moclo.base.vectors`)
    AbstractVector
    EntryVector
    CassetteVector
-   MultigeneVector
+   DeviceVector
 
 
 Errors (`moclo.errors`)

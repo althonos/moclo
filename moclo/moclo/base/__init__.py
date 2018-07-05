@@ -11,8 +11,8 @@ deterministic way.
 """
 from __future__ import absolute_import
 
-from .modules import AbstractModule, Cassette, Entry, Multigene, Product
-from .vectors import AbstractVector, CassetteVector, EntryVector, MultigeneVector
+from .modules import AbstractModule, Cassette, Entry, Device, Product
+from .vectors import AbstractVector, CassetteVector, EntryVector, DeviceVector
 
 __all__ = [
     'AbstractModule',
@@ -21,7 +21,7 @@ __all__ = [
     'CassetteVector',
     'Entry',
     'EntryVector',
-    'Multigene',
-    'MultigeneVector',
+    'Device',
+    'DeviceVector',
     'Product',
 ]

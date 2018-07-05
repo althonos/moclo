@@ -95,7 +95,7 @@ class YTKCassetteVector(vectors.CassetteVector):
     )
 
 
-class YTKMultigeneVector(vectors.MultigeneVector):
+class YTKDeviceVector(vectors.DeviceVector):
     """A MoClo Yeast ToolKit multigene vector.
 
     Parts of Type 1 and 5 are used to order the cassette plasmids within
