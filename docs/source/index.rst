@@ -58,7 +58,7 @@ Kits
   :maxdepth: 1
 
   Yeast ToolKit (YTK)  <kits/ytk/index.rst>
-
+  CIDAR Kit            <kits/cidar/index.rst>
 
 
 Indices and tables

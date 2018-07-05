@@ -1,0 +1,77 @@
+CIDAR Kit
+=========
+
+.. currentmodule:: moclo.kits.cidar
+
+.. automodule:: moclo.kits.cidar
+
+Level -1
+--------
+
+Module
+^^^^^^
+.. autoclass:: CIDARProduct(Product)
+   :members:
+   :inherited-members:
+   :special-members: __init__
+
+
+Vector
+^^^^^^
+.. autoclass:: CIDAREntryVector(EntryVector)
+   :members:
+   :inherited-members:
+   :special-members: __init__
+
+
+Level 0
+-------
+
+Module
+^^^^^^
+.. autoclass:: CIDAREntry(Entry)
+   :members:
+   :inherited-members:
+   :special-members: __init__
+
+
+Vector
+^^^^^^
+.. autoclass:: CIDARCassetteVector(CassetteVector)
+   :members:
+   :inherited-members:
+   :special-members: __init__
+
+
+Parts
+^^^^^
+
+Base Parts
+''''''''''
+
+.. autoclass:: CIDARPromoter(CIDARPart)
+
+
+
+Level 1
+-------
+
+Module
+^^^^^^
+.. autoclass:: CIDARCassette(Cassette)
+   :members:
+
+Vector
+^^^^^^
+.. autoclass:: CIDARDeviceVector(MultigeneVector)
+   :members:
+
+
+Level 2
+-------
+
+Module
+^^^^^^
+
+.. autoclass:: CIDARDevice(Multigene)
+   :members:
