@@ -24,6 +24,7 @@ before_install:
 install:
 - pip install ./moclo
 - pip install ./moclo-ytk
+- pip install ./moclo-cidar
 
 before_script:
 - pip install -U -r tests/requirements.txt
@@ -36,8 +37,7 @@ after_script:
 - python -m codacy
 
 before_deploy:
-- cd moclo;     python setup.py check -rms sdist -d ../dist bdist_wheel -d ../dist; cd ..
-- cd moclo-ytk; python setup.py check -rms sdist -d ../dist bdist_wheel -d ../dist; cd ..
+- ci/travis/before-deploy.sh
 
 deploy:
   provider: script
