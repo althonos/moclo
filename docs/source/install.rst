@@ -25,8 +25,7 @@ To download the latest release from the Python Package Index:
 
 .. code-block:: console
 
-  $ pip install --user moclo
-  $ pip install --user moclo-ytk
+  $ pip install --user moclo moclo-ytk moclo-cidar
 
 
 GitHub + ``pip`` |Travis|
@@ -42,6 +41,7 @@ a subfolder in the installation command and directly install it:
 
   $ pip install --user git+https://github.com/althonos/moclo#subdirectory=moclo
   $ pip install --user git+https://github.com/althonos/moclo#subdirectory=moclo-ytk
+  $ pip install --user git+https://github.com/althonos/moclo#subdirectory=moclo-cidar
 
 Check the CI build is passing, or else you may be installing a broken version of
 the library !
