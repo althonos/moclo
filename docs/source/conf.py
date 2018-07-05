@@ -270,6 +270,7 @@ autoclass_content = 'class'
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3/', None),
+    'six': ('http://six.readthedocs.io/', None),
 }
 
 # -- Options for todo extension ----------------------------------------------

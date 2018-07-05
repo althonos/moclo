@@ -46,10 +46,10 @@ Vector
 Parts
 ^^^^^
 
-Base Parts
-''''''''''
-
 .. autoclass:: CIDARPromoter(CIDARPart)
+.. autoclass:: CIDARibosomeBindingSite(CIDARPart)
+.. autoclass:: CIDARCodingSequence(CIDARPart)
+.. autoclass:: CIDARTerminator(CIDARPart)
 
 
 
