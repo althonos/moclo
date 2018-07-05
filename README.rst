@@ -48,6 +48,7 @@ Additional kits can be installed separately depending on what's needed. The
 following implementations are available:
 
 * `Yeast ToolKit (moclo-ytk) <https://github.com/althonos/moclo/tree/master/moclo-ytk>`_
+* `CIDAR Kit (moclo-cidar) <https://github.com/althonos/moclo/tree/master/moclo-cidar>`_
 
 Once installed, kits are available in the ``moclo.kits`` package namespace.
 `Kit-specific documentation <https://moclo.readthedocs.io/en/latest/#kits>`_ is
