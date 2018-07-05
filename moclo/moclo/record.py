@@ -77,7 +77,7 @@ class CircularRecord(SeqRecord):
     # Patch other methods to work as intended
 
     def __contains__(self, char):  # noqa: D105
-        return char in str(self.seq) * 2   # FIXME ?
+        return len(char) <= len(self) and char in str(self.seq) * 2
 
     def __getitem__(self, index):  # noqa: D105
         rec = super(CircularRecord, self).__getitem__(index)
