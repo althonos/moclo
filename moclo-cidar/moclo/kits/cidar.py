@@ -226,5 +226,7 @@ class CIDARTerminator(CIDARPart, CIDAREntry):
     multigenic assembly within a device.
     """
 
+    _structure = _ent.format(start='AGGT', end='GCTT|CGCT|TGCC|ACTA')
+
 
 del _ent
