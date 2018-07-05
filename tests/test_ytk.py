@@ -31,7 +31,7 @@ class _TestYTK(unittest.TestCase):
     @classmethod
     def make_suite(cls, part_cls, part_name, exclude=frozenset()):
         if cls._plasmids is None:
-            cls._plasmids = list(plasmids('ytk.csv.xz'))
+            cls._plasmids = list(plasmids('ytk.tsv.xz'))
         case_name = str('Test{}'.format(part_cls.__name__))
         tests = {
             test.__name__: test
@@ -117,7 +117,7 @@ class TestYTKConstruct(unittest.TestCase):
         """
         records = {
             p[0]: CircularRecord(Seq(p[4]), id=p[0], name=p[0])
-            for p in plasmids('ytk.csv.xz')
+            for p in plasmids('ytk.tsv.xz')
         }
 
         part1 = ytk.YTKPart1(records['pYTK008'])
@@ -144,7 +144,7 @@ class TestYTKMultigene(unittest.TestCase):
         """
         records = {
             p[0]: CircularRecord(Seq(p[4]), id=p[0], name=p[0])
-            for p in plasmids('ytk-multigene.csv.xz')
+            for p in plasmids('ytk-multigene.tsv.xz')
         }
 
         tu1 = ytk.YTKCassette(records['mCerulean'])
