@@ -31,3 +31,14 @@ def catch_warnings(action, category=Warning, lineno=0, append=False):
                 return func(*args, **kwargs)
         return newfunc
     return decorator
+
+
+class classproperty(object):
+    """A class `property` decorator.
+    """
+
+    def __init__(self, getter):
+        self.getter= getter
+
+    def __get__(self, instance, owner):
+        return self.getter(owner)
