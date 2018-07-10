@@ -91,10 +91,13 @@ class Cassette(AbstractModule):
 
 
 class Device(AbstractModule):
-    """Level 2 module, also refered as a Multigene plasmid.
+    """A level 2 module, also refered as a Multigene plasmid.
 
-    Modules of this level are assembled from several transcriptional units
-    so that they contain several genes that can be expressed all at once.
+    Modules of this level are assembled from several transcriptional units so
+    that they contain several genes that can be expressed all at once. Most of
+    the MoClo implementations are desinged so that multiple devices can be
+    assembled into a module that is also a valid level 1 module, as does the
+    **Golden Braid** system with its α and Ω plasmids.
 
     """
 

@@ -219,6 +219,7 @@ class CIDARTerminator(CIDARPart, CIDAREntry):
     """A CIDAR terminator.
 
     .. image:: terminator.svg
+       :align: center
 
     Parts of this type contain a terminator. The upstream overhang is always
     the same for the terminator to directly follow the coding sequence, but
