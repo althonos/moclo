@@ -33,8 +33,9 @@ sys.path.append(os.path.join(docssrc_dir))
 
 # Add path to moclo kits
 import moclo.kits
-moclo.kits.__path__.append(os.path.join(project_dir, 'moclo-ytk', 'moclo', 'kits'))
+moclo.kits.__path__.append(os.path.join(project_dir, 'moclo-ecoflex', 'moclo', 'kits'))
 moclo.kits.__path__.append(os.path.join(project_dir, 'moclo-cidar', 'moclo', 'kits'))
+moclo.kits.__path__.append(os.path.join(project_dir, 'moclo-ytk', 'moclo', 'kits'))
 
 # -- Files setup -------------------------------------------------------------
 

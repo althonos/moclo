@@ -17,6 +17,10 @@ import moclo.kits
 moclo.kits.__path__.append(os.path.join(proj, 'moclo-cidar', 'moclo', 'kits'))
 import moclo.kits.cidar
 
+# EcoFlex
+moclo.kits.__path__.append(os.path.join(proj, 'moclo-ecoflex', 'moclo', 'kits'))
+import moclo.kits.ecoflex
+
 # Yeast ToolKit
 moclo.kits.__path__.append(os.path.join(proj, 'moclo-ytk', 'moclo', 'kits'))
 import moclo.kits.ytk

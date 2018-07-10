@@ -59,6 +59,7 @@ Kits
 
   Yeast ToolKit (YTK)  <kits/ytk/index.rst>
   CIDAR Kit            <kits/cidar/index.rst>
+  EcoFlex Kit          <kits/ecoflex/index.rst>
 
 
 Indices and tables
