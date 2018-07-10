@@ -1,6 +1,10 @@
 # coding: utf-8
 """An implementation of the Yeast ToolKit for the Python MoClo library.
 
+This module is tested against the officials parts available in the Yeast
+ToolKit (YTK), and also against the Pichia ToolKit (PTK) parts since they were
+designed to be compatible with each other.
+
 The documentation of this module is mostly adapted from the *Lee et al.*
 supplementary data. Each item also has specific sections that are organized
 as follow:
@@ -20,7 +24,11 @@ References:
        A Highly Characterized Yeast Toolkit for Modular, Multipart Assembly.
        ACS Synthetic Biology, 4(9), 975–986.
        <https://doi.org/10.1021/sb500366v>`_
-    2. `Weber, E., Engler, C., Gruetzner, R., Werner, S., Marillonnet, S. (2011).
+    2. `Obst, U., Lu, T. K., & Sieber, V. (2017).
+        A Modular Toolkit for Generating Pichia pastoris Secretion Libraries.
+        ACS Synthetic Biology, 6(6), 1016–1025.
+        <https://doi.org/10.1021/acssynbio.6b00337>`_
+    3. `Weber, E., Engler, C., Gruetzner, R., Werner, S., Marillonnet, S. (2011).
        A Modular Cloning System for Standardized Assembly of Multigene Constructs.
        PLOS ONE, 6(2), e16765.
        <https://doi.org/10.1371/journal.pone.0016765>`_
@@ -121,7 +129,7 @@ class YTKDeviceVector(vectors.DeviceVector):
 ### MODULES
 
 class YTKProduct(modules.Product):  # FIXME ?
-    """A MoClo Yeast ToolKit cassette vector.
+    """A MoClo Yeast ToolKit product.
 
     As the YTK entry vector does not contain the required *BsaI* restriction
     site, the site must be contained in the product sequence.
