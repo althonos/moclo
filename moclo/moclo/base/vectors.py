@@ -7,21 +7,22 @@ contain a placeholder sequence that is replaced by the concatenation of the
 modules during the Golden Gate assembly.
 """
 
+import abc
+import typing
 import warnings
 
 import six
-import typing
 from Bio import BiopythonWarning
+from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
 from .. import errors
 from ..record import CircularRecord
-from ..utils import catch_warnings
+from ..utils import catch_warnings, classproperty
 from ._structured import StructuredRecord
 
 if typing.TYPE_CHECKING:
     from typing import Any, MutableMapping, Union   # noqa: F401
-    from Bio.Seq import Seq                         # noqa: F401
     from .modules import AbstractModule             # noqa: F401
 
 
@@ -30,6 +31,21 @@ class AbstractVector(StructuredRecord):
     """
 
     _level = None  # type: Union[None, int]
+
+    @abc.abstractmethod
+    @classproperty
+    def cutter(cls):
+        return NotImplemented
+
+    @classproperty
+    def _structure(cls):
+        downstream = cls.cutter.elucidate()
+        upstream = str(Seq(downstream).reverse_complement())
+        return ''.join([
+            upstream.replace('^', ')(').replace('_', '('),
+            'N*',
+            downstream.replace('^', ')(').replace('_', ')')
+        ])
 
     def overhang_start(self):
         # type: () -> Seq
@@ -119,7 +135,7 @@ class AbstractVector(StructuredRecord):
             warnings.warn(errors.UnusedModules(*modmap.values()))
 
         # Replace placeholder in the vector while keeping annotations
-        ph_start, ph_end = self._match.span(0)
+        ph_start, ph_end = self._match.span(1)[0], self._match.span(3)[1]
         rec = (self.record << ph_start)
         return CircularRecord(assembly + rec[ph_end - ph_start:])
 

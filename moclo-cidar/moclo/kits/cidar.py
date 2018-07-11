@@ -35,6 +35,7 @@ class CIDAREntryVector(vectors.EntryVector):
     """A CIDAR MoClo entry vector.
     """
 
+    cutter = BbsI
     _structure = (
         'GGTCTC'  # BsaI
         'N'
@@ -58,6 +59,7 @@ class CIDARCassetteVector(vectors.CassetteVector):
 
     """
 
+    cutter = BbsI
     _structure = (
         'GAAGAC'  # BbsI
         'NN'
@@ -81,6 +83,7 @@ class CIDARDeviceVector(vectors.DeviceVector):
 
     """
 
+    cutter = BbsI
     _structure = (
         'GGTCTC'  # BsaI
         'N'
@@ -123,7 +126,7 @@ class CIDARDevice(modules.Device):
     """
 
     cutter = BsaI
-    
+
 
 ### PARTS
 

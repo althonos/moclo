@@ -37,21 +37,14 @@ class EcoFlexEntryVector(vectors.EntryVector):
     """An EcoFlex MoClo entry vector.
     """
 
-    _structure = (
-        '(NNNN)'  # Vector overhang (start)
-        '(N'
-        'GAGACG'  # BsmBI
-        'N*?'     # Placeholder sequence
-        'CGTCTC'  # BsmBI
-        'N)'
-        '(NNNN)'  # Vector overhang (end)
-    )
+    cutter = BsmBI
 
 
 class EcoFlexCassetteVector(vectors.CassetteVector):
     """An EcoFlex MoClo cassette vector.
     """
 
+    cutter = BsaI
     _structure = (
         'CGTCTC'  # BsmBI
         'N'
@@ -73,6 +66,7 @@ class EcoFlexDeviceVector(vectors.DeviceVector):
     """An EcoFlex MoClo device vector.
     """
 
+    cutter = BsmBI
     _structure = (
         'GGTCTC'  # BsaI
         'NNNN'    # Device overhang (start)
