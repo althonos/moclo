@@ -16,6 +16,7 @@ References:
 import abc
 
 import six
+from Bio.Restriction import BsaI, BbsI
 
 from ..base import modules, vectors
 
@@ -107,46 +108,22 @@ class CIDAREntry(modules.Entry):
     """A CIDAR MoClo entry.
     """
 
-    _structure = (
-        'GGTCTC'  # BsaI
-        'N'
-        '(NNNN)'  # Type specific overhang (start)
-        '(N*?)'   # Target sequence
-        '(NNNN)'  # Type specific overhang (end)
-        'N'
-        'GAGACC'  # BsaI
-    )
+    cutter = BsaI
 
 
 class CIDARCassette(modules.Cassette):
     """A CIDAR MoClo cassette.
     """
 
-    _structure = (
-        'GAAGAC'  # BbsI
-        'NN'
-        '(NNNN)'  # Cassette overhang (start)
-        '(N*?)'   # Target sequence
-        '(NNNN)'  # Type specific overhang (end)
-        'NN'
-        'GTCTTC'  # BbsI
-    )
+    cutter = BbsI
 
 
 class CIDARDevice(modules.Device):
     """A CIDAR MoClo device.
     """
 
-    _structure = (
-        'GGTCTC'   # BsaI
-        'N'
-        '(NNNN)'   # Upstream overhang
-        '(N*)'     # Target sequence
-        '(NNNN)'   # Downstream overhang
-        'N'
-        'GAGACC'   # BsaI
-    )
-
+    cutter = BsaI
+    
 
 ### PARTS
 

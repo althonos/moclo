@@ -38,6 +38,7 @@ References:
 import abc
 
 import six
+from Bio.Restriction import BsaI, BsmBI
 
 from ..base import modules, vectors
 
@@ -68,15 +69,7 @@ class YTKEntryVector(vectors.EntryVector):
 
     """
 
-    _structure = (
-        '(NNNN)'  # Vector overhang (start)
-        '(N'
-        'GAGACG'  # BsmBI
-        'N*?'     # Placeholder sequence
-        'CGTCTC'  # BsmBI
-        'N)'
-        '(NNNN)'  # Vector overhang (end)
-    )
+    cutter = BsmBI
 
 
 class YTKCassetteVector(vectors.CassetteVector):
@@ -92,15 +85,7 @@ class YTKCassetteVector(vectors.CassetteVector):
 
     """
 
-    _structure = (
-        '(NNNN)'  # Restriction site (start)
-        '(N'
-        'GAGACC'  # BsaI
-        'N*?'     # Placeholder sequence
-        'GGTCTC'  # BsaI
-        'N)'
-        '(NNNN)'  # Restriction site (end)
-    )
+    cutter = BsaI
 
 
 class YTKDeviceVector(vectors.DeviceVector):
@@ -115,15 +100,7 @@ class YTKDeviceVector(vectors.DeviceVector):
 
     """
 
-    _structure = (
-        '(CTGA)'  # ConLS
-        '(N'
-        'GAGACG'  # BsmBI
-        'N*'      # Placeholder sequence
-        'CGTCTC'  # BsmBI
-        'N)'
-        '(AGCA)'  # ConRE
-    )
+    cutter = BsmBI
 
 
 ### MODULES
@@ -146,6 +123,7 @@ class YTKProduct(modules.Product):  # FIXME ?
 
     """
 
+    cutter = BsmBI
     _structure = (
         'CGTCTC'  # BsmBI
         'N'
@@ -181,30 +159,14 @@ class YTKEntry(modules.Entry):
 
     """
 
-    _structure = (
-        'GGTCTC'  # BsaI
-        'N'
-        '(NNNN)'  # Type specific overhang (start)
-        '(N*?)'   # Target sequence
-        '(NNNN)'  # Type specific overhang (end)
-        'N'
-        'GAGACC'  # BsaI
-    )
+    cutter = BsaI
 
 
 class YTKCassette(modules.Cassette):
     """A MoClo Yeast ToolKit cassette.
     """
 
-    _structure = (
-        'CGTCTC'  # BsmBI
-        'N'
-        '(NNNN)'  # Cassette overhang (start)
-        '(N*?)'   # Target sequence
-        '(NNNN)'  # Type specific overhang (end)
-        'N'
-        'GAGACG'  # BsmBI
-    )
+    cutter = BsmBI
 
 
 ### PARTS

@@ -17,6 +17,7 @@ References:
 import abc
 
 import six
+from Bio.Restriction import BsmBI, BsaI
 
 from ..base import modules, vectors
 
@@ -89,19 +90,12 @@ class EcoFlexDeviceVector(vectors.DeviceVector):
 
 ### MODULES
 
-class EcoFlexProduct(modules.Product):
-    """An EcoFlex MoClo product.
-    """
+# class EcoFlexProduct(modules.Product):
+#     """An EcoFlex MoClo product.
+#     """
+#
+#     cutter = BsaI
 
-    _structure = (
-        'GGTCTC'  # BsaI
-        'N'
-        '(NNNN)'  # Type specific overhang (start)
-        '(N*?)'   # Target sequence
-        '(NNNN)'  # Type specific overhang (end)
-        'N'
-        'GAGACC'  # BsaI
-    )
 
 
 class EcoFlexEntry(modules.Entry):
@@ -111,45 +105,21 @@ class EcoFlexEntry(modules.Entry):
     binding sites at both ends of the target sequence.
     """
 
-    _structure = (
-        'GGTCTC'  # BsaI
-        'N'
-        '(NNNN)'  # Type specific overhang (start)
-        '(N*?)'   # Target sequence
-        '(NNNN)'  # Type specific overhang (end)
-        'N'
-        'GAGACC'  # BsaI
-    )
+    cutter = BsaI
 
 
 class EcoFlexCassette(modules.Cassette):
     """An EcoFlex MoClo cassette.
     """
 
-    _structure = (
-        'CGTCTC'  # BsmBI
-        'N'
-        '(NNNN)'  # Cassette overhang (start)
-        '(N*?)'   # Target sequence
-        '(NNNN)'  # Type specific overhang (end)
-        'N'
-        'GAGACG'  # BsmBI
-    )
+    cutter = BsmBI
 
 
 class EcoFlexDevice(modules.Device):
     """An EcoFlex MoClo device.
     """
 
-    _structure = (
-        'GGTCTC'  # BsaI
-        'N'
-        '(NNNN)'  # Device overhang (start)
-        '(N*?)'   # Target sequence
-        '(NNNN)'  # Device overhang (end)
-        'N'
-        'GAGACC'  # BsaI
-    )
+    cutter = BsaI
 
 
 ### PARTS

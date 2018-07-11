@@ -8,21 +8,47 @@ target sequence with Type IIS restriction sites, which depend on the level of
 the module, as well as the chosen MoClo protocol.
 """
 
+import abc
 import typing
 
+from Bio.Seq import Seq
+
 from ._structured import StructuredRecord
+from ..utils import classproperty
 
 if typing.TYPE_CHECKING:
     from typing import Union             # noqa: F401
-    from Bio.Seq import Seq              # noqa: F401
     from Bio.SeqRecord import SeqRecord  # noqa: F401
 
 
 class AbstractModule(StructuredRecord):
     """An abstract modular cloning module.
+
+    Attributes:
+        cutter (`~Bio.Restriction.Restriction.RestrictionType`): the enzyme
+            used to cut the target sequence from the backbone plasmid during
+            Golden Gate assembly.
+
     """
 
     _level = None  # type: Union[None, int]
+
+    @abc.abstractmethod
+    @classproperty
+    def cutter(cls):
+        """Get the cutter enzyme.
+        """
+        return  NotImplemented
+
+    @classproperty
+    def _structure(cls):
+        upstream = cls.cutter.elucidate()
+        downstream = str(Seq(upstream).reverse_complement())
+        return ''.join([
+            upstream.replace('^', '(').replace('_', ')('),
+            'N*',
+            downstream.replace('^', ')').replace('_', ')(')
+        ])
 
     def overhang_start(self):
         # type: () -> Seq
