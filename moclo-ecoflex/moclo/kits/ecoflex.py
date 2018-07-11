@@ -19,7 +19,7 @@ import abc
 import six
 from Bio.Restriction import BsmBI, BsaI
 
-from ..base import modules, vectors
+from ..base import parts, modules, vectors
 
 __author__ = 'Martin Larralde'
 __author_email__ = 'martin.larralde@ens-paris-saclay.fr'
@@ -122,15 +122,11 @@ _ent = 'GGTCTCN({start})(N*?)({end})NGAGACC'
 _vec = '({end})(NGAGACCN*?GGTCTCN)({start})'
 
 
-@six.add_metaclass(abc.ABCMeta)
-class EcoFlexPart(object):
+class EcoFlexPart(parts.AbstractPart):
     """An EcoFlex MoClo standard part.
     """
 
-    @property
-    @abc.abstractmethod
-    def _structure(self):
-        return NotImplemented
+    cutter = BsaI
 
 
 class EcoFlexPromoter(EcoFlexPart, EcoFlexEntry):
@@ -141,7 +137,7 @@ class EcoFlexPromoter(EcoFlexPart, EcoFlexEntry):
 
     """
 
-    _structure = _ent.format(start='CTAT', end='GTAC')
+    signature = ('CTAT', 'GTAC')
 
 
 class EcoFlexRBS(EcoFlexPart, EcoFlexEntry):
@@ -154,7 +150,7 @@ class EcoFlexRBS(EcoFlexPart, EcoFlexEntry):
     adenosine serves as the beginning of the start codon of the following CDS.
     """
 
-    _structure = _ent.format(start='GTAC', end='CATA')
+    signature = ('GTAC', 'CATA')
 
 
 class EcoFlexTagLinker(EcoFlexPart, EcoFlexEntry):
@@ -167,7 +163,7 @@ class EcoFlexTagLinker(EcoFlexPart, EcoFlexEntry):
     tag sequence before the CDS.
     """
 
-    _structure = _ent.format(start='GTAC', end='TAAA')
+    signature = ('GTAC', 'TAAA')
 
 
 class EcoFlexTag(EcoFlexPart, EcoFlexEntry):
@@ -180,7 +176,7 @@ class EcoFlexTag(EcoFlexPart, EcoFlexEntry):
     of the translated protein, such as a *hexa histidine* or a *Strep(II)* tag.
     """
 
-    _structure = _ent.format(start='TAAA', end='CATA')
+    signature = ('TAAA', 'CATA')
 
 
 class EcoFlexCodingSequence(EcoFlexPart, EcoFlexEntry):
@@ -198,7 +194,7 @@ class EcoFlexCodingSequence(EcoFlexPart, EcoFlexEntry):
         the downstream overhang.
     """
 
-    _structure = _ent.format(start='CATA', end='TCGA')
+    signature = ('CATA', 'TCGA')
 
 
 class EcoFlexTerminator(EcoFlexPart, EcoFlexEntry):
@@ -209,7 +205,7 @@ class EcoFlexTerminator(EcoFlexPart, EcoFlexEntry):
 
     """
 
-    _structure = _ent.format(start='TCGA', end='TGTT')
+    signature = ('TCGA', 'TGTT')
 
 
 class EcoFlexPromoterRBS(EcoFlexPart, EcoFlexEntry):
@@ -222,4 +218,4 @@ class EcoFlexPromoterRBS(EcoFlexPart, EcoFlexEntry):
     followed by a ribosome binding site, and possibly a proteic tag.
     """
 
-    _structure = _ent.format(start='CTAT', end='CATA')
+    signature = ('CTAT', 'CATA')
