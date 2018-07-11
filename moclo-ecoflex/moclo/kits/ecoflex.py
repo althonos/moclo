@@ -246,3 +246,16 @@ class EcoFlexTerminator(EcoFlexPart, EcoFlexEntry):
     """
 
     _structure = _ent.format(start='TCGA', end='TGTT')
+
+
+class EcoFlexPromoterRBS(EcoFlexPart, EcoFlexEntry):
+    """An EcoFlex Moclo promoter followed by an RBS.
+
+    .. image:: promoter-rbs.svg
+       :align: center
+
+    These parts contain a promoter (official parts use the T7 consensus)
+    followed by a ribosome binding site, and possibly a proteic tag.
+    """
+
+    _structure = _ent.format(start='CTAT', end='CATA')

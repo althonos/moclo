@@ -90,9 +90,15 @@ class _TestEcoFlex(unittest.TestCase):
 
 # Generate test cases
 
-TestEcoFlexPromoter = _TestEcoFlex.make_suite(ecoflex.EcoFlexPromoter, 'promoter')
-TestEcoFlexRBS = _TestEcoFlex.make_suite(ecoflex.EcoFlexRBS, 'RBS')
-TestEcoFlexTag = _TestEcoFlex.make_suite(ecoflex.EcoFlexTag, 'tag')
-TestEcoFlexTerminator = _TestEcoFlex.make_suite(ecoflex.EcoFlexTerminator, 'terminator')
-TestEcoFlexCodingSequence = _TestEcoFlex.make_suite(ecoflex.EcoFlexCodingSequence, 'CDS',
-                                                    exclude=('pBP-ORF'))
+TestEcoFlexPromoter = \
+    _TestEcoFlex.make_suite(ecoflex.EcoFlexPromoter, 'promoter')
+TestEcoFlexRBS = \
+    _TestEcoFlex.make_suite(ecoflex.EcoFlexRBS, 'RBS')
+TestEcoFlexTag = \
+    _TestEcoFlex.make_suite(ecoflex.EcoFlexTag, 'tag')
+TestEcoFlexTerminator = \
+    _TestEcoFlex.make_suite(ecoflex.EcoFlexTerminator, 'terminator')
+TestEcoFlexCodingSequence = \
+    _TestEcoFlex.make_suite(ecoflex.EcoFlexCodingSequence, 'CDS', exclude=('pBP-ORF'))
+TestEcoFlexPromoterRBS = \
+    _TestEcoFlex.make_suite(ecoflex.EcoFlexPromoterRBS, 'promoterRBS')
