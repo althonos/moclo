@@ -66,13 +66,22 @@ class AbstractModule(StructuredRecord):
 
 class Product(AbstractModule):
     """A level -1 module, often obtained as a PCR product.
+
+    Modules of this level are the lowest components of the MoClo system, but
+    are not practical to work with until they are assembled in a standard
+    vector to obtain *entries*.
+
     """
 
     _level = -1
 
 
 class Entry(AbstractModule):
-    """A level 0 module.
+    """A level 0 module, often obtained from the official toolkits plamisds.
+
+    Entries are assembled from products into a standard vector suitable for
+    selection and storage.
+
     """
 
     _level = 0
@@ -81,9 +90,9 @@ class Entry(AbstractModule):
 class Cassette(AbstractModule):
     """A level 1 module, also refered as a Transcriptional Unit.
 
-    Modules of this level are able to express genes in their target organism,
-    but can also be assembled into *multigene* modules for expressing many
-    genes at once.
+    Cassettes can either express genes in their target organism, or be
+    assembled into *multigene* modules for expressing many genes at once,
+    depending on the chosen cassette vector during level 0 assembly.
 
     """
 
@@ -97,7 +106,7 @@ class Device(AbstractModule):
     that they contain several genes that can be expressed all at once. Most of
     the MoClo implementations are desinged so that multiple devices can be
     assembled into a module that is also a valid level 1 module, as does the
-    **Golden Braid** system with its α and Ω plasmids.
+    **Golden Braid** system with its **α** and **Ω** plasmids.
 
     """
 
