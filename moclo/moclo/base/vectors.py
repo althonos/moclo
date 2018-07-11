@@ -38,7 +38,12 @@ class AbstractVector(StructuredRecord):
         if cls.cutter is NotImplemented:
             msg = '{} does not declare a cutter'.format(cls.__name__)
             raise NotImplementedError(msg)
-        return super(AbstractVector, cls).__new__(cls)
+        elif cls.cutter.is_blunt():
+            raise ValueError('cannot use a blunt cutter for Golden Gate')
+        elif cls.cutter.is_unknown():
+            raise ValueError('cannot use an unknown cutter for Golden Gate')
+        else:
+            return super(AbstractVector, cls).__new__(cls)
 
     @classproperty
     def _structure(cls):
@@ -71,12 +76,10 @@ class AbstractVector(StructuredRecord):
         GFP expression cassette that can be used to measure the progress of
         the assembly.
         """
-        placeholder = self._match.group(2)
         if self.cutter.is_3overhang():
-            placeholder.seq += self.overhang_end()
+            return self._match.group(2) + self.overhang_end()
         else:
-            placeholder.seq += self.overhang_start()
-        return
+            return self.overhang_start() + self._match.group(2)
 
     def target_sequence(self):
         # type: () -> SeqRecord
@@ -140,13 +143,15 @@ class AbstractVector(StructuredRecord):
         # Generate the complete inserted sequence
         try:
             overhang_next = self.overhang_end()
-            assembly = SeqRecord(overhang_next, id='assembly')
+            assembly = SeqRecord('', id='assembly')
+            if self.cutter.is_3overhang():
+                assembly += overhang_next
             while overhang_next != self.overhang_start():
                 module = modmap.pop(overhang_next)
                 assembly += module.target_sequence()
                 overhang_next = module.overhang_end()
-                if overhang_next != self.overhang_end():
-                    assembly += overhang_next
+            if self.cutter.is_5overhang():
+                assembly += overhang_next
         except KeyError as ke:
             # Raise the MissingModule error without the KeyError traceback
             raise six.raise_from(errors.MissingModule(ke.args[0]), None)

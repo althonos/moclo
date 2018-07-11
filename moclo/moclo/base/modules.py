@@ -82,12 +82,17 @@ class AbstractModule(StructuredRecord):
         Returns:
             `~Bio.SeqRecord.SeqRecord`: the target sequence with annotations.
 
-        Danger:
-            The start and end overhangs are not included in the returned
-            sequence.
+        Note:
+            Depending on the cutting direction of the restriction enzyme used
+            during assembly, the overhang will be left at the beginning or at
+            the end, so the obtained record is exactly the sequence the enzyme
+            created during restriction.
 
         """
-        return self._match.group(2)
+        if self.cutter.is_3overhang():
+            return self._match.group(2) + self._match.group(3)
+        else:
+            return self._match.group(1) + self._match.group(2)
 
 
 class Product(AbstractModule):
