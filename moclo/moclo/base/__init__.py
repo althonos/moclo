@@ -11,10 +11,12 @@ deterministic way.
 """
 from __future__ import absolute_import
 
+from .parts import AbstractPart
 from .modules import AbstractModule, Cassette, Entry, Device, Product
 from .vectors import AbstractVector, CassetteVector, EntryVector, DeviceVector
 
 __all__ = [
+    'AbstractPart',
     'AbstractModule',
     'AbstractVector',
     'Cassette',

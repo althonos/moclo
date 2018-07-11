@@ -14,6 +14,7 @@ import typing
 from Bio.Seq import Seq
 
 from ._structured import StructuredRecord
+from ._utils import cutter_check
 from ..utils import classproperty
 
 if typing.TYPE_CHECKING:
@@ -35,9 +36,7 @@ class AbstractModule(StructuredRecord):
     cutter = NotImplemented # type: Union[NotImplemented, RestrictionType]
 
     def __new__(cls, *args, **kwargs):
-        if cls.cutter is NotImplemented:
-            msg = '{} does not declare a cutter'.format(cls.__name__)
-            raise NotImplementedError(msg)
+        cutter_check(cls.cutter, name=cls.__name__)
         return super(AbstractModule, cls).__new__(cls)
 
     @classproperty

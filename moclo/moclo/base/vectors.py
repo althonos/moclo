@@ -19,6 +19,7 @@ from Bio.SeqRecord import SeqRecord
 from .. import errors
 from ..record import CircularRecord
 from ..utils import catch_warnings, classproperty
+from ._utils import cutter_check
 from ._structured import StructuredRecord
 
 if typing.TYPE_CHECKING:
@@ -35,15 +36,8 @@ class AbstractVector(StructuredRecord):
     cutter = NotImplemented # type: Union[NotImplemented, RestrictionType]
 
     def __new__(cls, *args, **kwargs):
-        if cls.cutter is NotImplemented:
-            msg = '{} does not declare a cutter'.format(cls.__name__)
-            raise NotImplementedError(msg)
-        elif cls.cutter.is_blunt():
-            raise ValueError('cannot use a blunt cutter for Golden Gate')
-        elif cls.cutter.is_unknown():
-            raise ValueError('cannot use an unknown cutter for Golden Gate')
-        else:
-            return super(AbstractVector, cls).__new__(cls)
+        cutter_check(cls.cutter, name=cls.__name__)
+        return super(AbstractVector, cls).__new__(cls)
 
     @classproperty
     def _structure(cls):
