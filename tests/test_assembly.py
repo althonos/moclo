@@ -7,6 +7,7 @@ import warnings
 
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
+from Bio.Restriction import BpiI
 
 from moclo import errors
 from moclo.record import CircularRecord
@@ -17,26 +18,10 @@ from moclo.base.modules import AbstractModule
 class TestAssembly(unittest.TestCase):
 
     class MockVector(AbstractVector):
-        _structure = (
-            "(NNNN)"
-            "(NN"
-            "GTCTTC"  # BpiI
-            "N*?"      # Placeholder
-            "GAAGAC"  # BpiI
-            "NN)"
-            "(NNNN)"
-        )
+        cutter = BpiI
 
     class MockModule(AbstractModule):
-        _structure = (
-            "GAAGAC"  # BpiI
-            "NN"
-            "(NNNN)"  # Product overhangs (start)
-            "(N*?)"      # Target
-            "(NNNN)"  # Product overhangs (end)
-            "NN"
-            "GTCTTC"  # BpiI
-        )
+        cutter = BpiI
 
     def test_invalid_vector(self):
         """Assert an error is raised on a vector with invalid overhangs.

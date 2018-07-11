@@ -22,20 +22,23 @@ from ..utils import catch_warnings, classproperty
 from ._structured import StructuredRecord
 
 if typing.TYPE_CHECKING:
-    from typing import Any, MutableMapping, Union   # noqa: F401
-    from .modules import AbstractModule             # noqa: F401
+    from typing import Any, MutableMapping, Union           # noqa: F401
+    from Bio.Restriction.Restriction import RestrictionType # noqa: F401
+    from .modules import AbstractModule                     # noqa: F401
 
 
 class AbstractVector(StructuredRecord):
     """An abstract modular cloning vector.
     """
 
-    _level = None  # type: Union[None, int]
+    _level = None           # type: Union[None, int]
+    cutter = NotImplemented # type: Union[NotImplemented, RestrictionType]
 
-    @abc.abstractmethod
-    @classproperty
-    def cutter(cls):
-        return NotImplemented
+    def __new__(cls, *args, **kwargs):
+        if cls.cutter is NotImplemented:
+            msg = '{} does not declare a cutter'.format(cls.__name__)
+            raise NotImplementedError(msg)
+        return super(AbstractVector, cls).__new__(cls)
 
     @classproperty
     def _structure(cls):
@@ -68,7 +71,25 @@ class AbstractVector(StructuredRecord):
         GFP expression cassette that can be used to measure the progress of
         the assembly.
         """
-        return self._match.group(2)
+        placeholder = self._match.group(2)
+        if self.cutter.is_3overhang():
+            placeholder.seq += self.overhang_end()
+        else:
+            placeholder.seq += self.overhang_start()
+        return
+
+    def target_sequence(self):
+        # type: () -> SeqRecord
+        """Get the target sequence in the vector.
+
+        The target sequence if the part of the plasmid that is not discarded
+        during the assembly (everything except the placeholder sequence).
+        """
+        if self.cutter.is_3overhang():
+            start, end = self._match.span(2)[0], self._match.span(3)[1]
+        else:
+            start, end = self._match.span(1)[0], self._match.span(2)[1]
+        return (self.record << start)[end - start:]
 
     @catch_warnings('ignore', category=BiopythonWarning)
     def assemble(self, module, *modules, **kwargs):
@@ -98,7 +119,7 @@ class AbstractVector(StructuredRecord):
                 match the required module structure (missing site, wrong
                 overhang, etc.).
             `~moclo.errors.UnusedModules`: when some modules were not used
-                during the assembly.
+                during the assembly (mostly caused by duplicate parts).
 
         """
         # If the start and end overhangs are the same, the assembly will

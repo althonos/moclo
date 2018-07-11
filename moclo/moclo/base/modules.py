@@ -32,13 +32,13 @@ class AbstractModule(StructuredRecord):
     """
 
     _level = None  # type: Union[None, int]
+    cutter = NotImplemented # type: Union[NotImplemented, RestrictionType]
 
-    @abc.abstractmethod
-    @classproperty
-    def cutter(cls):
-        """Get the cutter enzyme.
-        """
-        return  NotImplemented
+    def __new__(cls, *args, **kwargs):
+        if cls.cutter is NotImplemented:
+            msg = '{} does not declare a cutter'.format(cls.__name__)
+            raise NotImplementedError(msg)
+        return super(AbstractModule, cls).__new__(cls)
 
     @classproperty
     def _structure(cls):

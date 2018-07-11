@@ -139,7 +139,7 @@ class TestYTKConstruct(unittest.TestCase):
 
 class TestYTKDevice(unittest.TestCase):
 
-    def test_Device_assembly(self):
+    def test_device_assembly(self):
         """Check a YTK multigene assembly gives the expected result.
         """
         records = {
