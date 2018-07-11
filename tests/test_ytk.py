@@ -15,7 +15,7 @@ from Bio.Seq import Seq
 from moclo.record import CircularRecord
 from moclo.kits import ytk
 
-from .utils import plasmids
+from .utils import DATAFS, plasmids
 
 
 
@@ -139,6 +139,8 @@ class TestYTKConstruct(unittest.TestCase):
 
 class TestYTKDevice(unittest.TestCase):
 
+    @unittest.skipUnless(DATAFS.exists('ytk-multigene.tsv.xz'),
+                         'decrypted test data not found')
     def test_device_assembly(self):
         """Check a YTK multigene assembly gives the expected result.
         """

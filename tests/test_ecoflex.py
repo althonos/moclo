@@ -19,11 +19,11 @@ from .utils import plasmids
 
 
 
-### Test Yeast ToolKit plasmids
+### Test EcoFlex MoClo plasmids
 
 # Metaclass for test suites: create a test suite per type with a method per
 # plasmid that will check if that plasmid is recognized as the test suite
-# part or not rightfully. The `_TestYTK` instance acts as a single test case.
+# part or not rightfully. The `_TestEcoFlex` instance acts as a single test case.
 class _TestEcoFlex(unittest.TestCase):
 
     _plasmids = None
