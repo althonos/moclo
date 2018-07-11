@@ -4,6 +4,7 @@ Base API
 .. toctree::
    :hidden:
 
+   parts
    modules
    vectors
    errors
@@ -36,6 +37,15 @@ Vectors (`moclo.base.vectors`)
    EntryVector
    CassetteVector
    DeviceVector
+
+Parts (`moclo.base.parts`)
+--------------------------
+
+.. currentmodule:: moclo.base.parts
+.. autosummary::
+   :nosignatures:
+
+   AbstractPart
 
 
 Errors (`moclo.errors`)
