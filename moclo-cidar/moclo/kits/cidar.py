@@ -18,7 +18,7 @@ import abc
 import six
 from Bio.Restriction import BsaI, BbsI
 
-from ..base import modules, vectors
+from ..base import parts, modules, vectors
 
 __author__ = 'Martin Larralde'
 __author_email__ = 'martin.larralde@ens-paris-saclay.fr'
@@ -130,21 +130,14 @@ class CIDARDevice(modules.Device):
 
 ### PARTS
 
-_ent = 'GGTCTCN({start})(N*?)({end})NGAGACC'
-
-
-@six.add_metaclass(abc.ABCMeta)
-class CIDARPart(object):
+class CIDARPart(parts.AbstractPart):
     """A CIDAR MoClo standard part.
 
     A part is a plasmid with standardized flanking overhang sequences
     that allows immediate type recognition.
     """
 
-    @property
-    @abc.abstractmethod
-    def _structure(self):
-        return NotImplemented
+    cutter = BsaI
 
 
 class CIDARPromoter(CIDARPart, CIDAREntry):
@@ -155,12 +148,18 @@ class CIDARPromoter(CIDARPart, CIDAREntry):
 
     Parts of this type contain contain a promoter. The upstream overhangs can
     be changed to amend the order of assembly of a circuit from different
-    cassettes. The upstream overhang can vary between four differents sequences,
-    but the downstream overhang is unique.
+    cassettes.
+
+    Note:
+        The CIDAR toolkit parts provide 4 different upstream overhangs:
+        *GGAG*, *GCTT*, *CGCT*, and *TGCC*. These are not enforced in this
+        module, and any upstream sequence will be accepted. The downstream
+        sequence however is always *TACT*.
+
     """
 
     # FIXME: enforce official upstream overhangs or not ?
-    _structure = _ent.format(start='GGAG|GCTT|CGCT|TGCC', end='TACT')
+    signature = ('NNNN', 'TACT')
 
 
 class CIDARibosomeBindingSite(CIDARPart, CIDAREntry):
@@ -174,7 +173,7 @@ class CIDARibosomeBindingSite(CIDARPart, CIDAREntry):
 
     """
 
-    _structure = _ent.format(start='TACT', end='AATG')
+    signature = ('TACT', 'AATG')
 
 
 class CIDARCodingSequence(CIDARPart, CIDAREntry):
@@ -192,7 +191,7 @@ class CIDARCodingSequence(CIDARPart, CIDAREntry):
         the downstream overhang.
     """
 
-    _structure = _ent.format(start='AATG', end='AGGT')
+    signature = ('AATG', 'AGGT')
 
 
 class CIDARTerminator(CIDARPart, CIDAREntry):
@@ -205,9 +204,13 @@ class CIDARTerminator(CIDARPart, CIDAREntry):
     the same for the terminator to directly follow the coding sequence, but
     the downstream overhang can vary to specify an order for a following
     multigenic assembly within a device.
+
+    Note:
+        The CIDAR toolkit parts provide 4 different downstream overhangs:
+        *GCTT*, *CGCT*, *TGCC*, and *ACTA*. These are not enforced in this
+        module, and any downstream sequence will be accepted. The upstream
+        sequence however is always *AGGT*.
+
     """
 
-    _structure = _ent.format(start='AGGT', end='GCTT|CGCT|TGCC|ACTA')
-
-
-del _ent
+    signature = ('AGGT', 'NNNN')
