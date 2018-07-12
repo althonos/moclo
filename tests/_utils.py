@@ -75,8 +75,8 @@ class PartsMetaCase(object):
                 )
             name = "test_{}_is_not_{}"
             doc = 'Check that {} ({} - {}) is not a {} {}.\n'
-        test.__name__ = name.format(id_, part_name)
-        test.__doc__ = doc.format(id_, type_, name, self.kit_name, part_name)
+        test.__name__ = str(name.format(id_, part_name))
+        test.__doc__ = str(doc.format(id_, type_, name, self.kit_name, part_name))
         return test
 
 

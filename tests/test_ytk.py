@@ -19,12 +19,12 @@ from moclo.kits import ytk
 from ._utils import AssemblyTestCase, PartsMetaCase
 
 
-def setUpModule():
-    warnings.simplefilter('ignore', category=ResourceWarning)
-
-
-def tearDownModule():
-    warnings.simplefilter(warnings.defaultaction)
+if six.PY3:
+    def setUpModule():
+        warnings.simplefilter('ignore', category=ResourceWarning)
+        
+    def tearDownModule():
+        warnings.simplefilter(warnings.defaultaction)
 
 
 
