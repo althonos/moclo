@@ -1,5 +1,5 @@
 ``moclo-ecoflex``
-===============
+=================
 
 *EcoFlex Kit implementation for the base* `moclo <https://github.com/althonos/moclo/tree/master/moclo>`__ *library*.
 
