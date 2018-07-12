@@ -8,12 +8,12 @@ EcoFlex Kit
 Level -1
 --------
 
-Module
-^^^^^^
-.. autoclass:: EcoFlexProduct(Product)
-   :members:
-   :inherited-members:
-   :special-members: __init__
+.. Module
+.. ^^^^^^
+.. .. autoclass:: EcoFlexProduct(Product)
+..    :members:
+..    :inherited-members:
+..    :special-members: __init__
 
 
 Vector

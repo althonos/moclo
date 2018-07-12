@@ -17,11 +17,11 @@ References:
 import abc
 
 import six
+from Bio.Restriction import BsmBI, BsaI
 
-from ..base import modules, vectors
+from ..base import parts, modules, vectors
 
-__author__ = 'Martin Larralde'
-__author_email__ = 'martin.larralde@ens-paris-saclay.fr'
+__author__ = 'Martin Larralde <martin.larralde@ens-paris-saclay.fr>'
 __version__ = (
     __import__('pkg_resources')
         .resource_string(__name__, 'ecoflex.version')
@@ -36,72 +36,65 @@ class EcoFlexEntryVector(vectors.EntryVector):
     """An EcoFlex MoClo entry vector.
     """
 
-    _structure = (
-        '(NNNN)'  # Vector overhang (start)
-        '(N'
-        'GAGACG'  # BsmBI
-        'N*?'     # Placeholder sequence
-        'CGTCTC'  # BsmBI
-        'N)'
-        '(NNNN)'  # Vector overhang (end)
-    )
+    cutter = BsmBI
 
 
 class EcoFlexCassetteVector(vectors.CassetteVector):
     """An EcoFlex MoClo cassette vector.
     """
 
-    _structure = (
-        'CGTCTC'  # BsmBI
-        'N'
-        'NNNN'    # Cassette overhang (start)
-        '(NNNN)'  # Vector overhang (start)
-        '(N'
-        'GAGACC'  # BsaI
-        'N*?'     # Placeholder sequence
-        'GGTCTC'  # BsaI
-        'N)'
-        '(NNNN)'  # Vector overhang (end)
-        'NNNN'    # Cassette overhang (end)
-        'N'
-        'GAGACG'  # BsmBI
-    )
+    cutter = BsaI
+
+    @staticmethod
+    def structure():
+        return (
+            'CGTCTC'  # BsmBI
+            'N'
+            'NNNN'    # Cassette overhang (start)
+            '(NNNN)'  # Vector overhang (start)
+            '(N'
+            'GAGACC'  # BsaI
+            'N*?'     # Placeholder sequence
+            'GGTCTC'  # BsaI
+            'N)'
+            '(NNNN)'  # Vector overhang (end)
+            'NNNN'    # Cassette overhang (end)
+            'N'
+            'GAGACG'  # BsmBI
+        )
 
 
 class EcoFlexDeviceVector(vectors.DeviceVector):
     """An EcoFlex MoClo device vector.
     """
 
-    _structure = (
-        'GGTCTC'  # BsaI
-        'NNNN'    # Device overhang (start)
-        '(NNNN)'  # Vector overhang (start)
-        '(N'
-        'GAGACG'  # BsmBI
-        'N*'      # Placeholder sequence
-        'CGTCTC'  # BsmBI
-        'N)'
-        '(NNNN)'  # Vector overhang (end)
-        'NNNN'    # Device overhang (end)
-        'GAGACC'  # BsaI
-    )
+    cutter = BsmBI
+
+    @staticmethod
+    def structure():
+        return (
+            'GGTCTC'  # BsaI
+            'NNNN'    # Device overhang (start)
+            '(NNNN)'  # Vector overhang (start)
+            '(N'
+            'GAGACG'  # BsmBI
+            'N*'      # Placeholder sequence
+            'CGTCTC'  # BsmBI
+            'N)'
+            '(NNNN)'  # Vector overhang (end)
+            'NNNN'    # Device overhang (end)
+            'GAGACC'  # BsaI
+        )
 
 
 ### MODULES
 
-class EcoFlexProduct(modules.Product):
-    """An EcoFlex MoClo product.
-    """
+# class EcoFlexProduct(modules.Product):
+#     """An EcoFlex MoClo product.
+#     """
+#
+#     cutter = BsaI
 
-    _structure = (
-        'GGTCTC'  # BsaI
-        'N'
-        '(NNNN)'  # Type specific overhang (start)
-        '(N*?)'   # Target sequence
-        '(NNNN)'  # Type specific overhang (end)
-        'N'
-        'GAGACC'  # BsaI
-    )
 
 
 class EcoFlexEntry(modules.Entry):
@@ -111,62 +104,30 @@ class EcoFlexEntry(modules.Entry):
     binding sites at both ends of the target sequence.
     """
 
-    _structure = (
-        'GGTCTC'  # BsaI
-        'N'
-        '(NNNN)'  # Type specific overhang (start)
-        '(N*?)'   # Target sequence
-        '(NNNN)'  # Type specific overhang (end)
-        'N'
-        'GAGACC'  # BsaI
-    )
+    cutter = BsaI
 
 
 class EcoFlexCassette(modules.Cassette):
     """An EcoFlex MoClo cassette.
     """
 
-    _structure = (
-        'CGTCTC'  # BsmBI
-        'N'
-        '(NNNN)'  # Cassette overhang (start)
-        '(N*?)'   # Target sequence
-        '(NNNN)'  # Type specific overhang (end)
-        'N'
-        'GAGACG'  # BsmBI
-    )
+    cutter = BsmBI
 
 
 class EcoFlexDevice(modules.Device):
     """An EcoFlex MoClo device.
     """
 
-    _structure = (
-        'GGTCTC'  # BsaI
-        'N'
-        '(NNNN)'  # Device overhang (start)
-        '(N*?)'   # Target sequence
-        '(NNNN)'  # Device overhang (end)
-        'N'
-        'GAGACC'  # BsaI
-    )
+    cutter = BsaI
 
 
 ### PARTS
 
-_ent = 'GGTCTCN({start})(N*?)({end})NGAGACC'
-_vec = '({end})(NGAGACCN*?GGTCTCN)({start})'
-
-
-@six.add_metaclass(abc.ABCMeta)
-class EcoFlexPart(object):
+class EcoFlexPart(parts.AbstractPart):
     """An EcoFlex MoClo standard part.
     """
 
-    @property
-    @abc.abstractmethod
-    def _structure(self):
-        return NotImplemented
+    cutter = BsaI
 
 
 class EcoFlexPromoter(EcoFlexPart, EcoFlexEntry):
@@ -177,7 +138,7 @@ class EcoFlexPromoter(EcoFlexPart, EcoFlexEntry):
 
     """
 
-    _structure = _ent.format(start='CTAT', end='GTAC')
+    signature = ('CTAT', 'GTAC')
 
 
 class EcoFlexRBS(EcoFlexPart, EcoFlexEntry):
@@ -190,7 +151,7 @@ class EcoFlexRBS(EcoFlexPart, EcoFlexEntry):
     adenosine serves as the beginning of the start codon of the following CDS.
     """
 
-    _structure = _ent.format(start='GTAC', end='CATA')
+    signature = ('GTAC', 'CATA')
 
 
 class EcoFlexTagLinker(EcoFlexPart, EcoFlexEntry):
@@ -203,7 +164,7 @@ class EcoFlexTagLinker(EcoFlexPart, EcoFlexEntry):
     tag sequence before the CDS.
     """
 
-    _structure = _ent.format(start='GTAC', end='TAAA')
+    signature = ('GTAC', 'TAAA')
 
 
 class EcoFlexTag(EcoFlexPart, EcoFlexEntry):
@@ -216,7 +177,7 @@ class EcoFlexTag(EcoFlexPart, EcoFlexEntry):
     of the translated protein, such as a *hexa histidine* or a *Strep(II)* tag.
     """
 
-    _structure = _ent.format(start='TAAA', end='CATA')
+    signature = ('TAAA', 'CATA')
 
 
 class EcoFlexCodingSequence(EcoFlexPart, EcoFlexEntry):
@@ -234,7 +195,7 @@ class EcoFlexCodingSequence(EcoFlexPart, EcoFlexEntry):
         the downstream overhang.
     """
 
-    _structure = _ent.format(start='CATA', end='TCGA')
+    signature = ('CATA', 'TCGA')
 
 
 class EcoFlexTerminator(EcoFlexPart, EcoFlexEntry):
@@ -245,7 +206,7 @@ class EcoFlexTerminator(EcoFlexPart, EcoFlexEntry):
 
     """
 
-    _structure = _ent.format(start='TCGA', end='TGTT')
+    signature = ('TCGA', 'TGTT')
 
 
 class EcoFlexPromoterRBS(EcoFlexPart, EcoFlexEntry):
@@ -258,4 +219,4 @@ class EcoFlexPromoterRBS(EcoFlexPart, EcoFlexEntry):
     followed by a ribosome binding site, and possibly a proteic tag.
     """
 
-    _structure = _ent.format(start='CTAT', end='CATA')
+    signature = ('CTAT', 'CATA')

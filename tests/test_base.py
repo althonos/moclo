@@ -6,6 +6,7 @@ import unittest
 
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
+from Bio.Restriction import BpiI
 
 from moclo.base import EntryVector, Product
 from moclo.record import CircularRecord
@@ -14,26 +15,34 @@ from moclo.record import CircularRecord
 class TestEntryVector(unittest.TestCase):
 
     class MockEntryVector(EntryVector):
-        _structure = (
-            "(NNNN)"
-            "(NN"
-            "GTCTTC"  # BpiI
-            "N*?"      # Placeholder
-            "GAAGAC"  # BpiI
-            "NN)"
-            "(NNNN)"
-        )
+        cutter = BpiI
 
     class MockProduct(Product):
-        _structure = (
+        cutter = BpiI
+
+    def test_module_structure(self):
+        self.assertEqual(self.MockProduct.structure(), (
             "GAAGAC"  # BpiI
             "NN"
             "(NNNN)"  # Product overhangs (start)
-            "(N*?)"      # Target
+            "(NN*N)"  # Target
             "(NNNN)"  # Product overhangs (end)
             "NN"
             "GTCTTC"  # BpiI
-        )
+        ))
+
+    def test_vector_structure(self):
+        self.assertEqual(self.MockEntryVector.structure(), (
+            "N"
+            "(NNNN)"
+            "(NN"
+            "GTCTTC"  # BpiI
+            "N*"      # Placeholder
+            "GAAGAC"  # BpiI
+            "NN)"
+            "(NNNN)"
+            "N"
+        ))
 
     def test_valid(self):
         """Assert a valid product is considered valid.

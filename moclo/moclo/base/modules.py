@@ -8,21 +8,46 @@ target sequence with Type IIS restriction sites, which depend on the level of
 the module, as well as the chosen MoClo protocol.
 """
 
+import abc
 import typing
 
+from Bio.Seq import Seq
+
 from ._structured import StructuredRecord
+from ._utils import cutter_check
+from ..utils import classproperty
 
 if typing.TYPE_CHECKING:
     from typing import Union             # noqa: F401
-    from Bio.Seq import Seq              # noqa: F401
     from Bio.SeqRecord import SeqRecord  # noqa: F401
 
 
 class AbstractModule(StructuredRecord):
     """An abstract modular cloning module.
+
+    Attributes:
+        cutter (`~Bio.Restriction.Restriction.RestrictionType`): the enzyme
+            used to cut the target sequence from the backbone plasmid during
+            Golden Gate assembly.
+
     """
 
     _level = None  # type: Union[None, int]
+    cutter = NotImplemented # type: Union[NotImplemented, RestrictionType]
+
+    def __new__(cls, *args, **kwargs):
+        cutter_check(cls.cutter, name=cls.__name__)
+        return super(AbstractModule, cls).__new__(cls)
+
+    @classmethod
+    def structure(cls):
+        upstream = cls.cutter.elucidate()
+        downstream = str(Seq(upstream).reverse_complement())
+        return ''.join([
+            upstream.replace('^', '(').replace('_', ')('),
+            'N*',
+            downstream.replace('^', ')').replace('_', ')(')
+        ])
 
     def overhang_start(self):
         # type: () -> Seq
@@ -56,12 +81,17 @@ class AbstractModule(StructuredRecord):
         Returns:
             `~Bio.SeqRecord.SeqRecord`: the target sequence with annotations.
 
-        Danger:
-            The start and end overhangs are not included in the returned
-            sequence.
+        Note:
+            Depending on the cutting direction of the restriction enzyme used
+            during assembly, the overhang will be left at the beginning or at
+            the end, so the obtained record is exactly the sequence the enzyme
+            created during restriction.
 
         """
-        return self._match.group(2)
+        if self.cutter.is_3overhang():
+            return self._match.group(2) + self._match.group(3)
+        else:
+            return self._match.group(1) + self._match.group(2)
 
 
 class Product(AbstractModule):

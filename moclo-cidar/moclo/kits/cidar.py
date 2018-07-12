@@ -16,11 +16,11 @@ References:
 import abc
 
 import six
+from Bio.Restriction import BsaI, BbsI
 
-from ..base import modules, vectors
+from ..base import parts, modules, vectors
 
-__author__ = 'Martin Larralde'
-__author_email__ = 'martin.larralde@ens-paris-saclay.fr'
+__author__ = 'Martin Larralde <martin.larralde@ens-paris-saclay.fr>'
 __version__ = (
     __import__('pkg_resources')
         .resource_string(__name__, 'cidar.version')
@@ -34,18 +34,22 @@ class CIDAREntryVector(vectors.EntryVector):
     """A CIDAR MoClo entry vector.
     """
 
-    _structure = (
-        'GGTCTC'  # BsaI
-        'N'
-        '(NNNN)'  # Downstream overhang
-        '(NN'
-        'GTCTTC'  # BbsI
-        'N*'      # Placeholder sequence
-        'GAAGAC'  # BbsI
-        'NN)'
-        '(NNNN)'  # Upstream overhang
-        'N'
-        'GAGACC'  # BsaI
+    cutter = BbsI
+
+    @staticmethod
+    def structure():
+        return (
+            'GGTCTC'  # BsaI
+            'N'
+            '(NNNN)'  # Downstream overhang
+            '(NN'
+            'GTCTTC'  # BbsI
+            'N*'      # Placeholder sequence
+            'GAAGAC'  # BbsI
+            'NN)'
+            '(NNNN)'  # Upstream overhang
+            'N'
+            'GAGACC'  # BsaI
     )
 
 
@@ -57,19 +61,23 @@ class CIDARCassetteVector(vectors.CassetteVector):
 
     """
 
-    _structure = (
-        'GAAGAC'  # BbsI
-        'NN'
-        '(NNNN)'  # Downstream overhang
-        '(N'
-        'GAGACC'  # BsaI
-        'N*'      # Placeholder sequence
-        'CGTCTC'  # BsaI
-        'N)'
-        '(NNNN)'  # Upstream overhang
-        'NN'
-        'GTCTTC'  # BbsI
-    )
+    cutter = BbsI
+
+    @staticmethod
+    def structure():
+        return (
+            'GAAGAC'  # BbsI
+            'NN'
+            '(NNNN)'  # Downstream overhang
+            '(N'
+            'GAGACC'  # BsaI
+            'N*'      # Placeholder sequence
+            'CGTCTC'  # BsaI
+            'N)'
+            '(NNNN)'  # Upstream overhang
+            'NN'
+            'GTCTTC'  # BbsI
+        )
 
 
 class CIDARDeviceVector(vectors.DeviceVector):
@@ -80,19 +88,23 @@ class CIDARDeviceVector(vectors.DeviceVector):
 
     """
 
-    _structure = (
-        'GGTCTC'  # BsaI
-        'N'
-        '(NNNN)'  # Downstream overhang
-        '(NN'
-        'GTCTTC'  # BbsI
-        'N*'      # Placeholder sequence
-        'GAAGAC'  # BbsI
-        'NN)'
-        '(NNNN)'  # Upstream overhang
-        'N'
-        'GAGACC'  # BsaI
-    )
+    cutter = BbsI
+
+    @staticmethod
+    def structure():
+        return (
+            'GGTCTC'  # BsaI
+            'N'
+            '(NNNN)'  # Downstream overhang
+            '(NN'
+            'GTCTTC'  # BbsI
+            'N*'      # Placeholder sequence
+            'GAAGAC'  # BbsI
+            'NN)'
+            '(NNNN)'  # Upstream overhang
+            'N'
+            'GAGACC'  # BsaI
+        )
 
 
 ### MODULES
@@ -100,71 +112,41 @@ class CIDARDeviceVector(vectors.DeviceVector):
 class CIDARProduct(modules.Product):
     """A CIDAR MoClo product.
     """
-    # TODO #
+
+    cutter = BbsI
 
 
 class CIDAREntry(modules.Entry):
     """A CIDAR MoClo entry.
     """
 
-    _structure = (
-        'GGTCTC'  # BsaI
-        'N'
-        '(NNNN)'  # Type specific overhang (start)
-        '(N*?)'   # Target sequence
-        '(NNNN)'  # Type specific overhang (end)
-        'N'
-        'GAGACC'  # BsaI
-    )
+    cutter = BsaI
 
 
 class CIDARCassette(modules.Cassette):
     """A CIDAR MoClo cassette.
     """
 
-    _structure = (
-        'GAAGAC'  # BbsI
-        'NN'
-        '(NNNN)'  # Cassette overhang (start)
-        '(N*?)'   # Target sequence
-        '(NNNN)'  # Type specific overhang (end)
-        'NN'
-        'GTCTTC'  # BbsI
-    )
+    cutter = BbsI
 
 
 class CIDARDevice(modules.Device):
     """A CIDAR MoClo device.
     """
 
-    _structure = (
-        'GGTCTC'   # BsaI
-        'N'
-        '(NNNN)'   # Upstream overhang
-        '(N*)'     # Target sequence
-        '(NNNN)'   # Downstream overhang
-        'N'
-        'GAGACC'   # BsaI
-    )
+    cutter = BsaI
 
 
 ### PARTS
 
-_ent = 'GGTCTCN({start})(N*?)({end})NGAGACC'
-
-
-@six.add_metaclass(abc.ABCMeta)
-class CIDARPart(object):
+class CIDARPart(parts.AbstractPart):
     """A CIDAR MoClo standard part.
 
     A part is a plasmid with standardized flanking overhang sequences
     that allows immediate type recognition.
     """
 
-    @property
-    @abc.abstractmethod
-    def _structure(self):
-        return NotImplemented
+    cutter = BsaI
 
 
 class CIDARPromoter(CIDARPart, CIDAREntry):
@@ -175,12 +157,18 @@ class CIDARPromoter(CIDARPart, CIDAREntry):
 
     Parts of this type contain contain a promoter. The upstream overhangs can
     be changed to amend the order of assembly of a circuit from different
-    cassettes. The upstream overhang can vary between four differents sequences,
-    but the downstream overhang is unique.
+    cassettes.
+
+    Note:
+        The CIDAR toolkit parts provide 4 different upstream overhangs:
+        *GGAG*, *GCTT*, *CGCT*, and *TGCC*. These are not enforced in this
+        module, and any upstream sequence will be accepted. The downstream
+        sequence however is always *TACT*.
+
     """
 
     # FIXME: enforce official upstream overhangs or not ?
-    _structure = _ent.format(start='GGAG|GCTT|CGCT|TGCC', end='TACT')
+    signature = ('NNNN', 'TACT')
 
 
 class CIDARibosomeBindingSite(CIDARPart, CIDAREntry):
@@ -194,7 +182,7 @@ class CIDARibosomeBindingSite(CIDARPart, CIDAREntry):
 
     """
 
-    _structure = _ent.format(start='TACT', end='AATG')
+    signature = ('TACT', 'AATG')
 
 
 class CIDARCodingSequence(CIDARPart, CIDAREntry):
@@ -212,7 +200,7 @@ class CIDARCodingSequence(CIDARPart, CIDAREntry):
         the downstream overhang.
     """
 
-    _structure = _ent.format(start='AATG', end='AGGT')
+    signature = ('AATG', 'AGGT')
 
 
 class CIDARTerminator(CIDARPart, CIDAREntry):
@@ -225,9 +213,13 @@ class CIDARTerminator(CIDARPart, CIDAREntry):
     the same for the terminator to directly follow the coding sequence, but
     the downstream overhang can vary to specify an order for a following
     multigenic assembly within a device.
+
+    Note:
+        The CIDAR toolkit parts provide 4 different downstream overhangs:
+        *GCTT*, *CGCT*, *TGCC*, and *ACTA*. These are not enforced in this
+        module, and any downstream sequence will be accepted. The upstream
+        sequence however is always *AGGT*.
+
     """
 
-    _structure = _ent.format(start='AGGT', end='GCTT|CGCT|TGCC|ACTA')
-
-
-del _ent
+    signature = ('AGGT', 'NNNN')

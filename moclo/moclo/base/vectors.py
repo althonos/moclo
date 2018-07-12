@@ -7,29 +7,47 @@ contain a placeholder sequence that is replaced by the concatenation of the
 modules during the Golden Gate assembly.
 """
 
+import abc
+import typing
 import warnings
 
 import six
-import typing
 from Bio import BiopythonWarning
+from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
 from .. import errors
 from ..record import CircularRecord
-from ..utils import catch_warnings
+from ..utils import catch_warnings, classproperty
+from ._utils import cutter_check
 from ._structured import StructuredRecord
 
 if typing.TYPE_CHECKING:
-    from typing import Any, MutableMapping, Union   # noqa: F401
-    from Bio.Seq import Seq                         # noqa: F401
-    from .modules import AbstractModule             # noqa: F401
+    from typing import Any, MutableMapping, Union           # noqa: F401
+    from Bio.Restriction.Restriction import RestrictionType # noqa: F401
+    from .modules import AbstractModule                     # noqa: F401
 
 
 class AbstractVector(StructuredRecord):
     """An abstract modular cloning vector.
     """
 
-    _level = None  # type: Union[None, int]
+    _level = None           # type: Union[None, int]
+    cutter = NotImplemented # type: Union[NotImplemented, RestrictionType]
+
+    def __new__(cls, *args, **kwargs):
+        cutter_check(cls.cutter, name=cls.__name__)
+        return super(AbstractVector, cls).__new__(cls)
+
+    @classmethod
+    def structure(cls):
+        downstream = cls.cutter.elucidate()
+        upstream = str(Seq(downstream).reverse_complement())
+        return ''.join([
+            upstream.replace('^', ')(').replace('_', '('),
+            'N*',
+            downstream.replace('^', ')(').replace('_', ')')
+        ])
 
     def overhang_start(self):
         # type: () -> Seq
@@ -52,7 +70,23 @@ class AbstractVector(StructuredRecord):
         GFP expression cassette that can be used to measure the progress of
         the assembly.
         """
-        return self._match.group(2)
+        if self.cutter.is_3overhang():
+            return self._match.group(2) + self.overhang_end()
+        else:
+            return self.overhang_start() + self._match.group(2)
+
+    def target_sequence(self):
+        # type: () -> SeqRecord
+        """Get the target sequence in the vector.
+
+        The target sequence if the part of the plasmid that is not discarded
+        during the assembly (everything except the placeholder sequence).
+        """
+        if self.cutter.is_3overhang():
+            start, end = self._match.span(2)[0], self._match.span(3)[1]
+        else:
+            start, end = self._match.span(1)[0], self._match.span(2)[1]
+        return (self.record << start)[end - start:]
 
     @catch_warnings('ignore', category=BiopythonWarning)
     def assemble(self, module, *modules, **kwargs):
@@ -82,7 +116,7 @@ class AbstractVector(StructuredRecord):
                 match the required module structure (missing site, wrong
                 overhang, etc.).
             `~moclo.errors.UnusedModules`: when some modules were not used
-                during the assembly.
+                during the assembly (mostly caused by duplicate parts).
 
         """
         # If the start and end overhangs are the same, the assembly will
@@ -103,13 +137,15 @@ class AbstractVector(StructuredRecord):
         # Generate the complete inserted sequence
         try:
             overhang_next = self.overhang_end()
-            assembly = SeqRecord(overhang_next, id='assembly')
+            assembly = SeqRecord('', id='assembly')
+            if self.cutter.is_3overhang():
+                assembly += overhang_next
             while overhang_next != self.overhang_start():
                 module = modmap.pop(overhang_next)
                 assembly += module.target_sequence()
                 overhang_next = module.overhang_end()
-                if overhang_next != self.overhang_end():
-                    assembly += overhang_next
+            if self.cutter.is_5overhang():
+                assembly += overhang_next
         except KeyError as ke:
             # Raise the MissingModule error without the KeyError traceback
             raise six.raise_from(errors.MissingModule(ke.args[0]), None)
@@ -119,7 +155,7 @@ class AbstractVector(StructuredRecord):
             warnings.warn(errors.UnusedModules(*modmap.values()))
 
         # Replace placeholder in the vector while keeping annotations
-        ph_start, ph_end = self._match.span(0)
+        ph_start, ph_end = self._match.span(1)[0], self._match.span(3)[1]
         rec = (self.record << ph_start)
         return CircularRecord(assembly + rec[ph_end - ph_start:])
 
