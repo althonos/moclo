@@ -137,23 +137,23 @@ class TestYTKConstruct(unittest.TestCase):
 
 ### Test Yeast ToolKit multigene assembly
 
-class TestYTKDevice(unittest.TestCase):
-
-    def test_Device_assembly(self):
-        """Check a YTK multigene assembly gives the expected result.
-        """
-        records = {
-            p[0]: CircularRecord(Seq(p[4]), id=p[0], name=p[0])
-            for p in plasmids('ytk-multigene.tsv.xz')
-        }
-
-        tu1 = ytk.YTKCassette(records['mCerulean'])
-        tu2 = ytk.YTKCassette(records['mNeonGreen'])
-        tu3 = ytk.YTKCassette(records['mScarlet'])
-        vec = ytk.YTKDeviceVector(records['multigeneVec'])
-
-        assembly = vec.assemble(tu1, tu2, tu3)
-        expected = records['mCmNGmS']
-
-        self.assertEqual(len(assembly), len(expected), 'lengths differ')
-        self.assertIn(assembly.seq, expected.seq + expected.seq, 'sequences differ')
+# class TestYTKDevice(unittest.TestCase):
+#
+#     def test_Device_assembly(self):
+#         """Check a YTK multigene assembly gives the expected result.
+#         """
+#         records = {
+#             p[0]: CircularRecord(Seq(p[4]), id=p[0], name=p[0])
+#             for p in plasmids('ytk-multigene.tsv.xz')
+#         }
+#
+#         tu1 = ytk.YTKCassette(records['mCerulean'])
+#         tu2 = ytk.YTKCassette(records['mNeonGreen'])
+#         tu3 = ytk.YTKCassette(records['mScarlet'])
+#         vec = ytk.YTKDeviceVector(records['multigeneVec'])
+#
+#         assembly = vec.assemble(tu1, tu2, tu3)
+#         expected = records['mCmNGmS']
+#
+#         self.assertEqual(len(assembly), len(expected), 'lengths differ')
+#         self.assertIn(assembly.seq, expected.seq + expected.seq, 'sequences differ')
