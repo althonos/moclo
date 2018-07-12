@@ -8,6 +8,7 @@ import six
 
 from .. import errors
 from ..regex import DNARegex
+from ..utils import classproperty
 
 if typing.TYPE_CHECKING:
     from typing import Dict, Optional, Text, Type  # noqa: F401
@@ -18,23 +19,32 @@ if typing.TYPE_CHECKING:
 @six.add_metaclass(abc.ABCMeta)
 class StructuredRecord(object):
 
-    _structure = NotImplemented  # type: Optional[Text]
-    _regexes = {}                # type: Dict[Type[StructuredRecord], DNARegex]
+    _regex = None
 
     def __init__(self, record):
         # type: (SeqRecord) -> None
         self.record = record
         self.seq = record.seq
 
+    @classmethod
+    @abc.abstractmethod
+    def structure(cls):
+        # type: () -> Text
+        """Get the expected record structure as a DNA pattern in regex syntax.
+        """
+        return NotImplemented
+
+    @classmethod
+    def _get_regex(cls):
+        if cls._regex is None:
+            cls._regex = DNARegex(cls.structure())
+        return cls._regex
+
     @cached_property.cached_property
     def _match(self):
         # type: () -> SeqMatch[SeqRecord]
-        regex = self._regexes.get(type(self))
-        if regex is None:
-            topology = self.record.annotations.get('topology', 'circular').lower()
-            regex = DNARegex(self._structure, linear=topology != 'circular')
-            self._regexes[type(self)] = regex
-        match = regex.search(self.record)
+        topology = self.record.annotations.get('topology', 'circular').lower()
+        match = self._get_regex().search(self.record, linear=topology != 'circular')
         if match is None:
             details = "does not match '{}' structure".format(type(self).__name__)
             raise errors.InvalidSequence(self.record, details=details)

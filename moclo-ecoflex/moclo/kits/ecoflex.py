@@ -21,8 +21,7 @@ from Bio.Restriction import BsmBI, BsaI
 
 from ..base import parts, modules, vectors
 
-__author__ = 'Martin Larralde'
-__author_email__ = 'martin.larralde@ens-paris-saclay.fr'
+__author__ = 'Martin Larralde <martin.larralde@ens-paris-saclay.fr>'
 __version__ = (
     __import__('pkg_resources')
         .resource_string(__name__, 'ecoflex.version')

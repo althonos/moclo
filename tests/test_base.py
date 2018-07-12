@@ -21,7 +21,7 @@ class TestEntryVector(unittest.TestCase):
         cutter = BpiI
 
     def test_module_structure(self):
-        self.assertEqual(self.MockProduct._structure, (
+        self.assertEqual(self.MockProduct.structure(), (
             "GAAGAC"  # BpiI
             "NN"
             "(NNNN)"  # Product overhangs (start)
@@ -32,7 +32,7 @@ class TestEntryVector(unittest.TestCase):
         ))
 
     def test_vector_structure(self):
-        self.assertEqual(self.MockEntryVector._structure, (
+        self.assertEqual(self.MockEntryVector.structure(), (
             "N"
             "(NNNN)"
             "(NN"

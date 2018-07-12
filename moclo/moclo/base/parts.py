@@ -29,8 +29,12 @@ class AbstractPart(StructuredRecord):
         cutter_check(cls.cutter, name=cls.__name__)
         return super(AbstractPart, cls).__new__(cls)
 
-    @classproperty
-    def _structure(cls):
+    @classmethod
+    def structure(cls):
+
+        if cls.signature is NotImplemented:
+            raise NotImplementedError('no signature defined')
+
         up = cls.cutter.elucidate()
         down = str(Seq(up).reverse_complement())
         ovhg = cls.cutter.ovhgseq

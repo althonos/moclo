@@ -39,8 +39,8 @@ class AbstractVector(StructuredRecord):
         cutter_check(cls.cutter, name=cls.__name__)
         return super(AbstractVector, cls).__new__(cls)
 
-    @classproperty
-    def _structure(cls):
+    @classmethod
+    def structure(cls):
         downstream = cls.cutter.elucidate()
         upstream = str(Seq(downstream).reverse_complement())
         return ''.join([

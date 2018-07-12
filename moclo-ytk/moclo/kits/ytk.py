@@ -42,8 +42,7 @@ from Bio.Restriction import BsaI, BsmBI
 
 from ..base import modules, vectors, parts
 
-__author__ = 'Martin Larralde'
-__author_email__ = 'martin.larralde@ens-paris-saclay.fr'
+__author__ = 'Martin Larralde <martin.larralde@ens-paris-saclay.fr>'
 __version__ = (
     __import__('pkg_resources')
         .resource_string(__name__, 'ytk.version')
@@ -184,7 +183,6 @@ class YTKPart(parts.AbstractPart):
         sequences as "parts" of different, strongly-defined types. In order
         to follow the base MoClo frameworks, parts of Type 8, 8a, and 678 are
         handled as cassette vectors, while other parts are handled as entries.
-
     """
 
     cutter = BsaI
@@ -360,8 +358,10 @@ class YTKPart234r(YTKPart, YTKEntry):
     """
 
     signature = ('AACG', 'GCTG')
-    # the Bsa site is kept in the target sequence
-    _structure = '(AACG)(NGAGACCN*?GGTCTCN)(GCTG)'
+
+    @staticmethod
+    def structure():
+        return '(AACG)(NGAGACCN*?GGTCTCN)(GCTG)'
 
 
 class YTKPart5(YTKPart, YTKEntry):

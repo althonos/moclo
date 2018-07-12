@@ -78,13 +78,12 @@ class DNARegex(object):
             target.append(cls._lettermap.get(letter, letter))
         return ''.join(target)
 
-    def __init__(self, pattern, linear=True):
+    def __init__(self, pattern):
         # type: (Text, bool) -> None
         self.pattern = pattern
         self.regex = re.compile(self._transcribe(pattern))
-        self.linear = True
 
-    def search(self, string, pos=0, endpos=six.MAXSIZE):
+    def search(self, string, pos=0, endpos=six.MAXSIZE, linear=True):
         # type: (_S, int, int) -> Optional[SeqMatch[_S]]
 
         if not isinstance(string, (Bio.Seq.Seq, Bio.SeqRecord.SeqRecord)):
@@ -96,7 +95,7 @@ class DNARegex(object):
         else:
             data = str(string)
 
-        if not self.linear or isinstance(string, CircularRecord):
+        if not linear or isinstance(string, CircularRecord):
             data *= 2
 
         for i in range(pos, min(len(string), endpos)):

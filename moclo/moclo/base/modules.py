@@ -39,8 +39,8 @@ class AbstractModule(StructuredRecord):
         cutter_check(cls.cutter, name=cls.__name__)
         return super(AbstractModule, cls).__new__(cls)
 
-    @classproperty
-    def _structure(cls):
+    @classmethod
+    def structure(cls):
         upstream = cls.cutter.elucidate()
         downstream = str(Seq(upstream).reverse_complement())
         return ''.join([
