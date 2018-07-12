@@ -35,18 +35,21 @@ class CIDAREntryVector(vectors.EntryVector):
     """
 
     cutter = BbsI
-    _structure = (
-        'GGTCTC'  # BsaI
-        'N'
-        '(NNNN)'  # Downstream overhang
-        '(NN'
-        'GTCTTC'  # BbsI
-        'N*'      # Placeholder sequence
-        'GAAGAC'  # BbsI
-        'NN)'
-        '(NNNN)'  # Upstream overhang
-        'N'
-        'GAGACC'  # BsaI
+
+    @staticmethod
+    def structure():
+        return (
+            'GGTCTC'  # BsaI
+            'N'
+            '(NNNN)'  # Downstream overhang
+            '(NN'
+            'GTCTTC'  # BbsI
+            'N*'      # Placeholder sequence
+            'GAAGAC'  # BbsI
+            'NN)'
+            '(NNNN)'  # Upstream overhang
+            'N'
+            'GAGACC'  # BsaI
     )
 
 
@@ -59,19 +62,22 @@ class CIDARCassetteVector(vectors.CassetteVector):
     """
 
     cutter = BbsI
-    _structure = (
-        'GAAGAC'  # BbsI
-        'NN'
-        '(NNNN)'  # Downstream overhang
-        '(N'
-        'GAGACC'  # BsaI
-        'N*'      # Placeholder sequence
-        'CGTCTC'  # BsaI
-        'N)'
-        '(NNNN)'  # Upstream overhang
-        'NN'
-        'GTCTTC'  # BbsI
-    )
+
+    @staticmethod
+    def structure():
+        return (
+            'GAAGAC'  # BbsI
+            'NN'
+            '(NNNN)'  # Downstream overhang
+            '(N'
+            'GAGACC'  # BsaI
+            'N*'      # Placeholder sequence
+            'CGTCTC'  # BsaI
+            'N)'
+            '(NNNN)'  # Upstream overhang
+            'NN'
+            'GTCTTC'  # BbsI
+        )
 
 
 class CIDARDeviceVector(vectors.DeviceVector):
@@ -83,19 +89,22 @@ class CIDARDeviceVector(vectors.DeviceVector):
     """
 
     cutter = BbsI
-    _structure = (
-        'GGTCTC'  # BsaI
-        'N'
-        '(NNNN)'  # Downstream overhang
-        '(NN'
-        'GTCTTC'  # BbsI
-        'N*'      # Placeholder sequence
-        'GAAGAC'  # BbsI
-        'NN)'
-        '(NNNN)'  # Upstream overhang
-        'N'
-        'GAGACC'  # BsaI
-    )
+
+    @staticmethod
+    def structure():
+        return (
+            'GGTCTC'  # BsaI
+            'N'
+            '(NNNN)'  # Downstream overhang
+            '(NN'
+            'GTCTTC'  # BbsI
+            'N*'      # Placeholder sequence
+            'GAAGAC'  # BbsI
+            'NN)'
+            '(NNNN)'  # Upstream overhang
+            'N'
+            'GAGACC'  # BsaI
+        )
 
 
 ### MODULES
@@ -103,7 +112,8 @@ class CIDARDeviceVector(vectors.DeviceVector):
 class CIDARProduct(modules.Product):
     """A CIDAR MoClo product.
     """
-    # TODO #
+
+    cutter = BbsI
 
 
 class CIDAREntry(modules.Entry):

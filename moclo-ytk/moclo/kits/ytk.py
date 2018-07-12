@@ -123,21 +123,24 @@ class YTKProduct(modules.Product):  # FIXME ?
     """
 
     cutter = BsmBI
-    _structure = (
-        'CGTCTC'  # BsmBI
-        'N'
-        '(NNGG)'  # Product overhangs (start)
-        '(TCTC'   # BsaI (first 2 nucleotides in the overhang)
-        'N'
-        'NNNN'    # Type specific overhang (start)
-        'N*?'     # Template
-        'NNNN'    # Type specific overhang (end)
-        'N'
-        'GA)'     # BsaI (last 4 nucleotides in the overhang)
-        '(GACC)'  # Entry overhangs (end)
-        'N'
-        'GAGACG'  # BsmBI
-    )
+
+    @staticmethod
+    def structure():
+        return (
+            'CGTCTC'  # BsmBI
+            'N'
+            '(NNGG)'  # Product overhangs (start)
+            '(TCTC'   # BsaI (first 2 nucleotides in the overhang)
+            'N'
+            'NNNN'    # Type specific overhang (start)
+            'N*?'     # Template
+            'NNNN'    # Type specific overhang (end)
+            'N'
+            'GA)'     # BsaI (last 4 nucleotides in the overhang)
+            '(GACC)'  # Entry overhangs (end)
+            'N'
+            'GAGACG'  # BsmBI
+        )
 
 
 class YTKEntry(modules.Entry):

@@ -44,21 +44,24 @@ class EcoFlexCassetteVector(vectors.CassetteVector):
     """
 
     cutter = BsaI
-    _structure = (
-        'CGTCTC'  # BsmBI
-        'N'
-        'NNNN'    # Cassette overhang (start)
-        '(NNNN)'  # Vector overhang (start)
-        '(N'
-        'GAGACC'  # BsaI
-        'N*?'     # Placeholder sequence
-        'GGTCTC'  # BsaI
-        'N)'
-        '(NNNN)'  # Vector overhang (end)
-        'NNNN'    # Cassette overhang (end)
-        'N'
-        'GAGACG'  # BsmBI
-    )
+
+    @staticmethod
+    def structure():
+        return (
+            'CGTCTC'  # BsmBI
+            'N'
+            'NNNN'    # Cassette overhang (start)
+            '(NNNN)'  # Vector overhang (start)
+            '(N'
+            'GAGACC'  # BsaI
+            'N*?'     # Placeholder sequence
+            'GGTCTC'  # BsaI
+            'N)'
+            '(NNNN)'  # Vector overhang (end)
+            'NNNN'    # Cassette overhang (end)
+            'N'
+            'GAGACG'  # BsmBI
+        )
 
 
 class EcoFlexDeviceVector(vectors.DeviceVector):
@@ -66,19 +69,22 @@ class EcoFlexDeviceVector(vectors.DeviceVector):
     """
 
     cutter = BsmBI
-    _structure = (
-        'GGTCTC'  # BsaI
-        'NNNN'    # Device overhang (start)
-        '(NNNN)'  # Vector overhang (start)
-        '(N'
-        'GAGACG'  # BsmBI
-        'N*'      # Placeholder sequence
-        'CGTCTC'  # BsmBI
-        'N)'
-        '(NNNN)'  # Vector overhang (end)
-        'NNNN'    # Device overhang (end)
-        'GAGACC'  # BsaI
-    )
+
+    @staticmethod
+    def structure():
+        return (
+            'GGTCTC'  # BsaI
+            'NNNN'    # Device overhang (start)
+            '(NNNN)'  # Vector overhang (start)
+            '(N'
+            'GAGACG'  # BsmBI
+            'N*'      # Placeholder sequence
+            'CGTCTC'  # BsmBI
+            'N)'
+            '(NNNN)'  # Vector overhang (end)
+            'NNNN'    # Device overhang (end)
+            'GAGACC'  # BsaI
+        )
 
 
 ### MODULES
@@ -116,10 +122,6 @@ class EcoFlexDevice(modules.Device):
 
 
 ### PARTS
-
-_ent = 'GGTCTCN({start})(N*?)({end})NGAGACC'
-_vec = '({end})(NGAGACCN*?GGTCTCN)({start})'
-
 
 class EcoFlexPart(parts.AbstractPart):
     """An EcoFlex MoClo standard part.
