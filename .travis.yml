@@ -22,9 +22,7 @@ before_install:
 - pip install -U -r ci/requirements.txt
 
 install:
-- pip install ./moclo
-- pip install ./moclo-ytk
-- pip install ./moclo-cidar
+- pip install ./moclo ./moclo-ytk ./moclo-cidar ./moclo-ecoflex
 
 before_script:
 - pip install -U -r tests/requirements.txt
