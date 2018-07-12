@@ -21,6 +21,21 @@ if typing.TYPE_CHECKING:
 
 @six.add_metaclass(abc.ABCMeta)
 class AbstractPart(StructuredRecord):
+    """An abstract modular cloning part.
+
+    Parts can be either modules or vectors, but are determined by their
+    flanking overhangs sequences, declared in the ``signature`` class
+    attribute. The part structure is derived from the part class (module
+    of vector), signature, and restriction enzyme.
+
+    Example:
+        >>> class ExamplePart(AbstractPart, Entry):
+        ...     cutter = BsaI
+        ...     signature = ('ATGC', 'ATTC')
+        ...
+        >>> ExamplePart.structure()
+        'GGTCTCN(ATGC)(NN*N)(ATTC)NGAGACC'
+    """
 
     cutter = NotImplemented
     signature = NotImplemented
