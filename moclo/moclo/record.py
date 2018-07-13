@@ -23,6 +23,17 @@ def _ambiguous(func):
 
 
 class CircularRecord(SeqRecord):
+    """A derived `SeqRecord` that contains a circular DNA sequence.
+
+    It handles ``_ in record`` as expected, and removes the implementation of
+    ``_ + record`` since circular DNA sequence do not have an end to append
+    more nucleotides to. In addition, it overloads the ``>>`` and ``<<`` to
+    allow rotating the sequence and its annotations, effectively changing the
+    *0* position.
+
+    See Also:
+        `~Bio.SeqRecord.SeqRecord <https://biopython.org/wiki/SeqRecord>`_
+    """
 
     # Patch constructor to allow constructing a CircularRecord from
     # a SeqRecord argument (other arguments are ignored).
