@@ -49,6 +49,7 @@ following implementations are available:
 
 * `Yeast ToolKit (moclo-ytk) <https://github.com/althonos/moclo/tree/master/moclo-ytk>`_
 * `CIDAR Kit (moclo-cidar) <https://github.com/althonos/moclo/tree/master/moclo-cidar>`_
+* `EcoFlex Kit (moclo-ecoflex) <https://github.com/althonos/moclo/tree/master/moclo-ecoflex>`_
 
 Once installed, kits are available in the ``moclo.kits`` package namespace.
 `Kit-specific documentation <https://moclo.readthedocs.io/en/latest/#kits>`_ is
