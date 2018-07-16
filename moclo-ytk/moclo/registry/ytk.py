@@ -45,3 +45,8 @@ class YTKRegistry(EmbeddedRegistry):
     def _load_location(self, raw, index):
         x, y = index % 12, index // 12
         return '{}, {}{}'.format(self.location, chr(ord('A') + y), x+1)
+
+
+class PTKRegistry(YTKRegistry):
+
+    _file = 'ptk.inv'
