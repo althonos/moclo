@@ -12,30 +12,19 @@ import pkg_resources
 
 from .._impl import json, lzma
 from ..record import CircularRecord
-
-if typing.TYPE_CHECKING:
-    from typing import Union, Text
-    from ..base import AbstractModule, AbstractVector
+from ..core import AbstractModule, AbstractVector
 
 
-class Item(object):
+class Item(typing.NamedTuple('Item', [
+            ('id', typing.Text),
+            ('name', typing.Text),
+            ('entity', typing.Union[AbstractModule, AbstractVector]),
+            ('location', typing.Text),
+            ('resistance', typing.Text),
+        ])):
     """A registry item.
     """
-
-    def __init__(self,
-                 id,
-                 name,
-                 entity,      # type: Union[AbstractModule, AbstractVector]
-                 location,    # type: Text,
-                 resistance   # type: Text,
-                 ):
-        # type: (...) -> None
-        self.entity = entity
-        self.id = id
-        self.name = name
-        self.location = location
-        self.resistance = resistance
-
+    
 
 class AbstractRegistry(typing.Mapping[typing.Text, Item]):
     """An abstract registry holding MoClo plasmids.
