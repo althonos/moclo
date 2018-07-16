@@ -12,6 +12,7 @@ import cached_property
 import pkg_resources
 
 from .._impl import lzma
+from ..record import CircularRecord
 
 if typing.TYPE_CHECKING:
     from typing import Union, Text
@@ -70,7 +71,8 @@ class EmbeddedRegistry(AbstractRegistry):
                 raw_data = json.load(decomp)
 
         for raw in raw_data:
-            raw['record'] = Bio.SeqIO.read(io.StringIO(raw['gb']), 'gb')
+            record = Bio.SeqIO.read(io.StringIO(raw['gb']), 'gb')
+            raw['record'] = CircularRecord(record)
 
         return {
             item.id: item

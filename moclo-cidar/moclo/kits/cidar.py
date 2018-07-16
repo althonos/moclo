@@ -18,7 +18,7 @@ import abc
 import six
 from Bio.Restriction import BsaI, BbsI
 
-from ..base import parts, modules, vectors
+from ..core import parts, modules, vectors
 
 __author__ = 'Martin Larralde <martin.larralde@ens-paris-saclay.fr>'
 __version__ = (

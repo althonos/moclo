@@ -11,8 +11,8 @@ from Bio.Restriction import BpiI
 
 from moclo import errors
 from moclo.record import CircularRecord
-from moclo.base.vectors import AbstractVector
-from moclo.base.modules import AbstractModule
+from moclo.core.vectors import AbstractVector
+from moclo.core.modules import AbstractModule
 
 
 class TestAssembly(unittest.TestCase):

@@ -16,7 +16,7 @@ import Bio.SeqRecord
 import Bio.Restriction
 import six
 
-import moclo, moclo.base, moclo.kits
+import moclo, moclo.core, moclo.kits
 
 
 class IgnoreUnicodeChecker(doctest.OutputChecker):
@@ -53,8 +53,8 @@ def load_tests(loader=None, tests=unittest.TestSuite(), ignore=False):
     }
 
     # Load all abstract base classes in the namespace
-    for name in moclo.base.__all__:
-        globs[name] = getattr(moclo.base, name)
+    for name in moclo.core.__all__:
+        globs[name] = getattr(moclo.core, name)
 
     # Load all restriction enzymes in the namespace
     RestrictionType = Bio.Restriction.Restriction.RestrictionType
@@ -65,7 +65,7 @@ def load_tests(loader=None, tests=unittest.TestSuite(), ignore=False):
 
     if not sys.argv[0].endswith('green'):
         _load_tests_from_module(tests, moclo, globs, _setUp, _tearDown)
-        _load_tests_from_module(tests, moclo.base, globs, _setUp, _tearDown)
+        _load_tests_from_module(tests, moclo.core, globs, _setUp, _tearDown)
         _load_tests_from_module(tests, moclo.kits, globs, _setUp, _tearDown)
 
     return tests

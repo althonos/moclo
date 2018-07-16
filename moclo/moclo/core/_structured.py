@@ -24,8 +24,7 @@ class StructuredRecord(object):
 
     def __init__(self, record):
         # type: (SeqRecord) -> None
-        linear = record.annotations.get('topology', 'circular') != 'linear'
-        self.record = record if linear else CircularRecord(record)
+        self.record = record 
         self.seq = record.seq
 
     @classmethod

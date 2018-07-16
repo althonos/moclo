@@ -1,5 +1,5 @@
-Base API
-========
+Library Reference
+=================
 
 .. toctree::
    :hidden:
@@ -9,14 +9,14 @@ Base API
    vectors
    errors
 
-.. currentmodule:: moclo.base
-.. automodule:: moclo.base
+.. currentmodule:: moclo.core
+.. automodule:: moclo.core
 
 
-Modules (`moclo.base.modules`)
+Modules (`moclo.core.modules`)
 ------------------------------
 
-.. currentmodule:: moclo.base.modules
+.. currentmodule:: moclo.core.modules
 .. autosummary::
    :nosignatures:
 
@@ -26,10 +26,10 @@ Modules (`moclo.base.modules`)
    Device
 
 
-Vectors (`moclo.base.vectors`)
+Vectors (`moclo.core.vectors`)
 ------------------------------
 
-.. currentmodule:: moclo.base.vectors
+.. currentmodule:: moclo.core.vectors
 .. autosummary::
    :nosignatures:
 
@@ -38,10 +38,10 @@ Vectors (`moclo.base.vectors`)
    CassetteVector
    DeviceVector
 
-Parts (`moclo.base.parts`)
+Parts (`moclo.core.parts`)
 --------------------------
 
-.. currentmodule:: moclo.base.parts
+.. currentmodule:: moclo.core.parts
 .. autosummary::
    :nosignatures:
 

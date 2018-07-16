@@ -8,7 +8,7 @@ from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.Restriction import BpiI
 
-from moclo.base import EntryVector, Product
+from moclo.core import EntryVector, Product
 from moclo.record import CircularRecord
 
 

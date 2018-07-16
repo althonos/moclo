@@ -47,7 +47,7 @@ Library
 
   Installing  <install.rst>
   Examples    <examples/index.rst>
-  Base API    <api/index.rst>
+  Reference   <api/index.rst>
   About       <about.rst>
 
 
