@@ -7,8 +7,8 @@ import cached_property
 import six
 
 from .. import errors
+from .._utils import classproperty
 from ..regex import DNARegex
-from ..utils import classproperty
 from ..record import CircularRecord
 
 if typing.TYPE_CHECKING:

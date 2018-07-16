@@ -17,8 +17,8 @@ from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
 from .. import errors
+from .._utils import catch_warnings, classproperty
 from ..record import CircularRecord
-from ..utils import catch_warnings, classproperty
 from ._utils import cutter_check
 from ._structured import StructuredRecord
 

@@ -8,7 +8,7 @@ import typing
 import six
 from Bio.Seq import Seq
 
-from ..utils import classproperty
+from .._utils import classproperty
 from .modules import AbstractModule
 from .vectors import AbstractVector
 from ._structured import StructuredRecord
