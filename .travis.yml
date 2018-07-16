@@ -16,7 +16,7 @@ matrix:
   allow_failures:
   - python: pypy
   - python: pypy3.5
-  - python: 3.7
+  - python: '3.7'
 
 before_install:
 - ci/travis/decrypt-all.sh
