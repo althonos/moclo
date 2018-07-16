@@ -9,6 +9,7 @@ import six
 from .. import errors
 from ..regex import DNARegex
 from ..utils import classproperty
+from ..record import CircularRecord
 
 if typing.TYPE_CHECKING:
     from typing import Dict, Optional, Text, Type  # noqa: F401
@@ -23,7 +24,8 @@ class StructuredRecord(object):
 
     def __init__(self, record):
         # type: (SeqRecord) -> None
-        self.record = record
+        linear = record.annotations.get('topology', 'circular') != 'linear'
+        self.record = record if linear else CircularRecord(record)
         self.seq = record.seq
 
     @classmethod
