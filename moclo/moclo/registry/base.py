@@ -4,11 +4,13 @@ from __future__ import unicode_literals
 
 import abc
 import io
+import itertools
 import typing
 
 import Bio.SeqIO
 import cached_property
 import pkg_resources
+import six
 
 from .._impl import json, lzma
 from ..record import CircularRecord
@@ -24,11 +26,35 @@ class Item(typing.NamedTuple('Item', [
         ])):
     """A registry item.
     """
-    
+
 
 class AbstractRegistry(typing.Mapping[typing.Text, Item]):
     """An abstract registry holding MoClo plasmids.
     """
+
+
+class CombinedRegistry(AbstractRegistry):
+    """A registry combining several registries into a single collection.
+    """
+
+    def __init__(self):
+        self._data = {}
+
+    def __lshift__(self, registry):
+        self.add_registry(registry)
+
+    def add_registry(self, registry):
+        for item in six.itervalues(registry):
+            self._data.setdefault(item.id, item)
+
+    def __contains__(self, item):
+        return item in self._data
+
+    def __iter__(self):
+        return iter(self._data)
+
+    def __len__(self):
+        return len(self._data)
 
 
 class EmbeddedRegistry(AbstractRegistry):
