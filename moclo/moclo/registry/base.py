@@ -4,14 +4,13 @@ from __future__ import unicode_literals
 
 import abc
 import io
-import json
 import typing
 
 import Bio.SeqIO
 import cached_property
 import pkg_resources
 
-from .._impl import lzma
+from .._impl import json, lzma
 from ..record import CircularRecord
 
 if typing.TYPE_CHECKING:
