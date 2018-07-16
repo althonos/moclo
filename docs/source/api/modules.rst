@@ -1,7 +1,7 @@
 Modules
 =======
 
-.. automodule:: moclo.base.modules
+.. automodule:: moclo.core.modules
 
 Abstract
 --------

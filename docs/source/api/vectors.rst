@@ -1,7 +1,7 @@
 Vectors
 =======
 
-.. automodule:: moclo.base.vectors
+.. automodule:: moclo.core.vectors
 
 
 Abstract

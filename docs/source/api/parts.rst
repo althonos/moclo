@@ -1,7 +1,7 @@
 Parts
 =====
 
-.. automodule:: moclo.base.parts
+.. automodule:: moclo.core.parts
 
 Abstract
 --------
