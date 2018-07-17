@@ -32,7 +32,7 @@ FEATURES             Location/Qualifiers
      CDS             11..724
                      /codon_start=1
                      /product="yeast-enhanced green fluorescent protein"
-                     /label="yeGFP"
+                     /label="Venus"
                      /note="codons optimized for translation in S. cerevisiae
                      and C. albicans"
                      /translation="MSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLK
@@ -40,8 +40,6 @@ FEATURES             Location/Qualifiers
                      NYKTRAEVKFEGDTLVNRIELKGIDFKEGGNILGHKLEYNYNSHNVYITADKQKNGIKA
                      NFKIRHNIEDGGVQLADHYQQNTPIGDGPVLLPDNHYLSYQSALSKDPNEKRDHMVLLE
                      FVTAAGITHGMDELYK"
-     CDS             14..724
-                     /label="Venus"
                      /ApEinfo_fwdcolor="#74FF7B"
                      /ApEinfo_revcolor="#74FF7B"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
