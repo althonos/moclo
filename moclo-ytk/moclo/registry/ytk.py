@@ -40,7 +40,7 @@ class YTKRegistry(EmbeddedRegistry):
         return raw['record'].description
 
     def _load_id(self, raw, index):
-        return 'pYTK{:03}'.format(index+1)
+        return raw['record'].id
 
     def _load_location(self, raw, index):
         x, y = index % 12, index // 12
@@ -50,3 +50,6 @@ class YTKRegistry(EmbeddedRegistry):
 class PTKRegistry(YTKRegistry):
 
     _file = 'ptk.inv'
+
+    def __init__(self, location='PTK Plate'):
+        super(PTKRegistry, self).__init__(location)
