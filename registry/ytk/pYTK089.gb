@@ -120,8 +120,6 @@ FEATURES             Location/Qualifiers
                      VTVTQDSSLQDGEFIYKVKLRGTNFPSDGPVMQKKTMGWEASTERMYPEDGALKGEIKM
                      RLKLKDGGHYDAEVKTTYMAKKPVQLPGAYKTDIKLDITSHNEDYTIVEQYERAEGRHS
                      TGA"
-     CDS             1972..2649
-                     /label="mRFP1"
                      /ApEinfo_fwdcolor="#C16969"
                      /ApEinfo_revcolor="#C16969"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
