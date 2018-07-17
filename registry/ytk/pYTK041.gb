@@ -35,8 +35,6 @@ FEATURES             Location/Qualifiers
                      /label="ubiquitin"
                      /translation="MQIFVKTLTGKTITLEVESSDTIDNVKSKIQDKEGIPPDQQRLIF
                      AGKQLEDGRTLSDYNIQKESTLHLVLRLRGG"
-     CDS             14..238
-                     /label="Ubiquitin"
                      /ApEinfo_fwdcolor="#FFCBBF"
                      /ApEinfo_revcolor="#FFCBBF"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
