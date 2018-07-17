@@ -79,7 +79,7 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      terminator      complement(1045..1153)
-                     /label="CamR Terminator"
+                     /label="CmR Terminator"
                      /ApEinfo_fwdcolor="#66CCFF"
                      /ApEinfo_revcolor="#66CCFF"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
@@ -113,7 +113,7 @@ FEATURES             Location/Qualifiers
                      /label="CAT-R"
                      /note="Chloramphenicol resistance gene, reverse primer"
      promoter        complement(1814..1918)
-                     /label="CamR Promoter"
+                     /label="CmR Promoter"
                      /ApEinfo_fwdcolor="#66CCFF"
                      /ApEinfo_revcolor="#66CCFF"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
