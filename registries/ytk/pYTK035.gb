@@ -18,7 +18,6 @@ REFERENCE   2  (bases 1 to 2373)
   JOURNAL   Distributed with the MoClo Python library
             https://github.com/althonos/moclo
 COMMENT     
-            
             ApEinfo:methylated:1
 FEATURES             Location/Qualifiers
      source          1..2373
@@ -63,12 +62,17 @@ FEATURES             Location/Qualifiers
                      KTVKKNKHKFYPAFIHILARLMNAHPEFRMAMKDGELVIWDSVHPCYTVFHEQTETFSS
                      LWSEYHDDFRQFLHIYSQDVACYGENLAYFPKGFIENMFFVSANPWVSFTSFDLNVANM
                      DNFFAPVFTMGKYYTQGDKVLMPLAIQVHHAVCDGFHVGRMLNELQQYCDEWQGGA"
-     CDS             complement(843..1502)
-                     /label="CamR"
                      /ApEinfo_fwdcolor="#0000FF"
                      /ApEinfo_revcolor="#0000FF"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
+                     /EC_number="2.3.1.28"
+                     /db_xref="UniProtKB/Swiss-Prot:P62577"
+                     /db_xref="GO:0008811"
+                     /db_xref="GO:0016740"
+                     /db_xref="GO:0016746"
+                     /db_xref="GO:0046677"
+                     /db_xref="PFAM:PF00302"
      primer_bind     1417..1436
                      /label="CAT-R"
                      /note="Chloramphenicol resistance gene, reverse primer"
