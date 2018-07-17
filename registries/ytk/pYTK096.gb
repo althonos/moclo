@@ -18,7 +18,6 @@ REFERENCE   2  (bases 1 to 5283)
   JOURNAL   Distributed with the MoClo Python library
             https://github.com/althonos/moclo
 COMMENT     
-            
             ApEinfo:methylated:1
 FEATURES             Location/Qualifiers
      source          1..5283
@@ -71,7 +70,7 @@ FEATURES             Location/Qualifiers
      RBS             865..876
                      /note="strong bacterial ribosome binding site (Elowitz and
                      Leibler, 2000)"
-     CDS             883..1596
+     CDS             883..1599
                      /codon_start=1
                      /product="GFP variant that folds robustly even when fused
                      to poorly folded proteins (Pedelacq et al., 2006)"
@@ -81,8 +80,6 @@ FEATURES             Location/Qualifiers
                      TYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNFNSHNVYITADKQKNGIKA
                      NFKIRHNVEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSVLSKDPNEKRDHMVLLE
                      FVTAAGITHGMDELYK"
-     CDS             883..1599
-                     /label="sfGFP"
                      /ApEinfo_fwdcolor="#34FF03"
                      /ApEinfo_revcolor="#34FF03"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}

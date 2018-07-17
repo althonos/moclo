@@ -45,7 +45,7 @@ FEATURES             Location/Qualifiers
      RBS             160..171
                      /note="strong bacterial ribosome binding site (Elowitz and
                      Leibler, 2000)"
-     CDS             178..891
+     CDS             178..894
                      /codon_start=1
                      /product="GFP variant that folds robustly even when fused
                      to poorly folded proteins (Pedelacq et al., 2006)"
@@ -55,8 +55,6 @@ FEATURES             Location/Qualifiers
                      TYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNFNSHNVYITADKQKNGIKA
                      NFKIRHNVEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSVLSKDPNEKRDHMVLLE
                      FVTAAGITHGMDELYK"
-     CDS             178..894
-                     /label="sfGFP"
                      /ApEinfo_fwdcolor="#34FF03"
                      /ApEinfo_revcolor="#34FF03"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
