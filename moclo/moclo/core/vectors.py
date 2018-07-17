@@ -137,15 +137,11 @@ class AbstractVector(StructuredRecord):
         # Generate the complete inserted sequence
         try:
             overhang_next = self.overhang_end()
-            assembly = SeqRecord('', id='assembly')
-            if self.cutter.is_3overhang():
-                assembly += overhang_next
+            assembly = SeqRecord(Seq(''), id='assembly')
             while overhang_next != self.overhang_start():
                 module = modmap.pop(overhang_next)
                 assembly += module.target_sequence()
                 overhang_next = module.overhang_end()
-            if self.cutter.is_5overhang():
-                assembly += overhang_next
         except KeyError as ke:
             # Raise the MissingModule error without the KeyError traceback
             raise six.raise_from(errors.MissingModule(ke.args[0]), None)
@@ -154,10 +150,8 @@ class AbstractVector(StructuredRecord):
         if modmap:
             warnings.warn(errors.UnusedModules(*modmap.values()))
 
-        # Replace placeholder in the vector while keeping annotations
-        ph_start, ph_end = self._match.span(1)[0], self._match.span(3)[1]
-        rec = (self.record << ph_start)
-        return CircularRecord(assembly + rec[ph_end - ph_start:])
+        # Replace placeholder in the vector
+        return CircularRecord(assembly + self.target_sequence())
 
 
 class EntryVector(AbstractVector):
