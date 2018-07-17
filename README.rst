@@ -56,6 +56,16 @@ Once installed, kits are available in the ``moclo.kits`` package namespace.
 available as well.
 
 
+Registries
+----------
+
+Kit-specific modules and vectors are distributed with the library files, so that
+each library provides the base parts needed to create an assembly. They can be
+found in the ``moclo.registry`` namespace. See also the `registry folder
+<https://github.com/althonos/moclo/tree/master/registry>`_ for a detail of how
+the records were obtained.
+
+
 About
 -----
 
