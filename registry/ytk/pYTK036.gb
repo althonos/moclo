@@ -59,8 +59,6 @@ FEATURES             Location/Qualifiers
                      LALPSKYVNFLYLASHYEKLKGSPEDNEQKQLFVEQHKHYLDEIIEQISEFSKRVILAD
                      ANLDKVLSAYNKHRDKPIREQAENIIHLFTLTNLGAPAAFKYFDTTIDRKRYTSTKEVL
                      DATLIHQSITGLYETRIDLSQLGGD"
-     CDS             14..4114
-                     /label="Cas9"
                      /ApEinfo_fwdcolor="cyan"
                      /ApEinfo_revcolor="green"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
