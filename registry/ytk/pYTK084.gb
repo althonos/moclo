@@ -47,8 +47,6 @@ FEATURES             Location/Qualifiers
                      TAFQVLEEYPDSGENIVDALAVFLRRLHSIPVCNCPFNSDRVFRLAQAQSRMNNGLVDA
                      SDFDDERNGWPVEQVWKEMHKLLPFSPDSVVTHGDFSLDNLIFDEGKLIGCIDVGRVGI
                      ADRYQDLAILWNCLGEFSPSLQKRLFQKYGIDNPDMNKLQFHLMLDEFF"
-     CDS             complement(49..864)
-                     /label="KanR"
                      /ApEinfo_fwdcolor="#008000"
                      /ApEinfo_revcolor="#008000"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}

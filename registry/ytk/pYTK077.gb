@@ -46,8 +46,6 @@ FEATURES             Location/Qualifiers
                      FQVLEEYPDSGENIVDALAVFLRRLHSIPVCNCPFNSDRVFRLAQAQSRMNNGLVDASD
                      FDDERNGWPVEQVWKEMHKLLPFSPDSVVTHGDFSLDNLIFDEGKLIGCIDVGRVGIAD
                      RYQDLAILWNCLGEFSPSLQKRLFQKYGIDNPDMNKLQFHLMLDEFF"
-     CDS             397..1206
-                     /label="KanR"
                      /ApEinfo_fwdcolor="#E490FF"
                      /ApEinfo_revcolor="#E490FF"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
