@@ -15,11 +15,12 @@ import six
 from Bio import BiopythonWarning
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
+from Bio.SeqFeature import SeqFeature, FeatureLocation
 
 from .. import errors
 from .._utils import catch_warnings, classproperty
 from ..record import CircularRecord
-from ._utils import cutter_check
+from ._utils import cutter_check, add_as_source
 from ._structured import StructuredRecord
 
 if typing.TYPE_CHECKING:
@@ -86,7 +87,7 @@ class AbstractVector(StructuredRecord):
             start, end = self._match.span(2)[0], self._match.span(3)[1]
         else:
             start, end = self._match.span(1)[0], self._match.span(2)[1]
-        return (self.record << start)[end - start:]
+        return add_as_source(self.record, (self.record << start)[end - start:])
 
     @catch_warnings('ignore', category=BiopythonWarning)
     def assemble(self, module, *modules, **kwargs):

@@ -15,7 +15,7 @@ from Bio.Seq import Seq
 
 from .._utils import classproperty
 from ._structured import StructuredRecord
-from ._utils import cutter_check
+from ._utils import cutter_check, add_as_source
 
 if typing.TYPE_CHECKING:
     from typing import Union             # noqa: F401
@@ -89,9 +89,10 @@ class AbstractModule(StructuredRecord):
 
         """
         if self.cutter.is_3overhang():
-            return self._match.group(2) + self._match.group(3)
+            start, end = self._match.span(2)[0], self._match.span(3)[1]
         else:
-            return self._match.group(1) + self._match.group(2)
+            start, end = self._match.span(1)[0], self._match.span(2)[1]
+        return add_as_source(self.record, (self.record << start)[:end - start])
 
 
 class Product(AbstractModule):
