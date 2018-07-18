@@ -28,11 +28,9 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_revcolor="#E72E00"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
-     rep_origin      14..996
-                     /label="2u ori"
-                     /note="yeast 2u plasmid origin of replication"
      rep_origin      14..976
-                     /label="2micron"
+                     /label="2µ ori"
+                     /note="yeast 2u plasmid origin of replication"
                      /ApEinfo_fwdcolor="#BDA661"
                      /ApEinfo_revcolor="#BDA661"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
