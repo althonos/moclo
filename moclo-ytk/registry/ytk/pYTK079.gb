@@ -36,8 +36,20 @@ FEATURES             Location/Qualifiers
                      width 5 offset 0"
      CDS             397..1425
                      /codon_start=1
-                     /gene="aph(4)-Ia"
-                     /product="aminoglycoside phosphotransferase from E. coli"
+                     /db_xref="GO:0000166"
+                     /db_xref="GO:0005524"
+                     /db_xref="GO:0016301"
+                     /db_xref="GO:0016740"
+                     /db_xref="GO:0016310"
+                     /db_xref="GO:0046677"
+                     /db_xref="InterPro:IPR011009"
+                     /db_xref="InterPro:IPR002575"
+                     /db_xref="PDB:3W0O"
+                     /db_xref="PFAM:PF01636"
+                     /db_xref="UniProtKB/Swiss-Prot:P00557"
+                     /EC_number="2.7.1.163"
+                     /gene="hph"
+                     /product="hygromycin-B kinase"
                      /label="HygR"
                      /note="confers resistance to hygromycin"
                      /translation="MGKKPELTATSVEKFLIEKFDSVSDLMQLSEGEESRAFSFDVGGR
@@ -47,8 +59,6 @@ FEATURES             Location/Qualifiers
                      FGDSQYEVANIFFWRPWLACMEQQTRYFERRHPELAGSPRLRAYMLRIGLDQLYQSLVD
                      GNFDDAAWAQGRCDAIVRSGAGTVGRTQIARRSAAVWTDGCVEVLADSGNRRPSTRPRA
                      KE"
-     CDS             397..1425
-                     /label="HPH (Hygromycin Phosphotransferase)"
                      /ApEinfo_fwdcolor="#BAC9FF"
                      /ApEinfo_revcolor="#BAC9FF"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
