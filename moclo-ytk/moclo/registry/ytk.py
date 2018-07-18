@@ -2,6 +2,8 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
+import six
+
 from ..kits import ytk
 from .base import EmbeddedRegistry
 
@@ -9,7 +11,15 @@ from .base import EmbeddedRegistry
 class YTKRegistry(EmbeddedRegistry):
 
     _module = __name__
-    _file = "ytk.inv"
+    _file = "ytk.json"
+
+    _antibio = {
+        'CmR': 'Chloramphenicol',
+        'AmpR': 'Ampicillin',
+        'KanR': 'Kanamycin',
+        'SmR': 'Spectinomycin',
+    }
+
     _types = {
         '1': ytk.YTKPart1,
         '2': ytk.YTKPart2,
@@ -41,6 +51,25 @@ class YTKRegistry(EmbeddedRegistry):
 
     def _load_id(self, raw, index):
         return raw['record'].id
+
+    def _load_resistance(self, raw, index):
+        try:
+            gene = next(
+                f.qualifiers['label'][0] for f in raw['record'].features
+                if any(a in f.qualifiers.get('label', []) for a in self._antibio)
+            )
+            return self._antibio[gene]
+        except StopIteration:
+            msg = "could not find antibiotics resistance of '{}'"
+            six.raise_from(RuntimeError(msg.format(raw['record'].id)), None)
+        return raw['resistance']
+
+    def _load_entity(self, raw, index):
+        hint = next(c for c in raw['record'].annotations['comment']
+                    if c.startswith('YTK:'))
+        raw['record'].annotations['comment'].remove(hint)
+        _, type_ = hint.strip().split(':', 1)
+        return self._types[_type](raw['record'])
 
     def _load_location(self, raw, index):
         x, y = index % 12, index // 12

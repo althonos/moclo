@@ -1,0 +1,140 @@
+LOCUS       pYTK029                 2421 bp    ds-DNA  circular SYN 10-JAN-2018
+DEFINITION  pMF_2.
+ACCESSION   pYTK029
+VERSION     pYTK029
+KEYWORDS    pYTK029.
+SOURCE      synthetic DNA construct
+  ORGANISM  synthetic DNA construct
+            .
+REFERENCE   1  (bases 1 to 2421)
+  AUTHORS   Lee ME, DeLoache WC, Cervantes B, Dueber JE
+  TITLE     A Highly-characterized Yeast Toolkit for Modular, Multi-part
+            Assembly.
+  JOURNAL   ACS Synth Biol. 2015 Apr 14.
+   PUBMED   25871405
+REFERENCE   2  (bases 1 to 2421)
+  AUTHORS   Larralde M
+  TITLE     Direct Submission
+  JOURNAL   Distributed with the MoClo Python library
+            https://github.com/althonos/moclo
+COMMENT     YTK:2
+FEATURES             Location/Qualifiers
+     source          1..2421
+                     /organism="synthetic DNA construct"
+                     /mol_type="other DNA"
+     protein_bind    join(3..8,10..13)
+                     /label="BsaI"
+                     /ApEinfo_fwdcolor="#00FF2C"
+                     /ApEinfo_revcolor="#E72E00"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     promoter        14..763
+                     /label="ScMF(alpha)2 Promoter"
+                     /ApEinfo_fwdcolor="#00A1EE"
+                     /ApEinfo_revcolor="#00A1EE"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     protein_bind    complement(join(769..772,774..779))
+                     /label="BsaI(1)"
+                     /ApEinfo_label="BsaI"
+                     /ApEinfo_fwdcolor="#00FF2C"
+                     /ApEinfo_revcolor="#E72E00"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     terminator      complement(782..890)
+                     /label="CmR Terminator"
+                     /ApEinfo_fwdcolor="#66CCFF"
+                     /ApEinfo_revcolor="#66CCFF"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     terminator      786..820
+                     /label="lambda t0 terminator"
+                     /note="minimal transcription terminator from phage lambda
+                     (Scholtissek and Grosse, 1987)"
+     CDS             complement(891..1550)
+                     /codon_start=1
+                     /gene="cat"
+                     /product="chloramphenicol acetyltransferase"
+                     /label="CmR"
+                     /note="confers resistance to chloramphenicol"
+                     /translation="MEKKITGYTTVDISQWHRKEHFEAFQSVAQCTYNQTVQLDITAFL
+                     KTVKKNKHKFYPAFIHILARLMNAHPEFRMAMKDGELVIWDSVHPCYTVFHEQTETFSS
+                     LWSEYHDDFRQFLHIYSQDVACYGENLAYFPKGFIENMFFVSANPWVSFTSFDLNVANM
+                     DNFFAPVFTMGKYYTQGDKVLMPLAIQVHHAVCDGFHVGRMLNELQQYCDEWQGGA"
+                     /ApEinfo_fwdcolor="#0000FF"
+                     /ApEinfo_revcolor="#0000FF"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+                     /EC_number="2.3.1.28"
+                     /db_xref="UniProtKB/Swiss-Prot:P62577"
+                     /db_xref="GO:0008811"
+                     /db_xref="GO:0016740"
+                     /db_xref="GO:0016746"
+                     /db_xref="GO:0046677"
+                     /db_xref="PFAM:PF00302"
+     primer_bind     1465..1484
+                     /label="CAT-R"
+                     /note="Chloramphenicol resistance gene, reverse primer"
+     promoter        complement(1551..1655)
+                     /label="CmR Promoter"
+                     /ApEinfo_fwdcolor="#66CCFF"
+                     /ApEinfo_revcolor="#66CCFF"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     rep_origin      complement(1656..2419)
+                     /label="ColE1"
+                     /ApEinfo_fwdcolor="#7F7F7F"
+                     /ApEinfo_revcolor="#7F7F7F"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     rep_origin      1732..2320
+                     /direction=RIGHT
+                     /label="ori"
+                     /note="high-copy-number ColE1/pMB1/pBR322/pUC origin of
+                     replication"
+     primer_bind     2221..2240
+                     /label="pBR322ori-F"
+                     /note="pBR322 origin, forward primer"
+ORIGIN
+        1 tcggtctcaa acgttgatct gccttttata gctaagaaaa aaaaagagaa aaaaataata
+       61 agtgcgggta acctcatgca ttgtaaaacg gtagggctac aaggcactac ttactctacg
+      121 ctatagaaga agcttcaaga catggtgttg ttcttatttg agcgaactca gctgtcaccg
+      181 tttcgggaaa ctctatagtt ttctgcgttt cagtacgcag ttgggcgtgc taaagttgtt
+      241 ttcctaattt gctagtgttc acttgctcat tgatgtccct aaaaggtaat gtcgcatagt
+      301 aagatgtatg tcccatatca aacgcattcc tagaaaaaca tgcactgaat gaataagcag
+      361 ttacttcgat tactaatctt cacagcataa tttttctctt atcttgtaaa cctctttcta
+      421 tcttttcata aagtttgtca cttatatttc ttcattggta catcaatgcc agcaacgatg
+      481 tgcgcatctg ggcgacgcct gtagtgattg ttttcaaggt atcgagccaa actattcatc
+      541 gttactgttt caaatattca gttgtttcag tacagagtcg ccgtggacct agtgaaactt
+      601 ggtgtcttta cagcgcagag atgagggctt atatgtataa aagctgtcct tgattctggt
+      661 gtagtttgag gtgtccttcc tatatctgtt tttatattct atataatgga taattactac
+      721 catcacctgc atcaaattcc agtaaattca catattggag aaaagatcta tgtgagacca
+      781 gaccaataaa aaacgcccgg cggcaaccga gcgttctgaa caaatccaga tggagttctg
+      841 aggtcattac tggatctatc aacaggagtc caagcgagct cgatatcaaa ttacgccccg
+      901 ccctgccact catcgcagta ctgttgtaat tcattaagca ttctgccgac atggaagcca
+      961 tcacaaacgg catgatgaac ctgaatcgcc agcggcatca gcaccttgtc gccttgcgta
+     1021 taatatttgc ccatggtgaa aacgggggcg aagaagttgt ccatattggc cacgtttaaa
+     1081 tcaaaactgg tgaaactcac ccagggattg gctgaaacga aaaacatatt ctcaataaac
+     1141 cctttaggga aataggccag gttttcaccg taacacgcca catcttgcga atatatgtgt
+     1201 agaaactgcc ggaaatcgtc gtggtattca ctccagagcg atgaaaacgt ttcagtttgc
+     1261 tcatggaaaa cggtgtaaca agggtgaaca ctatcccata tcaccagctc accgtctttc
+     1321 attgccatac gaaattccgg atgagcattc atcaggcggg caagaatgtg aataaaggcc
+     1381 ggataaaact tgtgcttatt tttctttacg gtctttaaaa aggccgtaat atccagctga
+     1441 acggtctggt tataggtaca ttgagcaact gactgaaatg cctcaaaatg ttctttacga
+     1501 tgccattggg atatatcaac ggtggtatat ccagtgattt ttttctccat tttagcttcc
+     1561 ttagctcctg aaaatctcga taactcaaaa aatacgcccg gtagtgatct tatttcatta
+     1621 tggtgaaagt tggaacctct tacgtgcccg atcaatcatg accaaaatcc cttaacgtga
+     1681 gttttcgttc cactgagcgt cagaccccgt agaaaagatc aaaggatctt cttgagatcc
+     1741 tttttttctg cgcgtaatct gctgcttgca aacaaaaaaa ccaccgctac cagcggtggt
+     1801 ttgtttgccg gatcaagagc taccaactct ttttccgaag gtaactggct tcagcagagc
+     1861 gcagatacca aatactgttc ttctagtgta gccgtagtta ggccaccact tcaagaactc
+     1921 tgtagcaccg cctacatacc tcgctctgct aatcctgtta ccagtggctg ctgccagtgg
+     1981 cgataagtcg tgtcttaccg ggttggactc aagacgatag ttaccggata aggcgcagcg
+     2041 gtcgggctga acggggggtt cgtgcacaca gcccagcttg gagcgaacga cctacaccga
+     2101 actgagatac ctacagcgtg agctatgaga aagcgccacg cttcccgaag ggagaaaggc
+     2161 ggacaggtat ccggtaagcg gcagggtcgg aacaggagag cgcacgaggg agcttccagg
+     2221 gggaaacgcc tggtatcttt atagtcctgt cgggtttcgc cacctctgac ttgagcgtcg
+     2281 atttttgtga tgctcgtcag gggggcggag cctatggaaa aacgccagca acgcggcctt
+     2341 tttacggttc ctggcctttt gctggccttt tgctcacatg ttctttcctg cgttatcccc
+     2401 tgattctgtg gataaccgta g
+//
