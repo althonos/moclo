@@ -14,5 +14,5 @@ def _import_from(*names):
     raise ImportError('no module found among: {}'.format(', '.join(names)))
 
 
+bz2 = _import_from('bz2file', 'bz2')
 json = _import_from('ujson', 'yajl', 'simplejson', 'json')
-lzma = _import_from('lzma', 'backports.lzma')

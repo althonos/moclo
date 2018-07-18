@@ -12,7 +12,7 @@ import cached_property
 import pkg_resources
 import six
 
-from .._impl import json, lzma
+from .._impl import bz2, json
 from ..record import CircularRecord
 from ..core import AbstractModule, AbstractVector
 
@@ -81,7 +81,7 @@ class EmbeddedRegistry(AbstractRegistry):
     @cached_property.cached_property
     def _data(self):
         with pkg_resources.resource_stream(self._module, self._file) as rs:
-            with lzma.open(rs) as decomp:
+            with bz2.open(rs) as decomp:
                 raw_data = json.load(decomp)
 
         for raw in raw_data:
