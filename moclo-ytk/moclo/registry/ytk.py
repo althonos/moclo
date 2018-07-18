@@ -11,7 +11,7 @@ from .base import EmbeddedRegistry
 class YTKRegistry(EmbeddedRegistry):
 
     _module = __name__
-    _file = "ytk.json"
+    _file = "ytk.json.bz2"
 
     _antibio = {
         'CmR': 'Chloramphenicol',
@@ -65,11 +65,12 @@ class YTKRegistry(EmbeddedRegistry):
         return raw['resistance']
 
     def _load_entity(self, raw, index):
-        hint = next(c for c in raw['record'].annotations['comment']
-                    if c.startswith('YTK:'))
-        raw['record'].annotations['comment'].remove(hint)
+        comments = raw['record'].annotations['comment'].splitlines()
+        hint = next(c for c in comments if c.startswith('YTK:'))
+        comments.remove(hint)
+        raw['record'].annotations['comment'] = "\n".join(comments)
         _, type_ = hint.strip().split(':', 1)
-        return self._types[_type](raw['record'])
+        return self._types[type_](raw['record'])
 
     def _load_location(self, raw, index):
         x, y = index % 12, index // 12
