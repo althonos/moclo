@@ -1,4 +1,33 @@
 # coding: utf-8
+"""Yeast ToolKit and Pichia ToolKit sequences registry.
+
+Yeast ToolKit:
+    Sequences were obtained from two different AddGene sources:
+    * The YTK plasmid files distributed with the kit in a zip archive,
+      available under the *Protocol & Resources* tab of the YTK repository.
+    * The individual plasmid files from their dedicated AddGene webpages,
+      using the *full depositor* sequences.
+
+    Records were then merged using a Python script and ``biopython``; details
+    can be found in the history of the ``git`` repository. Some annotations
+    were also added to common genes and sequences (such as the Chloramphenicol
+    resistance cassette `CmR <https://www.uniprot.org/uniprot/P62577>`_, or
+    the `H4 ARS consensus <https://www.yeastgenome.org/locus/ARS209>`_).
+    Duplicated features refering to the same location were merged directly,
+    and duplicated features with unidentical locations were manually reviewed.
+
+Pichia ToolKit:
+    Sequences were obtained from two different AddGene sources:
+    * The PTK plasmid files available on each AddGene plasmid webpage as
+      *Supplemental Documents*
+    * The indiviual plasmid files from their dedicated AddGene webpages,
+      using the *full AddGene* sequences.
+
+    Since both sequences did not share the same origins, plasmids were rotated
+    for the upstream *BsaI* recognition site to span on nucleotides 3 to 11,
+    in order for the PTK plasmids to be organized like the YTK plasmids.
+
+"""
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
