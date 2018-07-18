@@ -22,15 +22,15 @@ class Registry(distutils.core.Extension):
 
 class build_ext(_build_ext):
 
-    def build_extension(self, ext):
+    def get_ext_filename(self, ext_name):
+        return os.path.join(*ext_name.split('.')) + '.json.bz2'
 
-        if not isinstance(ext, Registry):
-            return _build_ext.build_extension(ext)
+    def build_extension(self, ext):
 
         registry = []
         gb_dir = os.path.dirname(ext.sources[0])
-        dst_dir = os.path.dirname(self.get_ext_fullpath(ext.name))
-        dst_file = os.path.join(dst_dir, '{}.json.bz2').format(ext.name)
+        dst_file = self.get_ext_fullpath(ext.name)
+        dst_dir = os.path.dirname(dst_file)
 
         self.announce('collecting records from {}'.format(gb_dir), 2)
         for gb_file in sorted(ext.sources):
@@ -38,6 +38,7 @@ class build_ext(_build_ext):
             with open(gb_file) as gb_rec:
                 registry.append({'id': id_, 'gb': gb_rec.read()})
 
+        self.mkpath(dst_dir)
         self.announce('writing {} records to {}'.format(len(registry), dst_file), 2)
         with bz2.open(dst_file, 'wt') as reg:
             json.dump(registry, reg)
