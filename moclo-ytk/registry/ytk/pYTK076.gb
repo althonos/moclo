@@ -39,17 +39,29 @@ FEATURES             Location/Qualifiers
                      /label="HIS3 promoter"
      CDS             251..913
                      /codon_start=1
-                     /gene="S. cerevisiae HIS3"
-                     /product="imidazoleglycerol-phosphate dehydratase, required
-                     for histidine biosynthesis"
+                     /db_xref="GO:0004424"
+                     /db_xref="GO:0016829"
+                     /db_xref="GO:0000105"
+                     /db_xref="GO:0008652"
+                     /db_xref="GO:0005575"
+                     /db_xref="InterPro:IPR038494"
+                     /db_xref="InterPro:IPR000807"
+                     /db_xref="InterPro:IPR020565"
+                     /db_xref="InterPro:IPR020568"
+                     /db_xref="PFAM:PF00475"
+                     /db_xref="SGD:S000005728"
+                     /db_xref="PDB:6EZM"
+                     /db_xref="UniProtKB/Swiss-Prot:P06633"
+                     /EC_number="4.2.1.19"
+                     /gene="HIS3"
+                     /product="imidazoleglycerol-phosphate dehydratase"
+                     /function="histidine biosynthesis"
                      /label="HIS3"
                      /note="yeast auxotrophic marker"
                      /translation="MTEQKALVKRITNETKIQIAISLKGGPLAIEHSIFPEKEAEAVAE
                      QATQSQVINVHTGIGFLDHMIHALAKHSGWSLIVECIGDLHIDDHHTTEDCGIALGQAF
                      KEALGAVRGVKRFGSGFAPLDEALSRAVVDLSNRPYAVVELGLQREKVGDLSCEMIPHF
                      LESFAEASRITLHVDCLRGKNDHHRSESAFKALAVAIREATSPNGTNDVPSTKGVLM"
-     CDS             251..913
-                     /label="HIS3"
                      /ApEinfo_fwdcolor="#d455ac"
                      /ApEinfo_revcolor="green"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
