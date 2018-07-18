@@ -35,14 +35,34 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      promoter        254..661
-                     /gene="S. cerevisiae LEU2"
+                     /gene="LEU2"
                      /label="LEU2 promoter"
      CDS             662..1756
                      /codon_start=1
-                     /gene="S. cerevisiae LEU2"
-                     /product="3-isopropylmalate dehydrogenase, required for
-                     leucine biosynthesis"
-                     /label="LEU2"
+                     /db_xref="GO:0000287"
+                     /db_xref="GO:0003862"
+                     /db_xref="GO:0005737"
+                     /db_xref="GO:0005829"
+                     /db_xref="GO:0006097"
+                     /db_xref="GO:0008652"
+                     /db_xref="GO:0009082"
+                     /db_xref="GO:0009098"
+                     /db_xref="GO:0016491"
+                     /db_xref="GO:0016616"
+                     /db_xref="GO:0046872"
+                     /db_xref="GO:0051287"
+                     /db_xref="GO:0055114"
+                     /db_xref="IntePro:IPR019818"
+                     /db_xref="IntePro:IPR024084"
+                     /db_xref="IntePro:IPR004429"
+                     /db_xref="SGD:S000000523"
+                     /db_xref="PFAM:PF00180"
+                     /db_xref="UniProtKB/Swiss-Prot:P04173"
+                     /EC_number="1.1.1.85"
+                     /gene="LEU2"
+                     /standard_name="LEU2"
+                     /product="3-isopropylmalate dehydrogenase"
+                     /function="leucine biosynthesis"
                      /note="yeast auxotrophic marker"
                      /translation="MSAPKKIVVLPGDHVGQEITAEAIKVLKAISDVRSNVKFDFENHL
                      IGGAAIDATGVPLPDEALEASKKADAVLLGAVGGPKWGTGSVRPEQGLLKIRKELQLYA
@@ -51,14 +71,14 @@ FEATURES             Location/Qualifiers
                      LIDSAAMILVKNPTHLNGIIITSNMFGDIISDEASVIPGSLGLLPSASLASLPDKNTAF
                      GLYEPCHGSAPDLPKNKVNPIATILSAAMMLKLSLNLPEEGKAIEDAVKKVLDAGIRTG
                      DLGGSNSTTEVGDAVAEEVKKILA"
-     CDS             662..1756
-                     /label="LEU2"
                      /ApEinfo_fwdcolor="#7cff8c"
                      /ApEinfo_revcolor="green"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      terminator      1757..1930
-                     /label="AgLEU2 Terminator"
+                     /label="LEU2 Terminator"
+                     /note="LEU2 terminator from A. gossypii"
+                     /gene="LEU2"
                      /ApEinfo_fwdcolor="#BAFFA6"
                      /ApEinfo_revcolor="#BAFFA6"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
