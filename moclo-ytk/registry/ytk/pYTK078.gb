@@ -46,8 +46,6 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_revcolor="#B29990"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
-     terminator      974..1171
-                     /label="TEF terminator"
                      /note="Ashbya gossypii TEF terminator"
      protein_bind    complement(join(1172..1175,1177..1182))
                      /label="BsaI(1)"
