@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# Genbank compressed registries
+**/registry/**/*.json.bz2
+
 # Distribution / packaging
 .Python
 env/
