@@ -28,22 +28,27 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_revcolor="#E72E00"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
-     misc_feature    14..517
-                     /label="CEN/ARS"
-                     /note="S. cerevisiae CEN6 centromere fused to an
-                     autonomously replicating sequence"
-     rep_origin      14..130
+     centromere      14..131
                      /label="CEN6"
+                     /standard_name="CEN6"
+                     /db_xref="SGD:S000001896"
                      /ApEinfo_fwdcolor="#BDA661"
                      /ApEinfo_revcolor="#BDA661"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
-     rep_origin      131..521
-                     /label="ARS4"
+     rep_origin      132..521
                      /ApEinfo_fwdcolor="#9A969B"
                      /ApEinfo_revcolor="#9A969B"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
+                     /label="H4 ARS"
+                     /note="S. cerevisiae autonomously replicating sequence"
+     rep_origin      354..439
+                     /label="H4 ARS consensus"
+                     /standard_name="ARS209"
+                     /db_xref="SGD:S000114517"
+                     /ApEinfo_fwdcolor="#9A969B"
+                     /ApEinfo_revcolor="#9A969B"
      protein_bind    complement(join(522..525,527..532))
                      /label="BsaI(1)"
                      /ApEinfo_label="BsaI"
