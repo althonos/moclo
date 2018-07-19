@@ -81,7 +81,7 @@ class EmbeddedRegistry(AbstractRegistry):
     @cached_property.cached_property
     def _data(self):
         with pkg_resources.resource_stream(self._module, self._file) as rs:
-            with bz2.BZ2File(rs) as decomp:
+            with io.TextIOWrapper(bz2.BZ2File(rs)) as decomp:
                 raw_data = json.load(decomp)
 
         for raw in raw_data:

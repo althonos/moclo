@@ -39,9 +39,13 @@ moclo.kits.__path__.append(os.path.join(project_dir, 'moclo-ytk', 'moclo', 'kits
 
 # -- Files setup -------------------------------------------------------------
 
+from _scripts import ytk_parts, ytk_registries
+
 # Generate SVG files from template SVG
-from _scripts import ytk_parts
 ytk_parts.generate_svg()
+
+# Force `build_ext --inplace` in `moclo-ytk`
+ytk_registries.build_registries()
 
 # with open(os.path.join(project_dir, "CHANGELOG.rst"), 'rb') as src:
 #     with open(os.path.join(docsrc_dir, "changelog.rst"), 'wb') as dst:
