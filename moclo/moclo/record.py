@@ -146,11 +146,14 @@ class CircularRecord(SeqRecord):
         }
 
         for feature in self.features:
-            if feature.location is None:
+            loc = feature.location
+            if loc is None:
                 newloc = None
+            elif feature.type == "source" and loc.start == 0 and loc.end == len(self):
+                newloc = loc
             else:
                 _newloc = []
-                for part in (feature.location + index).parts:
+                for part in (loc + index).parts:
                     if part.end >= len(newseq) and part.start >= len(newseq):
                         r = part.start // len(newseq)             # remainder is used to
                         _newloc.append(FeatureLocation(           # make sure that part.end
