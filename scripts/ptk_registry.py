@@ -46,23 +46,24 @@ UA = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)
 
 
 COLOR_REGEX = re.compile(r"color: (#[0-9a-fA-F]{6})")
+
+
 def translate_color(feature):
-    notes = feature.qualifiers.get('note', [])
-    color_note = next((n for n in notes if n.startswith('color: #')), None)
+    notes = feature.qualifiers.get("note", [])
+    color_note = next((n for n in notes if n.startswith("color: #")), None)
 
     if color_note is None:
         return
 
     hex_color = COLOR_REGEX.match(color_note).group(1).lower()
-    feature.qualifiers['note'].remove(color_note)
-    feature.qualifiers.update({
-        'ApEinfo_fwdcolor': [hex_color],
-        'ApEinfo_revcolor': [hex_color],
-        'ApEinfo_graphicformat': ["arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0"],
-    })
-
-
-
+    feature.qualifiers["note"].remove(color_note)
+    feature.qualifiers.update(
+        {
+            "ApEinfo_fwdcolor": [hex_color],
+            "ApEinfo_revcolor": [hex_color],
+            "ApEinfo_graphicformat": ["arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0"],
+        }
+    )
 
 
 if __name__ == "__main__":
@@ -161,7 +162,6 @@ if __name__ == "__main__":
         # Add reversed BsaI site
         BsaI_site_r = Seq(BsaI.site).reverse_complement()
         pos = (gba.seq + gba.seq).find(BsaI_site_r)
-
         features.append(
             SeqFeature(
                 type="protein_bind",
@@ -226,8 +226,8 @@ if __name__ == "__main__":
             p1.qualifiers.update(
                 {
                     "label": ["PpAOX1 Promoter"],
-                    'gene': ['Pichia pastoris AOX1'],
-                    'function': ['methanol inducible promoter'],
+                    "gene": ["Pichia pastoris AOX1"],
+                    "function": ["methanol inducible promoter"],
                     "note": [
                         "promoter for Pichia pastoris alcohol oxydase",
                         "color: #00a1ee; direction: RIGHT",
@@ -243,7 +243,7 @@ if __name__ == "__main__":
                 {
                     "label": ["PpGAP Promoter"],
                     "gene": ["Pichia pastoris GAP"],
-                    'function': ['glucose inducible promoter'],
+                    "function": ["glucose inducible promoter"],
                     "note": [
                         "promoter for Pichia pastoris glyceraldehyde-3-phosphate dehydrogenase",
                         "color: #00a1ee; direction: RIGHT",
@@ -251,74 +251,108 @@ if __name__ == "__main__":
                 }
             )
 
-        elif id_ == 'pPTK003':
-            pENO = next(f for f in features if 'pENO' in f.qualifiers.get('note', []))
-            pENO.type = 'promoter'
+        elif id_ == "pPTK003":
+            pENO = next(f for f in features if "pENO" in f.qualifiers.get("note", []))
+            pENO.type = "promoter"
             pENO.qualifiers = {
-                'label': ['PpENO1 Promoter'],
-                'gene': ['Pichia pastoris ENO1'],
-                'function': ['hypoxia inducible promoter'],
-                'note': [
-                    'promoter for Pichia pastoris alpha-enolase',
+                "label": ["PpENO1 Promoter"],
+                "gene": ["Pichia pastoris ENO1"],
+                "function": ["hypoxia inducible promoter"],
+                "note": [
+                    "promoter for Pichia pastoris alpha-enolase",
                     "color: #00a1ee; direction: RIGHT",
-                ]
+                ],
             }
 
-        elif id_ == 'pPTK004':
-            pTP1 = next(f for f in features if 'TPI1' in f.qualifiers.get('note', []))
+        elif id_ == "pPTK004":
+            pTP1 = next(f for f in features if "TPI1" in f.qualifiers.get("note", []))
             pTP1.qualifiers = {
-                'label': ['PpTPI1 Promoter'],
-                'gene': ['Pichia pastoris TPI1'],
-                'function': ['strong constitutive promoter'],
-                'note': [
-                    'promoter for Pichia pastoris triose-phosphate isomerase',
+                "label": ["PpTPI1 Promoter"],
+                "gene": ["Pichia pastoris TPI1"],
+                "function": ["strong constitutive promoter"],
+                "note": [
+                    "promoter for Pichia pastoris triose-phosphate isomerase",
                     "color: #00a1ee; direction: RIGHT",
-                ]
+                ],
             }
 
-        elif id_ == 'pPTK005':
-            a1 = next(f for f in features if 'alpha-factor secretion signal' in f.qualifiers.get('note', []))
-            a2 = next(get_features('-alpha-factor secretion signal'))
+        elif id_ == "pPTK005":
+            a1 = next(
+                f
+                for f in features
+                if "alpha-factor secretion signal" in f.qualifiers.get("note", [])
+            )
+            a2 = next(get_features("-alpha-factor secretion signal"))
             features.remove(a1)
             start = a2.location.start
-            a2.location = CompoundLocation([
-                FeatureLocation(start, start+57, 1),
-                FeatureLocation(start+57, start+57+198, 1),
-                FeatureLocation(start+57+198, start+57+198+12, 1),
-            ])
+            a2.location = CompoundLocation(
+                [
+                    FeatureLocation(start, start + 57, 1),
+                    FeatureLocation(start + 57, start + 57 + 198, 1),
+                    FeatureLocation(start + 57 + 198, start + 57 + 198 + 12, 1),
+                ]
+            )
             # QUESTION: CDS or sig_peptide ?
-            #a2.type = 'sig_peptide'
-            a2.qualifiers.update({
-                'codon_start': ['1'],
-                'direction': ['RIGHT'],
-                'label': ['alpha-factor secretion signal'],
-                'gene': ['S. cerevisiae MF-alpha-1'],
-                'product': ['alpha-factor secretion signal'],
-                'note': ['Cleavage by the Kex2 protease occurs after the '
-                        'dibasic KR sequence. The EA dipeptides are then '
-                        'removed by dipeptidyl aminopeptidase A.',
-                        'color: #ffcbbf; direction: RIGHT'],
-            })
+            # a2.type = 'sig_peptide'
+            a2.qualifiers.update(
+                {
+                    "codon_start": ["1"],
+                    # 'direction': ['RIGHT'],
+                    "label": ["alpha-MF"],
+                    "gene": ["S. cerevisiae MF-alpha-1"],
+                    "product": ["alpha-factor secretion signal"],
+                    "note": [
+                        "Cleavage by the Kex2 protease occurs after the "
+                        "dibasic KR sequence. The EA dipeptides are then "
+                        "removed by dipeptidyl aminopeptidase A.",
+                        "color: #ffcbbf; direction: RIGHT",
+                    ],
+                }
+            )
 
-        elif id_ == 'pPTK006':
-            a1 = next(f for f in features if 'alpha-factor secretion signal' in f.qualifiers.get('note', []))
+        elif id_ == "pPTK006":
+            a1 = next(
+                f
+                for f in features
+                if "alpha-factor secretion signal" in f.qualifiers.get("note", [])
+            )
             start = a1.location.start
-            a1.location = CompoundLocation([
-                FeatureLocation(start, start+57, 1),
-                FeatureLocation(start+57, start+57+198, 1),
-            ])
+            a1.location = CompoundLocation(
+                [
+                    FeatureLocation(start, start + 57, 1),
+                    FeatureLocation(start + 57, start + 57 + 198, 1),
+                ]
+            )
             # QUESTION: CDS or sig_peptide ?
-            #a1.type = 'sig_peptide'
-            a1.qualifiers.update({
-                'codon_start': ['1'],
-                'direction': ['RIGHT'],
-                'label': ['alpha-factor secretion signal'],
-                'gene': ['S. cerevisiae MF-alpha-1'],
-                'product': ['alpha-factor secretion signal'],
-                'note': ['Cleavage by the Kex2 protease occurs after the '
-                        'dibasic KR sequence.',
-                        'color: #ffcbbf; direction: RIGHT'],
-            })
+            # a1.type = 'sig_peptide'
+            a1.qualifiers.update(
+                {
+                    "codon_start": ["1"],
+                    # 'direction': ['RIGHT'],
+                    "label": ["alpha-MF (no EAEA)"],
+                    "gene": ["S. cerevisiae MF-alpha-1"],
+                    "product": ["alpha-factor secretion signal"],
+                    "note": [
+                        "Cleavage by the Kex2 protease occurs after the " "dibasic KR sequence.",
+                        "color: #ffcbbf; direction: RIGHT",
+                    ],
+                }
+            )
+
+        elif id_ == "pPTK007":
+            ad = next(f for f in features if "Alpha" in f.qualifiers.get("note", []))
+            # QUESTION: CDS or sig_peptide ?
+            ad.type = "CDS"
+            ad.qualifiers.update(
+                {
+                    "codon_start": ["1"],
+                    # 'direction': ['RIGHT'],
+                    "label": ["alpha-MF-delta"],
+                    "gene": ["S. cerevisiae MF-alpha-1"],
+                    "product": ["alpha-factor shortened secretion signal"],
+                    "note": ["color: #ffcbbf; direction: RIGHT"],
+                }
+            )
 
         if any(get_features("EGFP")):
             egfp1 = next(f for f in features if "EGFP" in f.qualifiers.get("note", []))
@@ -377,23 +411,25 @@ if __name__ == "__main__":
 
         if any("PARS-1" in f.qualifiers.get("note", []) for f in features):
             pars = next(f for f in features if "PARS-1" in f.qualifiers.get("note", []))
-            pars.type = 'rep_origin'
-            pars.qualifiers['label'] = ['PARS-1']
-            pars.qualifiers['note'] = ['color: #9A969B']
+            pars.type = "rep_origin"
+            pars.qualifiers["label"] = ["PARS-1"]
+            pars.qualifiers["note"] = ["color: #9A969B"]
 
-        if any(get_features('AOX1 terminator')):
-            t1 = next(f for f in features if 'AOX1 terminator' in f.qualifiers.get("note", []))
-            t2 = next(get_features('AOX1 terminator'))
+        if any(get_features("AOX1 terminator")):
+            t1 = next(f for f in features if "AOX1 terminator" in f.qualifiers.get("note", []))
+            t2 = next(get_features("AOX1 terminator"))
             features.remove(t2)
-            t1.qualifiers.update({
-                'note': ['transcription terminator for AOX1', 'color: #ff8eff'],
-                'label': ['PpAOX1 Terminator'],
-            })
-
-
+            t1.qualifiers.update(
+                {
+                    "note": ["transcription terminator for AOX1", "color: #ff8eff"],
+                    "label": ["PpAOX1 Terminator"],
+                }
+            )
 
         # sort features
-        features.sort(key=lambda feat: -1 if feat.type == "source" else feat.location.start)
+        features.sort(
+            key=lambda feat: (-len(gba.seq)) * (feat.type == "source") + feat.location.start
+        )
 
         # translate color from notes to ApEinfo
         for feature in features:
@@ -409,7 +445,7 @@ if __name__ == "__main__":
         ref.journal = "Distributed with the MoClo Python library\nhttps://github.com/althonos/moclo"
 
         # Add the YTK type to the record comments
-        annotations['comments'] = ['YTK:{}'.format(type_)]
+        annotations["comments"] = ["YTK:{}".format(type_)]
 
         # create the final record
         final = CircularRecord(
