@@ -1,0 +1,430 @@
+#!/usr/bin/env python3
+# coding: utf-8
+"""Automatic PTK sequences annotation pipeline.
+
+Downloads depositor and AddGene full sequences from each PTK plasmid page,
+rotate the plasmids so that they have the same orientation as YTK official
+sequences, merge the two records, remove duplicated annotations, add BsaI
+sites as annotations, and then:
+
+Edits:
+- rename all chloramphenicol resistance associated sequences (promoter, CDS,
+  terminator) to use the same nomenclature and color scheme as the YTK records
+- improve annotations of pPTK001, pPKT002, pPTK003, pPTK004 (promoters) using
+  the same format, using '/label', '/function' and '/gene' and '/note' in a
+  standardized way.
+- change type of 'pENO1' to 'promoter' and use YTK color
+- set type of 'RFP' to CDS, remove duplicate annotaiton, add '/db_xref'
+  qualifiers with UniProt/GO/PFAM/PDB/InterPro, set '/gene' to 'mCherry'
+  (accepted name), use YTK color scheme
+-
+
+"""
+
+import copy
+import io
+import json
+import re
+import os
+import warnings
+import sys
+
+import tqdm
+import requests
+import bs4 as bs
+from Bio.Seq import Seq, translate
+from Bio.SeqFeature import SeqFeature, FeatureLocation, CompoundLocation
+from Bio.SeqIO import read, write
+from Bio.SeqRecord import SeqRecord
+from Bio.Restriction import BsaI
+
+from moclo.record import CircularRecord
+
+
+URL = "https://www.addgene.org/kits/sieber-moclo-pichia-toolkit/#protocols-and-resources"
+UA = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
+
+
+COLOR_REGEX = re.compile(r"color: (#[0-9a-fA-F]{6})")
+def translate_color(feature):
+    notes = feature.qualifiers.get('note', [])
+    color_note = next((n for n in notes if n.startswith('color: #')), None)
+
+    if color_note is None:
+        return
+
+    hex_color = COLOR_REGEX.match(color_note).group(1).lower()
+    feature.qualifiers['note'].remove(color_note)
+    feature.qualifiers.update({
+        'ApEinfo_fwdcolor': [hex_color],
+        'ApEinfo_revcolor': [hex_color],
+        'ApEinfo_graphicformat': ["arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0"],
+    })
+
+
+
+
+
+if __name__ == "__main__":
+
+    warnings.simplefilter("ignore")
+    session = requests.Session()
+
+    # load the kit inventory page
+    with session.get(URL) as res:
+        soup = bs.BeautifulSoup(res.text, "html.parser")
+
+    # load inventory
+    inventory = soup.find("table", class_="kit-inventory-table")
+    for row in tqdm.tqdm(inventory.find_all("tr")[1:]):
+
+        # extract each row
+        row_text = row.find("a").text
+        id_, type_, name = map(str.strip, row_text.split("-", 2))
+        info = {
+            "resistance": row.find("span", class_="resistance-spacing").text,
+            "name": name,
+            "id": id_,
+            "type": type_,
+            "location": row.find("b").text.strip().replace(" / ", ""),
+            "addgene_id": row.find("a").get("href").strip("/"),
+        }
+
+        # get the AddGene sequences page
+        url = "https://www.addgene.org/{}/sequences/".format(info["addgene_id"])
+        with session.get(url) as res:
+            soup = bs.BeautifulSoup(res.text, "html.parser")
+
+        # get the addgene full sequence
+        section = soup.find("section", id="addgene-full")
+        gb_url = section.find("a", class_="genbank-file-download").get("href")
+        with requests.get(gb_url) as res:
+            gbd = info["gb_depositor"] = CircularRecord(read(io.StringIO(res.text), "gb"))
+
+        # get the AddGene plasmid page
+        url = "https://www.addgene.org/{}/".format(info["addgene_id"])
+        with session.get(url) as res:
+            soup = bs.BeautifulSoup(res.text, "html.parser")
+
+        # get the deposited record
+        section = soup.find("ul", class_="addgene-document-list")
+        gb_url = section.find("a").get("href")
+        with requests.get(gb_url) as res:
+            gba = info["gb_addgene"] = CircularRecord(read(io.StringIO(res.text), "gb"))
+
+        # Sanity check
+        if len(gba) != len(gbd):
+            raise RuntimeError("sequences do not have the same length")
+        if gba.seq not in (gbd.seq + gbd.seq):
+            gbd = gbd.reverse_complement(id=True, name=True, annotations=True)
+        if gba.seq not in (gbd.seq + gbd.seq):
+            raise RuntimeError("sequences differ")
+
+        # put the BsaI on 3..13 bases via plasmid rotation
+        gba_bsa = (gba.seq + gba.seq).find(BsaI.site)
+        gbd_bsa = (gbd.seq + gbd.seq).find(BsaI.site)
+        if gba_bsa < 0:
+            raise RuntimeError("no BsaI site found in gba !")
+        if gbd_bsa < 0:
+            raise RuntimeError("no BsaI site found in gbd !")
+        gba <<= gba_bsa - 2
+        gbd <<= gbd_bsa - 2
+
+        # Check sequences are exactly the same so we don't fuck up features
+        if not gba.seq == gbd.seq:
+            raise RuntimeError("alignment failed")
+
+        # Fix duplicated features and add additional annotations
+        features = gba.features + gbd.features
+
+        def get_features(label):
+            return (f for f in features if label in f.qualifiers.get("label", []))
+
+        # Add direct BsaI site
+        features.append(
+            SeqFeature(
+                type="protein_bind",
+                qualifiers={
+                    "label": ["BsaI"],
+                    "bound_moiety": ["BsaI"],
+                    "note": ["color: #ff0000; direction: RIGHT"],
+                    # "note": ["This forward directional feature has 2 segments:\n"
+                    #          "1: 3 ..  8 / #ff0000\n"
+                    #          "2: 10 .. 13 / #ff0000\n"]
+                },
+                location=CompoundLocation(
+                    [FeatureLocation(2, 8, strand=1), FeatureLocation(9, 13, strand=1)]
+                ),
+            )
+        )
+
+        # Add reversed BsaI site
+        BsaI_site_r = Seq(BsaI.site).reverse_complement()
+        pos = (gba.seq + gba.seq).find(BsaI_site_r)
+
+        features.append(
+            SeqFeature(
+                type="protein_bind",
+                qualifiers={
+                    "label": ["BsaI(1)"],
+                    "bound_moiety": ["BsaI"],
+                    "note": ["color: #ff0000; direction: LEFT"],
+                    # "note": [("""This forward directional feature has 2 segments:
+                    #                  1: {} .. {} / #ff0000
+                    #                  2: {} .. {} / #ff0000
+                    #           """).format(pos+1, pos + 6, pos - 4, pos - 1)]
+                },
+                location=CompoundLocation(
+                    [
+                        FeatureLocation(pos, pos + 6, strand=-1),
+                        FeatureLocation(pos - 5, pos - 1, strand=-1),
+                    ]
+                ),
+            )
+        )
+
+        # Fix annotations of Chloramphenicol resistance cassette
+        camr, cmr = next(get_features("CamR")), next(get_features("CmR"))
+        features.remove(camr)
+        cmr.qualifiers.update({k: v for k, v in camr.qualifiers.items() if k not in cmr.qualifiers})
+        cmr.qualifiers.update(
+            {
+                "codon_start": [1],
+                "gene": ["cat"],
+                "product": ["chloramphenicol acetyltransferase"],
+                "label": ["CmR"],
+                "function": ["chloramphenicol resistance"],
+                "note": ["color: #0000ff; direction: LEFT"],
+                "EC_number": ["2.3.1.28"],
+                "db_xref": [
+                    "UniProtKB/Swiss-Prot:P62577",
+                    "GO:0008811",
+                    "GO:0016740",
+                    "GO:0016746",
+                    "GO:0046677",
+                    "PFAM:PF00302",
+                ],
+            }
+        )
+        cmr_prom = next(get_features("CamR Promoter"))
+        cmr_prom.qualifiers.update(
+            {"label": ["CmR Promoter"], "note": ["color: #66ccff; direction: LEFT"]}
+        )
+        cmr_term = next(get_features("CamR Terminator"))
+        cmr_term.qualifiers.update(
+            {"label": ["CmR Terminator"], "note": ["color: #66ccff; direction: LEFT"]}
+        )
+
+        # Make sure ColE1 is grayed
+        cole1 = next(get_features("ColE1"))
+        cole1.qualifiers["note"] = ["color: #7f7f7f"]
+
+        # plasmid-specific annotations
+        if id_ == "pPTK001":
+            p1, p2 = [f for f in features if any("AOX1" in l for l in f.qualifiers.get("gene", []))]
+            features.remove(p2)
+            p1.qualifiers.update(
+                {
+                    "label": ["PpAOX1 Promoter"],
+                    'gene': ['Pichia pastoris AOX1'],
+                    'function': ['methanol inducible promoter'],
+                    "note": [
+                        "promoter for Pichia pastoris alcohol oxydase",
+                        "color: #00a1ee; direction: RIGHT",
+                    ],
+                }
+            )
+
+        elif id_ == "pPTK002":
+            p1 = next(f for f in features if "GAP promoter" in f.qualifiers.get("note", []))
+            p2 = next(get_features("GAP promoter"))
+            features.remove(p2)
+            p1.qualifiers.update(
+                {
+                    "label": ["PpGAP Promoter"],
+                    "gene": ["Pichia pastoris GAP"],
+                    'function': ['glucose inducible promoter'],
+                    "note": [
+                        "promoter for Pichia pastoris glyceraldehyde-3-phosphate dehydrogenase",
+                        "color: #00a1ee; direction: RIGHT",
+                    ],
+                }
+            )
+
+        elif id_ == 'pPTK003':
+            pENO = next(f for f in features if 'pENO' in f.qualifiers.get('note', []))
+            pENO.type = 'promoter'
+            pENO.qualifiers = {
+                'label': ['PpENO1 Promoter'],
+                'gene': ['Pichia pastoris ENO1'],
+                'function': ['hypoxia inducible promoter'],
+                'note': [
+                    'promoter for Pichia pastoris alpha-enolase',
+                    "color: #00a1ee; direction: RIGHT",
+                ]
+            }
+
+        elif id_ == 'pPTK004':
+            pTP1 = next(f for f in features if 'TPI1' in f.qualifiers.get('note', []))
+            pTP1.qualifiers = {
+                'label': ['PpTPI1 Promoter'],
+                'gene': ['Pichia pastoris TPI1'],
+                'function': ['strong constitutive promoter'],
+                'note': [
+                    'promoter for Pichia pastoris triose-phosphate isomerase',
+                    "color: #00a1ee; direction: RIGHT",
+                ]
+            }
+
+        elif id_ == 'pPTK005':
+            a1 = next(f for f in features if 'alpha-factor secretion signal' in f.qualifiers.get('note', []))
+            a2 = next(get_features('-alpha-factor secretion signal'))
+            features.remove(a1)
+            start = a2.location.start
+            a2.location = CompoundLocation([
+                FeatureLocation(start, start+57, 1),
+                FeatureLocation(start+57, start+57+198, 1),
+                FeatureLocation(start+57+198, start+57+198+12, 1),
+            ])
+            # QUESTION: CDS or sig_peptide ?
+            #a2.type = 'sig_peptide'
+            a2.qualifiers.update({
+                'codon_start': ['1'],
+                'direction': ['RIGHT'],
+                'label': ['alpha-factor secretion signal'],
+                'gene': ['S. cerevisiae MF-alpha-1'],
+                'product': ['alpha-factor secretion signal'],
+                'note': ['Cleavage by the Kex2 protease occurs after the '
+                        'dibasic KR sequence. The EA dipeptides are then '
+                        'removed by dipeptidyl aminopeptidase A.',
+                        'color: #ffcbbf; direction: RIGHT'],
+            })
+
+        elif id_ == 'pPTK006':
+            a1 = next(f for f in features if 'alpha-factor secretion signal' in f.qualifiers.get('note', []))
+            start = a1.location.start
+            a1.location = CompoundLocation([
+                FeatureLocation(start, start+57, 1),
+                FeatureLocation(start+57, start+57+198, 1),
+            ])
+            # QUESTION: CDS or sig_peptide ?
+            #a1.type = 'sig_peptide'
+            a1.qualifiers.update({
+                'codon_start': ['1'],
+                'direction': ['RIGHT'],
+                'label': ['alpha-factor secretion signal'],
+                'gene': ['S. cerevisiae MF-alpha-1'],
+                'product': ['alpha-factor secretion signal'],
+                'note': ['Cleavage by the Kex2 protease occurs after the '
+                        'dibasic KR sequence.',
+                        'color: #ffcbbf; direction: RIGHT'],
+            })
+
+        if any(get_features("EGFP")):
+            egfp1 = next(f for f in features if "EGFP" in f.qualifiers.get("note", []))
+            egfp2 = next(get_features("EGFP"))
+            features.remove(egfp2)
+            egfp1.location = FeatureLocation(
+                egfp1.location.start,
+                egfp1.location.end + 9,  # fix STOP codon not being included
+                egfp1.location.strand,
+            )
+            egfp1.qualifiers.update(
+                {
+                    "label": "eGFP",
+                    "note": ["mammalian codon-optimized", "color: #34FF03; direction: RIGHT"],
+                }
+            )
+
+        if any("RFP" in f.qualifiers.get("note", []) for f in features):
+            rfp = next(f for f in features if "RFP" in f.qualifiers.get("note", []))
+            rfp.type = "CDS"
+            rfp.location = FeatureLocation(
+                rfp.location.start,
+                rfp.location.end + 9,  # fix STOP codon not being included
+                rfp.location.strand,
+            )
+            rfp.qualifiers.update(
+                {
+                    "codon_start": 1,
+                    "label": "RFP",
+                    "gene": "mCherry",
+                    "product": "mCherry",
+                    "translation": str(translate(rfp.extract(gba.seq), to_stop=True)),
+                    "note": [
+                        "color: #c16969; direction: RIGHT",
+                        "ATG deleted, start with second codon",
+                    ],
+                    "db_xref": [
+                        "UniProtKB/Swiss-Prot:X5DSL3",
+                        "PDB:4ZIN",
+                        "InterPro:IPR009017",
+                        "InterPro:IPR011584",
+                        "InterPro:IPR000786",
+                        "PFAM:PF01353",
+                        "GO:0006091",
+                        "GO:0008218",
+                    ],
+                }
+            )
+
+            alert = next(
+                f
+                for f in features
+                if "Start with second codon!!! ATG deleted!" in f.qualifiers.get("note", [])
+            )
+            features.remove(alert)
+
+        if any("PARS-1" in f.qualifiers.get("note", []) for f in features):
+            pars = next(f for f in features if "PARS-1" in f.qualifiers.get("note", []))
+            pars.type = 'rep_origin'
+            pars.qualifiers['label'] = ['PARS-1']
+            pars.qualifiers['note'] = ['color: #9A969B']
+
+        if any(get_features('AOX1 terminator')):
+            t1 = next(f for f in features if 'AOX1 terminator' in f.qualifiers.get("note", []))
+            t2 = next(get_features('AOX1 terminator'))
+            features.remove(t2)
+            t1.qualifiers.update({
+                'note': ['transcription terminator for AOX1', 'color: #ff8eff'],
+                'label': ['PpAOX1 Terminator'],
+            })
+
+
+
+        # sort features
+        features.sort(key=lambda feat: -1 if feat.type == "source" else feat.location.start)
+
+        # translate color from notes to ApEinfo
+        for feature in features:
+            translate_color(feature)
+
+        # merge annotations
+        annotations = copy.deepcopy(gba.annotations)
+        annotations.update(gbd.annotations)
+
+        # Fix the direct submission annotation
+        ref = annotations["references"][-1]
+        ref.authors = "Larralde M"
+        ref.journal = "Distributed with the MoClo Python library\nhttps://github.com/althonos/moclo"
+
+        # Add the YTK type to the record comments
+        annotations['comments'] = ['YTK:{}'.format(type_)]
+
+        # create the final record
+        final = CircularRecord(
+            seq=gba.seq,
+            id=info["id"],
+            name=info["id"],
+            description=info["name"],
+            dbxrefs=gba.dbxrefs + gbd.dbxrefs,
+            features=features,
+            annotations=annotations,
+        )
+
+        # write the final record
+        dst_dir = os.path.abspath(
+            os.path.join(__file__, "..", "..", "moclo-ytk", "registry", "ptk")
+        )
+        dst_file = os.path.join(dst_dir, "{}.gb").format(info["id"])
+        write(final, dst_file, "gb")
