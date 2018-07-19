@@ -102,6 +102,25 @@ class CircularRecord(SeqRecord):
             copy.deepcopy(rec.annotations),
             copy.deepcopy(rec.letter_annotations))
 
+    def reverse_complement(self,
+                           id=False,
+                           name=False,
+                           description=False,
+                           features=True,
+                           annotations=False,
+                           letter_annotations=True,
+                           dbxrefs=False,
+                          ):
+        return type(self)(super(CircularRecord, self).reverse_complement(
+            id=id,
+            name=name,
+            description=description,
+            features=features,
+            annotations=annotations,
+            letter_annotations=letter_annotations,
+            dbxrefs=dbxrefs
+        ))
+
     # Additional methods
 
     def __lshift__(self, index):
@@ -149,7 +168,7 @@ class CircularRecord(SeqRecord):
                 id=feature.id,
                 qualifiers=feature.qualifiers))
 
-        return CircularRecord(
+        return type(self)(
             seq=newseq,
             id=self.id,
             name=self.name,
