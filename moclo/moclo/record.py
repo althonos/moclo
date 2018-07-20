@@ -23,16 +23,17 @@ def _ambiguous(func):
 
 
 class CircularRecord(SeqRecord):
-    """A derived `SeqRecord` that contains a circular DNA sequence.
+    """A derived ``SeqRecord`` that contains a circular DNA sequence.
 
-    It handles ``_ in record`` as expected, and removes the implementation of
-    ``_ + record`` since circular DNA sequence do not have an end to append
-    more nucleotides to. In addition, it overloads the ``>>`` and ``<<`` to
-    allow rotating the sequence and its annotations, effectively changing the
-    *0* position.
+    It handles the `in` operator as expected, and removes the implementation
+    of the `+` operator since circular DNA sequence do not have an end to
+    append more nucleotides to. In addition, it overloads the `>>` and `<<`
+    operators to allow rotating the sequence and its annotations, effectively
+    changing the *0* position.
 
     See Also:
-        `~Bio.SeqRecord.SeqRecord <https://biopython.org/wiki/SeqRecord>`_
+        ``Bio.SeqRecord.SeqRecord`` documentation on the `Biopython wiki
+        <https://biopython.org/wiki/SeqRecord>`_.
     """
 
     # Patch constructor to allow constructing a CircularRecord from
@@ -49,7 +50,12 @@ class CircularRecord(SeqRecord):
                  letter_annotations=None
                  ):
         # type: (...) -> None
+        """Create a new `CircularRecord` instance.
 
+        If given a `SeqRecord` as the first argument, it will simply copy all
+        attributes of the record. This allows using `Bio.SeqIO.read` to open
+        records, then loading them into a `CircularRecord`.
+        """
         if isinstance(seq, SeqRecord):
             self.__init__(   # noqa: T484
                 seq.seq,
@@ -78,29 +84,54 @@ class CircularRecord(SeqRecord):
     # Patch methods that are ambiguous with a non-linear sequence.
 
     @_ambiguous
-    def __add__(self, other):   # noqa: D105
+    def __add__(self, other):
+        """Add another sequence or string to this sequence.
+
+        Since adding an arbitrary sequence to a plasmid is ambiguous (there is
+        no sequence end), trying to add a sequence to a ``CircularRecord``
+        will raise a `TypeError`.
+        """
         return NotImplemented
 
     @_ambiguous
     def __radd__(self, other):   # noqa: D105
+        """Add another sequence or string to this sequence (from the left).
+
+        Since adding an arbitrary sequence to a plasmid is ambiguous (there is
+        no sequence end), trying to add a sequence to a ``CircularRecord``
+        will raise a `TypeError`.
+        """
         return NotImplemented
 
     # Patch other methods to work as intended
 
     def __contains__(self, char):  # noqa: D105
+        """Implement the `in` keyword, searches the sequence.
+        """
         return len(char) <= len(self) and char in str(self.seq) * 2
 
     def __getitem__(self, index):  # noqa: D105
+        """Return a sub-sequence or an individual letter.
+
+        The sub-sequence is always returned as a ``SeqRecord``, since it is
+        probably not circular anymore.
+        """
         rec = super(CircularRecord, self).__getitem__(index)
-        return SeqRecord(
-            rec.seq,
-            rec.id,
-            rec.name,
-            rec.description,
-            copy.deepcopy(rec.dbxrefs),
-            copy.deepcopy(rec.features),
-            copy.deepcopy(rec.annotations),
-            copy.deepcopy(rec.letter_annotations))
+        if isinstance(index, slice):
+            annotations = copy.deepcopy(rec.annotations)
+            if 'topology' in annotations:
+                annotations['topology'] = 'linear'
+            return SeqRecord(
+                rec.seq,
+                rec.id,
+                rec.name,
+                rec.description,
+                copy.deepcopy(rec.dbxrefs),
+                copy.deepcopy(rec.features),
+                annotations,
+                copy.deepcopy(rec.letter_annotations))
+        else:
+            return rec
 
     def reverse_complement(self,
                            id=False,
@@ -111,6 +142,8 @@ class CircularRecord(SeqRecord):
                            letter_annotations=True,
                            dbxrefs=False,
                           ):
+        """Return a new ``CircularRecord`` with reverse complement sequence.
+        """
         return type(self)(super(CircularRecord, self).reverse_complement(
             id=id,
             name=name,

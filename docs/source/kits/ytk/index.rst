@@ -1,5 +1,5 @@
-Yeast ToolKit
-=============
+Yeast ToolKit (YTK) / Pichia ToolKit (PTK)
+==========================================
 
 .. currentmodule:: moclo.kits.ytk
 

@@ -4,10 +4,36 @@ Library Reference
 .. toctree::
    :hidden:
 
-   parts
+   record
+   registry
    modules
    vectors
+   parts
    errors
+
+
+Record (`moclo.record`)
+-----------------------
+
+.. currentmodule:: moclo.record
+.. autosummary::
+   :nosignatures:
+
+   CircularRecord
+
+
+Registry (`moclo.registry.base`)
+--------------------------------
+
+.. currentmodule:: moclo.registry.base
+.. autosummary::
+   :nosignatures:
+
+   Item
+   AbstractRegistry
+   CombinedRegistry
+   EmbeddedRegistry
+
 
 .. currentmodule:: moclo.core
 .. automodule:: moclo.core
@@ -73,13 +99,3 @@ Errors (`moclo.errors`)
    :nosignatures:
 
    UnusedModules
-
-
-Record (`moclo.record`)
------------------------
-
-.. currentmodule:: moclo.record
-.. autosummary::
-   :nosignatures:
-
-   CircularRecord

@@ -39,27 +39,38 @@ The MoClo system is a standard for molecular cloning that relies on the Golden
 Gate Assembly technique.
 
 
+Concepts and Definitions
+------------------------
+
+.. toctree::
+  :maxdepth: 2
+
+  process
+  definitions
+
+
+
 Library
 -------
 
 .. toctree::
-  :maxdepth: 1
+  :maxdepth: 2
 
-  Installing  <install.rst>
-  Examples    <examples/index.rst>
-  Reference   <api/index.rst>
-  About       <about.rst>
+  install
+  examples/index
+  api/index
+  about
 
 
 Kits
 ----
 
 .. toctree::
-  :maxdepth: 1
+  :maxdepth: 2
 
-  Yeast ToolKit (YTK)  <kits/ytk/index.rst>
-  CIDAR Kit            <kits/cidar/index.rst>
-  EcoFlex Kit          <kits/ecoflex/index.rst>
+  kits/ytk/index
+  kits/cidar/index
+  kits/ecoflex/index
 
 
 Indices and tables

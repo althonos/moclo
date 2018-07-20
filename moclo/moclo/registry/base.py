@@ -24,7 +24,7 @@ class Item(typing.NamedTuple('Item', [
             # ('location', typing.Text),
             ('resistance', typing.Text),
         ])):
-    """A registry item.
+    """A uniquely identified record in a registry.
     """
 
 
@@ -58,6 +58,11 @@ class CombinedRegistry(AbstractRegistry):
 
 
 class EmbeddedRegistry(AbstractRegistry):
+    """An embedded registry, distributed with the library source code.
+
+    Records are stored within a BZ2 compressed JSON file, using standard
+    annotations to allow retrieving features easily.
+    """
 
     _module = NotImplemented
     _file = NotImplemented
@@ -83,11 +88,9 @@ class EmbeddedRegistry(AbstractRegistry):
         with pkg_resources.resource_stream(self._module, self._file) as rs:
             with io.TextIOWrapper(bz2.BZ2File(rs)) as decomp:
                 raw_data = json.load(decomp)
-
         for raw in raw_data:
             record = Bio.SeqIO.read(io.StringIO(raw['gb']), 'gb')
             raw['record'] = CircularRecord(record)
-
         return {
             item.id: item
             for item in (
