@@ -451,37 +451,39 @@ if __name__ == "__main__":
         if egfp2 is not None:
             egfp1 = next(get_features_from_note("EGFP"))
             features.remove(egfp2)
-            # egfp1.location = FeatureLocation(
-            #     egfp1.location.start,
-            #     egfp1.location.end + 6,
-            #     egfp1.location.strand,
-            # )
             egfp1.qualifiers.update(
                 {
-                    "label": "eGFP",
+                    "codon_start": 1,
+                    "label": ["eGFP"],
+                    "gene": ["GFP"]
+                    "product": ["enhanced green fluorescent protein"],
                     "note": ["mammalian codon-optimized", "color: #34FF03; direction: RIGHT"],
+                    "db_xref": [
+                        'UniProtKB/Swiss-Prot:P42212',
+                        'PDB:1EMA',
+                        'InterPro:IPR009017',
+                        'InterPro:IPR011584',
+                        'InterPro:IPR000786',
+                        'PFAM:PF01353',
+                        'GO:0008218',
+                        'GO:0018298',
+                    ]
                 }
             )
 
         rfp = next(get_features_from_note("RFP"), None)
         if rfp is not None:
             rfp.type = "CDS"
-            has_atg = gba.seq[rfp.location.start - 3 : rfp.location.start] == "ATG"
-            rfp.location = FeatureLocation(
-                rfp.location.start - (3 if has_atg else 0),
-                rfp.location.end,
-                # rfp.location.end + 6,
-                rfp.location.strand,
-            )
+            start = rfp.location.start + rfp.extract(gba.seq).find('ATG', 1)
+            rfp.location = FeatureLocation(start, start + 708, 1)
             rfp.qualifiers.update(
                 {
                     "codon_start": 1,
-                    "label": "RFP",
-                    "gene": "mCherry",
-                    "product": "mCherry",
+                    "label": ["RFP"],
+                    "gene": ["mCherry"],
+                    "product": ["mCherry"],
                     "translation": str(translate(rfp.extract(gba.seq), to_stop=True)),
-                    "note": ["color: #c16969; direction: RIGHT"]
-                    + ([] if has_atg else ["ATG deleted, start with second codon"]),
+                    "note": ["color: #c16969; direction: RIGHT"],
                     "db_xref": [
                         "UniProtKB/Swiss-Prot:X5DSL3",
                         "PDB:4ZIN",
