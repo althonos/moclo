@@ -39,6 +39,7 @@ from Bio.SeqRecord import SeqRecord
 from Bio.Restriction import BsaI
 
 from moclo.record import CircularRecord
+from moclo.regex import DNARegex
 
 
 URL = "https://www.addgene.org/kits/sieber-moclo-pichia-toolkit/#protocols-and-resources"
@@ -46,6 +47,7 @@ UA = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)
 
 
 COLOR_REGEX = re.compile(r"color: (#[0-9a-fA-F]{6})")
+ALPHA_MF_DELTA = None
 
 
 def translate_color(feature):
@@ -146,7 +148,7 @@ if __name__ == "__main__":
             SeqFeature(
                 type="protein_bind",
                 qualifiers={
-                    "label": ["BsaI"],
+                    # "label": ["BsaI"],
                     "bound_moiety": ["BsaI"],
                     "note": ["color: #ff0000; direction: RIGHT"],
                     # "note": ["This forward directional feature has 2 segments:\n"
@@ -166,7 +168,7 @@ if __name__ == "__main__":
             SeqFeature(
                 type="protein_bind",
                 qualifiers={
-                    "label": ["BsaI(1)"],
+                    # "label": ["BsaI(1)"],
                     "bound_moiety": ["BsaI"],
                     "note": ["color: #ff0000; direction: LEFT"],
                     # "note": [("""This forward directional feature has 2 segments:
@@ -186,6 +188,7 @@ if __name__ == "__main__":
         # Fix annotations of Chloramphenicol resistance cassette
         camr, cmr = next(get_features("CamR")), next(get_features("CmR"))
         features.remove(camr)
+        cmr.type = "CDS"
         cmr.qualifiers.update({k: v for k, v in camr.qualifiers.items() if k not in cmr.qualifiers})
         cmr.qualifiers.update(
             {
@@ -207,22 +210,26 @@ if __name__ == "__main__":
             }
         )
         cmr_prom = next(get_features("CamR Promoter"))
+        cmr_prom.type = "promoter"
         cmr_prom.qualifiers.update(
             {"label": ["CmR Promoter"], "note": ["color: #66ccff; direction: LEFT"]}
         )
         cmr_term = next(get_features("CamR Terminator"))
+        cmr_term.type = "terminator"
         cmr_term.qualifiers.update(
             {"label": ["CmR Terminator"], "note": ["color: #66ccff; direction: LEFT"]}
         )
 
         # Make sure ColE1 is grayed
         cole1 = next(get_features("ColE1"))
+        cole1.type = "rep_origin"
         cole1.qualifiers["note"] = ["color: #7f7f7f"]
 
         # plasmid-specific annotations
         if id_ == "pPTK001":
             p1, p2 = [f for f in features if any("AOX1" in l for l in f.qualifiers.get("gene", []))]
             features.remove(p2)
+            p1.type = "promoter"
             p1.qualifiers.update(
                 {
                     "label": ["PpAOX1 Promoter"],
@@ -239,6 +246,7 @@ if __name__ == "__main__":
             p1 = next(f for f in features if "GAP promoter" in f.qualifiers.get("note", []))
             p2 = next(get_features("GAP promoter"))
             features.remove(p2)
+            p1.type = "promoter"
             p1.qualifiers.update(
                 {
                     "label": ["PpGAP Promoter"],
@@ -266,6 +274,7 @@ if __name__ == "__main__":
 
         elif id_ == "pPTK004":
             pTP1 = next(f for f in features if "TPI1" in f.qualifiers.get("note", []))
+            pTP1.type = "promoter"
             pTP1.qualifiers = {
                 "label": ["PpTPI1 Promoter"],
                 "gene": ["Pichia pastoris TPI1"],
@@ -293,19 +302,24 @@ if __name__ == "__main__":
                 ]
             )
             # QUESTION: CDS or sig_peptide ?
-            # a2.type = 'sig_peptide'
+            a2.type = "sig_peptide"
             a2.qualifiers.update(
                 {
                     "codon_start": ["1"],
-                    # 'direction': ['RIGHT'],
-                    "label": ["alpha-MF"],
-                    "gene": ["S. cerevisiae MF-alpha-1"],
-                    "product": ["alpha-factor secretion signal"],
+                    "label": ["MF-alpha-1 signal"],
+                    "gene": ["S. cerevisiae MF(ALPHA)1"],
+                    "product": ["mating factor alpha-1 secretion signal"],
                     "note": [
                         "Cleavage by the Kex2 protease occurs after the "
                         "dibasic KR sequence. The EA dipeptides are then "
                         "removed by dipeptidyl aminopeptidase A.",
                         "color: #ffcbbf; direction: RIGHT",
+                    ],
+                    "db_xref": [
+                        "UniProtKB/Swiss-Prot:P01149",
+                        "InterPro:IPR008675",
+                        "PFAM:PF05436",
+                        "SGD:S000006108",
                     ],
                 }
             )
@@ -324,17 +338,23 @@ if __name__ == "__main__":
                 ]
             )
             # QUESTION: CDS or sig_peptide ?
-            # a1.type = 'sig_peptide'
+            a1.type = "sig_peptide"
             a1.qualifiers.update(
                 {
                     "codon_start": ["1"],
                     # 'direction': ['RIGHT'],
-                    "label": ["alpha-MF (no EAEA)"],
-                    "gene": ["S. cerevisiae MF-alpha-1"],
-                    "product": ["alpha-factor secretion signal"],
+                    "label": ["MF-alpha-1 signal (no EAEA)"],
+                    "gene": ["S. cerevisiae MF(ALPHA)1"],
+                    "product": ["mating factor alpha-1 secretion signal, no EAEA"],
                     "note": [
                         "Cleavage by the Kex2 protease occurs after the " "dibasic KR sequence.",
                         "color: #ffcbbf; direction: RIGHT",
+                    ],
+                    "db_xref": [
+                        "UniProtKB/Swiss-Prot:P01149",
+                        "InterPro:IPR008675",
+                        "PFAM:PF05436",
+                        "SGD:S000006108",
                     ],
                 }
             )
@@ -342,17 +362,84 @@ if __name__ == "__main__":
         elif id_ == "pPTK007":
             ad = next(f for f in features if "Alpha" in f.qualifiers.get("note", []))
             # QUESTION: CDS or sig_peptide ?
-            ad.type = "CDS"
+            ad.type = "sig_peptide"
             ad.qualifiers.update(
                 {
                     "codon_start": ["1"],
                     # 'direction': ['RIGHT'],
-                    "label": ["alpha-MF-delta"],
-                    "gene": ["S. cerevisiae MF-alpha-1"],
-                    "product": ["alpha-factor shortened secretion signal"],
+                    "label": ["MF-alpha-1-delta signal"],
+                    "gene": ["S. cerevisiae MF(ALPHA)1"],
+                    "product": ["mating factor alpha-1 secretion signal, shortened"],
                     "note": ["color: #ffcbbf; direction: RIGHT"],
+                    "db_xref": [
+                        "UniProtKB/Swiss-Prot:P01149",
+                        "InterPro:IPR008675",
+                        "PFAM:PF05436",
+                        "SGD:S000006108",
+                    ],
                 }
             )
+            ALPHA_MF_DELTA = DNARegex(str(ad.extract(gba.seq)).replace("GCCGCTA", "GCC[GT]CTA"))
+
+        elif id_ == "pPTK009":
+            am = next(f for f in features if "alpha-amylase" in f.qualifiers.get("note", []))
+            am.type = "sig_peptide"
+            am.location = FeatureLocation(am.location.start, am.location.start + 60, +1)
+            am.qualifiers = {
+                "gene": ["amy"],
+                "product": ["alpha-amylase signal"],
+                "note": ["color: #ffcbbf; direction: RIGHT"],
+                "label": ["Alpha-amylase signal"],
+                "db_xref": ["UniProtKB/Swiss-Prot:P30292"],
+            }
+
+        elif id_ == "pPTK010":
+            gam = next(f for f in features if "Glucoamylase" in f.qualifiers.get("note", []))
+            gam.type = "sig_peptide"
+            gam.location = FeatureLocation(gam.location.start, gam.location.start + 54, +1)
+            gam.qualifiers = {
+                "gene": ["gaI"],
+                "product": ["glucoamylase I signal"],
+                "note": ["color: #ffcbbf; direction: RIGHT"],
+                "label": ["Glucoamylase signal"],
+                "db_xref": ["UniProtKB/Swiss-Prot:P23176"],
+            }
+
+        elif id_ == "pPTK011":
+            alb = next(f for f in features if "hSA" in f.qualifiers.get("note", []))
+            alb.type = "sig_peptide"
+            alb.location = FeatureLocation(alb.location.start, alb.location.start + 54, +1)
+            alb.qualifiers = {
+                "gene": ["ALB"],
+                "product": ["serum albumin signal"],
+                "note": ["color: #ffcbbf; direction: RIGHT"],
+                "label": ["Serum Albumin signal"],
+                "db_xref": ["UniProtKB/Swiss-Prot:P02768"],
+            }
+
+        elif id_ == "pPTK012":
+            inu = next(f for f in features if "Inulinase" in f.qualifiers.get("note", []))
+            inu.type = "sig_peptide"
+            inu.location = FeatureLocation(inu.location.start, inu.location.start + 48, +1)
+            inu.qualifiers = {
+                "gene": ["INU1"],
+                "product": ["inulinase signal peptide"],
+                "note": ["color: #ffcbbf; direction: RIGHT"],
+                "label": ["Inulinase signal"],
+                "db_xref": ["UniProtKB/Swiss-Prot:P28999"],
+            }
+
+        elif id_ == "pPTK013":
+            inv = next(f for f in features if "Invertase" in f.qualifiers.get("note", []))
+            inv.type = "sig_peptide"
+            inv.location = FeatureLocation(inv.location.start, inv.location.start + 57, +1)
+            inv.qualifiers = {
+                "gene": ["SUC1"],
+                "product": ["invertase 1 signal peptide"],
+                "note": ["color: #ffcbbf; direction: RIGHT"],
+                "label": ["Invertase signal"],
+                "db_xref": ["UniProtKB/Swiss-Prot:P10594"],
+            }
 
         if any(get_features("EGFP")):
             egfp1 = next(f for f in features if "EGFP" in f.qualifiers.get("note", []))
@@ -424,6 +511,25 @@ if __name__ == "__main__":
                     "note": ["transcription terminator for AOX1", "color: #ff8eff"],
                     "label": ["PpAOX1 Terminator"],
                 }
+            )
+
+        match = ALPHA_MF_DELTA and ALPHA_MF_DELTA.search(gba.seq)
+        if id_ != "pPTK007" and match is not None:
+            start, end = match.span(0)
+            # start = gba.seq.find(ALPHA_MF_DELTA)
+            # end = start + len(ALPHA_MF_DELTA)
+            features.append(
+                SeqFeature(
+                    location=FeatureLocation(start, end, 1),
+                    type="sig_peptide",
+                    id="alpha-MF-delta",
+                    qualifiers={
+                        "label": ["alpha-MF-delta"],
+                        "gene": ["S. cerevisiae MF-alpha-1"],
+                        "product": ["alpha-factor shortened secretion signal"],
+                        "note": ["color: #ffcbbf; direction: RIGHT"],
+                    },
+                )
             )
 
         # sort features
