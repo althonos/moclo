@@ -21,7 +21,7 @@ class Item(typing.NamedTuple('Item', [
             ('id', typing.Text),
             ('name', typing.Text),
             ('entity', typing.Union[AbstractModule, AbstractVector]),
-            ('location', typing.Text),
+            # ('location', typing.Text),
             ('resistance', typing.Text),
         ])):
     """A registry item.
@@ -94,7 +94,7 @@ class EmbeddedRegistry(AbstractRegistry):
                 Item(
                     id=self._load_id(raw, index),
                     name=self._load_name(raw, index),
-                    location=self._load_location(raw, index),
+                    # location=self._load_location(raw, index),
                     resistance=self._load_resistance(raw, index),
                     entity=self._load_entity(raw, index),
                 )
