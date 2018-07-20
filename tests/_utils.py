@@ -89,6 +89,10 @@ class AssemblyTestCase(unittest.TestCase):
 
     def load_data(self, name):
         archive_path = 'cases/{}.tar.xz'.format(name)
+
+        if not DATAFS.exists(archive_path):
+            raise unittest.SkipTest('no test case found')
+
         with contexter.Contexter() as ctx:
             # open FASTA files
             casefs = ctx << fs.archive.open_archive(DATAFS, archive_path)

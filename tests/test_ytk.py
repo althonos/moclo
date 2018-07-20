@@ -16,13 +16,13 @@ from Bio.Seq import Seq
 from moclo.record import CircularRecord
 from moclo.kits import ytk
 
-from ._utils import AssemblyTestCase, PartsMetaCase
+from ._utils import DATAFS, AssemblyTestCase, PartsMetaCase
 
 
 if six.PY3:
     def setUpModule():
         warnings.simplefilter('ignore', category=ResourceWarning)
-        
+
     def tearDownModule():
         warnings.simplefilter(warnings.defaultaction)
 
