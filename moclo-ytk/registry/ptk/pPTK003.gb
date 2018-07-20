@@ -1,0 +1,160 @@
+LOCUS       pPTK003                 2664 bp    ds-DNA  circular SYN 10-JAN-2018
+DEFINITION  pENO1.
+ACCESSION   pPTK003
+VERSION     pPTK003
+KEYWORDS    pPTK003-2-pENO1.
+SOURCE      synthetic DNA construct
+  ORGANISM  synthetic DNA construct
+            .
+REFERENCE   1  (bases 1 to 2664)
+  AUTHORS   Obst U, Lu TK, Sieber V
+  TITLE     A Modular Toolkit for Generating Pichia pastoris Secretion
+            Libraries.
+  JOURNAL   ACS Synth Biol. 2017 Mar 15. doi: 10.1021/acssynbio.6b00337.
+   PUBMED   28252957
+REFERENCE   2  (bases 1 to 2664)
+  AUTHORS   Larralde M
+  TITLE     Direct Submission
+  JOURNAL   Distributed with the MoClo Python library
+            https://github.com/althonos/moclo
+FEATURES             Location/Qualifiers
+     source          1..2664
+                     /organism="synthetic DNA construct"
+                     /mol_type="other DNA"
+     source          1..2664
+                     /organism="synthetic DNA construct"
+                     /mol_type="other DNA"
+     protein_bind    join(3..8,10..13)
+                     /bound_moiety="BsaI"
+                     /ApEinfo_fwdcolor="#ff0000"
+                     /ApEinfo_revcolor="#ff0000"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     promoter        14..1011
+                     /label="PpENO1 Promoter"
+                     /gene="Pichia pastoris ENO1"
+                     /function="hypoxia inducible promoter"
+                     /note="promoter for Pichia pastoris alpha-enolase"
+                     /ApEinfo_fwdcolor="#00a1ee"
+                     /ApEinfo_revcolor="#00a1ee"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     misc_feature    703..708
+                     /note="OLD BsmBI"
+     misc_feature    704
+                     /note="g to c to remove BsmBI"
+     misc_feature    777..782
+                     /note="OLD BsaI site"
+     misc_feature    778
+                     /note="g to c to remove BsaI"
+     protein_bind    complement(join(1012..1015,1017..1022))
+                     /bound_moiety="BsaI"
+                     /ApEinfo_fwdcolor="#ff0000"
+                     /ApEinfo_revcolor="#ff0000"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     protein_bind    1019..1022
+                     /label="BsmBI"
+                     /note="BsmBI"
+     terminator      complement(1025..1133)
+                     /label="CmR Terminator"
+                     /ApEinfo_fwdcolor="#66ccff"
+                     /ApEinfo_revcolor="#66ccff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     terminator      1029..1063
+                     /label="lambda t0 terminator"
+                     /note="minimal transcription terminator from phage lambda
+                     (Scholtissek and Grosse, 1987)"
+     CDS             complement(1134..1793)
+                     /codon_start=1
+                     /gene="cat"
+                     /product="chloramphenicol acetyltransferase"
+                     /label="CmR"
+                     /translation="MEKKITGYTTVDISQWHRKEHFEAFQSVAQCTYNQTVQLDITAFL
+                     KTVKKNKHKFYPAFIHILARLMNAHPEFRMAMKDGELVIWDSVHPCYTVFHEQTETFSS
+                     LWSEYHDDFRQFLHIYSQDVACYGENLAYFPKGFIENMFFVSANPWVSFTSFDLNVANM
+                     DNFFAPVFTMGKYYTQGDKVLMPLAIQVHHAVCDGFHVGRMLNELQQYCDEWQGGA"
+                     /function="chloramphenicol resistance"
+                     /EC_number="2.3.1.28"
+                     /db_xref="UniProtKB/Swiss-Prot:P62577"
+                     /db_xref="GO:0008811"
+                     /db_xref="GO:0016740"
+                     /db_xref="GO:0016746"
+                     /db_xref="GO:0046677"
+                     /db_xref="PFAM:PF00302"
+                     /ApEinfo_fwdcolor="#0000ff"
+                     /ApEinfo_revcolor="#0000ff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     primer_bind     1708..1727
+                     /label="CAT-R"
+                     /note="Chloramphenicol resistance gene, reverse primer"
+     promoter        complement(1794..1898)
+                     /label="CmR Promoter"
+                     /ApEinfo_fwdcolor="#66ccff"
+                     /ApEinfo_revcolor="#66ccff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     rep_origin      complement(1899..2662)
+                     /direction=LEFT
+                     /label="ColE1"
+                     /ApEinfo_fwdcolor="#7f7f7f"
+                     /ApEinfo_revcolor="#7f7f7f"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     rep_origin      1975..2563
+                     /direction=RIGHT
+                     /label="ori"
+                     /note="high-copy-number ColE1/pMB1/pBR322/pUC origin of
+                     replication"
+     primer_bind     2464..2483
+                     /label="pBR322ori-F"
+                     /note="pBR322 origin, forward primer"
+ORIGIN
+        1 tcggtctcaa acgagaaagc atactatact attcgacatt cctttcaatc ctggaattaa
+       61 cagtcacttt taaaaaagac atctaccgtg aaggtgccgt agagtatcgc gttaccatat
+      121 cgccaaaaac tgatatacgc cgcggaaacc aggcaaacaa ttgaaaagaa aaattttgag
+      181 gaactctctg catcgaagcc gtctagagtt accactagtc agatgccgcg ggcacttgag
+      241 cacctcatgc acagcaataa cacaacacaa tggttagtag caacctgaat tcggtcattg
+      301 atgcatgcat gtgccgtgaa gcgggacaac cagaaaagtc gtctataaat gccggcacgt
+      361 gcgatcatcg tggcggggtt ttaagagtgc atatcacaaa ttgtcgcatt accgcggaac
+      421 cgccagatat tcattacttg acgcaaaagc gtttgaaata atgacgaaaa agaaggaaga
+      481 aaaaaaaaga aaaataccgc ttctaggcgg gttatctact gatccgagct tccactagga
+      541 tagcacccaa acacctgcat atttggacga cctttactta caccaccaaa aaccactttc
+      601 gcctctcccg cccctgataa cgtccactaa ttgagcgatt acctgagcgg tcctcttttg
+      661 tttgcagcat gagacttgca tactgcaaat cgtaagtagc aacctctcaa ggtcaaaact
+      721 gtatggaaac cttgtcacct cacttaattc tagctagcct accctgcaag tcaagagctc
+      781 tccgtgattc ctagccacct caaggtatgc ctctccccgg aaactgtggc cttttctggc
+      841 acacatgatc tccacgattt caacatataa atagcttttg ataatggcaa tattaatcaa
+      901 atttatttta cttctttctt gtaacatctc tcttgtaatc ccttattcct tctagctatt
+      961 tttcataaaa aaccaagcaa ctgcttatca acacacaaac actaaatcaa atatgtgaga
+     1021 ccagaccaat aaaaaacgcc cggcggcaac cgagcgttct gaacaaatcc agatggagtt
+     1081 ctgaggtcat tactggatct atcaacagga gtccaagcga gctcgatatc aaattacgcc
+     1141 ccgccctgcc actcatcgca gtactgttgt aattcattaa gcattctgcc gacatggaag
+     1201 ccatcacaaa cggcatgatg aacctgaatc gccagcggca tcagcacctt gtcgccttgc
+     1261 gtataatatt tgcccatggt gaaaacgggg gcgaagaagt tgtccatatt ggccacgttt
+     1321 aaatcaaaac tggtgaaact cacccaggga ttggctgaaa cgaaaaacat attctcaata
+     1381 aaccctttag ggaaataggc caggttttca ccgtaacacg ccacatcttg cgaatatatg
+     1441 tgtagaaact gccggaaatc gtcgtggtat tcactccaga gcgatgaaaa cgtttcagtt
+     1501 tgctcatgga aaacggtgta acaagggtga acactatccc atatcaccag ctcaccgtct
+     1561 ttcattgcca tacgaaattc cggatgagca ttcatcaggc gggcaagaat gtgaataaag
+     1621 gccggataaa acttgtgctt atttttcttt acggtcttta aaaaggccgt aatatccagc
+     1681 tgaacggtct ggttataggt acattgagca actgactgaa atgcctcaaa atgttcttta
+     1741 cgatgccatt gggatatatc aacggtggta tatccagtga tttttttctc cattttagct
+     1801 tccttagctc ctgaaaatct cgataactca aaaaatacgc ccggtagtga tcttatttca
+     1861 ttatggtgaa agttggaacc tcttacgtgc ccgatcaatc atgaccaaaa tcccttaacg
+     1921 tgagttttcg ttccactgag cgtcagaccc cgtagaaaag atcaaaggat cttcttgaga
+     1981 tccttttttt ctgcgcgtaa tctgctgctt gcaaacaaaa aaaccaccgc taccagcggt
+     2041 ggtttgtttg ccggatcaag agctaccaac tctttttccg aaggtaactg gcttcagcag
+     2101 agcgcagata ccaaatactg ttcttctagt gtagccgtag ttaggccacc acttcaagaa
+     2161 ctctgtagca ccgcctacat acctcgctct gctaatcctg ttaccagtgg ctgctgccag
+     2221 tggcgataag tcgtgtctta ccgggttgga ctcaagacga tagttaccgg ataaggcgca
+     2281 gcggtcgggc tgaacggggg gttcgtgcac acagcccagc ttggagcgaa cgacctacac
+     2341 cgaactgaga tacctacagc gtgagctatg agaaagcgcc acgcttcccg aagggagaaa
+     2401 ggcggacagg tatccggtaa gcggcagggt cggaacagga gagcgcacga gggagcttcc
+     2461 agggggaaac gcctggtatc tttatagtcc tgtcgggttt cgccacctct gacttgagcg
+     2521 tcgatttttg tgatgctcgt caggggggcg gagcctatgg aaaaacgcca gcaacgcggc
+     2581 ctttttacgg ttcctggcct tttgctggcc ttttgctcac atgttctttc ctgcgttatc
+     2641 ccctgattct gtggataacc gtag
+//

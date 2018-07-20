@@ -1,0 +1,154 @@
+LOCUS       pPTK002                 2143 bp    ds-DNA  circular SYN 10-JAN-2018
+DEFINITION  pGAP.
+ACCESSION   pPTK002
+VERSION     pPTK002
+KEYWORDS    pPTK002-2-pGAP.
+SOURCE      synthetic DNA construct
+  ORGANISM  synthetic DNA construct
+            .
+REFERENCE   1  (bases 1 to 2143)
+  AUTHORS   Obst U, Lu TK, Sieber V
+  TITLE     A Modular Toolkit for Generating Pichia pastoris Secretion
+            Libraries.
+  JOURNAL   ACS Synth Biol. 2017 Mar 15. doi: 10.1021/acssynbio.6b00337.
+   PUBMED   28252957
+REFERENCE   2  (bases 1 to 2143)
+  AUTHORS   Larralde M
+  TITLE     Direct Submission
+  JOURNAL   Distributed with the MoClo Python library
+            https://github.com/althonos/moclo
+FEATURES             Location/Qualifiers
+     source          1..2143
+                     /organism="recombinant plasmid"
+                     /mol_type="other DNA"
+     source          1..2143
+                     /organism="synthetic DNA construct"
+                     /mol_type="other DNA"
+     protein_bind    join(3..8,10..13)
+                     /bound_moiety="BsaI"
+                     /ApEinfo_fwdcolor="#ff0000"
+                     /ApEinfo_revcolor="#ff0000"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     promoter        14..490
+                     /note="promoter for Pichia pastoris
+                     glyceraldehyde-3-phosphate dehydrogenase"
+                     /label="PpGAP Promoter"
+                     /gene="Pichia pastoris GAP"
+                     /function="glucose inducible promoter"
+                     /ApEinfo_fwdcolor="#00a1ee"
+                     /ApEinfo_revcolor="#00a1ee"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     misc_feature    159
+                     /note="Modification for no digestion"
+                     /ApEinfo_fwdcolor="#ff00ff"
+                     /ApEinfo_revcolor="#ff00ff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     protein_bind    complement(join(491..494,496..501))
+                     /bound_moiety="BsaI"
+                     /ApEinfo_fwdcolor="#ff0000"
+                     /ApEinfo_revcolor="#ff0000"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     protein_bind    498..501
+                     /label="BsmBI"
+                     /note="BsmBI"
+                     /ApEinfo_fwdcolor="#00ff15"
+                     /ApEinfo_revcolor="#00ff15"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     terminator      complement(504..612)
+                     /label="CmR Terminator"
+                     /ApEinfo_fwdcolor="#66ccff"
+                     /ApEinfo_revcolor="#66ccff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     terminator      508..542
+                     /label="lambda t0 terminator"
+                     /note="minimal transcription terminator from phage lambda
+                     (Scholtissek and Grosse, 1987)"
+     CDS             complement(613..1272)
+                     /codon_start=1
+                     /gene="cat"
+                     /product="chloramphenicol acetyltransferase"
+                     /label="CmR"
+                     /translation="MEKKITGYTTVDISQWHRKEHFEAFQSVAQCTYNQTVQLDITAFL
+                     KTVKKNKHKFYPAFIHILARLMNAHPEFRMAMKDGELVIWDSVHPCYTVFHEQTETFSS
+                     LWSEYHDDFRQFLHIYSQDVACYGENLAYFPKGFIENMFFVSANPWVSFTSFDLNVANM
+                     DNFFAPVFTMGKYYTQGDKVLMPLAIQVHHAVCDGFHVGRMLNELQQYCDEWQGGA"
+                     /function="chloramphenicol resistance"
+                     /EC_number="2.3.1.28"
+                     /db_xref="UniProtKB/Swiss-Prot:P62577"
+                     /db_xref="GO:0008811"
+                     /db_xref="GO:0016740"
+                     /db_xref="GO:0016746"
+                     /db_xref="GO:0046677"
+                     /db_xref="PFAM:PF00302"
+                     /ApEinfo_fwdcolor="#0000ff"
+                     /ApEinfo_revcolor="#0000ff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     primer_bind     1187..1206
+                     /label="CAT-R"
+                     /note="Chloramphenicol resistance gene, reverse primer"
+     promoter        complement(1273..1377)
+                     /label="CmR Promoter"
+                     /ApEinfo_fwdcolor="#66ccff"
+                     /ApEinfo_revcolor="#66ccff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     rep_origin      complement(1378..2141)
+                     /direction=LEFT
+                     /label="ColE1"
+                     /ApEinfo_fwdcolor="#7f7f7f"
+                     /ApEinfo_revcolor="#7f7f7f"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     rep_origin      1454..2042
+                     /direction=RIGHT
+                     /label="ori"
+                     /note="high-copy-number ColE1/pMB1/pBR322/pUC origin of
+                     replication"
+     primer_bind     1943..1962
+                     /label="pBR322ori-F"
+                     /note="pBR322 origin, forward primer"
+ORIGIN
+        1 tcggtctcaa acgtttttgt agaaatgtct tggtgtcctc gtccaatcag gtagccatct
+       61 ctgaaatatc tggctccgtt gcaactccga acgacctgct ggcaacgtaa aattctccgg
+      121 ggtaaaactt aaatgtggag taatggaacc agaaacgtgt cttcccttct ctctccttcc
+      181 accgcccgtt accgtcccta ggaaatttta ctctgctgga gagcttcttc tacggccccc
+      241 ttgcagcaat gctcttccca gcattacgtt gcgggtaaaa cggaggtcgt gtacccgacc
+      301 tagcagccca gggatggaaa agtcccggcc gtcgctggca ataatagcgg gcggacgcat
+      361 gtcatgagat tattggaaac caccagaatc gaatataaaa ggcgaacacc tttcccaatt
+      421 ttggtttctc ctgacccaaa gactttaaat ttaatttatt tgtccctatt tcaatcaatt
+      481 gaacaactat tatgtgagac cagaccaata aaaaacgccc ggcggcaacc gagcgttctg
+      541 aacaaatcca gatggagttc tgaggtcatt actggatcta tcaacaggag tccaagcgag
+      601 ctcgatatca aattacgccc cgccctgcca ctcatcgcag tactgttgta attcattaag
+      661 cattctgccg acatggaagc catcacaaac ggcatgatga acctgaatcg ccagcggcat
+      721 cagcaccttg tcgccttgcg tataatattt gcccatggtg aaaacggggg cgaagaagtt
+      781 gtccatattg gccacgttta aatcaaaact ggtgaaactc acccagggat tggctgaaac
+      841 gaaaaacata ttctcaataa accctttagg gaaataggcc aggttttcac cgtaacacgc
+      901 cacatcttgc gaatatatgt gtagaaactg ccggaaatcg tcgtggtatt cactccagag
+      961 cgatgaaaac gtttcagttt gctcatggaa aacggtgtaa caagggtgaa cactatccca
+     1021 tatcaccagc tcaccgtctt tcattgccat acgaaattcc ggatgagcat tcatcaggcg
+     1081 ggcaagaatg tgaataaagg ccggataaaa cttgtgctta tttttcttta cggtctttaa
+     1141 aaaggccgta atatccagct gaacggtctg gttataggta cattgagcaa ctgactgaaa
+     1201 tgcctcaaaa tgttctttac gatgccattg ggatatatca acggtggtat atccagtgat
+     1261 ttttttctcc attttagctt ccttagctcc tgaaaatctc gataactcaa aaaatacgcc
+     1321 cggtagtgat cttatttcat tatggtgaaa gttggaacct cttacgtgcc cgatcaatca
+     1381 tgaccaaaat cccttaacgt gagttttcgt tccactgagc gtcagacccc gtagaaaaga
+     1441 tcaaaggatc ttcttgagat cctttttttc tgcgcgtaat ctgctgcttg caaacaaaaa
+     1501 aaccaccgct accagcggtg gtttgtttgc cggatcaaga gctaccaact ctttttccga
+     1561 aggtaactgg cttcagcaga gcgcagatac caaatactgt tcttctagtg tagccgtagt
+     1621 taggccacca cttcaagaac tctgtagcac cgcctacata cctcgctctg ctaatcctgt
+     1681 taccagtggc tgctgccagt ggcgataagt cgtgtcttac cgggttggac tcaagacgat
+     1741 agttaccgga taaggcgcag cggtcgggct gaacgggggg ttcgtgcaca cagcccagct
+     1801 tggagcgaac gacctacacc gaactgagat acctacagcg tgagctatga gaaagcgcca
+     1861 cgcttcccga agggagaaag gcggacaggt atccggtaag cggcagggtc ggaacaggag
+     1921 agcgcacgag ggagcttcca gggggaaacg cctggtatct ttatagtcct gtcgggtttc
+     1981 gccacctctg acttgagcgt cgatttttgt gatgctcgtc aggggggcgg agcctatgga
+     2041 aaaacgccag caacgcggcc tttttacggt tcctggcctt ttgctggcct tttgctcaca
+     2101 tgttctttcc tgcgttatcc cctgattctg tggataaccg tag
+//

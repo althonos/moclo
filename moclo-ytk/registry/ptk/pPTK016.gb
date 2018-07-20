@@ -1,0 +1,189 @@
+LOCUS       pPTK016                 2403 bp    ds-DNA  circular SYN 10-JAN-2018
+DEFINITION  RFP_Intra.
+ACCESSION   pPTK016
+VERSION     pPTK016
+KEYWORDS    pPTK016-3-RFP_Intra.
+SOURCE      synthetic DNA construct
+  ORGANISM  synthetic DNA construct
+            .
+REFERENCE   1  (bases 1 to 2403)
+  AUTHORS   Obst U, Lu TK, Sieber V
+  TITLE     A Modular Toolkit for Generating Pichia pastoris Secretion
+            Libraries.
+  JOURNAL   ACS Synth Biol. 2017 Mar 15. doi: 10.1021/acssynbio.6b00337.
+   PUBMED   28252957
+REFERENCE   2  (bases 1 to 2403)
+  AUTHORS   Larralde M
+  TITLE     Direct Submission
+  JOURNAL   Distributed with the MoClo Python library
+            https://github.com/althonos/moclo
+FEATURES             Location/Qualifiers
+     source          1..2403
+                     /organism="recombinant plasmid"
+                     /mol_type="other DNA"
+     source          1..2403
+                     /organism="synthetic DNA construct"
+                     /mol_type="other DNA"
+     protein_bind    join(3..8,10..13)
+                     /bound_moiety="BsaI"
+                     /ApEinfo_fwdcolor="#ff0000"
+                     /ApEinfo_revcolor="#ff0000"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     CDS             26..733
+                     /codon_start=1
+                     /label="RFP"
+                     /gene="mCherry"
+                     /product="mCherry"
+                     /translation="MVSKGEENNMAIIKEFMRFKVHMEGSVNGHEFEIEGEGEGRPYEG
+                     TQTAKLKVTKGGPLPFAWDILSPQFMYGSKAYVKHPADIPDYLKLSFPEGFKWERVMNF
+                     EDGGVVTVTQDSSLQDGEFIYKVKLRGTNFPSDGPVMQKKTMGWEASSERMYPEDGALK
+                     GEIKQRLKLKDGGHYDAEVKTTYKAKKPVQLPGAYNVNIKLDITSHNEDYTIVEQYERA
+                     EGRHSTGGMDELYK"
+                     /db_xref="UniProtKB/Swiss-Prot:X5DSL3"
+                     /db_xref="PDB:4ZIN"
+                     /db_xref="InterPro:IPR009017"
+                     /db_xref="InterPro:IPR011584"
+                     /db_xref="InterPro:IPR000786"
+                     /db_xref="PFAM:PF01353"
+                     /db_xref="GO:0006091"
+                     /db_xref="GO:0008218"
+                     /ApEinfo_fwdcolor="#c16969"
+                     /ApEinfo_revcolor="#c16969"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     misc_feature    28..33
+                     /note="OLD BsaI"
+                     /ApEinfo_fwdcolor="#00ff00"
+                     /ApEinfo_revcolor="#00ff00"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     misc_feature    31
+                     /note="c to g to remove BsaI"
+                     /ApEinfo_fwdcolor="#ff0000"
+                     /ApEinfo_revcolor="#ff0000"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     misc_feature    145..150
+                     /note="OLD BsaI"
+                     /ApEinfo_fwdcolor="#00ff00"
+                     /ApEinfo_revcolor="#00ff00"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     misc_feature    148
+                     /note="a to g to remove BsaI"
+                     /ApEinfo_fwdcolor="#ff0000"
+                     /ApEinfo_revcolor="#ff0000"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     protein_bind    complement(join(751..754,756..761))
+                     /bound_moiety="BsaI"
+                     /ApEinfo_fwdcolor="#ff0000"
+                     /ApEinfo_revcolor="#ff0000"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     protein_bind    758..761
+                     /label="BsmBI"
+                     /note="BsmBI"
+                     /ApEinfo_fwdcolor="#00ff15"
+                     /ApEinfo_revcolor="#00ff15"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     terminator      complement(764..872)
+                     /label="CmR Terminator"
+                     /ApEinfo_fwdcolor="#66ccff"
+                     /ApEinfo_revcolor="#66ccff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     terminator      768..802
+                     /label="lambda t0 terminator"
+                     /note="minimal transcription terminator from phage lambda
+                     (Scholtissek and Grosse, 1987)"
+     CDS             complement(873..1532)
+                     /codon_start=1
+                     /gene="cat"
+                     /product="chloramphenicol acetyltransferase"
+                     /label="CmR"
+                     /translation="MEKKITGYTTVDISQWHRKEHFEAFQSVAQCTYNQTVQLDITAFL
+                     KTVKKNKHKFYPAFIHILARLMNAHPEFRMAMKDGELVIWDSVHPCYTVFHEQTETFSS
+                     LWSEYHDDFRQFLHIYSQDVACYGENLAYFPKGFIENMFFVSANPWVSFTSFDLNVANM
+                     DNFFAPVFTMGKYYTQGDKVLMPLAIQVHHAVCDGFHVGRMLNELQQYCDEWQGGA"
+                     /function="chloramphenicol resistance"
+                     /EC_number="2.3.1.28"
+                     /db_xref="UniProtKB/Swiss-Prot:P62577"
+                     /db_xref="GO:0008811"
+                     /db_xref="GO:0016740"
+                     /db_xref="GO:0016746"
+                     /db_xref="GO:0046677"
+                     /db_xref="PFAM:PF00302"
+                     /ApEinfo_fwdcolor="#0000ff"
+                     /ApEinfo_revcolor="#0000ff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     primer_bind     1447..1466
+                     /label="CAT-R"
+                     /note="Chloramphenicol resistance gene, reverse primer"
+     promoter        complement(1533..1637)
+                     /label="CmR Promoter"
+                     /ApEinfo_fwdcolor="#66ccff"
+                     /ApEinfo_revcolor="#66ccff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     rep_origin      complement(1638..2401)
+                     /direction=LEFT
+                     /label="ColE1"
+                     /ApEinfo_fwdcolor="#7f7f7f"
+                     /ApEinfo_revcolor="#7f7f7f"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     rep_origin      1714..2302
+                     /direction=RIGHT
+                     /label="ori"
+                     /note="high-copy-number ColE1/pMB1/pBR322/pUC origin of
+                     replication"
+     primer_bind     2203..2222
+                     /label="pBR322ori-F"
+                     /note="pBR322 origin, forward primer"
+ORIGIN
+        1 tcggtctcat atggcaactt ccggtatggt gtcaaaggga gaggaaaata atatggctat
+       61 tattaaggag tttatgcgtt ttaaggtaca tatggaaggt tctgtcaacg gtcacgaatt
+      121 cgaaattgaa ggtgaggggg aggggaggcc atacgaggga actcagactg ctaagttaaa
+      181 ggtcactaaa ggtggtcctt tacctttcgc ctgggatatc ctgtctccac agtttatgta
+      241 cggttcaaag gcttatgtga aacatcctgc cgatatccca gattatctta aactttcttt
+      301 ccctgagggt tttaagtggg agagggtaat gaactttgaa gacggtggtg tggtcactgt
+      361 tactcaggac tcaagtctgc aggacggtga gttcatctac aaggtgaagc tgagaggtac
+      421 caattttcca tcagatggtc ccgtgatgca aaaaaagaca atgggttggg aagcttctag
+      481 tgaacgtatg tatcccgaag atggagcttt gaaaggtgaa attaagcaaa gactaaaact
+      541 taaggatggt ggacattacg atgctgaagt taagacgacc tacaaggcca aaaagccagt
+      601 ccagttgcct ggagcataca atgttaacat caaattggat ataacttccc ataatgaaga
+      661 ctataccatc gtcgagcaat acgaacgagc cgaagggaga cacagtactg gtggtatgga
+      721 tgaactttat aaaggatccg gaaccgcagg atcctgagac cagaccaata aaaaacgccc
+      781 ggcggcaacc gagcgttctg aacaaatcca gatggagttc tgaggtcatt actggatcta
+      841 tcaacaggag tccaagcgag ctcgatatca aattacgccc cgccctgcca ctcatcgcag
+      901 tactgttgta attcattaag cattctgccg acatggaagc catcacaaac ggcatgatga
+      961 acctgaatcg ccagcggcat cagcaccttg tcgccttgcg tataatattt gcccatggtg
+     1021 aaaacggggg cgaagaagtt gtccatattg gccacgttta aatcaaaact ggtgaaactc
+     1081 acccagggat tggctgaaac gaaaaacata ttctcaataa accctttagg gaaataggcc
+     1141 aggttttcac cgtaacacgc cacatcttgc gaatatatgt gtagaaactg ccggaaatcg
+     1201 tcgtggtatt cactccagag cgatgaaaac gtttcagttt gctcatggaa aacggtgtaa
+     1261 caagggtgaa cactatccca tatcaccagc tcaccgtctt tcattgccat acgaaattcc
+     1321 ggatgagcat tcatcaggcg ggcaagaatg tgaataaagg ccggataaaa cttgtgctta
+     1381 tttttcttta cggtctttaa aaaggccgta atatccagct gaacggtctg gttataggta
+     1441 cattgagcaa ctgactgaaa tgcctcaaaa tgttctttac gatgccattg ggatatatca
+     1501 acggtggtat atccagtgat ttttttctcc attttagctt ccttagctcc tgaaaatctc
+     1561 gataactcaa aaaatacgcc cggtagtgat cttatttcat tatggtgaaa gttggaacct
+     1621 cttacgtgcc cgatcaatca tgaccaaaat cccttaacgt gagttttcgt tccactgagc
+     1681 gtcagacccc gtagaaaaga tcaaaggatc ttcttgagat cctttttttc tgcgcgtaat
+     1741 ctgctgcttg caaacaaaaa aaccaccgct accagcggtg gtttgtttgc cggatcaaga
+     1801 gctaccaact ctttttccga aggtaactgg cttcagcaga gcgcagatac caaatactgt
+     1861 tcttctagtg tagccgtagt taggccacca cttcaagaac tctgtagcac cgcctacata
+     1921 cctcgctctg ctaatcctgt taccagtggc tgctgccagt ggcgataagt cgtgtcttac
+     1981 cgggttggac tcaagacgat agttaccgga taaggcgcag cggtcgggct gaacgggggg
+     2041 ttcgtgcaca cagcccagct tggagcgaac gacctacacc gaactgagat acctacagcg
+     2101 tgagctatga gaaagcgcca cgcttcccga agggagaaag gcggacaggt atccggtaag
+     2161 cggcagggtc ggaacaggag agcgcacgag ggagcttcca gggggaaacg cctggtatct
+     2221 ttatagtcct gtcgggtttc gccacctctg acttgagcgt cgatttttgt gatgctcgtc
+     2281 aggggggcgg agcctatgga aaaacgccag caacgcggcc tttttacggt tcctggcctt
+     2341 ttgctggcct tttgctcaca tgttctttcc tgcgttatcc cctgattctg tggataaccg
+     2401 tag
+//

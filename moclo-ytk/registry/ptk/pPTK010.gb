@@ -1,0 +1,151 @@
+LOCUS       pPTK010                 1890 bp    ds-DNA  circular SYN 10-JAN-2018
+DEFINITION  Glucoamylase-αMFΔ.
+ACCESSION   pPTK010
+VERSION     pPTK010
+KEYWORDS    pPTK010-3a-Glucoamylase-alpha-MF-Delta.
+SOURCE      synthetic DNA construct
+  ORGANISM  synthetic DNA construct
+            .
+REFERENCE   1  (bases 1 to 1890)
+  AUTHORS   Obst U, Lu TK, Sieber V
+  TITLE     A Modular Toolkit for Generating Pichia pastoris Secretion
+            Libraries.
+  JOURNAL   ACS Synth Biol. 2017 Mar 15. doi: 10.1021/acssynbio.6b00337.
+   PUBMED   28252957
+REFERENCE   2  (bases 1 to 1890)
+  AUTHORS   Larralde M
+  TITLE     Direct Submission
+  JOURNAL   Distributed with the MoClo Python library
+            https://github.com/althonos/moclo
+FEATURES             Location/Qualifiers
+     source          1..1890
+                     /organism="recombinant plasmid"
+                     /mol_type="other DNA"
+     source          1..1890
+                     /organism="synthetic DNA construct"
+                     /mol_type="other DNA"
+     protein_bind    join(3..8,10..13)
+                     /bound_moiety="BsaI"
+                     /ApEinfo_fwdcolor="#ff0000"
+                     /ApEinfo_revcolor="#ff0000"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     sig_peptide     11..64
+                     /gene="gaI"
+                     /product="glucoamylase I signal"
+                     /label="Glucoamylase signal"
+                     /db_xref="UniProtKB/Swiss-Prot:P23176"
+                     /ApEinfo_fwdcolor="#ff6600"
+                     /ApEinfo_revcolor="#ff6600"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     sig_peptide     65..235
+                     /label="alpha-MF-delta"
+                     /gene="S. cerevisiae MF-alpha-1"
+                     /product="alpha-factor shortened secretion signal"
+                     /ApEinfo_fwdcolor="#ffcbbf"
+                     /ApEinfo_revcolor="#ffcbbf"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     protein_bind    complement(join(238..241,243..248))
+                     /bound_moiety="BsaI"
+                     /ApEinfo_fwdcolor="#ff0000"
+                     /ApEinfo_revcolor="#ff0000"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     protein_bind    245..248
+                     /label="BsmBI"
+                     /note="BsmBI"
+                     /ApEinfo_fwdcolor="#00ff15"
+                     /ApEinfo_revcolor="#00ff15"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     terminator      complement(251..359)
+                     /label="CmR Terminator"
+                     /ApEinfo_fwdcolor="#66ccff"
+                     /ApEinfo_revcolor="#66ccff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     terminator      255..289
+                     /label="lambda t0 terminator"
+                     /note="minimal transcription terminator from phage lambda
+                     (Scholtissek and Grosse, 1987)"
+     CDS             complement(360..1019)
+                     /codon_start=1
+                     /gene="cat"
+                     /product="chloramphenicol acetyltransferase"
+                     /label="CmR"
+                     /translation="MEKKITGYTTVDISQWHRKEHFEAFQSVAQCTYNQTVQLDITAFL
+                     KTVKKNKHKFYPAFIHILARLMNAHPEFRMAMKDGELVIWDSVHPCYTVFHEQTETFSS
+                     LWSEYHDDFRQFLHIYSQDVACYGENLAYFPKGFIENMFFVSANPWVSFTSFDLNVANM
+                     DNFFAPVFTMGKYYTQGDKVLMPLAIQVHHAVCDGFHVGRMLNELQQYCDEWQGGA"
+                     /function="chloramphenicol resistance"
+                     /EC_number="2.3.1.28"
+                     /db_xref="UniProtKB/Swiss-Prot:P62577"
+                     /db_xref="GO:0008811"
+                     /db_xref="GO:0016740"
+                     /db_xref="GO:0016746"
+                     /db_xref="GO:0046677"
+                     /db_xref="PFAM:PF00302"
+                     /ApEinfo_fwdcolor="#0000ff"
+                     /ApEinfo_revcolor="#0000ff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     primer_bind     934..953
+                     /label="CAT-R"
+                     /note="Chloramphenicol resistance gene, reverse primer"
+     promoter        complement(1020..1124)
+                     /label="CmR Promoter"
+                     /ApEinfo_fwdcolor="#66ccff"
+                     /ApEinfo_revcolor="#66ccff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     rep_origin      complement(1125..1888)
+                     /direction=LEFT
+                     /label="ColE1"
+                     /ApEinfo_fwdcolor="#7f7f7f"
+                     /ApEinfo_revcolor="#7f7f7f"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     rep_origin      1201..1789
+                     /direction=RIGHT
+                     /label="ori"
+                     /note="high-copy-number ColE1/pMB1/pBR322/pUC origin of
+                     replication"
+     primer_bind     1690..1709
+                     /label="pBR322ori-F"
+                     /note="pBR322 origin, forward primer"
+ORIGIN
+        1 tcggtctcat atgtctttca gatccctatt ggcattgtca gggttggtct gttctggatt
+       61 ggctatgaga tttcctagta ttttcactgc tgtgctattt gccgctagtt ccgctctagc
+      121 tgctccagtt aatactacta ctgaagatga attggagggt gacttcgatg ttgctgttct
+      181 gcctttttcc gcttctatcg cagccaagga agaaggtgta tctctagaga agcgtggttc
+      241 ttgagaccag accaataaaa aacgcccggc ggcaaccgag cgttctgaac aaatccagat
+      301 ggagttctga ggtcattact ggatctatca acaggagtcc aagcgagctc gatatcaaat
+      361 tacgccccgc cctgccactc atcgcagtac tgttgtaatt cattaagcat tctgccgaca
+      421 tggaagccat cacaaacggc atgatgaacc tgaatcgcca gcggcatcag caccttgtcg
+      481 ccttgcgtat aatatttgcc catggtgaaa acgggggcga agaagttgtc catattggcc
+      541 acgtttaaat caaaactggt gaaactcacc cagggattgg ctgaaacgaa aaacatattc
+      601 tcaataaacc ctttagggaa ataggccagg ttttcaccgt aacacgccac atcttgcgaa
+      661 tatatgtgta gaaactgccg gaaatcgtcg tggtattcac tccagagcga tgaaaacgtt
+      721 tcagtttgct catggaaaac ggtgtaacaa gggtgaacac tatcccatat caccagctca
+      781 ccgtctttca ttgccatacg aaattccgga tgagcattca tcaggcgggc aagaatgtga
+      841 ataaaggccg gataaaactt gtgcttattt ttctttacgg tctttaaaaa ggccgtaata
+      901 tccagctgaa cggtctggtt ataggtacat tgagcaactg actgaaatgc ctcaaaatgt
+      961 tctttacgat gccattggga tatatcaacg gtggtatatc cagtgatttt tttctccatt
+     1021 ttagcttcct tagctcctga aaatctcgat aactcaaaaa atacgcccgg tagtgatctt
+     1081 atttcattat ggtgaaagtt ggaacctctt acgtgcccga tcaatcatga ccaaaatccc
+     1141 ttaacgtgag ttttcgttcc actgagcgtc agaccccgta gaaaagatca aaggatcttc
+     1201 ttgagatcct ttttttctgc gcgtaatctg ctgcttgcaa acaaaaaaac caccgctacc
+     1261 agcggtggtt tgtttgccgg atcaagagct accaactctt tttccgaagg taactggctt
+     1321 cagcagagcg cagataccaa atactgttct tctagtgtag ccgtagttag gccaccactt
+     1381 caagaactct gtagcaccgc ctacatacct cgctctgcta atcctgttac cagtggctgc
+     1441 tgccagtggc gataagtcgt gtcttaccgg gttggactca agacgatagt taccggataa
+     1501 ggcgcagcgg tcgggctgaa cggggggttc gtgcacacag cccagcttgg agcgaacgac
+     1561 ctacaccgaa ctgagatacc tacagcgtga gctatgagaa agcgccacgc ttcccgaagg
+     1621 gagaaaggcg gacaggtatc cggtaagcgg cagggtcgga acaggagagc gcacgaggga
+     1681 gcttccaggg ggaaacgcct ggtatcttta tagtcctgtc gggtttcgcc acctctgact
+     1741 tgagcgtcga tttttgtgat gctcgtcagg ggggcggagc ctatggaaaa acgccagcaa
+     1801 cgcggccttt ttacggttcc tggccttttg ctggcctttt gctcacatgt tctttcctgc
+     1861 gttatcccct gattctgtgg ataaccgtag
+//

@@ -25,7 +25,9 @@ Pichia ToolKit:
 
     Since both sequences did not share the same origins, plasmids were rotated
     for the upstream *BsaI* recognition site to span on nucleotides 3 to 11,
-    in order for the PTK plasmids to be organized like the YTK plasmids.
+    in order for the PTK plasmids to be organized like the YTK plasmids. Using
+    ``biopython``, sequences were annotated using a custom annotation script
+    (see `source <https://github.com/althonos/moclo/blob/master/scripts>_`).
 
 """
 from __future__ import absolute_import
@@ -108,7 +110,7 @@ class YTKRegistry(EmbeddedRegistry):
 
 class PTKRegistry(YTKRegistry):
 
-    _file = 'ptk.inv'
+    _file = "ptk.json.bz2"
 
     def __init__(self, location='PTK Plate'):
         super(PTKRegistry, self).__init__(location)
