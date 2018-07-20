@@ -143,6 +143,9 @@ if __name__ == "__main__":
         def get_features(label):
             return (f for f in features if label in f.qualifiers.get("label", []))
 
+        def get_features_from_note(note):
+            return (f for f in features if note in f.qualifiers.get("note", []))
+
         # Add direct BsaI site
         features.append(
             SeqFeature(
@@ -243,7 +246,7 @@ if __name__ == "__main__":
             )
 
         elif id_ == "pPTK002":
-            p1 = next(f for f in features if "GAP promoter" in f.qualifiers.get("note", []))
+            p1 = next(get_features_from_note("GAP promoter"))
             p2 = next(get_features("GAP promoter"))
             features.remove(p2)
             p1.type = "promoter"
@@ -260,7 +263,7 @@ if __name__ == "__main__":
             )
 
         elif id_ == "pPTK003":
-            pENO = next(f for f in features if "pENO" in f.qualifiers.get("note", []))
+            pENO = next(get_features_from_note("pENO"))
             pENO.type = "promoter"
             pENO.qualifiers = {
                 "label": ["PpENO1 Promoter"],
@@ -273,7 +276,7 @@ if __name__ == "__main__":
             }
 
         elif id_ == "pPTK004":
-            pTP1 = next(f for f in features if "TPI1" in f.qualifiers.get("note", []))
+            pTP1 = next(get_features_from_note("TPI1"))
             pTP1.type = "promoter"
             pTP1.qualifiers = {
                 "label": ["PpTPI1 Promoter"],
@@ -286,11 +289,7 @@ if __name__ == "__main__":
             }
 
         elif id_ == "pPTK005":
-            a1 = next(
-                f
-                for f in features
-                if "alpha-factor secretion signal" in f.qualifiers.get("note", [])
-            )
+            a1 = next(get_features_from_note("alpha-factor secretion signal"))
             a2 = next(get_features("-alpha-factor secretion signal"))
             features.remove(a1)
             start = a2.location.start
@@ -325,11 +324,7 @@ if __name__ == "__main__":
             )
 
         elif id_ == "pPTK006":
-            a1 = next(
-                f
-                for f in features
-                if "alpha-factor secretion signal" in f.qualifiers.get("note", [])
-            )
+            a1 = next(get_features_from_note("alpha-factor secretion signal"))
             start = a1.location.start
             a1.location = CompoundLocation(
                 [
@@ -360,7 +355,7 @@ if __name__ == "__main__":
             )
 
         elif id_ == "pPTK007":
-            ad = next(f for f in features if "Alpha" in f.qualifiers.get("note", []))
+            ad = next(get_features_from_note("Alpha"))
             # QUESTION: CDS or sig_peptide ?
             ad.type = "sig_peptide"
             ad.qualifiers.update(
@@ -382,74 +377,85 @@ if __name__ == "__main__":
             ALPHA_MF_DELTA = DNARegex(str(ad.extract(gba.seq)).replace("GCCGCTA", "GCC[GT]CTA"))
 
         elif id_ == "pPTK009":
-            am = next(f for f in features if "alpha-amylase" in f.qualifiers.get("note", []))
+            am = next(get_features_from_note("alpha-amylase"))
             am.type = "sig_peptide"
             am.location = FeatureLocation(am.location.start, am.location.start + 60, +1)
             am.qualifiers = {
                 "gene": ["amy"],
                 "product": ["alpha-amylase signal"],
-                "note": ["color: #ffcbbf; direction: RIGHT"],
+                "note": ["color: #ff6600; direction: RIGHT"],
                 "label": ["Alpha-amylase signal"],
                 "db_xref": ["UniProtKB/Swiss-Prot:P30292"],
             }
 
         elif id_ == "pPTK010":
-            gam = next(f for f in features if "Glucoamylase" in f.qualifiers.get("note", []))
+            gam = next(get_features_from_note("Glucoamylase"))
             gam.type = "sig_peptide"
             gam.location = FeatureLocation(gam.location.start, gam.location.start + 54, +1)
             gam.qualifiers = {
                 "gene": ["gaI"],
                 "product": ["glucoamylase I signal"],
-                "note": ["color: #ffcbbf; direction: RIGHT"],
+                "note": ["color: #ff6600; direction: RIGHT"],
                 "label": ["Glucoamylase signal"],
                 "db_xref": ["UniProtKB/Swiss-Prot:P23176"],
             }
 
         elif id_ == "pPTK011":
-            alb = next(f for f in features if "hSA" in f.qualifiers.get("note", []))
+            alb = next(get_features_from_note("hSA"))
             alb.type = "sig_peptide"
             alb.location = FeatureLocation(alb.location.start, alb.location.start + 54, +1)
             alb.qualifiers = {
                 "gene": ["ALB"],
                 "product": ["serum albumin signal"],
-                "note": ["color: #ffcbbf; direction: RIGHT"],
+                "note": ["color: #ff6600; direction: RIGHT"],
                 "label": ["Serum Albumin signal"],
                 "db_xref": ["UniProtKB/Swiss-Prot:P02768"],
             }
 
         elif id_ == "pPTK012":
-            inu = next(f for f in features if "Inulinase" in f.qualifiers.get("note", []))
+            inu = next(get_features_from_note("Inulinase"))
             inu.type = "sig_peptide"
             inu.location = FeatureLocation(inu.location.start, inu.location.start + 48, +1)
             inu.qualifiers = {
                 "gene": ["INU1"],
                 "product": ["inulinase signal peptide"],
-                "note": ["color: #ffcbbf; direction: RIGHT"],
+                "note": ["color: #ff6600; direction: RIGHT"],
                 "label": ["Inulinase signal"],
                 "db_xref": ["UniProtKB/Swiss-Prot:P28999"],
             }
 
         elif id_ == "pPTK013":
-            inv = next(f for f in features if "Invertase" in f.qualifiers.get("note", []))
+            inv = next(get_features_from_note("Invertase"))
             inv.type = "sig_peptide"
             inv.location = FeatureLocation(inv.location.start, inv.location.start + 57, +1)
             inv.qualifiers = {
                 "gene": ["SUC1"],
                 "product": ["invertase 1 signal peptide"],
-                "note": ["color: #ffcbbf; direction: RIGHT"],
+                "note": ["color: #ff6600; direction: RIGHT"],
                 "label": ["Invertase signal"],
                 "db_xref": ["UniProtKB/Swiss-Prot:P10594"],
             }
 
-        if any(get_features("EGFP")):
-            egfp1 = next(f for f in features if "EGFP" in f.qualifiers.get("note", []))
-            egfp2 = next(get_features("EGFP"))
+        elif id_ == "pPTK014":
+            kil = next(get_features_from_note("Killer"))
+            kil.type = "sig_peptide"
+            kil.location = FeatureLocation(kil.location.start, kil.location.start + 78, 1)
+            kil.qualifiers = {
+                "product": ["M1-1 killer toxin signal peptide"],
+                "note": ["color: #ff6600; direction: RIGHT"],
+                "label": ["Killer toxin signal"],
+                "db_xref": ["UniProtKB/Swiss-Prot:P01546"],
+            }
+
+        egfp2 = next(get_features("EGFP"), None)
+        if egfp2 is not None:
+            egfp1 = next(get_features_from_note("EGFP"))
             features.remove(egfp2)
-            egfp1.location = FeatureLocation(
-                egfp1.location.start,
-                egfp1.location.end + 9,  # fix STOP codon not being included
-                egfp1.location.strand,
-            )
+            # egfp1.location = FeatureLocation(
+            #     egfp1.location.start,
+            #     egfp1.location.end + 6,
+            #     egfp1.location.strand,
+            # )
             egfp1.qualifiers.update(
                 {
                     "label": "eGFP",
@@ -457,12 +463,14 @@ if __name__ == "__main__":
                 }
             )
 
-        if any("RFP" in f.qualifiers.get("note", []) for f in features):
-            rfp = next(f for f in features if "RFP" in f.qualifiers.get("note", []))
+        rfp = next(get_features_from_note("RFP"), None)
+        if rfp is not None:
             rfp.type = "CDS"
+            has_atg = gba.seq[rfp.location.start - 3 : rfp.location.start] == "ATG"
             rfp.location = FeatureLocation(
-                rfp.location.start,
-                rfp.location.end + 9,  # fix STOP codon not being included
+                rfp.location.start - (3 if has_atg else 0),
+                rfp.location.end,
+                # rfp.location.end + 6,
                 rfp.location.strand,
             )
             rfp.qualifiers.update(
@@ -472,10 +480,8 @@ if __name__ == "__main__":
                     "gene": "mCherry",
                     "product": "mCherry",
                     "translation": str(translate(rfp.extract(gba.seq), to_stop=True)),
-                    "note": [
-                        "color: #c16969; direction: RIGHT",
-                        "ATG deleted, start with second codon",
-                    ],
+                    "note": ["color: #c16969; direction: RIGHT"]
+                    + ([] if has_atg else ["ATG deleted, start with second codon"]),
                     "db_xref": [
                         "UniProtKB/Swiss-Prot:X5DSL3",
                         "PDB:4ZIN",
@@ -489,22 +495,18 @@ if __name__ == "__main__":
                 }
             )
 
-            alert = next(
-                f
-                for f in features
-                if "Start with second codon!!! ATG deleted!" in f.qualifiers.get("note", [])
-            )
+            alert = next(get_features_from_note("Start with second codon!!! ATG deleted!"))
             features.remove(alert)
 
-        if any("PARS-1" in f.qualifiers.get("note", []) for f in features):
-            pars = next(f for f in features if "PARS-1" in f.qualifiers.get("note", []))
+        pars = next(get_features_from_note("PARS-1"), None)
+        if pars is not None:
             pars.type = "rep_origin"
             pars.qualifiers["label"] = ["PARS-1"]
             pars.qualifiers["note"] = ["color: #9A969B"]
 
-        if any(get_features("AOX1 terminator")):
-            t1 = next(f for f in features if "AOX1 terminator" in f.qualifiers.get("note", []))
-            t2 = next(get_features("AOX1 terminator"))
+        t1 = next(get_features_from_note("AOX1 terminator"), None)
+        t2 = next(get_features("AOX1 terminator"), None)
+        if t1 is not None and t2 is not None:
             features.remove(t2)
             t1.qualifiers.update(
                 {
@@ -516,8 +518,6 @@ if __name__ == "__main__":
         match = ALPHA_MF_DELTA and ALPHA_MF_DELTA.search(gba.seq)
         if id_ != "pPTK007" and match is not None:
             start, end = match.span(0)
-            # start = gba.seq.find(ALPHA_MF_DELTA)
-            # end = start + len(ALPHA_MF_DELTA)
             features.append(
                 SeqFeature(
                     location=FeatureLocation(start, end, 1),
