@@ -15,4 +15,4 @@ def _import_from(*names):
 
 
 bz2 = _import_from('bz2file', 'bz2')
-json = _import_from('ujson', 'yajl', 'simplejson', 'json')
+json = _import_from('hyperjson', 'ujson', 'yajl', 'rapidjson', 'simplejson', 'json')
