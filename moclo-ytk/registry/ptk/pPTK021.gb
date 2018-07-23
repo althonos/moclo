@@ -17,6 +17,7 @@ REFERENCE   2  (bases 1 to 1841)
   TITLE     Direct Submission
   JOURNAL   Distributed with the MoClo Python library
             https://github.com/althonos/moclo
+COMMENT     YTK:7
 FEATURES             Location/Qualifiers
      source          1..1841
                      /organism="recombinant plasmid"

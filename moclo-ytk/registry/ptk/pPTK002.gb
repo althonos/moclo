@@ -17,6 +17,7 @@ REFERENCE   2  (bases 1 to 2143)
   TITLE     Direct Submission
   JOURNAL   Distributed with the MoClo Python library
             https://github.com/althonos/moclo
+COMMENT     YTK:2
 FEATURES             Location/Qualifiers
      source          1..2143
                      /organism="recombinant plasmid"
@@ -40,12 +41,9 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_revcolor="#00a1ee"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
-     misc_feature    159
-                     /note="Modification for no digestion"
-                     /ApEinfo_fwdcolor="#ff00ff"
-                     /ApEinfo_revcolor="#ff00ff"
-                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
-                     width 5 offset 0"
+     misc_difference 159
+                     /replace="c"
+                     /note="remove BsmBI cutting site"
      protein_bind    complement(join(491..494,496..501))
                      /bound_moiety="BsaI"
                      /ApEinfo_fwdcolor="#ff0000"

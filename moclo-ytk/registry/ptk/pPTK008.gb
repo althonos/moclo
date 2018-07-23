@@ -17,6 +17,7 @@ REFERENCE   2  (bases 1 to 1893)
   TITLE     Direct Submission
   JOURNAL   Distributed with the MoClo Python library
             https://github.com/althonos/moclo
+COMMENT     YTK:3a
 FEATURES             Location/Qualifiers
      source          1..1893
                      /organism="recombinant plasmid"
@@ -45,7 +46,7 @@ FEATURES             Location/Qualifiers
                      width 5 offset 0"
      sig_peptide     69..238
                      /codon_start=1
-                     /label="MF-alpha-1-delta signal (no Kex2p)"
+                     /label="alpha-MF-delta (no Kex)"
                      /gene="S. cerevisiae MF(ALPHA)1"
                      /product="mating factor alpha-1 secretion signal,
                      shortened, no Kex2p site"

@@ -695,7 +695,7 @@ if __name__ == "__main__":
         ref.journal = "Distributed with the MoClo Python library\nhttps://github.com/althonos/moclo"
 
         # Add the YTK type to the record comments
-        annotations["comments"] = ["YTK:{}".format(type_)]
+        annotations["comment"] = ["YTK:{}".format(type_)]
 
         # create the final record
         final = CircularRecord(
