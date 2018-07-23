@@ -73,7 +73,6 @@ class TestAssembly(unittest.TestCase):
         msg = "no module with 'ATGC' start overhang"
         self.assertEqual(str(ctx.exception), msg)
 
-
     def test_unused_modules(self):
         """Assert an error is raised on unused modules during assembly.
         """

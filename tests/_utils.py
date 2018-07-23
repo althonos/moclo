@@ -23,6 +23,7 @@ from moclo.record import CircularRecord
 
 # fs.osfs.OSFS: FS where test data is located
 DATAFS = fs.open_fs(os.path.join(__file__, '..', 'data'))
+YTKFS = fs.open_fs(os.path.join(__file__, '..', '..', 'moclo-ytk'))
 
 
 class PartsMetaCase(object):
