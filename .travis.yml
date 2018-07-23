@@ -36,7 +36,7 @@ after_script:
 - python -m codacy
 
 before_deploy:
-- ci/travis/before-deploy.sh
+- python ci/travis/before-deploy.py
 
 deploy:
   provider: script
