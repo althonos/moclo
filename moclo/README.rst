@@ -83,6 +83,26 @@ To see more ways of installing, head over to the `Installation <https://moclo.re
 page of the online documentation.
 
 
+Kits
+----
+
+By itself, ``moclo`` is not very useful. To be able to simulate MoClo assemblies
+you can install some of the following toolkits:
+
+- `moclo-ytk <https://pypi.org/project/moclo-ytk>`_: MoClo Yeast ToolKit,
+  *John Dueber Lab*, and Pichia ToolKit, *Volker Sieber Lab*
+- `moclo-cidar <https://pypi.org/project/moclo-cidar>`_: MoClo CIDAR kit,
+  *Douglas Densmore Lab*
+- `moclo-ecoflex <https://pypi.org/project/moclo-ecoflex>`_: MoClo EcoFlex,
+  *Paul Freemont Lab*
+
+Toolkits ship with concrete implementation of the MoClo logic (using the DNA
+signatures and restriction enzymes from the reference paper), as well as official
+sequences obtained from `AddGene <https://www.addgene.org>`_ and manually
+annotated with higher-quality features. These sequences can be accessed through
+the ``moclo.registry`` module, using the *registry* interface.
+
+
 About
 -----
 
