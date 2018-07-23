@@ -30,7 +30,7 @@
    :target: https://github.com/althonos/moclo/tree/master/moclo-cidar
 
 .. |Docs| image:: https://img.shields.io/readthedocs/moclo.svg?maxAge=3600&style=flat-square
-   :target: https://moclo.readthedocs.io/en/latest/kits/cidar.html
+   :target: https://moclo.readthedocs.io/en/latest/kits/cidar/
 
 Requirements
 ------------
