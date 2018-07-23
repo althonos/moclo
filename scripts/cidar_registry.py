@@ -1,23 +1,16 @@
 #!/usr/bin/env python3
 # coding: utf-8
-"""Automatic PTK sequences annotation pipeline.
+"""Automatic CIDAR sequences annotation pipeline.
 
-Downloads depositor and AddGene full sequences from each PTK plasmid page,
-rotate the plasmids so that they have the same orientation as YTK official
-sequences, merge the two records, remove duplicated annotations, add BsaI
-sites as annotations, and then:
+Downloads depositor full sequences from each CIDAR plasmid page,
+rotate the plasmids so that they have the same orientation using an ubiquitous
+feature as a reference position. The reference position makes sure no feature
+overlaps the $0$ reference. Missing sequences (`DVK_AE` and `DVK_AF`) are
+derived from `DVK_EF`.
 
 Edits:
-- rename all chloramphenicol resistance associated sequences (promoter, CDS,
-  terminator) to use the same nomenclature and color scheme as the YTK records
-- improve annotations of pPTK001, pPKT002, pPTK003, pPTK004 (promoters) using
-  the same format, using '/label', '/function' and '/gene' and '/note' in a
-  standardized way.
-- change type of 'pENO1' to 'promoter' and use YTK color
-- set type of 'RFP' to CDS, remove duplicate annotaiton, add '/db_xref'
-  qualifiers with UniProt/GO/PFAM/PDB/InterPro, set '/gene' to 'mCherry'
-  (accepted name), use YTK color scheme
--
+- Recolor all AmpR with the same color as YTK parts
+- Add AmpR terminator feature with standard color
 
 """
 
@@ -53,6 +46,8 @@ UA = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)
 
 DVK_AF = None
 AMPR_TERM = "gattatcaaaaaggatctt".upper()  # Reverse 3' of AmpR terminator
+KANR_PROM = "aacaccccttgtattactgtttatgtaagcagacagtttt".upper()
+KANR_TERM = "gtgttacaaccaattaaccaattctga".upper()
 
 NAME_REGEX = re.compile(r"([^ ]*) \(([^\)]*)\)(_[A-Z]{2})")
 COLOR_REGEX = re.compile(r"color: (#[0-9a-fA-F]{6})")
@@ -206,10 +201,38 @@ if __name__ == "__main__":
                 for f in gb.features
                 if "AmpR" in f.qualifiers.get("label", [])
             )
-            start = gb.seq.lower().find("taccaatgcttaatcagtg")
+            start = gb.seq.lower().find("ttaccaatgcttaatcagtg")
             end = start + 861
             ampr.location = FeatureLocation(start, end, -1)
 
+        if id_.startswith('C0062'):
+            loc = FeatureLocation(41, 794, 1)
+            lux = SeqFeature(location=loc, type='CDS')
+            lux.qualifiers.update({
+                'codon_start': '1',
+                'label': 'LuxR activator',
+                'product': 'transcriptional activator protein LuxR',
+                'gene': 'luxR',
+                'db_xref': [
+                    'UniProtKB/Swiss-Prot:P12746',
+                    'GO:0008218',
+                    'GO:0045893',
+                    'GO:0009371',
+                    'GO:0006351',
+                    'InterPro:IPR016032',
+                    'InterPro:IPR005143',
+                    'InterPro:IPR036693',
+                    'InterPro:IPR000792',
+                    'InterPro:IPR036388',
+                    'PFAM:PF03472',
+                    'PFAM:PF00196',
+                ],
+                'translation': lux.extract(gb.seq).translate(),
+                'inference': ['DESCRIPTION:alignment:blastx:UniProtKB/Swiss-Prot:P12746'],
+            })
+            gb.features.append(lux)
+
+        # AmpR recolor and annotations
         ampr = next(get_features("AmpR"), None)
         if ampr is not None:
             ampr.qualifiers = {
@@ -235,12 +258,13 @@ if __name__ == "__main__":
                 "EC_number": "3.5.2.6",
             }
 
-        ampr_prom = next(get_features("AmpR Promoter"), None)
+        ampr_prom = next(get_features("AmpR promoter"), None)
         if ampr_prom is not None:
+            ampr_prom.qualifiers["label"] = ["AmpR Promoter"]
             ampr_prom.qualifiers["note"] = ["color: #ff6666"]
 
         ampr_term_start = gb.seq.find(AMPR_TERM)
-        if ampr_term_start >= 0:
+        if ampr is not None and ampr_term_start >= 0:
             ampr_term = SeqFeature(
                 location=FeatureLocation(
                     ampr_term_start, ampr_term_start + 94, -1
@@ -248,10 +272,113 @@ if __name__ == "__main__":
                 type="terminator",
                 qualifiers={
                     "label": "AmpR Terminator",
-                    "note": "color: #ff6666",
+                    "note": ["color: #ff6666"],
                 },
             )
             gb.features.append(ampr_term)
+
+
+
+        # KanR recolor and annotations
+        kanr = next(get_features('KanR'), None)
+        if kanr is not None:
+            kanr.qualifiers.update({
+                'gene': 'aphA1',
+                'product': 'aminoglycoside phosphotransferase',
+                'EC_number': '2.7.1.95',
+                'label': 'KanR',
+                'function': 'kanamicyn resistance',
+                'db_xref': [
+                    'CDD:cd05150',
+                    'GO:0000166',
+                    'GO:0005524',
+                    'GO:0008910',
+                    'GO:0016301',
+                    'GO:0016740',
+                    'GO:0016773',
+                    'GO:0016310',
+                    'GO:0046677',
+                    'InterPro:IPR024165',
+                    'InterPro:IPR011009',
+                    'InterPro:IPR002575',
+                    'PFAM:PF01636',
+                    'UniProtKB/Swiss-Prot:P00551',
+                ],
+                'note': ['color: #008000'],
+            })
+
+        kanr_term_start = gb.seq.find(KANR_TERM)
+        if kanr is not None and kanr_term_start >= 0:
+            kanr_term = SeqFeature(
+                location=FeatureLocation(
+                    kanr_term_start, kanr_term_start + 27, -1
+                ),
+                type="terminator",
+                qualifiers={
+                    "label": ["KanR Terminator"],
+                    "note": ["color: #93ff35"],
+                },
+            )
+            gb.features.append(kanr_term)
+
+        kanr_prom_start = gb.seq.find(KANR_PROM)
+        if kanr is not None and kanr_prom_start >= 0:
+            kanr_prom = SeqFeature(
+                location=FeatureLocation(
+                    kanr_prom_start, kanr_prom_start + 148, -1
+                ),
+                type="terminator",
+                qualifiers={
+                    "label": ["KanR Promoter"],
+                    "note": ["color: #93ff35"],
+                },
+            )
+            gb.features.append(kanr_prom)
+
+        # GFP recolor and annotations
+        gfp = next(get_features('GFP'), None)
+        if gfp is not None:
+            gfp.qualifiers.update({
+                'label': 'GFP',
+                'note': ['color: #34ff03'],
+                'product': ['green fluorescent protein'],
+                'gene': ['GFP'],
+                'db_xref': [
+                    'PDB:1H6R',
+                    'InterPro:IPR009017',
+                    'InterPro:IPR011584',
+                    'InterPro:IPR000786',
+                    'PFAM:PF01353',
+                    'GO:0008218',
+                    'GO:0006091',
+                    'GO:0018298',
+                    'UniProtKB/Swiss-Prot:P42212',
+                ],
+                'inference': [
+                    'DESCRIPTION:alignment:blastx:UniProtKB/Swiss-Prot:P42212',
+                ]
+            })
+
+        # mRFP1 recolor and annotations
+        rfp = next(get_features('mRFP1'), None)
+        if rfp is not None:
+            rfp.qualifiers.update({
+                'label': 'mRFP',
+                'product': 'mRFP1',
+                'note': [
+                    'monomeric derivative of DsRed (Campbell et al., 2002)',
+                    'iGEM Part: BBa_E1010',
+                    'color: #c16969',
+                ],
+                'db_xref': [
+                    'UniProtKB/Swiss-Prot:Q9U6Y8',
+                    'GO:0008218',
+                    'GO:0006091',
+                    'GO:0018298',
+                    'PDB:2H5R',
+
+                ]
+            })
 
         # sort features by start location, source first
         gb.features.sort(
