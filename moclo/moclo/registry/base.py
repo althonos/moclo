@@ -9,12 +9,15 @@ import typing
 
 import Bio.SeqIO
 import cached_property
+import fs
 import pkg_resources
 import six
+from fs.wrap import read_only
+from fs.path import splitext
 
 from .._impl import bz2, json
 from ..record import CircularRecord
-from ..core import AbstractModule, AbstractVector
+from ..core import AbstractModule, AbstractVector, AbstractPart
 
 
 class Item(typing.NamedTuple('Item', [
@@ -31,6 +34,27 @@ class Item(typing.NamedTuple('Item', [
 class AbstractRegistry(typing.Mapping[typing.Text, Item]):
     """An abstract registry holding MoClo plasmids.
     """
+
+    _ANTIBIOTICS = {
+        'KanR': 'Kanamycin',
+        'CamR': 'Chloramphenicol',
+        'CmR': 'Chloramphenicol',
+        'KanR': ' Kanamycin',
+        'AmpR': 'Ampicillin',
+        'SmR': 'Spectinomycin',
+        'SpecR': 'Spectinomycin',
+    }
+
+    @classmethod
+    def _find_resistance(cls, record):
+        for feature in record.features:
+            labels = set(feature.qualifiers.get('labels', []))
+            cassettes = labels.intersection(cls._ANTIBIOTICS)
+            if len(cassettes) > 1:
+                raise RuntimeError('multiple resistance cassettes detected')
+            elif len(cassettes) == 1:
+                return cls._ANTIBIOTICS.get(cassettes[0])
+        raise RuntimeError("could not find the resistance of '{}'".format(record.id))
 
 
 class CombinedRegistry(AbstractRegistry):
@@ -113,3 +137,66 @@ class EmbeddedRegistry(AbstractRegistry):
 
     def __iter__(self):
         return iter(self._data)
+
+
+class FilesystemRegistry(AbstractRegistry):
+    """A registry located on a filesystem
+    """
+
+    def __init__(self, fs_url, base, extensions=('gb', 'gbk')):
+
+        bases = (AbstractPart, AbstractModule, AbstractModule)
+        if not isinstance(base, type) or not issubclass(base, (bases)):
+            raise TypeError("base cannot be '{}'".format(base))
+
+        self.fs = read_only(fs.open_fs(fs_url))
+        self.base = base
+        self._recurse = False
+        self._extensions = extensions
+        self._cache = {}
+
+    @cached_property.cached_property
+    def _files(self):
+        return ['*.{}'.format(extension) for extension in self._extensions]
+
+    def _find_type(self, record):
+        for cls in self.base.__subclasses__():
+            entity = cls(record)
+            if entity.is_valid():
+                return entity
+        raise RuntimeError("could not find the type for '{}'".format(record.id))
+
+    def __iter__(self):
+        for f in self.fs.filterdir('/', files=self._files, exclude_dirs=['*']):
+            name, _ = splitext(f)
+            yield name
+
+    def __len__(self):
+        return sum(1 for _ in self.fs.filterdir('/', files=self._files, exclude_dirs=['*']))
+
+    def __getitem__(self, item):
+        files = ('{}.{}'.format(item, extension) for extension in self._extensions)
+
+        for name in files:
+
+            if self.fs.isfile(name):
+
+                with self.fs.open(name) as handle:
+                    record = Bio.SeqIO.read(handle, 'genbank')
+                    record.id, _ = splitext(name)
+
+                entity = self._find_type(record)
+                resistance = self._find_resistance()
+
+
+                    if entity.is_valid():
+                        return Item(
+                            id=record.id,
+                            name=record.description,
+                            entity=entity,
+                            resistance=None,
+                        )
+
+                raise TypeError("could not get type of {}".format(record.id))
+
+        raise KeyError(item)
