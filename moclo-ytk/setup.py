@@ -8,7 +8,6 @@ import os
 import setuptools
 import sys
 
-from distutils.extension import Extension
 from setuptools.command.build_ext import build_ext as _build_ext
 
 
@@ -20,12 +19,12 @@ else:
         return bz2.open(filename, 'wt')
 
 
-class Registry(Extension):
+class Registry(setuptools.Extension):
 
     def __init__(self, name):
         directory = os.path.join('registry', name)
         sources = glob.glob(os.path.join(directory, '*.gb'))
-        Extension.__init__(self, name, sources)
+        setuptools.Extension.__init__(self, name, sources)
 
 
 class build_ext(_build_ext):
