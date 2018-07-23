@@ -72,10 +72,13 @@ structural and transcriptional features:
   and are able to express many genes at onces.
 
 The MoClo assembly follows the following hierarchical rule:
-$$
-m_i + \dots + m_i + v_{i+1} = m_{i+1}
-$$
-where $m_i$ is a module of level $i$, and $v_j$ a vector of level $j$.
+
+.. math::
+
+   m_i + \dots + m_i + v_{i+1} = m_{i+1}
+
+where :math:`m_i` is a module of level :math:`i`, and :math:`v_j` a vector of
+level :math:`j`.
 
 Furthermore, the enzyme used during the Golden Gate Assembly depends on the
 assembly level. Alternating between the two enzymes makes it possible for an
