@@ -232,6 +232,22 @@ if __name__ == "__main__":
             })
             gb.features.append(lux)
 
+        # Add missing Lux1 promoter
+        if id_.startswith('R0063'):
+            start = gb.seq.lower().find('cctgtacgatcctacaggtgcttatgttaagtaattgt')
+            plux = SeqFeature(
+                location=FeatureLocation(start, start + 150, 1),
+                type="promoter",
+                qualifiers={
+                    'label': ['pLuxR Promoter'],
+                    'gene': ['LuxR'],
+                    'operon': ['Lux'],
+                    'function': ['LuxR repressed promoter'],
+                    'note': ['color: #00a1ee'],
+                }
+            )
+            gb.features.append(plux)
+
         # AmpR recolor and annotations
         ampr = next(get_features("AmpR"), None)
         if ampr is not None:
