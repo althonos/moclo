@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 import abc
 import io
 import itertools
+import inspect
 import typing
 
 import Bio.SeqIO
@@ -48,12 +49,12 @@ class AbstractRegistry(typing.Mapping[typing.Text, Item]):
     @classmethod
     def _find_resistance(cls, record):
         for feature in record.features:
-            labels = set(feature.qualifiers.get('labels', []))
+            labels = set(feature.qualifiers.get('label', []))
             cassettes = labels.intersection(cls._ANTIBIOTICS)
             if len(cassettes) > 1:
                 raise RuntimeError('multiple resistance cassettes detected')
             elif len(cassettes) == 1:
-                return cls._ANTIBIOTICS.get(cassettes[0])
+                return cls._ANTIBIOTICS.get(cassettes.pop())
         raise RuntimeError("could not find the resistance of '{}'".format(record.id))
 
 
@@ -113,7 +114,7 @@ class EmbeddedRegistry(AbstractRegistry):
             with io.TextIOWrapper(bz2.BZ2File(rs)) as decomp:
                 raw_data = json.load(decomp)
         for raw in raw_data:
-            record = Bio.SeqIO.read(io.StringIO(raw['gb']), 'gb')
+            record = Bio.SeqIO.read(six.StringIO(raw['gb']), 'gb')
             raw['record'] = CircularRecord(record)
         return {
             item.id: item
@@ -140,12 +141,12 @@ class EmbeddedRegistry(AbstractRegistry):
 
 
 class FilesystemRegistry(AbstractRegistry):
-    """A registry located on a filesystem
+    """A registry located on a filesystem.
     """
 
     def __init__(self, fs_url, base, extensions=('gb', 'gbk')):
 
-        bases = (AbstractPart, AbstractModule, AbstractModule)
+        bases = (AbstractPart, AbstractModule, AbstractVector)
         if not isinstance(base, type) or not issubclass(base, (bases)):
             raise TypeError("base cannot be '{}'".format(base))
 
@@ -160,7 +161,10 @@ class FilesystemRegistry(AbstractRegistry):
         return ['*.{}'.format(extension) for extension in self._extensions]
 
     def _find_type(self, record):
-        for cls in self.base.__subclasses__():
+        classes = list(self.base.__subclasses__())
+        if not inspect.isabstract(self.base):
+            classes.append(self.base)
+        for cls in classes:
             entity = cls(record)
             if entity.is_valid():
                 return entity
@@ -176,27 +180,15 @@ class FilesystemRegistry(AbstractRegistry):
 
     def __getitem__(self, item):
         files = ('{}.{}'.format(item, extension) for extension in self._extensions)
-
         for name in files:
-
             if self.fs.isfile(name):
-
                 with self.fs.open(name) as handle:
                     record = Bio.SeqIO.read(handle, 'genbank')
                     record.id, _ = splitext(name)
-
-                entity = self._find_type(record)
-                resistance = self._find_resistance()
-
-
-                    if entity.is_valid():
-                        return Item(
-                            id=record.id,
-                            name=record.description,
-                            entity=entity,
-                            resistance=None,
-                        )
-
-                raise TypeError("could not get type of {}".format(record.id))
-
+                return Item(
+                    id=record.id,
+                    name=record.description,
+                    entity=self._find_type(record),
+                    resistance=self._find_resistance(record),
+                )
         raise KeyError(item)
