@@ -14,16 +14,12 @@ from moclo.kits import ytk
 from moclo.registry import base
 from moclo.registry.ytk import YTKRegistry, PTKRegistry
 
-from ._utils import YTKFS
+from ._utils import build_registries
 
 
 def setUpModule():
-    subprocess.Popen(
-        args=[sys.executable, "setup.py", "build_ext", "-i"],
-        cwd=YTKFS.getsyspath('/'),
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    ).communicate()
+    build_registries('ytk')
+    build_registries('cidar')
 
 
 class TestEmbeddedRegistry(unittest.TestCase):
@@ -72,7 +68,7 @@ class TestFilesystemRegistry(unittest.TestCase):
         write([r['pYTK038'].entity.record], buff, 'genbank')
         with cls.memfs.open('pYTK038.gb', 'w') as f:
             f.write(buff.getvalue())
-    
+
     @classmethod
     def tearDownClass(cls):
         cls.memfs.close()

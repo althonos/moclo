@@ -5,6 +5,8 @@ from __future__ import unicode_literals
 import io
 import os
 import unittest
+import subprocess
+import sys
 import warnings
 
 import Bio.SeqIO
@@ -21,10 +23,34 @@ except ImportError:
 from moclo.record import CircularRecord
 
 
-# fs.osfs.OSFS: FS where test data is located
-DATAFS = fs.open_fs(os.path.join(__file__, '..', 'data'))
-YTKFS = fs.open_fs(os.path.join(__file__, '..', '..', 'moclo-ytk'))
+# fs.osfs.OSFS: FS located at the root of the project
+PROJFS = fs.open_fs(os.path.join(__file__, '..', '..'))
 
+# fs.osfs.OSFS: FS where test data is located
+DATAFS = PROJFS.opendir('tests/data')
+
+### Setup helper
+
+class Registries(object):
+
+    def __init__(self):
+        self._built = set()
+
+    def __call__(self, name):
+        if name not in self._built:
+            subprocess.Popen(
+                args=[sys.executable, "setup.py", "build_ext", "-i"],
+                cwd=PROJFS.getsyspath('moclo-{}'.format(name)),
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            ).communicate()
+            self._built.add(name)
+
+
+build_registries = Registries()
+
+
+### Tests helper
 
 class PartsMetaCase(object):
 
