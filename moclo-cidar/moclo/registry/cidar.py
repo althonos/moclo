@@ -38,28 +38,6 @@ class CIDARRegistry(EmbeddedRegistry):
     _module = __name__
     _file = "cidar.json.bz2"
 
-    # _types = {
-    #     '1': ytk.YTKPart1,
-    #     '2': ytk.YTKPart2,
-    #     '3': ytk.YTKPart3,
-    #     '3a': ytk.YTKPart3a,
-    #     '3b': ytk.YTKPart3b,
-    #     '4': ytk.YTKPart4,
-    #     '4a': ytk.YTKPart4a,
-    #     '4b': ytk.YTKPart4b,
-    #     '234': ytk.YTKPart234,
-    #     '234r': ytk.YTKPart234r,
-    #     '5': ytk.YTKPart5,
-    #     '6': ytk.YTKPart6,
-    #     '7': ytk.YTKPart7,
-    #     '8': ytk.YTKPart8,
-    #     '8a': ytk.YTKPart8a,
-    #     '8b': ytk.YTKPart8b,
-    #     '678': ytk.YTKPart678,
-    #     'cassette vector': ytk.YTKCassetteVector,
-    #     'entry vector': ytk.YTKEntryVector,
-    # }
-
     def __init__(self, location='CIDAR Plate'):
         super(CIDARRegistry, self).__init__()
         self.location = location

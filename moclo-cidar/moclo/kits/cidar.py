@@ -61,7 +61,7 @@ class CIDARCassetteVector(vectors.CassetteVector):
 
     """
 
-    cutter = BbsI
+    cutter = BsaI
 
     @staticmethod
     def structure():
