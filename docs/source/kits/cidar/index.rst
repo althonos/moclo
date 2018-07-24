@@ -47,7 +47,7 @@ Parts
 ^^^^^
 
 .. autoclass:: CIDARPromoter(CIDARPart)
-.. autoclass:: CIDARibosomeBindingSite(CIDARPart)
+.. autoclass:: CIDARRibosomeBindingSite(CIDARPart)
 .. autoclass:: CIDARCodingSequence(CIDARPart)
 .. autoclass:: CIDARTerminator(CIDARPart)
 

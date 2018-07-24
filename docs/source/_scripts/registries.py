@@ -4,11 +4,11 @@ import sys
 import subprocess
 
 DOCSRC_DIR = os.path.abspath(os.path.join(__file__, '..', '..'))
-YTK_DIR = os.path.abspath(os.path.join(DOCSRC_DIR, '..', '..', 'moclo-ytk'))
+_EXT_DIR = os.path.abspath(os.path.join(DOCSRC_DIR, '..', '..', 'moclo-{}'))
 
-def build_registries():
+def build_registries(name):
     cmd = subprocess.Popen(
         [sys.executable, 'setup.py', 'build_ext', '--inplace'],
-        cwd=YTK_DIR,
+        cwd=_EXT_DIR.format(name),
     )
     cmd.communicate()
