@@ -19,13 +19,13 @@ from fs.path import splitext
 from .._impl import bz2, json
 from ..record import CircularRecord
 from ..core import AbstractModule, AbstractVector, AbstractPart
+from .utils import find_resistance
 
 
 class Item(typing.NamedTuple('Item', [
             ('id', typing.Text),
             ('name', typing.Text),
             ('entity', typing.Union[AbstractModule, AbstractVector]),
-            # ('location', typing.Text),
             ('resistance', typing.Text),
         ])):
     """A uniquely identified record in a registry.
@@ -35,28 +35,6 @@ class Item(typing.NamedTuple('Item', [
 class AbstractRegistry(typing.Mapping[typing.Text, Item]):
     """An abstract registry holding MoClo plasmids.
     """
-
-    _ANTIBIOTICS = {
-        'KanR': 'Kanamycin',
-        'CamR': 'Chloramphenicol',
-        'CmR': 'Chloramphenicol',
-        'KanR': ' Kanamycin',
-        'AmpR': 'Ampicillin',
-        'SmR': 'Spectinomycin',
-        'SpecR': 'Spectinomycin',
-    }
-
-    @classmethod
-    def _find_resistance(cls, record):
-        for feature in record.features:
-            labels = set(feature.qualifiers.get('label', []))
-            cassettes = labels.intersection(cls._ANTIBIOTICS)
-            if len(cassettes) > 1:
-                raise RuntimeError('multiple resistance cassettes detected')
-            elif len(cassettes) == 1:
-                return cls._ANTIBIOTICS.get(cassettes.pop())
-        raise RuntimeError("could not find the resistance of '{}'".format(record.id))
-
 
 class CombinedRegistry(AbstractRegistry):
     """A registry combining several registries into a single collection.
@@ -189,6 +167,6 @@ class FilesystemRegistry(AbstractRegistry):
                     id=record.id,
                     name=record.description,
                     entity=self._find_type(record),
-                    resistance=self._find_resistance(record),
+                    resistance=find_resistance(record),
                 )
         raise KeyError(item)

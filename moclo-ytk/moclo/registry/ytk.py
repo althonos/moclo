@@ -37,19 +37,13 @@ import six
 
 from ..kits import ytk
 from .base import EmbeddedRegistry
+from .utils import find_resistance
 
 
 class YTKRegistry(EmbeddedRegistry):
 
     _module = __name__
     _file = "ytk.json.bz2"
-
-    _antibio = {
-        'CmR': 'Chloramphenicol',
-        'AmpR': 'Ampicillin',
-        'KanR': 'Kanamycin',
-        'SmR': 'Spectinomycin',
-    }
 
     _types = {
         '1': ytk.YTKPart1,
@@ -85,15 +79,10 @@ class YTKRegistry(EmbeddedRegistry):
 
     def _load_resistance(self, raw, index):
         try:
-            gene = next(
-                f.qualifiers['label'][0] for f in raw['record'].features
-                if any(a in f.qualifiers.get('label', []) for a in self._antibio)
-            )
-            return self._antibio[gene]
+            return find_resistance(raw['record'])
         except StopIteration:
             msg = "could not find antibiotics resistance of '{}'"
             six.raise_from(RuntimeError(msg.format(raw['record'].id)), None)
-        return raw['resistance']
 
     def _load_entity(self, raw, index):
         comments = raw['record'].annotations['comment'].splitlines()
