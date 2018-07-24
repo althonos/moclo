@@ -98,10 +98,8 @@ class CIDARRegistry(EmbeddedRegistry):
 
     def _load_entity(self, raw, index):
         match = self._ENTITY_RX.match(raw['record'].description)
-        print(raw['id'], match)
         if match is not None:
             class_, type_ = map(str.strip, match.groups())
-            print(raw['id'], class_, '(', type_, ')')
             if class_ == 'Destination Vector':
                 if raw['id'].startswith('DVA'):
                     class_ = 'Entry Vector'
@@ -111,9 +109,6 @@ class CIDARRegistry(EmbeddedRegistry):
                 return self._CLASSES[class_](raw['record'])
             if type_ in self._TYPES:
                 return self._TYPES[type_](raw['record'])
-        else:
-            print(raw['record'].description)
-
         raise RuntimeError("could not find type of '{}'".format(raw['id']))
 
     def _load_location(self, raw, index):

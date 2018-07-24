@@ -72,7 +72,7 @@ class CIDARCassetteVector(vectors.CassetteVector):
             '(N'
             'GAGACC'  # BsaI
             'N*'      # Placeholder sequence
-            'CGTCTC'  # BsaI
+            'GGTCTC'  # BsaI
             'N)'
             '(NNNN)'  # Upstream overhang
             'NN'
