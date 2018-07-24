@@ -35,7 +35,7 @@ FEATURES             Location/Qualifiers
                      /bound_moiety="tetracycline repressor TetR"
                      /note="bacterial operator O2 for the tetR and tetA genes"
      promoter        42..95
-                     /label="pTet promoter"
+                     /label="Tet promoter"
                      /gene="tetR"
                      /operon="tet"
                      /function="TetR repressed medium-strength promoter"

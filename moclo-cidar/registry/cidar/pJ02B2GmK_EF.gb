@@ -1,10 +1,10 @@
-LOCUS       pJ02B2Gm_AE             3219 bp    ds-DNA  circular SYN 10-JAN-2018
+LOCUS       pJ02B2GmK_EF            3215 bp    ds-DNA  circular SYN 10-JAN-2018
 DEFINITION  MoClo Transcriptional Unit: FACS Standard Color Controls - High GFP
             expression cassette - Kanamycin plasmid
-            [A:J23102:B:BCD2:C:E0040m:D:B0015:E].
-ACCESSION   pJ02B2Gm_AE
-VERSION     pJ02B2Gm_AE
-KEYWORDS    pJ02B2Gm_AE.
+            [E:J23102:B:BCD2:C:E0040m:D:B0015:F].
+ACCESSION   pJ02B2GmK_EF
+VERSION     pJ02B2GmK_EF
+KEYWORDS    pJ02B2Gm_EF.
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -22,9 +22,6 @@ REFERENCE   2  (bases 1 to 3219)
   JOURNAL   Distributed with the MoClo Python library
             https://github.com/althonos/moclo
 FEATURES             Location/Qualifiers
-     source          1..3219
-                     /organism="synthetic DNA construct"
-                     /mol_type="other DNA"
      misc_feature    2..23
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
@@ -65,39 +62,39 @@ FEATURES             Location/Qualifiers
      primer_bind     823..843
                      /label="GFP-F"
                      /note="GFP, forward primer. Does NOT anneal to EGFP"
-     terminator      906..977
+     terminator      902..973
                      /label="rrnB T1 terminator"
                      /note="transcription terminator T1 from the E. coli rrnB
                      gene"
-     terminator      993..1020
+     terminator      989..1016
                      /label="T7Te terminator"
                      /note="phage T7 early transcription terminator"
-     misc_feature    1039..1059
+     misc_feature    1035..1055
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"
-     terminator      1060..1117
+     terminator      1056..1113
                      /label="his operon terminator"
                      /note="This putative transcriptin terminator from the E.
                      coli his operon has a 2-bp deletion introduced during
                      synthesis. Its efficiency has not been determined."
-     primer_bind     complement(1141..1158)
+     primer_bind     complement(1137..1154)
                      /label="L4440"
                      /note="L4440 vector, forward primer"
-     rep_origin      complement(1312..1900)
+     rep_origin      complement(1308..1896)
                      /direction=LEFT
                      /label="ori"
                      /note="high-copy-number ColE1/pMB1/pBR322/pUC origin of
                      replication"
-     primer_bind     complement(1392..1411)
+     primer_bind     complement(1388..1407)
                      /label="pBR322ori-F"
                      /note="pBR322 origin, forward primer"
-     terminator      complement(2106..2132)
+     terminator      complement(2102..2128)
                      /label="KanR Terminator"
                      /ApEinfo_fwdcolor="#93ff35"
                      /ApEinfo_revcolor="#93ff35"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
-     CDS             complement(2133..2948)
+     CDS             complement(2129..2944)
                      /codon_start=1
                      /gene="aphA1"
                      /product="aminoglycoside phosphotransferase"
@@ -127,27 +124,27 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_revcolor="#008000"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
-     primer_bind     2856..2875
+     primer_bind     2852..2871
                      /label="Kan-R"
                      /note="Kanamycin resistance gene, reverse primer"
-     primer_bind     2940..2959
+     primer_bind     2936..2955
                      /label="pENTR-R"
                      /note="pENTR vectors, reverse primer"
-     terminator      complement(2949..3096)
+     terminator      complement(2945..3092)
                      /label="KanR Promoter"
                      /ApEinfo_fwdcolor="#93ff35"
                      /ApEinfo_revcolor="#93ff35"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
-     primer_bind     3153..3171
+     primer_bind     3149..3167
                      /label="pBRforEco"
                      /note="pBR322 vectors, upsteam of EcoRI site, forward
                      primer"
-     terminator      3175..3218
+     terminator      3171..3214
                      /label="bacterial terminator"
                      /note="putative bacterial transcription terminator"
 ORIGIN
-        1 ggaattcgcg gccgcttcta gagactagtg gaagacatgg agttgacagc tagctcagtc
+        1 ggaattcgcg gccgcttcta gagactagtg gaagacatgc ttttgacagc tagctcagtc
        61 ctaggtactg tgctagctac tgggcccaag ttcacttaaa aaggagatca acaatgaaag
       121 caattttcgt actgaaacat cttaatcatg ctaaggaggt tttctaatga tgcgtaaagg
       181 agaagaactt ttcactggag ttgtcccaat tcttgttgaa ttagatggtg atgttaatgg
@@ -161,44 +158,44 @@ ORIGIN
       661 cttcaaaatt agacacaaca ttgaagatgg aagcgttcaa ctagcagacc attatcaaca
       721 aaatactcca attggcgatg gccctgtcct tttaccagac aaccattacc tgtccacaca
       781 atctgccctt tcgaaagatc ccaacgaaaa gagagatcac atggtccttc ttgagtttgt
-      841 aacagctgct gggattacac atggcatgga tgaactatac aaataataaa ggtaggtcca
-      901 ggcatcaaat aaaacgaaag gctcagtcga aagactgggc ctttcgtttt atctgttgtt
-      961 tgtcggtgaa cgctctctac tagagtcaca ctggctcacc ttcgggtggg cctttctgcg
-     1021 tttatagctt atgtcttcta ctagtagcgg ccgctgcagt ccggcaaaaa agggcaaggt
-     1081 gtcaccaccc tgcccttttt ctttaaaacc gaaaagatta cttcgcgtta tgcaggcttc
-     1141 ctcgctcact gactcgctgc gctcggtcgt tcggctgcgg cgagcggtat cagctcactc
-     1201 aaaggcggta atacggttat ccacagaatc aggggataac gcaggaaaga acatgtgagc
-     1261 aaaaggccag caaaaggcca ggaaccgtaa aaaggccgcg ttgctggcgt ttttccacag
-     1321 gctccgcccc cctgacgagc atcacaaaaa tcgacgctca agtcagaggt ggcgaaaccc
-     1381 gacaggacta taaagatacc aggcgtttcc ccctggaagc tccctcgtgc gctctcctgt
-     1441 tccgaccctg ccgcttaccg gatacctgtc cgcctttctc ccttcgggaa gcgtggcgct
-     1501 ttctcatagc tcacgctgta ggtatctcag ttcggtgtag gtcgttcgct ccaagctggg
-     1561 ctgtgtgcac gaaccccccg ttcagcccga ccgctgcgcc ttatccggta actatcgtct
-     1621 tgagtccaac ccggtaagac acgacttatc gccactggca gcagccactg gtaacaggat
-     1681 tagcagagcg aggtatgtag gcggtgctac agagttcttg aagtggtggc ctaactacgg
-     1741 ctacactaga agaacagtat ttggtatctg cgctctgctg aagccagtta ccttcggaaa
-     1801 aagagttggt agctcttgat ccggcaaaca aaccaccgct ggtagcggtg gtttttttgt
-     1861 ttgcaagcag cagattacgc gcagaaaaaa aggatctcaa gaagatcctt tgatcttttc
-     1921 tacggggtct gacgctcagt ggaacgaaaa ctcacgttaa gggattttgg tcatgagatt
-     1981 atcaaaaagg atcttcacct agatcctttt aaattaaaaa tgaagtttta aatcaatcta
-     2041 aagtatatat gagtaaactt ggtctgacag ctcgagtccc gtcaagtcag cgtaatgctc
-     2101 tgccagtgtt acaaccaatt aaccaattct gattagaaaa actcatcgag catcaaatga
-     2161 aactgcaatt tattcatatc aggattatca ataccatatt tttgaaaaag ccgtttctgt
-     2221 aatgaaggag aaaactcacc gaggcagttc cataggatgg caagatcctg gtatcggtct
-     2281 gcgattccga ctcgtccaac atcaatacaa cctattaatt tcccctcgtc aaaaataagg
-     2341 ttatcaagtg agaaatcacc atgagtgacg actgaatccg gtgagaatgg caaaagctta
-     2401 tgcatttctt tccagacttg ttcaacaggc cagccattac gctcgtcatc aaaatcactc
-     2461 gcatcaacca aaccgttatt cattcgtgat tgcgcctgag cgagacgaaa tacgcgatcg
-     2521 ctgttaaaag gacaattaca aacaggaatc gaatgcaacc ggcgcaggaa cactgccagc
-     2581 gcatcaacaa tattttcacc tgaatcagga tattcttcta atacctggaa tgctgttttc
-     2641 ccggggatcg cagtggtgag taaccatgca tcatcaggag tacggataaa atgcttgatg
-     2701 gtcggaagag gcataaattc cgtcagccag tttagtctga ccatctcatc tgtaacatca
-     2761 ttggcaacgc tacctttgcc atgtttcaga aacaactctg gcgcatcggg cttcccatac
-     2821 aatcgataga ttgtcgcacc tgattgcccg acattatcgc gagcccattt atacccatat
-     2881 aaatcagcat ccatgttgga atttaatcgc ggcctggagc aagacgtttc ccgttgaata
-     2941 tggctcataa caccccttgt attactgttt atgtaagcag acagttttat tgttcatgat
-     3001 gatatatttt tatcttgtgc aatgtaacat cagagatttt gagacacaac gtggctttgt
-     3061 tgaataaatc gaacttttgc tgagttgaag gatcagctcg agtgccactt gacgtctaag
-     3121 aaaccattat tatcatgaca ttaacctata aaaataggcg tatcacgagg cagaatttca
-     3181 gataaaaaaa atccttagct ttcgctaagg atgatttct
+      841 aacagctgct gggattacac atggcatgga tgaactatac aaataataaa ggtccaggca
+      901 tcaaataaaa cgaaaggctc agtcgaaaga ctgggccttt cgttttatct gttgtttgtc
+      961 ggtgaacgct ctctactaga gtcacactgg ctcaccttcg ggtgggcctt tctgcgttta
+     1021 tacgctatgt cttctactag tagcggccgc tgcagtccgg caaaaaaggg caaggtgtca
+     1081 ccaccctgcc ctttttcttt aaaaccgaaa agattacttc gcgttatgca ggcttcctcg
+     1141 ctcactgact cgctgcgctc ggtcgttcgg ctgcggcgag cggtatcagc tcactcaaag
+     1201 gcggtaatac ggttatccac agaatcaggg gataacgcag gaaagaacat gtgagcaaaa
+     1261 ggccagcaaa aggccaggaa ccgtaaaaag gccgcgttgc tggcgttttt ccacaggctc
+     1321 cgcccccctg acgagcatca caaaaatcga cgctcaagtc agaggtggcg aaacccgaca
+     1381 ggactataaa gataccaggc gtttccccct ggaagctccc tcgtgcgctc tcctgttccg
+     1441 accctgccgc ttaccggata cctgtccgcc tttctccctt cgggaagcgt ggcgctttct
+     1501 catagctcac gctgtaggta tctcagttcg gtgtaggtcg ttcgctccaa gctgggctgt
+     1561 gtgcacgaac cccccgttca gcccgaccgc tgcgccttat ccggtaacta tcgtcttgag
+     1621 tccaacccgg taagacacga cttatcgcca ctggcagcag ccactggtaa caggattagc
+     1681 agagcgaggt atgtaggcgg tgctacagag ttcttgaagt ggtggcctaa ctacggctac
+     1741 actagaagaa cagtatttgg tatctgcgct ctgctgaagc cagttacctt cggaaaaaga
+     1801 gttggtagct cttgatccgg caaacaaacc accgctggta gcggtggttt ttttgtttgc
+     1861 aagcagcaga ttacgcgcag aaaaaaagga tctcaagaag atcctttgat cttttctacg
+     1921 gggtctgacg ctcagtggaa cgaaaactca cgttaaggga ttttggtcat gagattatca
+     1981 aaaaggatct tcacctagat ccttttaaat taaaaatgaa gttttaaatc aatctaaagt
+     2041 atatatgagt aaacttggtc tgacagctcg agtcccgtca agtcagcgta atgctctgcc
+     2101 agtgttacaa ccaattaacc aattctgatt agaaaaactc atcgagcatc aaatgaaact
+     2161 gcaatttatt catatcagga ttatcaatac catatttttg aaaaagccgt ttctgtaatg
+     2221 aaggagaaaa ctcaccgagg cagttccata ggatggcaag atcctggtat cggtctgcga
+     2281 ttccgactcg tccaacatca atacaaccta ttaatttccc ctcgtcaaaa ataaggttat
+     2341 caagtgagaa atcaccatga gtgacgactg aatccggtga gaatggcaaa agcttatgca
+     2401 tttctttcca gacttgttca acaggccagc cattacgctc gtcatcaaaa tcactcgcat
+     2461 caaccaaacc gttattcatt cgtgattgcg cctgagcgag acgaaatacg cgatcgctgt
+     2521 taaaaggaca attacaaaca ggaatcgaat gcaaccggcg caggaacact gccagcgcat
+     2581 caacaatatt ttcacctgaa tcaggatatt cttctaatac ctggaatgct gttttcccgg
+     2641 ggatcgcagt ggtgagtaac catgcatcat caggagtacg gataaaatgc ttgatggtcg
+     2701 gaagaggcat aaattccgtc agccagttta gtctgaccat ctcatctgta acatcattgg
+     2761 caacgctacc tttgccatgt ttcagaaaca actctggcgc atcgggcttc ccatacaatc
+     2821 gatagattgt cgcacctgat tgcccgacat tatcgcgagc ccatttatac ccatataaat
+     2881 cagcatccat gttggaattt aatcgcggcc tggagcaaga cgtttcccgt tgaatatggc
+     2941 tcataacacc ccttgtatta ctgtttatgt aagcagacag ttttattgtt catgatgata
+     3001 tatttttatc ttgtgcaatg taacatcaga gattttgaga cacaacgtgg ctttgttgaa
+     3061 taaatcgaac ttttgctgag ttgaaggatc agctcgagtg ccacctgacg tctaagaaac
+     3121 cattattatc atgacattaa cctataaaaa taggcgtatc acgaggcaga atttcagata
+     3181 aaaaaaatcc ttagctttcg ctaaggatga tttct
 //

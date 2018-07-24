@@ -1,10 +1,10 @@
-LOCUS       pJ02B2Rm_EF             3176 bp    ds-DNA  circular SYN 10-JAN-2018
+LOCUS       pJ02B2RmK_AE            3176 bp    ds-DNA  circular SYN 10-JAN-2018
 DEFINITION  MoClo Transcriptional Unit: FACS Standard Color Controls - High RFP
             expression cassette - Kanamycin plasmid
-            [E:J23102:B:BCD2:C:E1010m:D:B0015:F].
-ACCESSION   pJ02B2Rm_EF
-VERSION     pJ02B2Rm_EF
-KEYWORDS    pJ02B2Rm_EF.
+            [A:J23102:B:BCD2:C:E1010m:D:B0015:E].
+ACCESSION   pJ02B2RmK_AE
+VERSION     pJ02B2RmK_AE
+KEYWORDS    pJ02B2Rm_AE.
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -137,7 +137,7 @@ FEATURES             Location/Qualifiers
                      /label="bacterial terminator"
                      /note="putative bacterial transcription terminator"
 ORIGIN
-        1 ggaattcgcg gccgcttcta gagactagtg gaagacatgc ttttgacagc tagctcagtc
+        1 ggaattcgcg gccgcttcta gagactagtg gaagacatgg agttgacagc tagctcagtc
        61 ctaggtactg tgctagctac tgggcccaag ttcacttaaa aaggagatca acaatgaaag
       121 caattttcgt actgaaacat cttaatcatg ctaaggaggt tttctaatga tggcttcctc
       181 cgaggatgtt atcaaagagt tcatgcgttt caaagttcgt atggaaggtt ccgttaacgg
@@ -153,7 +153,7 @@ ORIGIN
       781 caacgaggac tacaccatcg ttgaacagta cgaacgtgct gaaggtcgtc actccaccgg
       841 tgcttaataa aggtccaggc atcaaataaa acgaaaggct cagtcgaaag actgggcctt
       901 tcgttttatc tgttgtttgt cggtgaacgc tctctactag agtcacactg gctcaccttc
-      961 gggtgggcct ttctgcgttt atacgctatg tcttctacta gtagcggccg ctgcagtccg
+      961 gggtgggcct ttctgcgttt atagcttatg tcttctacta gtagcggccg ctgcagtccg
      1021 gcaaaaaagg gcaaggtgtc accaccctgc cctttttctt taaaaccgaa aagattactt
      1081 cgcgttatgc aggcttcctc gctcactgac tcgctgcgct cggtcgttcg gctgcggcga
      1141 gcggtatcag ctcactcaaa ggcggtaata cggttatcca cagaatcagg ggataacgca

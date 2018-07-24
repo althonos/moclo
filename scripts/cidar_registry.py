@@ -210,7 +210,7 @@ if __name__ == "__main__":
             lacz.location = FeatureLocation(start, end, -1)
 
         # Fix bad position of AmpR
-        elif id_.endswith("m_AF") or '_AmpR_' in id_:
+        if id_.endswith("m_AF") or 'A_' in id_:
             # write(gb, '/tmp/{}.gb'.format(id_), 'gb')
             ampr = next(
                 f
@@ -220,6 +220,16 @@ if __name__ == "__main__":
             start = gb.seq.lower().find("ttaccaatgcttaatcagtg")
             end = start + 861
             ampr.location = FeatureLocation(start, end, -1)
+
+        # Patch duplicated fusion sites in AddGene sequences
+        if 'pJ02B2Gm' in id_:
+            d_site = gb.seq.find('AGGTAGGT')
+            new_gb = gb[:d_site] + gb[d_site+4:]
+            new_gb.annotations = gb.annotations
+            new_gb.id = gb.id
+            new_gb.name = gb.name
+            new_gb.description = gb.description
+            gb = new_gb
 
         # Add the LuxR activator CDS
         if id_.startswith('C0062'):
@@ -255,7 +265,7 @@ if __name__ == "__main__":
             gb.features.append(lux)
 
         # Add missing Lux pL promoter
-        if id_.startswith('R0063'):
+        elif id_.startswith('R0063'):
             start = gb.seq.lower().find('cctgtacgatcctacaggtgcttatgttaagtaattgt')
             plux = SeqFeature(
                 location=FeatureLocation(start, start + 150, 1),
@@ -271,7 +281,7 @@ if __name__ == "__main__":
             gb.features.append(plux)
 
         # Add pTetR promoter
-        if id_.startswith('R0040'):
+        elif id_.startswith('R0040'):
             start = gb.seq.find('TCCCTATCAGTGATAGAGATTGACATCCCTATCAGTGATAGAGATACTGAGCAC')
             ptet = SeqFeature(
                 location=FeatureLocation(start, start + 54, 1),
@@ -287,7 +297,7 @@ if __name__ == "__main__":
             gb.features.append(ptet)
 
         # Add LacI regulator
-        if id_.startswith('R0010'):
+        elif id_.startswith('R0010'):
             plac = next(get_features('lac promoter'))
             start = gb.seq.find('CAATACGCAAACCGCCTCTCCCCGCG')
             plac.location = FeatureLocation(start, start + 200, 1)

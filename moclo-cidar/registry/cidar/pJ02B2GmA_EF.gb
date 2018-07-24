@@ -1,0 +1,189 @@
+LOCUS       pJ02B2GmA_EF            3088 bp    ds-DNA  circular SYN 10-JAN-2018
+DEFINITION  MoClo Transcriptional Unit: FACS Standard Color Controls - High GFP
+            expression cassette - Ampicillin plasmid
+            [E:J23102:B:BCD2:C:E0040m:D:B0015:F].
+ACCESSION   pJ02B2GmA_EF
+VERSION     pJ02B2GmA_EF
+KEYWORDS    pJ02B2Gm_EF.
+SOURCE      synthetic DNA construct
+  ORGANISM  synthetic DNA construct
+            .
+REFERENCE   1  (bases 1 to 3092)
+  AUTHORS   Iverson SV, Haddock TL, Beal J, Densmore DM
+  TITLE     CIDAR MoClo: Improved MoClo Assembly Standard and New E. coli Part
+            Library Enable Rapid Combinatorial Design for Synthetic and
+            Traditional Biology.
+  JOURNAL   ACS Synth Biol. 2016 Jan 15;5(1):99-103. doi:
+            10.1021/acssynbio.5b00124. Epub 2015 Nov 4.
+   PUBMED   26479688
+REFERENCE   2  (bases 1 to 3092)
+  AUTHORS   Larralde M
+  TITLE     Direct Submission
+  JOURNAL   Distributed with the MoClo Python library
+            https://github.com/althonos/moclo
+FEATURES             Location/Qualifiers
+     misc_feature    2..23
+                     /label="BioBrick prefix"
+                     /note="BioBrick prefix for parts that do not start with
+                     ATG"
+     RBS             151..159
+                     /label="Shine-Dalgarno sequence"
+                     /note="full consensus sequence for ribosome-binding sites
+                     upstream of start codons in E. coli; complementary to a
+                     region in the 3' end of the 16S rRNA (Chen et al., 1994)"
+     CDS             169..885
+                     /codon_start=1
+                     /product="green fluorescent protein"
+                     /label="GFP"
+                     /translation="MRKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLK
+                     FICTTGKLPVPWPTLVTTFGYGVQCFARYPDHMKQHDFFKSAMPEGYVQERTIFFKDDG
+                     NYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKV
+                     NFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLE
+                     FVTAAGITHGMDELYK"
+                     /gene="GFP"
+                     /db_xref="PDB:1H6R"
+                     /db_xref="InterPro:IPR009017"
+                     /db_xref="InterPro:IPR011584"
+                     /db_xref="InterPro:IPR000786"
+                     /db_xref="PFAM:PF01353"
+                     /db_xref="GO:0008218"
+                     /db_xref="GO:0006091"
+                     /db_xref="GO:0018298"
+                     /db_xref="UniProtKB/Swiss-Prot:P42212"
+                     /inference="DESCRIPTION:alignment:blastx:UniProtKB/Swiss-Pr
+                     ot:P42212"
+                     /ApEinfo_fwdcolor="#34ff03"
+                     /ApEinfo_revcolor="#34ff03"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     primer_bind     complement(199..227)
+                     /label="GFP-R"
+                     /note="GFP, reverse primer. Does NOT anneal to EGFP"
+     primer_bind     822..842
+                     /label="GFP-F"
+                     /note="GFP, forward primer. Does NOT anneal to EGFP"
+     terminator      901..972
+                     /label="rrnB T1 terminator"
+                     /note="transcription terminator T1 from the E. coli rrnB
+                     gene"
+     terminator      988..1015
+                     /label="T7Te terminator"
+                     /note="phage T7 early transcription terminator"
+     misc_feature    1033..1053
+                     /label="BioBrick suffix"
+                     /note="universal suffix for all parts"
+     primer_bind     complement(1059..1076)
+                     /label="L4440"
+                     /note="L4440 vector, forward primer"
+     rep_origin      complement(1230..1818)
+                     /direction=LEFT
+                     /label="ori"
+                     /note="high-copy-number ColE1/pMB1/pBR322/pUC origin of
+                     replication"
+     primer_bind     complement(1310..1329)
+                     /label="pBR322ori-F"
+                     /note="pBR322 origin, forward primer"
+     terminator      complement(1895..1988)
+                     /label="AmpR Terminator"
+                     /ApEinfo_fwdcolor="#ff6666"
+                     /ApEinfo_revcolor="#ff6666"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     CDS             complement(1989..2849)
+                     /label="AmpR"
+                     /codon_start=1
+                     /gene="bla"
+                     /product="beta-lactamase"
+                     /function="ampicilin and caribenicillin resistance"
+                     /translation="MSIQHFRVALIPFFAAFCLPVFAHPETLVKVKDAEDQLGARVGYI
+                     ELDLNSGKILESFRPEERFPMMSTFKVLLCGAVLSRIDAGQEQLGRRIHYSQNDLVEYS
+                     PVTEKHLTDGMTVRELCSAAITMSDNTAANLLLTTIGGPKELTAFLHNMGDHVTRLDRW
+                     EPELNEAIPNDERDTTMPVAMATTLRKLLTGELLTLASRQQLIDWMEADKVAGPLLRSA
+                     LPAGWFIADKSGAGERGSRGIIAALGPDGKPSRIVVIYTTGSQATMDERNRQIAEIGAS
+                     LIKHW*"
+                     /db_xref="GO:0005515"
+                     /db_xref="GO:0008800"
+                     /db_xref="GO:0016787"
+                     /db_xref="GO:0030655"
+                     /db_xref="GO:0046677"
+                     /db_xref="InterPro:IPR000871"
+                     /db_xref="InterPro:IPR023650"
+                     /db_xref="InterPro:IPR012338"
+                     /db_xref="PDB:1ZG4"
+                     /db_xref="UniProtKB/Swiss-Prot:P62593"
+                     /EC_number="3.5.2.6"
+                     /ApEinfo_fwdcolor="#9f4240"
+                     /ApEinfo_revcolor="#9f4240"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     primer_bind     2612..2631
+                     /label="Amp-R"
+                     /note="Ampicillin resistance gene, reverse primer"
+     promoter        complement(2850..2954)
+                     /gene="bla"
+                     /label="AmpR Promoter"
+                     /ApEinfo_fwdcolor="#ff6666"
+                     /ApEinfo_revcolor="#ff6666"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     primer_bind     3022..3040
+                     /label="pBRforEco"
+                     /note="pBR322 vectors, upsteam of EcoRI site, forward
+                     primer"
+     terminator      3044..3087
+                     /label="bacterial terminator"
+                     /note="putative bacterial transcription terminator"
+ORIGIN
+        1 ggaattcgcg gccgcttcta gagactagtg ggtctcagct tttgacagct agctcagtcc
+       61 taggtactgt gctagctact gggcccaagt tcacttaaaa aggagatcaa caatgaaagc
+      121 aattttcgta ctgaaacatc ttaatcatgc taaggaggtt ttctaatgat gcgtaaagga
+      181 gaagaacttt tcactggagt tgtcccaatt cttgttgaat tagatggtga tgttaatggg
+      241 cacaaatttt ctgtcagtgg agagggtgaa ggtgatgcaa catacggaaa acttaccctt
+      301 aaatttattt gcactactgg aaaactacct gttccatggc caacacttgt cactactttc
+      361 ggttatggtg ttcaatgctt tgcgagatac ccagatcata tgaaacagca tgactttttc
+      421 aagagtgcca tgcccgaagg ttatgtacag gaaagaacta tatttttcaa agatgacggg
+      481 aactacaaga cacgtgctga agtcaagttt gaaggtgata cccttgttaa tagaatcgag
+      541 ttaaaaggta ttgattttaa agaagatgga aacattcttg gacacaaatt ggaatacaac
+      601 tataactcac acaatgtata catcatggca gacaaacaaa agaatggaat caaagttaac
+      661 ttcaaaatta gacacaacat tgaagatgga agcgttcaac tagcagacca ttatcaacaa
+      721 aatactccaa ttggcgatgg ccctgtcctt ttaccagaca accattacct gtccacacaa
+      781 tctgcccttt cgaaagatcc caacgaaaag agagatcaca tggtccttct tgagtttgta
+      841 acagctgctg ggattacaca tggcatggat gaactataca aataataaag gtccaggcat
+      901 caaataaaac gaaaggctca gtcgaaagac tgggcctttc gttttatctg ttgtttgtcg
+      961 gtgaacgctc tctactagag tcacactggc tcaccttcgg gtgggccttt ctgcgtttat
+     1021 acgctagaga cctactagta gcggccgctg caggcttcct cgctcactga ctcgctgcgc
+     1081 tcggtcgttc ggctgcggcg agcggtatca gctcactcaa aggcggtaat acggttatcc
+     1141 acagaatcag gggataacgc aggaaagaac atgtgagcaa aaggccagca aaaggccagg
+     1201 aaccgtaaaa aggccgcgtt gctggcgttt ttccacaggc tccgcccccc tgacgagcat
+     1261 cacaaaaatc gacgctcaag tcagaggtgg cgaaacccga caggactata aagataccag
+     1321 gcgtttcccc ctggaagctc cctcgtgcgc tctcctgttc cgaccctgcc gcttaccgga
+     1381 tacctgtccg cctttctccc ttcgggaagc gtggcgcttt ctcatagctc acgctgtagg
+     1441 tatctcagtt cggtgtaggt cgttcgctcc aagctgggct gtgtgcacga accccccgtt
+     1501 cagcccgacc gctgcgcctt atccggtaac tatcgtcttg agtccaaccc ggtaagacac
+     1561 gacttatcgc cactggcagc agccactggt aacaggatta gcagagcgag gtatgtaggc
+     1621 ggtgctacag agttcttgaa gtggtggcct aactacggct acactagaag aacagtattt
+     1681 ggtatctgcg ctctgctgaa gccagttacc ttcggaaaaa gagttggtag ctcttgatcc
+     1741 ggcaaacaaa ccaccgctgg tagcggtggt ttttttgttt gcaagcagca gattacgcgc
+     1801 agaaaaaaag gatctcaaga agatcctttg atcttttcta cggggtctga cgctcagtgg
+     1861 aacgaaaact cacgttaagg gattttggtc atgagattat caaaaaggat cttcacctag
+     1921 atccttttaa attaaaaatg aagttttaaa tcaatctaaa gtatatatga gtaaacttgg
+     1981 tctgacagtt accaatgctt aatcagtgag gcacctatct cagcgatctg tctatttcgt
+     2041 tcatccatag ttgcctgact ccccgtcgtg tagataacta cgatacggga gggcttacca
+     2101 tctggcccca gtgctgcaat gataccgcgc gacccacgct caccggctcc agatttatca
+     2161 gcaataaacc agccagccgg aagggccgag cgcagaagtg gtcctgcaac tttatccgcc
+     2221 tccatccagt ctattaattg ttgccgggaa gctagagtaa gtagttcgcc agttaatagt
+     2281 ttgcgcaacg ttgttgccat tgctacaggc atcgtggtgt cacgctcgtc gtttggtatg
+     2341 gcttcattca gctccggttc ccaacgatca aggcgagtta catgatcccc catgttgtgc
+     2401 aaaaaagcgg ttagctcctt cggtcctccg atcgttgtca gaagtaagtt ggccgcagtg
+     2461 ttatcactca tggttatggc agcactgcat aattctctta ctgtcatgcc atccgtaaga
+     2521 tgcttttctg tgactggtga gtactcaacc aagtcattct gagaatagtg tatgcggcga
+     2581 ccgagttgct cttgcccggc gtcaatacgg gataataccg cgccacatag cagaacttta
+     2641 aaagtgctca tcattggaaa acgttcttcg gggcgaaaac tctcaaggat cttaccgctg
+     2701 ttgagatcca gttcgatgta acccactcgt gcacccaact gatcttcagc atcttttact
+     2761 ttcaccagcg tttctgggtg agcaaaaaca ggaaggcaaa atgccgcaaa aaagggaata
+     2821 agggcgacac ggaaatgttg aatactcata ctcttccttt ttcaatatta ttgaagcatt
+     2881 tatcagggtt attgtctcat gagcggatac atatttgaat gtatttagaa aaataaacaa
+     2941 ataggggttc cgcgcacatt tccccgaaaa gtgccacctg acgtctaaga aaccattatt
+     3001 atcatgacat taacctataa aaataggcgt atcacgaggc agaatttcag ataaaaaaaa
+     3061 tccttagctt tcgctaagga tgatttct
+//
