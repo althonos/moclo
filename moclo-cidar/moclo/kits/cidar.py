@@ -171,7 +171,7 @@ class CIDARPromoter(CIDARPart, CIDAREntry):
     signature = ('NNNN', 'TACT')
 
 
-class CIDARibosomeBindingSite(CIDARPart, CIDAREntry):
+class CIDARRibosomeBindingSite(CIDARPart, CIDAREntry):
     """A CIDAR ribosome binding site.
 
     .. image:: rbs.svg

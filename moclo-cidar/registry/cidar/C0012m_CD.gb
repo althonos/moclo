@@ -1,0 +1,170 @@
+LOCUS       lacI                    3236 bp    ds-DNA  circular SYN 10-JAN-2018
+DEFINITION  MoClo Basic Part: CDS - Controller protein, lacI repressor (in
+            concert with CAP, represses pLacI, R0010). Modified to fix illegal
+            site. [C:C0012m:D].
+ACCESSION   C0012m_CD
+VERSION     C0012m_CD
+KEYWORDS    C0012m (lacI)_CD.
+SOURCE      synthetic DNA construct
+  ORGANISM  synthetic DNA construct
+            .
+REFERENCE   1  (bases 1 to 3236)
+  AUTHORS   Iverson SV, Haddock TL, Beal J, Densmore DM
+  TITLE     CIDAR MoClo: Improved MoClo Assembly Standard and New E. coli Part
+            Library Enable Rapid Combinatorial Design for Synthetic and
+            Traditional Biology.
+  JOURNAL   ACS Synth Biol. 2016 Jan 15;5(1):99-103. doi:
+            10.1021/acssynbio.5b00124. Epub 2015 Nov 4.
+   PUBMED   26479688
+REFERENCE   2  (bases 1 to 3236)
+  AUTHORS   Larralde M
+  TITLE     Direct Submission
+  JOURNAL   Distributed with the MoClo Python library
+            https://github.com/althonos/moclo
+FEATURES             Location/Qualifiers
+     source          1..3236
+                     /organism="synthetic DNA construct"
+                     /mol_type="other DNA"
+     misc_feature    2..23
+                     /label="BioBrick prefix"
+                     /note="BioBrick prefix for parts that do not start with
+                     ATG"
+     CDS             51..1130
+                     /codon_start=1
+                     /gene="lacI"
+                     /product="lac repressor"
+                     /label="lacI"
+                     /note="The lac repressor binds to the lac operator to
+                     inhibit transcription in E. coli. This inhibition can be
+                     relieved by adding lactose or
+                     isopropyl-beta-D-thiogalactopyranoside (IPTG)."
+                     /translation="MKPVTLYDVAEYAGVSYQTVSRVVNQASHVSAKTREKVEAAMAEL
+                     NYIPNRVAQQLAGKQSLLIGVATSSLALHAPSQIVAAIKSRADQLGASVVVSMVERSGV
+                     EACKAAVHNLLAQRVSGLIINYPLDDQDAIAVEAACTNVPALFLDVSDQTPINSIIFSH
+                     EDGTRLGVEHLVALGHQQIALLAGPLSSVSARLRLAGWHKYLTRNQIQPIAEREGDWSA
+                     MSGFQQTMQMLNEGIVPTAMLVANDQMALGAMRAITESGLRVGADISVVGYDDTEDSSC
+                     YIPPLTTIKQDFRLLGQTSVDRLLQLSQGQAVKGNQLLPVSLVKRKTTLAPNTQTASPR
+                     ALADSLMQLARQVSRLESGQ"
+     primer_bind     complement(70..89)
+                     /label="LacI-R"
+                     /note="LacI, reverse primer"
+     misc_feature    1181..1201
+                     /label="BioBrick suffix"
+                     /note="universal suffix for all parts"
+     primer_bind     complement(1207..1224)
+                     /label="L4440"
+                     /note="L4440 vector, forward primer"
+     rep_origin      complement(1378..1966)
+                     /direction=LEFT
+                     /label="ori"
+                     /note="high-copy-number ColE1/pMB1/pBR322/pUC origin of
+                     replication"
+     primer_bind     complement(1458..1477)
+                     /label="pBR322ori-F"
+                     /note="pBR322 origin, forward primer"
+     terminator      complement(2043..2136)
+                     /label="AmpR Terminator"
+                     /ApEinfo_fwdcolor="#ff6666"
+                     /ApEinfo_revcolor="#ff6666"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     CDS             complement(2137..2997)
+                     /label="AmpR"
+                     /codon_start=1
+                     /gene="bla"
+                     /product="beta-lactamase"
+                     /function="ampicilin and caribenicillin resistance"
+                     /translation="MSIQHFRVALIPFFAAFCLPVFAHPETLVKVKDAEDQLGARVGYI
+                     ELDLNSGKILESFRPEERFPMMSTFKVLLCGAVLSRIDAGQEQLGRRIHYSQNDLVEYS
+                     PVTEKHLTDGMTVRELCSAAITMSDNTAANLLLTTIGGPKELTAFLHNMGDHVTRLDRW
+                     EPELNEAIPNDERDTTMPVAMATTLRKLLTGELLTLASRQQLIDWMEADKVAGPLLRSA
+                     LPAGWFIADKSGAGERGSRGIIAALGPDGKPSRIVVIYTTGSQATMDERNRQIAEIGAS
+                     LIKHW*"
+                     /db_xref="GO:0005515"
+                     /db_xref="GO:0008800"
+                     /db_xref="GO:0016787"
+                     /db_xref="GO:0030655"
+                     /db_xref="GO:0046677"
+                     /db_xref="InterPro:IPR000871"
+                     /db_xref="InterPro:IPR023650"
+                     /db_xref="InterPro:IPR012338"
+                     /db_xref="PDB:1ZG4"
+                     /db_xref="UniProtKB/Swiss-Prot:P62593"
+                     /EC_number="3.5.2.6"
+                     /ApEinfo_fwdcolor="#9f4240"
+                     /ApEinfo_revcolor="#9f4240"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     primer_bind     2760..2779
+                     /label="Amp-R"
+                     /note="Ampicillin resistance gene, reverse primer"
+     promoter        complement(2998..3102)
+                     /gene="bla"
+                     /label="AmpR Promoter"
+                     /ApEinfo_fwdcolor="#ff6666"
+                     /ApEinfo_revcolor="#ff6666"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     primer_bind     3170..3188
+                     /label="pBRforEco"
+                     /note="pBR322 vectors, upsteam of EcoRI site, forward
+                     primer"
+     terminator      3192..3235
+                     /label="bacterial terminator"
+                     /note="putative bacterial transcription terminator"
+ORIGIN
+        1 ggaattcgcg gccgcttcta gagactagtg ggtctcaaat gatggtgaat gtgaaaccag
+       61 taacgttata cgatgtcgca gagtatgccg gtgtctctta tcagaccgtt tcccgcgtgg
+      121 tgaaccaggc cagccacgtt tctgcgaaaa cgcgggaaaa agtggaagcg gcgatggcgg
+      181 agctgaatta cattcccaac cgcgtggcac aacaactggc gggcaaacag tcgttgctga
+      241 ttggcgttgc cacctccagt ctggccctgc acgcgccgtc gcaaattgtc gcggcgatta
+      301 aatctcgcgc cgatcaactg ggtgccagcg tggtggtgtc gatggtagaa cgaagcggcg
+      361 tcgaagcctg taaagcggcg gtgcacaatc ttctcgcgca acgcgtcagt gggctgatca
+      421 ttaactatcc gctggatgac caggatgcca ttgctgtgga agctgcctgc actaatgttc
+      481 cggcgttatt tcttgatgtc tctgaccaga cacccatcaa cagtattatt ttctcccatg
+      541 aggacggtac gcgactgggc gtggagcatc tggtcgcatt gggtcaccag caaatcgcgc
+      601 tgttagcggg cccattaagt tctgtctcgg cgcgtctgcg tctggctggc tggcataaat
+      661 atctcactcg caatcaaatt cagccgatag cggaacggga aggcgactgg agtgccatgt
+      721 ccggttttca acaaaccatg caaatgctga atgagggcat cgttcccact gcgatgctgg
+      781 ttgccaacga tcagatggcg ctgggcgcaa tgcgcgccat taccgagtcc gggctgcgcg
+      841 ttggtgcgga tatctcggta gtgggatacg acgataccga agatagctca tgttatatcc
+      901 cgccgttaac caccatcaaa caggattttc gcctgctggg gcaaaccagc gtggaccgct
+      961 tgctgcaact ctctcagggc caggcggtga agggcaatca gctgttgccc gtctcactgg
+     1021 tgaaaagaaa aaccaccctg gcgcccaata cgcaaaccgc ctctccccgc gcgttggccg
+     1081 attcattaat gcagctggca cgacaggttt cccgactgga aagcgggcag gctgcaaacg
+     1141 acgaaaacta cgctttagta gcttaataaa ggtagagacc tactagtagc ggccgctgca
+     1201 ggcttcctcg ctcactgact cgctgcgctc ggtcgttcgg ctgcggcgag cggtatcagc
+     1261 tcactcaaag gcggtaatac ggttatccac agaatcaggg gataacgcag gaaagaacat
+     1321 gtgagcaaaa ggccagcaaa aggccaggaa ccgtaaaaag gccgcgttgc tggcgttttt
+     1381 ccacaggctc cgcccccctg acgagcatca caaaaatcga cgctcaagtc agaggtggcg
+     1441 aaacccgaca ggactataaa gataccaggc gtttccccct ggaagctccc tcgtgcgctc
+     1501 tcctgttccg accctgccgc ttaccggata cctgtccgcc tttctccctt cgggaagcgt
+     1561 ggcgctttct catagctcac gctgtaggta tctcagttcg gtgtaggtcg ttcgctccaa
+     1621 gctgggctgt gtgcacgaac cccccgttca gcccgaccgc tgcgccttat ccggtaacta
+     1681 tcgtcttgag tccaacccgg taagacacga cttatcgcca ctggcagcag ccactggtaa
+     1741 caggattagc agagcgaggt atgtaggcgg tgctacagag ttcttgaagt ggtggcctaa
+     1801 ctacggctac actagaagaa cagtatttgg tatctgcgct ctgctgaagc cagttacctt
+     1861 cggaaaaaga gttggtagct cttgatccgg caaacaaacc accgctggta gcggtggttt
+     1921 ttttgtttgc aagcagcaga ttacgcgcag aaaaaaagga tctcaagaag atcctttgat
+     1981 cttttctacg gggtctgacg ctcagtggaa cgaaaactca cgttaaggga ttttggtcat
+     2041 gagattatca aaaaggatct tcacctagat ccttttaaat taaaaatgaa gttttaaatc
+     2101 aatctaaagt atatatgagt aaacttggtc tgacagttac caatgcttaa tcagtgaggc
+     2161 acctatctca gcgatctgtc tatttcgttc atccatagtt gcctgactcc ccgtcgtgta
+     2221 gataactacg atacgggagg gcttaccatc tggccccagt gctgcaatga taccgcgcga
+     2281 cccacgctca ccggctccag atttatcagc aataaaccag ccagccggaa gggccgagcg
+     2341 cagaagtggt cctgcaactt tatccgcctc catccagtct attaattgtt gccgggaagc
+     2401 tagagtaagt agttcgccag ttaatagttt gcgcaacgtt gttgccattg ctacaggcat
+     2461 cgtggtgtca cgctcgtcgt ttggtatggc ttcattcagc tccggttccc aacgatcaag
+     2521 gcgagttaca tgatccccca tgttgtgcaa aaaagcggtt agctccttcg gtcctccgat
+     2581 cgttgtcaga agtaagttgg ccgcagtgtt atcactcatg gttatggcag cactgcataa
+     2641 ttctcttact gtcatgccat ccgtaagatg cttttctgtg actggtgagt actcaaccaa
+     2701 gtcattctga gaatagtgta tgcggcgacc gagttgctct tgcccggcgt caatacggga
+     2761 taataccgcg ccacatagca gaactttaaa agtgctcatc attggaaaac gttcttcggg
+     2821 gcgaaaactc tcaaggatct taccgctgtt gagatccagt tcgatgtaac ccactcgtgc
+     2881 acccaactga tcttcagcat cttttacttt caccagcgtt tctgggtgag caaaaacagg
+     2941 aaggcaaaat gccgcaaaaa agggaataag ggcgacacgg aaatgttgaa tactcatact
+     3001 cttccttttt caatattatt gaagcattta tcagggttat tgtctcatga gcggatacat
+     3061 atttgaatgt atttagaaaa ataaacaaat aggggttccg cgcacatttc cccgaaaagt
+     3121 gccacctgac gtctaagaaa ccattattat catgacatta acctataaaa ataggcgtat
+     3181 cacgaggcag aatttcagat aaaaaaaatc cttagctttc gctaaggatg atttct
+//

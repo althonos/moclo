@@ -1,0 +1,154 @@
+LOCUS       pTet                    2162 bp    ds-DNA  circular SYN 10-JAN-2018
+DEFINITION  MoClo Basic Part: Controllable promoter - pTet - tetR regulated
+            (strong constitutive promoter repressed by tetR, C0040, which can
+            itself be inhibited by tetracycline or aTc) [A:R0040:B].
+ACCESSION   R0040_AB
+VERSION     R0040_AB
+KEYWORDS    R0040 (pTet)_AB.
+SOURCE      synthetic DNA construct
+  ORGANISM  synthetic DNA construct
+            .
+REFERENCE   1  (bases 1 to 2162)
+  AUTHORS   Iverson SV, Haddock TL, Beal J, Densmore DM
+  TITLE     CIDAR MoClo: Improved MoClo Assembly Standard and New E. coli Part
+            Library Enable Rapid Combinatorial Design for Synthetic and
+            Traditional Biology.
+  JOURNAL   ACS Synth Biol. 2016 Jan 15;5(1):99-103. doi:
+            10.1021/acssynbio.5b00124. Epub 2015 Nov 4.
+   PUBMED   26479688
+REFERENCE   2  (bases 1 to 2162)
+  AUTHORS   Larralde M
+  TITLE     Direct Submission
+  JOURNAL   Distributed with the MoClo Python library
+            https://github.com/althonos/moclo
+FEATURES             Location/Qualifiers
+     source          1..2162
+                     /organism="synthetic DNA construct"
+                     /mol_type="other DNA"
+     misc_feature    2..23
+                     /label="BioBrick prefix"
+                     /note="BioBrick prefix for parts that do not start with
+                     ATG"
+     protein_bind    42..60
+                     /gene="tetO"
+                     /label="tet operator"
+                     /bound_moiety="tetracycline repressor TetR"
+                     /note="bacterial operator O2 for the tetR and tetA genes"
+     promoter        42..95
+                     /label="pTet promoter"
+                     /gene="tetR"
+                     /operon="tet"
+                     /function="TetR repressed medium-strength promoter"
+                     /note="iGEM Part: BBa_R0040"
+                     /ApEinfo_fwdcolor="#00a1ee"
+                     /ApEinfo_revcolor="#00a1ee"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     protein_bind    67..85
+                     /gene="tetO"
+                     /label="tet operator"
+                     /bound_moiety="tetracycline repressor TetR"
+                     /note="bacterial operator O2 for the tetR and tetA genes"
+     misc_feature    107..127
+                     /label="BioBrick suffix"
+                     /note="universal suffix for all parts"
+     primer_bind     complement(133..150)
+                     /label="L4440"
+                     /note="L4440 vector, forward primer"
+     rep_origin      complement(304..892)
+                     /direction=LEFT
+                     /label="ori"
+                     /note="high-copy-number ColE1/pMB1/pBR322/pUC origin of
+                     replication"
+     primer_bind     complement(384..403)
+                     /label="pBR322ori-F"
+                     /note="pBR322 origin, forward primer"
+     terminator      complement(969..1062)
+                     /label="AmpR Terminator"
+                     /ApEinfo_fwdcolor="#ff6666"
+                     /ApEinfo_revcolor="#ff6666"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     CDS             complement(1063..1923)
+                     /label="AmpR"
+                     /codon_start=1
+                     /gene="bla"
+                     /product="beta-lactamase"
+                     /function="ampicilin and caribenicillin resistance"
+                     /translation="MSIQHFRVALIPFFAAFCLPVFAHPETLVKVKDAEDQLGARVGYI
+                     ELDLNSGKILESFRPEERFPMMSTFKVLLCGAVLSRIDAGQEQLGRRIHYSQNDLVEYS
+                     PVTEKHLTDGMTVRELCSAAITMSDNTAANLLLTTIGGPKELTAFLHNMGDHVTRLDRW
+                     EPELNEAIPNDERDTTMPVAMATTLRKLLTGELLTLASRQQLIDWMEADKVAGPLLRSA
+                     LPAGWFIADKSGAGERGSRGIIAALGPDGKPSRIVVIYTTGSQATMDERNRQIAEIGAS
+                     LIKHW*"
+                     /db_xref="GO:0005515"
+                     /db_xref="GO:0008800"
+                     /db_xref="GO:0016787"
+                     /db_xref="GO:0030655"
+                     /db_xref="GO:0046677"
+                     /db_xref="InterPro:IPR000871"
+                     /db_xref="InterPro:IPR023650"
+                     /db_xref="InterPro:IPR012338"
+                     /db_xref="PDB:1ZG4"
+                     /db_xref="UniProtKB/Swiss-Prot:P62593"
+                     /EC_number="3.5.2.6"
+                     /ApEinfo_fwdcolor="#9f4240"
+                     /ApEinfo_revcolor="#9f4240"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     primer_bind     1686..1705
+                     /label="Amp-R"
+                     /note="Ampicillin resistance gene, reverse primer"
+     promoter        complement(1924..2028)
+                     /gene="bla"
+                     /label="AmpR Promoter"
+                     /ApEinfo_fwdcolor="#ff6666"
+                     /ApEinfo_revcolor="#ff6666"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     primer_bind     2096..2114
+                     /label="pBRforEco"
+                     /note="pBR322 vectors, upsteam of EcoRI site, forward
+                     primer"
+     terminator      2118..2161
+                     /label="bacterial terminator"
+                     /note="putative bacterial transcription terminator"
+ORIGIN
+        1 ggaattcgcg gccgcttcta gagactagtg ggtctcagga gtccctatca gtgatagaga
+       61 ttgacatccc tatcagtgat agagatactg agcactacta gagacctact agtagcggcc
+      121 gctgcaggct tcctcgctca ctgactcgct gcgctcggtc gttcggctgc ggcgagcggt
+      181 atcagctcac tcaaaggcgg taatacggtt atccacagaa tcaggggata acgcaggaaa
+      241 gaacatgtga gcaaaaggcc agcaaaaggc caggaaccgt aaaaaggccg cgttgctggc
+      301 gtttttccac aggctccgcc cccctgacga gcatcacaaa aatcgacgct caagtcagag
+      361 gtggcgaaac ccgacaggac tataaagata ccaggcgttt ccccctggaa gctccctcgt
+      421 gcgctctcct gttccgaccc tgccgcttac cggatacctg tccgcctttc tcccttcggg
+      481 aagcgtggcg ctttctcata gctcacgctg taggtatctc agttcggtgt aggtcgttcg
+      541 ctccaagctg ggctgtgtgc acgaaccccc cgttcagccc gaccgctgcg ccttatccgg
+      601 taactatcgt cttgagtcca acccggtaag acacgactta tcgccactgg cagcagccac
+      661 tggtaacagg attagcagag cgaggtatgt aggcggtgct acagagttct tgaagtggtg
+      721 gcctaactac ggctacacta gaagaacagt atttggtatc tgcgctctgc tgaagccagt
+      781 taccttcgga aaaagagttg gtagctcttg atccggcaaa caaaccaccg ctggtagcgg
+      841 tggttttttt gtttgcaagc agcagattac gcgcagaaaa aaaggatctc aagaagatcc
+      901 tttgatcttt tctacggggt ctgacgctca gtggaacgaa aactcacgtt aagggatttt
+      961 ggtcatgaga ttatcaaaaa ggatcttcac ctagatcctt ttaaattaaa aatgaagttt
+     1021 taaatcaatc taaagtatat atgagtaaac ttggtctgac agttaccaat gcttaatcag
+     1081 tgaggcacct atctcagcga tctgtctatt tcgttcatcc atagttgcct gactccccgt
+     1141 cgtgtagata actacgatac gggagggctt accatctggc cccagtgctg caatgatacc
+     1201 gcgcgaccca cgctcaccgg ctccagattt atcagcaata aaccagccag ccggaagggc
+     1261 cgagcgcaga agtggtcctg caactttatc cgcctccatc cagtctatta attgttgccg
+     1321 ggaagctaga gtaagtagtt cgccagttaa tagtttgcgc aacgttgttg ccattgctac
+     1381 aggcatcgtg gtgtcacgct cgtcgtttgg tatggcttca ttcagctccg gttcccaacg
+     1441 atcaaggcga gttacatgat cccccatgtt gtgcaaaaaa gcggttagct ccttcggtcc
+     1501 tccgatcgtt gtcagaagta agttggccgc agtgttatca ctcatggtta tggcagcact
+     1561 gcataattct cttactgtca tgccatccgt aagatgcttt tctgtgactg gtgagtactc
+     1621 aaccaagtca ttctgagaat agtgtatgcg gcgaccgagt tgctcttgcc cggcgtcaat
+     1681 acgggataat accgcgccac atagcagaac tttaaaagtg ctcatcattg gaaaacgttc
+     1741 ttcggggcga aaactctcaa ggatcttacc gctgttgaga tccagttcga tgtaacccac
+     1801 tcgtgcaccc aactgatctt cagcatcttt tactttcacc agcgtttctg ggtgagcaaa
+     1861 aacaggaagg caaaatgccg caaaaaaggg aataagggcg acacggaaat gttgaatact
+     1921 catactcttc ctttttcaat attattgaag catttatcag ggttattgtc tcatgagcgg
+     1981 atacatattt gaatgtattt agaaaaataa acaaataggg gttccgcgca catttccccg
+     2041 aaaagtgcca cctgacgtct aagaaaccat tattatcatg acattaacct ataaaaatag
+     2101 gcgtatcacg aggcagaatt tcagataaaa aaaatcctta gctttcgcta aggatgattt
+     2161 ct
+//

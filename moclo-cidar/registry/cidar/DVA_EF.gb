@@ -1,0 +1,187 @@
+LOCUS       DVA_EF                  2606 bp    ds-DNA  circular SYN 10-JAN-2018
+DEFINITION  MoClo Destination Vector: (based on pSB1A2 with fixed illegal site)
+            [E:LacZa:F].
+ACCESSION   DVA_EF
+VERSION     DVA_EF
+KEYWORDS    DVA_EF.
+SOURCE      synthetic DNA construct
+  ORGANISM  synthetic DNA construct
+            .
+REFERENCE   1  (bases 1 to 2606)
+  AUTHORS   Iverson SV, Haddock TL, Beal J, Densmore DM
+  TITLE     CIDAR MoClo: Improved MoClo Assembly Standard and New E. coli Part
+            Library Enable Rapid Combinatorial Design for Synthetic and
+            Traditional Biology.
+  JOURNAL   ACS Synth Biol. 2016 Jan 15;5(1):99-103. doi:
+            10.1021/acssynbio.5b00124. Epub 2015 Nov 4.
+   PUBMED   26479688
+REFERENCE   2  (bases 1 to 2606)
+  AUTHORS   Larralde M
+  TITLE     Direct Submission
+  JOURNAL   Distributed with the MoClo Python library
+            https://github.com/althonos/moclo
+FEATURES             Location/Qualifiers
+     source          1..2606
+                     /organism="synthetic DNA construct"
+                     /mol_type="other DNA"
+     misc_feature    2..23
+                     /label="BioBrick prefix"
+                     /note="BioBrick prefix for parts that do not start with
+                     ATG"
+     CDS             complement(18..341)
+                     /codon_start=1
+                     /gene="lacZ fragment"
+                     /product="LacZ-alpha fragment of beta-galactosidase"
+                     /label="lacZ-alpha"
+                     /translation="MTMITPSLHACRSTLEDPRVPSSNSLAVVLQRRDWENPGVTQLNR
+                     LAAHPPFASWRNSEEARTDRPSQQLRSLNGEWRLMRYFLLTHLCGISHRIWCRRHKLRP
+                     TSL"
+     primer_bind     236..258
+                     /label="M13/pUC Forward"
+                     /note="In lacZ gene"
+     primer_bind     250..267
+                     /label="M13 Forward"
+                     /note="In lacZ gene. Also called M13-F20 or M13 (-21)
+                     Forward"
+     primer_bind     251..267
+                     /label="M13 fwd"
+                     /note="common sequencing primer, one of multiple similar
+                     variants"
+     misc_feature    268..324
+                     /label="MCS"
+                     /note="pUC18/19 multiple cloning site"
+     primer_bind     complement(337..353)
+                     /label="M13 rev"
+                     /note="common sequencing primer, one of multiple similar
+                     variants"
+     primer_bind     complement(337..353)
+                     /label="M13 Reverse"
+                     /note="In lacZ gene. Also called M13-rev"
+     primer_bind     complement(350..372)
+                     /label="M13/pUC Reverse"
+                     /note="In lacZ gene"
+     protein_bind    361..377
+                     /label="lac operator"
+                     /bound_moiety="lac repressor encoded by lacI"
+                     /note="The lac repressor binds to the lac operator to
+                     inhibit transcription in E. coli. This inhibition can be
+                     relieved by adding lactose or
+                     isopropyl-beta-D-thiogalactopyranoside (IPTG)."
+     promoter        complement(385..415)
+                     /label="lac promoter"
+                     /note="promoter for the E. coli lac operon"
+     protein_bind    430..451
+                     /label="CAP binding site"
+                     /bound_moiety="E. coli catabolite activator protein"
+                     /note="CAP binding activates transcription in the presence
+                     of cAMP."
+     misc_feature    551..571
+                     /label="BioBrick suffix"
+                     /note="universal suffix for all parts"
+     primer_bind     complement(577..594)
+                     /label="L4440"
+                     /note="L4440 vector, forward primer"
+     rep_origin      complement(748..1336)
+                     /direction=LEFT
+                     /label="ori"
+                     /note="high-copy-number ColE1/pMB1/pBR322/pUC origin of
+                     replication"
+     primer_bind     complement(828..847)
+                     /label="pBR322ori-F"
+                     /note="pBR322 origin, forward primer"
+     terminator      complement(1413..1506)
+                     /label="AmpR Terminator"
+                     /ApEinfo_fwdcolor="#ff6666"
+                     /ApEinfo_revcolor="#ff6666"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     CDS             complement(1507..2367)
+                     /label="AmpR"
+                     /codon_start=1
+                     /gene="bla"
+                     /product="beta-lactamase"
+                     /function="ampicilin and caribenicillin resistance"
+                     /translation="MSIQHFRVALIPFFAAFCLPVFAHPETLVKVKDAEDQLGARVGYI
+                     ELDLNSGKILESFRPEERFPMMSTFKVLLCGAVLSRIDAGQEQLGRRIHYSQNDLVEYS
+                     PVTEKHLTDGMTVRELCSAAITMSDNTAANLLLTTIGGPKELTAFLHNMGDHVTRLDRW
+                     EPELNEAIPNDERDTTMPVAMATTLRKLLTGELLTLASRQQLIDWMEADKVAGPLLRSA
+                     LPAGWFIADKSGAGERGSRGIIAALGPDGKPSRIVVIYTTGSQATMDERNRQIAEIGAS
+                     LIKHW*"
+                     /db_xref="GO:0005515"
+                     /db_xref="GO:0008800"
+                     /db_xref="GO:0016787"
+                     /db_xref="GO:0030655"
+                     /db_xref="GO:0046677"
+                     /db_xref="InterPro:IPR000871"
+                     /db_xref="InterPro:IPR023650"
+                     /db_xref="InterPro:IPR012338"
+                     /db_xref="PDB:1ZG4"
+                     /db_xref="UniProtKB/Swiss-Prot:P62593"
+                     /EC_number="3.5.2.6"
+                     /ApEinfo_fwdcolor="#9f4240"
+                     /ApEinfo_revcolor="#9f4240"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     primer_bind     2130..2149
+                     /label="Amp-R"
+                     /note="Ampicillin resistance gene, reverse primer"
+     promoter        complement(2368..2472)
+                     /gene="bla"
+                     /label="AmpR Promoter"
+                     /ApEinfo_fwdcolor="#ff6666"
+                     /ApEinfo_revcolor="#ff6666"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     primer_bind     2540..2558
+                     /label="pBRforEco"
+                     /note="pBR322 vectors, upsteam of EcoRI site, forward
+                     primer"
+     terminator      2562..2605
+                     /label="bacterial terminator"
+                     /note="putative bacterial transcription terminator"
+ORIGIN
+        1 ggaattcgcg gccgcttcta gagactagtg ggtctcagct tatgtcttct gcaccatatg
+       61 cggtgtgaaa taccgcacag atgcgtaagg agaaaatacc gcatcaggcg ccattcgcca
+      121 ttcaggctgc gcaactgttg ggaagggcga tcggtgcggg cctcttcgct attacgccag
+      181 ctggcgaaag ggggatgtgc tgcaaggcga ttaagttggg taacgccagg gttttcccag
+      241 tcacgacgtt gtaaaacgac ggccagtgaa ttcgagctcg gtacccgggg atcctctaga
+      301 gtcgacctgc aggcatgcaa gcttggcgta atcatggtca tagctgtttc ctgtgtgaaa
+      361 ttgttatccg ctcacaattc cacacaacat acgagccgga agcataaagt gtaaagcctg
+      421 gggtgcctaa tgagtgagct aactcacatt aattgcgttg cgctcactgc ccgctttcca
+      481 gtcgggaaac ctgtcgtgcc agctgcatta atgaatcggc caacgcgcgg ggaagacgtc
+      541 gctagagacc tactagtagc ggccgctgca ggcttcctcg ctcactgact cgctgcgctc
+      601 ggtcgttcgg ctgcggcgag cggtatcagc tcactcaaag gcggtaatac ggttatccac
+      661 agaatcaggg gataacgcag gaaagaacat gtgagcaaaa ggccagcaaa aggccaggaa
+      721 ccgtaaaaag gccgcgttgc tggcgttttt ccacaggctc cgcccccctg acgagcatca
+      781 caaaaatcga cgctcaagtc agaggtggcg aaacccgaca ggactataaa gataccaggc
+      841 gtttccccct ggaagctccc tcgtgcgctc tcctgttccg accctgccgc ttaccggata
+      901 cctgtccgcc tttctccctt cgggaagcgt ggcgctttct catagctcac gctgtaggta
+      961 tctcagttcg gtgtaggtcg ttcgctccaa gctgggctgt gtgcacgaac cccccgttca
+     1021 gcccgaccgc tgcgccttat ccggtaacta tcgtcttgag tccaacccgg taagacacga
+     1081 cttatcgcca ctggcagcag ccactggtaa caggattagc agagcgaggt atgtaggcgg
+     1141 tgctacagag ttcttgaagt ggtggcctaa ctacggctac actagaagaa cagtatttgg
+     1201 tatctgcgct ctgctgaagc cagttacctt cggaaaaaga gttggtagct cttgatccgg
+     1261 caaacaaacc accgctggta gcggtggttt ttttgtttgc aagcagcaga ttacgcgcag
+     1321 aaaaaaagga tctcaagaag atcctttgat cttttctacg gggtctgacg ctcagtggaa
+     1381 cgaaaactca cgttaaggga ttttggtcat gagattatca aaaaggatct tcacctagat
+     1441 ccttttaaat taaaaatgaa gttttaaatc aatctaaagt atatatgagt aaacttggtc
+     1501 tgacagttac caatgcttaa tcagtgaggc acctatctca gcgatctgtc tatttcgttc
+     1561 atccatagtt gcctgactcc ccgtcgtgta gataactacg atacgggagg gcttaccatc
+     1621 tggccccagt gctgcaatga taccgcgcga cccacgctca ccggctccag atttatcagc
+     1681 aataaaccag ccagccggaa gggccgagcg cagaagtggt cctgcaactt tatccgcctc
+     1741 catccagtct attaattgtt gccgggaagc tagagtaagt agttcgccag ttaatagttt
+     1801 gcgcaacgtt gttgccattg ctacaggcat cgtggtgtca cgctcgtcgt ttggtatggc
+     1861 ttcattcagc tccggttccc aacgatcaag gcgagttaca tgatccccca tgttgtgcaa
+     1921 aaaagcggtt agctccttcg gtcctccgat cgttgtcaga agtaagttgg ccgcagtgtt
+     1981 atcactcatg gttatggcag cactgcataa ttctcttact gtcatgccat ccgtaagatg
+     2041 cttttctgtg actggtgagt actcaaccaa gtcattctga gaatagtgta tgcggcgacc
+     2101 gagttgctct tgcccggcgt caatacggga taataccgcg ccacatagca gaactttaaa
+     2161 agtgctcatc attggaaaac gttcttcggg gcgaaaactc tcaaggatct taccgctgtt
+     2221 gagatccagt tcgatgtaac ccactcgtgc acccaactga tcttcagcat cttttacttt
+     2281 caccagcgtt tctgggtgag caaaaacagg aaggcaaaat gccgcaaaaa agggaataag
+     2341 ggcgacacgg aaatgttgaa tactcatact cttccttttt caatattatt gaagcattta
+     2401 tcagggttat tgtctcatga gcggatacat atttgaatgt atttagaaaa ataaacaaat
+     2461 aggggttccg cgcacatttc cccgaaaagt gccacctgac gtctaagaaa ccattattat
+     2521 catgacatta acctataaaa ataggcgtat cacgaggcag aatttcagat aaaaaaaatc
+     2581 cttagctttc gctaaggatg atttct
+//
