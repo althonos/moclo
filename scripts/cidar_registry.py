@@ -84,11 +84,13 @@ if __name__ == "__main__":
 
     # load inventory
     inventory = soup.find("table", class_="kit-inventory-table")
-    for row in tqdm.tqdm(inventory.find_all("tr")[1:]):
+    it = tqdm.tqdm(inventory.find_all("tr")[1:])
+    for row in it:
 
         # extract each row
         row_text = row.find("a").text
 
+        # Find a name / ID
         match = NAME_REGEX.match(row_text)
         if match is not None:
             id_ = match.group(1) + match.group(3)
@@ -96,7 +98,10 @@ if __name__ == "__main__":
         else:
             id_ = name = row_text
 
-        # id_, type_, name = map(str.strip, row_text.split("-", 2))
+        # Update the progress bar
+        it.set_description(id_)
+
+        # extract info
         info = {
             "resistance": row.find("span", class_="resistance-spacing").text,
             # "name": id_,
@@ -146,6 +151,8 @@ if __name__ == "__main__":
                     "[E:LacZa:F]", "[A:LacZa:F]"
                 )
 
+        # For the other plasmids a full sequence is available so simply
+        # download it from the Depositor full sequence
         else:
 
             # get the addgene full sequence
@@ -205,14 +212,19 @@ if __name__ == "__main__":
             end = start + 861
             ampr.location = FeatureLocation(start, end, -1)
 
+        # Add the LuxR activator CDS
         if id_.startswith('C0062'):
-            loc = FeatureLocation(41, 794, 1)
+            start = gb.seq.find('ATGAAAAACATAAATGCCGACGACACATACAGAATAATT')
+            end = start + gb.seq[start:].translate().find('*') * 3
+            loc = FeatureLocation(start, end, 1)
             lux = SeqFeature(location=loc, type='CDS')
             lux.qualifiers.update({
                 'codon_start': '1',
-                'label': 'LuxR activator',
-                'product': 'transcriptional activator protein LuxR',
+                'label': 'LuxR repressor',
+                'product': 'transcription factor LuxR',
+                'function': ['represses Lux pL promoter'],
                 'gene': 'luxR',
+                'operon': 'lux',
                 'db_xref': [
                     'UniProtKB/Swiss-Prot:P12746',
                     'GO:0008218',
@@ -227,26 +239,61 @@ if __name__ == "__main__":
                     'PFAM:PF03472',
                     'PFAM:PF00196',
                 ],
+                'note': 'iGEM Part: BBa_R0040',
                 'translation': lux.extract(gb.seq).translate(),
                 'inference': ['DESCRIPTION:alignment:blastx:UniProtKB/Swiss-Prot:P12746'],
             })
             gb.features.append(lux)
 
-        # Add missing Lux1 promoter
+        # Add missing Lux pL promoter
         if id_.startswith('R0063'):
             start = gb.seq.lower().find('cctgtacgatcctacaggtgcttatgttaagtaattgt')
             plux = SeqFeature(
                 location=FeatureLocation(start, start + 150, 1),
                 type="promoter",
                 qualifiers={
-                    'label': ['pLuxR Promoter'],
-                    'gene': ['LuxR'],
-                    'operon': ['Lux'],
-                    'function': ['LuxR repressed promoter'],
-                    'note': ['color: #00a1ee'],
+                    'label': ['Lux pL promoter'],
+                    'gene': 'luxR',
+                    'operon': 'lux',
+                    'function': ['LuxR repressed weak promoter'],
+                    'note': ['color: #00a1ee', 'iGEM Part: BBa_R0063'],
                 }
             )
             gb.features.append(plux)
+
+        # Add pTetR promoter
+        if id_.startswith('R0040'):
+            start = gb.seq.find('TCCCTATCAGTGATAGAGATTGACATCCCTATCAGTGATAGAGATACTGAGCAC')
+            ptet = SeqFeature(
+                location=FeatureLocation(start, start + 54, 1),
+                type='promoter',
+                qualifiers={
+                    'label': ['Tet promoter'],
+                    'gene': 'tetR',
+                    'operon': 'tet',
+                    'function': ['TetR repressed medium-strength promoter'],
+                    'note': ['color: #00a1ee', 'iGEM Part: BBa_R0040'],
+                }
+            )
+            gb.features.append(ptet)
+
+        # Add LacI regulator
+        if id_.startswith('R0010'):
+            plac = next(get_features('lac promoter'))
+            start = gb.seq.find('CAATACGCAAACCGCCTCTCCCCGCG')
+            plac.location = FeatureLocation(start, start + 200, 1)
+            # plac = SeqFeature(
+                # location=
+                # type='promoter',
+            plac.qualifiers.update({
+                    'label': 'Lac regulatory sequence',
+                    'gene': 'lacZ',
+                    'operon': 'lac',
+                    'function': 'LacI repressed promoter',
+                    'note': ['color: #00a1ee', 'iGEM Part: BBa_R0010'],
+                }
+            )
+            # gb.features.append(plac)
 
         # AmpR recolor and annotations
         ampr = next(get_features("AmpR"), None)
@@ -273,12 +320,10 @@ if __name__ == "__main__":
                 ],
                 "EC_number": "3.5.2.6",
             }
-
         ampr_prom = next(get_features("AmpR promoter"), None)
         if ampr_prom is not None:
             ampr_prom.qualifiers["label"] = ["AmpR Promoter"]
             ampr_prom.qualifiers["note"] = ["color: #ff6666"]
-
         ampr_term_start = gb.seq.find(AMPR_TERM)
         if ampr is not None and ampr_term_start >= 0:
             ampr_term = SeqFeature(
@@ -292,8 +337,6 @@ if __name__ == "__main__":
                 },
             )
             gb.features.append(ampr_term)
-
-
 
         # KanR recolor and annotations
         kanr = next(get_features('KanR'), None)
@@ -322,7 +365,6 @@ if __name__ == "__main__":
                 ],
                 'note': ['color: #008000'],
             })
-
         kanr_term_start = gb.seq.find(KANR_TERM)
         if kanr is not None and kanr_term_start >= 0:
             kanr_term = SeqFeature(
@@ -336,7 +378,6 @@ if __name__ == "__main__":
                 },
             )
             gb.features.append(kanr_term)
-
         kanr_prom_start = gb.seq.find(KANR_PROM)
         if kanr is not None and kanr_prom_start >= 0:
             kanr_prom = SeqFeature(
@@ -392,7 +433,6 @@ if __name__ == "__main__":
                     'GO:0006091',
                     'GO:0018298',
                     'PDB:2H5R',
-
                 ]
             })
 
@@ -406,7 +446,7 @@ if __name__ == "__main__":
         for feature in gb.features:
             translate_color(feature)
 
-        # Fix the direct submission annotation
+        # Fix the direct submission reference
         if gb.annotations["references"][-1].title == "Direct Submission":
             ref = gb.annotations["references"][-1]
         else:

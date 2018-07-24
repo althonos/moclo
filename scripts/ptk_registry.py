@@ -83,11 +83,14 @@ if __name__ == "__main__":
 
     # load inventory
     inventory = soup.find("table", class_="kit-inventory-table")
-    for row in tqdm.tqdm(inventory.find_all("tr")[1:]):
+    it = tqdm.tqdm(inventory.find_all("tr")[1:])
+
+    for row in it:
 
         # extract each row
         row_text = row.find("a").text
         id_, type_, name = map(str.strip, row_text.split("-", 2))
+        it.set_description(id_)
         info = {
             "resistance": row.find("span", class_="resistance-spacing").text,
             "name": name,
