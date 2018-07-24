@@ -135,10 +135,14 @@ class AbstractVector(StructuredRecord):
                 details = "same start overhang: '{}'".format(mod.overhang_start())
                 raise errors.DuplicateModules(mod2, mod, details=details)
 
+        # Get the alphabet using the largest alphabet from source records
+        alphabets = [mod.seq.alphabet for mod in six.itervalues(modmap)]
+        alphabet = max(alphabets, key=lambda a: len(a.letters))
+
         # Generate the complete inserted sequence
         try:
             overhang_next = self.overhang_end()
-            assembly = SeqRecord(Seq(''), id='assembly')
+            assembly = SeqRecord(Seq('', alphabet), id='assembly')
             while overhang_next != self.overhang_start():
                 module = modmap.pop(overhang_next)
                 assembly += module.target_sequence()
