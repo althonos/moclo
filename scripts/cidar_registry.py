@@ -90,11 +90,19 @@ if __name__ == "__main__":
         # extract each row
         row_text = row.find("a").text
 
+        # get antibiotics resistances
+        resistance = row.find("span", class_="resistance-spacing").text.strip()
+
         # Find a name / ID
         match = NAME_REGEX.match(row_text)
         if match is not None:
             id_ = match.group(1) + match.group(3)
             name = match.group(2)
+        elif row_text.startswith('pJ02'):
+            if resistance == 'Kanamycin':
+                name = id_ = row_text.replace('_', 'K_')
+            else:
+                name = id_ = row_text.replace('_', 'A_')
         else:
             id_ = name = row_text
 
@@ -103,7 +111,7 @@ if __name__ == "__main__":
 
         # extract info
         info = {
-            "resistance": row.find("span", class_="resistance-spacing").text,
+            "resistance": resistance,
             # "name": id_,
             "id": id_,
             # "type": type_,
@@ -202,7 +210,8 @@ if __name__ == "__main__":
             lacz.location = FeatureLocation(start, end, -1)
 
         # Fix bad position of AmpR
-        elif id_.endswith("m_AF"):
+        elif id_.endswith("m_AF") or '_AmpR_' in id_:
+            # write(gb, '/tmp/{}.gb'.format(id_), 'gb')
             ampr = next(
                 f
                 for f in gb.features
