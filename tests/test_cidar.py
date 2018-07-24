@@ -26,6 +26,6 @@ _Meta = PartsMetaCase('CIDAR', 'cidar.tsv.xz', __name__)
 
 # Generate test cases for each parts
 TestCIDARPromoter = _Meta(cidar.CIDARPromoter, 'Promoter')
-TestCIDARibosomeBindingSite = _Meta(cidar.CIDARibosomeBindingSite, 'RBS')
+TestCIDARibosomeBindingSite = _Meta(cidar.CIDARRibosomeBindingSite, 'RBS')
 TestCIDARCodingSequence = _Meta(cidar.CIDARCodingSequence, 'CDS')
 TestCIDARTerminator = _Meta(cidar.CIDARTerminator, 'Terminator')
