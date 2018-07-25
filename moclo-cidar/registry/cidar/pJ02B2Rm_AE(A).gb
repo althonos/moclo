@@ -1,10 +1,13 @@
-LOCUS       pJ02B2RmA_EF            3049 bp    ds-DNA  circular SYN 10-JAN-2018
+LOCUS       pJ02B2Rm_AE(A)          3049 bp    ds-DNA  circular SYN 10-JAN-2018
 DEFINITION  MoClo Transcriptional Unit: FACS Standard Color Controls - High RFP
             expression cassette - Ampicillin plasmid
-            [E:J23102:B:BCD2:C:E1010m:D:B0015:F].
-ACCESSION   pJ02B2RmA_EF
-VERSION     pJ02B2RmA_EF
-KEYWORDS    pJ02B2Rm_EF.
+            [A:J23102:B:BCD2:C:E1010m:D:B0015:E].
+ACCESSION   pJ02B2Rm_AE(A)
+VERSION     pJ02B2Rm_AE(A)
+KEYWORDS    "source:CIDAR" "antibiotic:Ampicillin (AMP)"
+            "part-subtype:Constitutive Fluorescence" "cloned-by:SI 5/18/14"
+            "part-type:Level 1 Unit" "plasmid:SIMC-" "2CC#:2CC1(A)"
+            "backbone:DVLA_AE (pSB1A2)" "fusion-site:AE" "glycerol:SI-".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -29,11 +32,23 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     misc_feature    42..76
+                     /label="J23102"
+                     /ApEinfo_revcolor="#ffef86"
+                     /ApEinfo_fwdcolor="#ffef86"
+     5'UTR           81..164
+                     /label="BCD2"
+                     /ApEinfo_revcolor="#f58a5e"
+                     /ApEinfo_fwdcolor="#f58a5e"
      RBS             151..159
                      /label="Shine-Dalgarno sequence"
                      /note="full consensus sequence for ribosome-binding sites
                      upstream of start codons in E. coli; complementary to a
                      region in the 3' end of the 16S rRNA (Chen et al., 1994)"
+     CDS             169..849
+                     /label="E1010m"
+                     /ApEinfo_revcolor="#faac61"
+                     /ApEinfo_fwdcolor="#faac61"
      CDS             169..846
                      /codon_start=1
                      /product="mRFP1"
@@ -55,6 +70,10 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_revcolor="#c16969"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
+     misc_feature    854..982
+                     /label="B0015"
+                     /ApEinfo_revcolor="#75c6a9"
+                     /ApEinfo_fwdcolor="#75c6a9"
      terminator      862..933
                      /label="rrnB T1 terminator"
                      /note="transcription terminator T1 from the E. coli rrnB
@@ -62,6 +81,10 @@ FEATURES             Location/Qualifiers
      terminator      949..976
                      /label="T7Te terminator"
                      /note="phage T7 early transcription terminator"
+     misc_feature    987..3086
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    994..1014
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"
@@ -127,7 +150,7 @@ FEATURES             Location/Qualifiers
                      /label="bacterial terminator"
                      /note="putative bacterial transcription terminator"
 ORIGIN
-        1 ggaattcgcg gccgcttcta gagactagtg ggtctcagct tttgacagct agctcagtcc
+        1 ggaattcgcg gccgcttcta gagactagtg ggtctcagga gttgacagct agctcagtcc
        61 taggtactgt gctagctact gggcccaagt tcacttaaaa aggagatcaa caatgaaagc
       121 aattttcgta ctgaaacatc ttaatcatgc taaggaggtt ttctaatgat ggcttcctcc
       181 gaggatgtta tcaaagagtt catgcgtttc aaagttcgta tggaaggttc cgttaacggt
@@ -143,7 +166,7 @@ ORIGIN
       781 aacgaggact acaccatcgt tgaacagtac gaacgtgctg aaggtcgtca ctccaccggt
       841 gcttaataaa ggtccaggca tcaaataaaa cgaaaggctc agtcgaaaga ctgggccttt
       901 cgttttatct gttgtttgtc ggtgaacgct ctctactaga gtcacactgg ctcaccttcg
-      961 ggtgggcctt tctgcgttta tacgctagag acctactagt agcggccgct gcaggcttcc
+      961 ggtgggcctt tctgcgttta tagcttagag acctactagt agcggccgct gcaggcttcc
      1021 tcgctcactg actcgctgcg ctcggtcgtt cggctgcggc gagcggtatc agctcactca
      1081 aaggcggtaa tacggttatc cacagaatca ggggataacg caggaaagaa catgtgagca
      1141 aaaggccagc aaaaggccag gaaccgtaaa aaggccgcgt tgctggcgtt tttccacagg

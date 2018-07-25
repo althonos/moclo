@@ -3,7 +3,11 @@ DEFINITION  MoClo Basic Part: CDS - Fluorescent protein. Red. Modified from
             Bba_E1010 to fix illegal sites. [C:E1010m:D].
 ACCESSION   E1010m_CD
 VERSION     E1010m_CD
-KEYWORDS    E1010m (RFP)_CD.
+KEYWORDS    "Backbone:DVA_CD" "Part subtype:Fluorescent reporter" "Seq
+            Source:parts.igem.org/Part\:Bba_E1010" "Part Source:CIDAR" "Fusion
+            site(s):CD" "Antibiotic:Ampicillin (AMP)" "Glycerol:--" "Seq
+            Verify:--" "Plasmid:--" "Cloned by (Date):SI 4/6/2014" "Part type
+            :CDS".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -28,6 +32,10 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     CDS             42..722
+                     /label="E1010m"
+                     /ApEinfo_revcolor="#faac61"
+                     /ApEinfo_fwdcolor="#faac61"
      CDS             42..719
                      /codon_start=1
                      /product="mRFP1"
@@ -49,6 +57,10 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_revcolor="#c16969"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
+     misc_feature    727..2826
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    734..754
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

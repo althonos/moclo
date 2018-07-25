@@ -2,7 +2,11 @@ LOCUS       YFP                     2831 bp    ds-DNA  circular SYN 10-JAN-2018
 DEFINITION  MoClo Basic Part: CDS - Fluorescent protein. Yellow.  [C:E0030:D].
 ACCESSION   E0030_CD
 VERSION     E0030_CD
-KEYWORDS    E0030 (YFP)_CD.
+KEYWORDS    "Plasmid:--" "Part subtype:Fluorescent reporter"
+            "Antibiotic:Ampicillin (AMP)" "Seq
+            Source:parts.igem.org/Part\:Bba_E0030" "Cloned by (Date):SI
+            4/6/2014" "Seq Verify:--" "Part type :CDS" "Backbone:DVA_CD" "Fusion
+            site(s):CD" "Glycerol:--" "Part Source:CIDAR".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -27,6 +31,10 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     CDS             42..764
+                     /label="E0030"
+                     /ApEinfo_revcolor="#faac61"
+                     /ApEinfo_fwdcolor="#faac61"
      CDS             42..761
                      /codon_start=1
                      /product="enhanced YFP"
@@ -46,6 +54,10 @@ FEATURES             Location/Qualifiers
      primer_bind     695..716
                      /label="EGFP-C"
                      /note="EGFP, forward primer"
+     misc_feature    769..2868
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    776..796
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

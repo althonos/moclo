@@ -2,7 +2,10 @@ LOCUS       B0015_DF                2237 bp    ds-DNA  circular SYN 10-JAN-2018
 DEFINITION  MoClo Basic Part: Double terminator (B0010:B0012)  [D:B0015:F].
 ACCESSION   B0015_DF
 VERSION     B0015_DF
-KEYWORDS    B0015_DF.
+KEYWORDS    "Glycerol:--" "Seq Source:parts.igem.org/Part\:Bba_B0015" "Cloned by
+            (Date):SI 4/6/2014" "Fusion site(s):DF" "Antibiotic:Ampicillin
+            (AMP)" "Seq Verify:--" "Part type :3'UTR" "Part Source:CIDAR"
+            "Backbone:DVA_DF" "Part subtype:Double Terminator" "Plasmid:--".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -27,6 +30,10 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     misc_feature    42..170
+                     /label="B0015"
+                     /ApEinfo_revcolor="#75c6a9"
+                     /ApEinfo_fwdcolor="#75c6a9"
      terminator      50..121
                      /label="rrnB T1 terminator"
                      /note="transcription terminator T1 from the E. coli rrnB
@@ -34,6 +41,10 @@ FEATURES             Location/Qualifiers
      terminator      137..164
                      /label="T7Te terminator"
                      /note="phage T7 early transcription terminator"
+     misc_feature    175..2274
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    182..202
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

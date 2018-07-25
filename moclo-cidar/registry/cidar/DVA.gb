@@ -3,7 +3,10 @@ DEFINITION  MoClo Destination Vector: Empty vector for creating new DVA. Cut
             with SpeI and insert amplified LacZa (based on pSB1A2).
 ACCESSION   DVA
 VERSION     DVA
-KEYWORDS    DVA.
+KEYWORDS    "Seq Source:parts.igem.org/Part\:pSB1A2" "Antibiotic:Ampicillin
+            (AMP)" "Backbone:DVA" "Cloned by (Date):SI 4/6/2014" "Seq Verify:--"
+            "Part Source:CIDAR" "Part type :Destination Vector" "Plasmid:--"
+            "Glycerol:--" "Fusion site(s)" "Part subtype:Level 0/2 Ampicillin".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -28,6 +31,10 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     misc_feature    24..2101
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      primer_bind     complement(49..66)
                      /label="L4440"
                      /note="L4440 vector, forward primer"

@@ -2,7 +2,10 @@ LOCUS       DVK_EF                  2731 bp    ds-DNA  circular SYN 10-JAN-2018
 DEFINITION  MoClo Destination Vector: (based on pSB1K3)  [E:LacZa:F].
 ACCESSION   DVK_EF
 VERSION     DVK_EF
-KEYWORDS    DVK_EF.
+KEYWORDS    "Part Source:CIDAR" "Glycerol:--" "Part subtype:Level 1 Kanamycin"
+            "Fusion site(s):EF" "Seq Source:parts.igem.org/Part\:pSB1K3" "Cloned
+            by (Date):SI 4/6/2014" "Backbone:DVK_EF" "Seq Verify:--" "Part type
+            :Destination Vector" "Antibiotic:Kanamycin (KAN)" "Plasmid:--".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -23,7 +26,7 @@ FEATURES             Location/Qualifiers
      source          1..2731
                      /organism="synthetic DNA construct"
                      /mol_type="other DNA"
-     CDS             complement(0..323)
+     CDS             complement(0^1)
                      /codon_start=1
                      /gene="lacZ fragment"
                      /product="LacZ-alpha fragment of beta-galactosidase"
@@ -35,6 +38,14 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     misc_feature    complement(43..538)
+                     /label="LacZa Part"
+                     /ApEinfo_revcolor="#b7e6d7"
+                     /ApEinfo_fwdcolor="#b7e6d7"
+     CDS             complement(111..179)
+                     /label="LacZ alpha"
+                     /ApEinfo_revcolor="#7ea7d8"
+                     /ApEinfo_fwdcolor="#7ea7d8"
      primer_bind     236..258
                      /label="M13/pUC Forward"
                      /note="In lacZ gene"
@@ -49,16 +60,20 @@ FEATURES             Location/Qualifiers
      misc_feature    268..324
                      /label="MCS"
                      /note="pUC18/19 multiple cloning site"
-     primer_bind     complement(337..353)
-                     /label="M13 rev"
-                     /note="common sequencing primer, one of multiple similar
-                     variants"
+     primer_bind     complement(333..353)
+                     /label="M13-rev"
+                     /ApEinfo_revcolor="#7bcdc8"
+                     /ApEinfo_fwdcolor="#7bcdc8"
      primer_bind     complement(337..353)
                      /label="M13 Reverse"
                      /note="In lacZ gene. Also called M13-rev"
      primer_bind     complement(350..372)
                      /label="M13/pUC Reverse"
                      /note="In lacZ gene"
+     misc_binding    complement(359..381)
+                     /label="LacO"
+                     /ApEinfo_revcolor="#7ea7d8"
+                     /ApEinfo_fwdcolor="#7ea7d8"
      protein_bind    361..377
                      /label="lac operator"
                      /bound_moiety="lac repressor encoded by lacI"
@@ -74,6 +89,10 @@ FEATURES             Location/Qualifiers
                      /bound_moiety="E. coli catabolite activator protein"
                      /note="CAP binding activates transcription in the presence
                      of cAMP."
+     misc_feature    543..2769
+                     /label="DVL1"
+                     /ApEinfo_revcolor="#85dae9"
+                     /ApEinfo_fwdcolor="#85dae9"
      misc_feature    551..571
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

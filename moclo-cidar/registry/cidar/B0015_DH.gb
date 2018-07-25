@@ -2,7 +2,10 @@ LOCUS       B0015_DH                2237 bp    ds-DNA  circular SYN 10-JAN-2018
 DEFINITION  MoClo Basic Part: Double terminator (B0010:B0012)  [D:B0015:H].
 ACCESSION   B0015_DH
 VERSION     B0015_DH
-KEYWORDS    B0015_DH.
+KEYWORDS    "Part type :3'UTR" "Cloned by (Date):SI 4/6/2014" "Seq Verify:--"
+            "Seq Source:parts.igem.org/Part\:Bba_B0015" "Part Source:CIDAR"
+            "Fusion site(s):DH" "Glycerol:--" "Antibiotic:Ampicillin (AMP)"
+            "Part subtype:Double Terminator" "Plasmid:--" "Backbone:DVA_DH".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -27,6 +30,10 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     misc_feature    42..170
+                     /label="B0015"
+                     /ApEinfo_revcolor="#75c6a9"
+                     /ApEinfo_fwdcolor="#75c6a9"
      terminator      50..121
                      /label="rrnB T1 terminator"
                      /note="transcription terminator T1 from the E. coli rrnB
@@ -34,6 +41,10 @@ FEATURES             Location/Qualifiers
      terminator      137..164
                      /label="T7Te terminator"
                      /note="phage T7 early transcription terminator"
+     misc_feature    175..2274
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    182..202
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

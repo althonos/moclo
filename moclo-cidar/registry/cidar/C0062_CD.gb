@@ -4,7 +4,10 @@ DEFINITION  MoClo Basic Part: CDS - Controller protein, luxR repressor/activator
             pLuxR(pL) R0062) [C:C0062:D].
 ACCESSION   C0062_CD
 VERSION     C0062_CD
-KEYWORDS    C0062 (luxR)_CD.
+KEYWORDS    "Backbone:DVA_CD" "Cloned by (Date):SI 4/6/2014" "Plasmid:--"
+            "Glycerol:--" "Seq Source:parts.igem.org/Part\:Bba_C0062" "Part
+            Source:CIDAR" "Seq Verify:--" "Fusion site(s):CD" "Part type :CDS"
+            "Part subtype:Transcription factor" "Antibiotic:Ampicillin (AMP)".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -29,6 +32,10 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     CDS             42..797
+                     /label="C0062"
+                     /ApEinfo_revcolor="#faac61"
+                     /ApEinfo_fwdcolor="#faac61"
      CDS             42..791
                      /codon_start=1
                      /label="LuxR repressor"
@@ -56,6 +63,10 @@ FEATURES             Location/Qualifiers
                      MKLNTTNRCQSISKAILTGAIDCPYFKN"
                      /inference="DESCRIPTION:alignment:blastx:UniProtKB/Swiss-Pr
                      ot:P12746"
+     misc_feature    802..2901
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    809..829
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

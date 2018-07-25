@@ -4,7 +4,11 @@ DEFINITION  MoClo Basic Part: Controllable promoter - pTet - tetR regulated
             itself be inhibited by tetracycline or aTc) [A:R0040:B].
 ACCESSION   R0040_AB
 VERSION     R0040_AB
-KEYWORDS    R0040 (pTet)_AB.
+KEYWORDS    "Fusion site(s):AB" "Antibiotic:Ampicillin (AMP)" "Cloned by
+            (Date):SI 4/6/2014" "Part subtype:Controllable" "Seq
+            Source:parts.igem.org/Part\:Bba_R0040" "Plasmid:--" "Glycerol:--"
+            "Seq Verify:--" "Part type :Promoter" "Backbone:DVA_AB" "Part
+            Source:CIDAR".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -44,11 +48,10 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_revcolor="#00a1ee"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
-     protein_bind    67..85
-                     /gene="tetO"
-                     /label="tet operator"
-                     /bound_moiety="tetracycline repressor TetR"
-                     /note="bacterial operator O2 for the tetR and tetA genes"
+     misc_feature    100..2199
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    107..127
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

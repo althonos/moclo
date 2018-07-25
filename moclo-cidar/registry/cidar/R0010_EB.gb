@@ -3,7 +3,10 @@ DEFINITION  MoClo Basic Part: Controllable promoter - pLacI - lacI regulated
             (repressed by LacI+CAP. LacI, C0012, inhibited by IPTG) [E:R0010:B].
 ACCESSION   R0010_EB
 VERSION     R0010_EB
-KEYWORDS    R0010 (pLacI)_EB.
+KEYWORDS    "Backbone:DVA_EB" "Antibiotic:Ampicillin (AMP)" "Seq Verify:--"
+            "Cloned by (Date):SI 4/6/2014" "Part subtype:Controllable"
+            "Glycerol:--" "Plasmid:--" "Part type :Promoter" "Part Source:CIDAR"
+            "Fusion site(s):EB" "Seq Source:parts.igem.org/Part\:Bba_R0010".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -43,6 +46,14 @@ FEATURES             Location/Qualifiers
                      /bound_moiety="E. coli catabolite activator protein"
                      /note="CAP binding activates transcription in the presence
                      of cAMP."
+     promoter        178..208
+                     /label="lac promoter"
+                     /ApEinfo_revcolor="#bc8dbf"
+                     /ApEinfo_fwdcolor="#bc8dbf"
+     misc_binding    212..234
+                     /label="LacO"
+                     /ApEinfo_revcolor="#7ea7d8"
+                     /ApEinfo_fwdcolor="#7ea7d8"
      protein_bind    216..232
                      /label="lac operator"
                      /bound_moiety="lac repressor encoded by lacI"
@@ -50,6 +61,10 @@ FEATURES             Location/Qualifiers
                      inhibit transcription in E. coli. This inhibition can be
                      relieved by adding lactose or
                      isopropyl-beta-D-thiogalactopyranoside (IPTG)."
+     misc_feature    246..2345
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    253..273
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

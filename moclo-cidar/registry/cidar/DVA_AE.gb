@@ -3,7 +3,11 @@ DEFINITION  MoClo Destination Vector: (based on pSB1A2 with fixed illegal site)
             [A:LacZa:E].
 ACCESSION   DVA_AE
 VERSION     DVA_AE
-KEYWORDS    DVA_AE.
+KEYWORDS    "Plasmid:--" "Glycerol:--" "Seq Source:parts.igem.org/Part\:pSB1A2"
+            "Cloned by (Date):SI 4/6/2014" "Part subtype:Level 0/2 Ampicillin"
+            "Antibiotic:Ampicillin (AMP)" "Part Source:CIDAR" "Seq Verify:--"
+            "Fusion site(s):AE" "Part type :Destination Vector"
+            "Backbone:DVA_AE".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -36,6 +40,14 @@ FEATURES             Location/Qualifiers
                      /translation="MTMITPSLHACRSTLEDPRVPSSNSLAVVLQRRDWENPGVTQLNR
                      LAAHPPFASWRNSEEARTDRPSQQLRSLNGEWRLMRYFLLTHLCGISHRIWCRRHLLRP
                      TSL"
+     misc_feature    complement(42..539)
+                     /label="LacZa Part"
+                     /ApEinfo_revcolor="#b7e6d7"
+                     /ApEinfo_fwdcolor="#b7e6d7"
+     CDS             complement(111..179)
+                     /label="LacZ alpha"
+                     /ApEinfo_revcolor="#7ea7d8"
+                     /ApEinfo_fwdcolor="#7ea7d8"
      primer_bind     236..258
                      /label="M13/pUC Forward"
                      /note="In lacZ gene"
@@ -50,16 +62,20 @@ FEATURES             Location/Qualifiers
      misc_feature    268..324
                      /label="MCS"
                      /note="pUC18/19 multiple cloning site"
-     primer_bind     complement(337..353)
-                     /label="M13 rev"
-                     /note="common sequencing primer, one of multiple similar
-                     variants"
+     primer_bind     complement(333..353)
+                     /label="M13-rev"
+                     /ApEinfo_revcolor="#7bcdc8"
+                     /ApEinfo_fwdcolor="#7bcdc8"
      primer_bind     complement(337..353)
                      /label="M13 Reverse"
                      /note="In lacZ gene. Also called M13-rev"
      primer_bind     complement(350..372)
                      /label="M13/pUC Reverse"
                      /note="In lacZ gene"
+     misc_binding    complement(359..381)
+                     /label="LacO"
+                     /ApEinfo_revcolor="#7ea7d8"
+                     /ApEinfo_fwdcolor="#7ea7d8"
      protein_bind    361..377
                      /label="lac operator"
                      /bound_moiety="lac repressor encoded by lacI"
@@ -75,6 +91,10 @@ FEATURES             Location/Qualifiers
                      /bound_moiety="E. coli catabolite activator protein"
                      /note="CAP binding activates transcription in the presence
                      of cAMP."
+     misc_feature    544..2643
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    551..571
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

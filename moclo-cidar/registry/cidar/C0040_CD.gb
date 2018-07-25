@@ -4,7 +4,11 @@ DEFINITION  MoClo Basic Part: CDS - Controller protein, tetR repressor
             [C:C0040:D].
 ACCESSION   C0040_CD
 VERSION     C0040_CD
-KEYWORDS    C0040 (tetR)_CD.
+KEYWORDS    "Plasmid:--" "Glycerol:--" "Seq Verify:--" "Cloned by (Date):SI
+            4/6/2014" "Part type :CDS" "Backbone:DVA_CD" "Part Source:CIDAR"
+            "Fusion site(s):CD" "Part subtype:Transcription factor" "Seq
+            Source:parts.igem.org/Part\:Bba_C0040" "Antibiotic:Ampicillin
+            (AMP)".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -41,9 +45,17 @@ FEATURES             Location/Qualifiers
                      KNKRALLDALAIEMLDRHHTHFCPLEGESWQDFLRNNAKSFRCALLSHRDGAKVHLGTR
                      PTEKQYETLENQLAFLCQQGFSLENALYALSAVGHFTLGCVLEDQEHQVAKEERETPTT
                      DSMPPLLRQAIELFDHQGAEPAFLFGLELIICGLEKQLKCESG"
+     CDS             42..698
+                     /label="C0040"
+                     /ApEinfo_revcolor="#faac61"
+                     /ApEinfo_fwdcolor="#faac61"
      primer_bind     complement(112..131)
                      /label="Tet-R"
                      /note="Tetracycline resistance gene, reverse primer"
+     misc_feature    703..2802
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    710..730
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

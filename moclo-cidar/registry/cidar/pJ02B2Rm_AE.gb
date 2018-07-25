@@ -1,10 +1,13 @@
-LOCUS       pJ02B2RmK_AE            3176 bp    ds-DNA  circular SYN 10-JAN-2018
+LOCUS       pJ02B2Rm_AE             3176 bp    ds-DNA  circular SYN 10-JAN-2018
 DEFINITION  MoClo Transcriptional Unit: FACS Standard Color Controls - High RFP
             expression cassette - Kanamycin plasmid
             [A:J23102:B:BCD2:C:E1010m:D:B0015:E].
-ACCESSION   pJ02B2RmK_AE
-VERSION     pJ02B2RmK_AE
-KEYWORDS    pJ02B2Rm_AE.
+ACCESSION   pJ02B2Rm_AE
+VERSION     pJ02B2Rm_AE
+KEYWORDS    "2CC#:2CC1" "source:CIDAR" "cloned-by:SI 11/25/13" "fusion-site:AE"
+            "antibiotic:Kanamycin (KAN)" "backbone:DVL1_AE (pSB1K3)"
+            "glycerol:SI-1-1 (SI 11/30/13)" "part-type:Level 1 Unit"
+            "part-subtype:Constitutive Fluorescence" "plasmid:SIMC-1-F2".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -29,11 +32,23 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     misc_feature    43..77
+                     /label="J23102"
+                     /ApEinfo_revcolor="#ffef86"
+                     /ApEinfo_fwdcolor="#ffef86"
+     5'UTR           82..165
+                     /label="BCD2"
+                     /ApEinfo_revcolor="#f58a5e"
+                     /ApEinfo_fwdcolor="#f58a5e"
      RBS             152..160
                      /label="Shine-Dalgarno sequence"
                      /note="full consensus sequence for ribosome-binding sites
                      upstream of start codons in E. coli; complementary to a
                      region in the 3' end of the 16S rRNA (Chen et al., 1994)"
+     CDS             170..850
+                     /label="E1010m"
+                     /ApEinfo_revcolor="#faac61"
+                     /ApEinfo_fwdcolor="#faac61"
      CDS             170..847
                      /codon_start=1
                      /product="mRFP1"
@@ -55,6 +70,10 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_revcolor="#c16969"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
+     misc_feature    855..983
+                     /label="B0015"
+                     /ApEinfo_revcolor="#75c6a9"
+                     /ApEinfo_fwdcolor="#75c6a9"
      terminator      863..934
                      /label="rrnB T1 terminator"
                      /note="transcription terminator T1 from the E. coli rrnB
@@ -62,6 +81,10 @@ FEATURES             Location/Qualifiers
      terminator      950..977
                      /label="T7Te terminator"
                      /note="phage T7 early transcription terminator"
+     misc_feature    988..3214
+                     /label="DVL1"
+                     /ApEinfo_revcolor="#85dae9"
+                     /ApEinfo_fwdcolor="#85dae9"
      misc_feature    996..1016
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

@@ -3,7 +3,10 @@ DEFINITION  MoClo Basic Part: RBS - Weiss RBS, low strength. Modified from
             Bba_B0033 to adjust spacing in MC system. [B:B0033m:C].
 ACCESSION   B0033m_BC
 VERSION     B0033m_BC
-KEYWORDS    B0033m_BC.
+KEYWORDS    "Backbone:DVA_BC" "Cloned by (Date):SI 4/6/2014" "Seq Verify:--"
+            "Seq Source:parts.igem.org/Part\:Bba_B0033" "Plasmid:--" "Fusion
+            site(s):BC" "Part Source:CIDAR" "Glycerol:--" "Part type :5'UTR"
+            "Antibiotic:Ampicillin (AMP)" "Part subtype:RBS".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -28,6 +31,18 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     5'UTR           42..61
+                     /label="B0033m"
+                     /ApEinfo_revcolor="#f58a5e"
+                     /ApEinfo_fwdcolor="#f58a5e"
+     5'UTR           46..56
+                     /label="B0033"
+                     /ApEinfo_revcolor="#f58a5e"
+                     /ApEinfo_fwdcolor="#f58a5e"
+     misc_feature    66..2165
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    73..93
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

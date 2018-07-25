@@ -3,7 +3,10 @@ DEFINITION  MoClo Basic Part: Constitutive promoter - Anderson series - low
             strength [G:J23103:B].
 ACCESSION   J23103_GB
 VERSION     J23103_GB
-KEYWORDS    J23103_GB.
+KEYWORDS    "Backbone:DVA_GB" "Seq Source:parts.igem.org/Part\:Bba_J23103" "Part
+            Source:CIDAR" "Cloned by (Date):SI 4/6/2014" "Plasmid:--" "Seq
+            Verify:--" "Glycerol:--" "Part subtype:Constitutive" "Part type
+            :Promoter" "Fusion site(s):GB" "Antibiotic:Ampicillin (AMP)".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -28,6 +31,14 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     misc_feature    42..76
+                     /label="J23103"
+                     /ApEinfo_revcolor="#ffef86"
+                     /ApEinfo_fwdcolor="#ffef86"
+     misc_feature    81..2180
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    88..108
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

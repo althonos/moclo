@@ -1,10 +1,13 @@
-LOCUS       pJ02B2GmK_EF            3215 bp    ds-DNA  circular SYN 10-JAN-2018
+LOCUS       pJ02B2Gm_AE             3215 bp    ds-DNA  circular SYN 10-JAN-2018
 DEFINITION  MoClo Transcriptional Unit: FACS Standard Color Controls - High GFP
             expression cassette - Kanamycin plasmid
-            [E:J23102:B:BCD2:C:E0040m:D:B0015:F].
-ACCESSION   pJ02B2GmK_EF
-VERSION     pJ02B2GmK_EF
-KEYWORDS    pJ02B2Gm_EF.
+            [A:J23102:B:BCD2:C:E0040m:D:B0015:E].
+ACCESSION   pJ02B2Gm_AE
+VERSION     pJ02B2Gm_AE
+KEYWORDS    "Source:CIDAR" "Cloned by (Date):SI 4/1/14" "Part type :Level 1"
+            "Fusion site(s):AE" "Antibiotic:Kanamycin (KAN)" "2CC#:2CC38" "Part
+            subtype:Fluorescent reporter" "Plasmid" "Glycerol"
+            "Backbone:DVL1_AE".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -26,42 +29,33 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     misc_feature    43..77
+                     /label="J23102"
+                     /ApEinfo_revcolor="#ffef86"
+                     /ApEinfo_fwdcolor="#ffef86"
+     5'UTR           82..165
+                     /label="BCD2"
+                     /ApEinfo_revcolor="#f58a5e"
+                     /ApEinfo_fwdcolor="#f58a5e"
      RBS             152..160
                      /label="Shine-Dalgarno sequence"
                      /note="full consensus sequence for ribosome-binding sites
                      upstream of start codons in E. coli; complementary to a
                      region in the 3' end of the 16S rRNA (Chen et al., 1994)"
-     CDS             170..886
-                     /codon_start=1
-                     /product="green fluorescent protein"
-                     /label="GFP"
-                     /translation="MRKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLK
-                     FICTTGKLPVPWPTLVTTFGYGVQCFARYPDHMKQHDFFKSAMPEGYVQERTIFFKDDG
-                     NYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKV
-                     NFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLLE
-                     FVTAAGITHGMDELYK"
-                     /gene="GFP"
-                     /db_xref="PDB:1H6R"
-                     /db_xref="InterPro:IPR009017"
-                     /db_xref="InterPro:IPR011584"
-                     /db_xref="InterPro:IPR000786"
-                     /db_xref="PFAM:PF01353"
-                     /db_xref="GO:0008218"
-                     /db_xref="GO:0006091"
-                     /db_xref="GO:0018298"
-                     /db_xref="UniProtKB/Swiss-Prot:P42212"
-                     /inference="DESCRIPTION:alignment:blastx:UniProtKB/Swiss-Pr
-                     ot:P42212"
-                     /ApEinfo_fwdcolor="#34ff03"
-                     /ApEinfo_revcolor="#34ff03"
-                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
-                     width 5 offset 0"
+     CDS             170..889
+                     /label="E0040m"
+                     /ApEinfo_revcolor="#faac61"
+                     /ApEinfo_fwdcolor="#faac61"
      primer_bind     complement(200..228)
                      /label="GFP-R"
                      /note="GFP, reverse primer. Does NOT anneal to EGFP"
      primer_bind     823..843
                      /label="GFP-F"
                      /note="GFP, forward primer. Does NOT anneal to EGFP"
+     misc_feature    894..1022
+                     /label="B0015"
+                     /ApEinfo_revcolor="#75c6a9"
+                     /ApEinfo_fwdcolor="#75c6a9"
      terminator      902..973
                      /label="rrnB T1 terminator"
                      /note="transcription terminator T1 from the E. coli rrnB
@@ -69,6 +63,10 @@ FEATURES             Location/Qualifiers
      terminator      989..1016
                      /label="T7Te terminator"
                      /note="phage T7 early transcription terminator"
+     misc_feature    1027..3253
+                     /label="DVL1"
+                     /ApEinfo_revcolor="#85dae9"
+                     /ApEinfo_fwdcolor="#85dae9"
      misc_feature    1035..1055
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"
@@ -144,7 +142,7 @@ FEATURES             Location/Qualifiers
                      /label="bacterial terminator"
                      /note="putative bacterial transcription terminator"
 ORIGIN
-        1 ggaattcgcg gccgcttcta gagactagtg gaagacatgc ttttgacagc tagctcagtc
+        1 ggaattcgcg gccgcttcta gagactagtg gaagacatgg agttgacagc tagctcagtc
        61 ctaggtactg tgctagctac tgggcccaag ttcacttaaa aaggagatca acaatgaaag
       121 caattttcgt actgaaacat cttaatcatg ctaaggaggt tttctaatga tgcgtaaagg
       181 agaagaactt ttcactggag ttgtcccaat tcttgttgaa ttagatggtg atgttaatgg
@@ -157,11 +155,11 @@ ORIGIN
       601 ctataactca cacaatgtat acatcatggc agacaaacaa aagaatggaa tcaaagttaa
       661 cttcaaaatt agacacaaca ttgaagatgg aagcgttcaa ctagcagacc attatcaaca
       721 aaatactcca attggcgatg gccctgtcct tttaccagac aaccattacc tgtccacaca
-      781 atctgccctt tcgaaagatc ccaacgaaaa gagagatcac atggtccttc ttgagtttgt
+      781 atctgccctt tcgaaagatc ccaacgaaaa gagagactac atggtccttc ttgagtttgt
       841 aacagctgct gggattacac atggcatgga tgaactatac aaataataaa ggtccaggca
       901 tcaaataaaa cgaaaggctc agtcgaaaga ctgggccttt cgttttatct gttgtttgtc
       961 ggtgaacgct ctctactaga gtcacactgg ctcaccttcg ggtgggcctt tctgcgttta
-     1021 tacgctatgt cttctactag tagcggccgc tgcagtccgg caaaaaaggg caaggtgtca
+     1021 tagcttatgt cttctactag tagcggccgc tgcagtccgg caaaaaaggg caaggtgtca
      1081 ccaccctgcc ctttttcttt aaaaccgaaa agattacttc gcgttatgca ggcttcctcg
      1141 ctcactgact cgctgcgctc ggtcgttcgg ctgcggcgag cggtatcagc tcactcaaag
      1201 gcggtaatac ggttatccac agaatcaggg gataacgcag gaaagaacat gtgagcaaaa

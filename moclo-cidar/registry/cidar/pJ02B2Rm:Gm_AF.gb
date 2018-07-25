@@ -1,8 +1,11 @@
-LOCUS       pJ02B2Rm:GmA_AF         4033 bp    ds-DNA  circular SYN 10-JAN-2018
+LOCUS       pJ02B2Rm:Gm_AF          4033 bp    ds-DNA  circular SYN 10-JAN-2018
 DEFINITION  MoClo Device: FACS Standard Color Controls - High RFP (first unit).
-ACCESSION   pJ02B2Rm:GmA_AF
-VERSION     pJ02B2Rm:GmA_AF
-KEYWORDS    pJ02B2Rm:Gm_AF.
+ACCESSION   pJ02B2Rm:Gm_AF
+VERSION     pJ02B2Rm:Gm_AF
+KEYWORDS    "fusion-site:AF" "part-type:Level 2 Unit" "2CC#:2CC18"
+            "backbone:DVL2_AF (pSB1A2)" "plasmid:SIMC (SI Update)" "cloned-by:SI
+            11/30/13" "source:CIDAR" "part-subtype:2 Color Control"
+            "glycerol:SI-1-19 (SI 11/30/13)" "antibiotic:Ampicillin (AMP)".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -27,11 +30,27 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     misc_feature    42..76
+                     /label="J23102"
+                     /ApEinfo_revcolor="#ffef86"
+                     /ApEinfo_fwdcolor="#ffef86"
+     5'UTR           81..164
+                     /label="BCD2"
+                     /ApEinfo_revcolor="#f58a5e"
+                     /ApEinfo_fwdcolor="#f58a5e"
      RBS             151..159
                      /label="Shine-Dalgarno sequence"
                      /note="full consensus sequence for ribosome-binding sites
                      upstream of start codons in E. coli; complementary to a
                      region in the 3' end of the 16S rRNA (Chen et al., 1994)"
+     CDS             169..849
+                     /label="E1010m"
+                     /ApEinfo_revcolor="#faac61"
+                     /ApEinfo_fwdcolor="#faac61"
+     CDS             169..849
+                     /label="E1010m"
+                     /ApEinfo_revcolor="#faac61"
+                     /ApEinfo_fwdcolor="#faac61"
      CDS             169..846
                      /codon_start=1
                      /product="mRFP1"
@@ -53,6 +72,10 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_revcolor="#c16969"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
+     misc_feature    854..982
+                     /label="B0015"
+                     /ApEinfo_revcolor="#75c6a9"
+                     /ApEinfo_fwdcolor="#75c6a9"
      terminator      862..933
                      /label="rrnB T1 terminator"
                      /note="transcription terminator T1 from the E. coli rrnB
@@ -60,11 +83,26 @@ FEATURES             Location/Qualifiers
      terminator      949..976
                      /label="T7Te terminator"
                      /note="phage T7 early transcription terminator"
-     RBS             1096..1104
-                     /label="Shine-Dalgarno sequence"
-                     /note="full consensus sequence for ribosome-binding sites
-                     upstream of start codons in E. coli; complementary to a
-                     region in the 3' end of the 16S rRNA (Chen et al., 1994)"
+     misc_feature    987..1021
+                     /label="J23102"
+                     /ApEinfo_revcolor="#ffef86"
+                     /ApEinfo_fwdcolor="#ffef86"
+     5'UTR           1026..1109
+                     /label="BCD2"
+                     /ApEinfo_revcolor="#f58a5e"
+                     /ApEinfo_fwdcolor="#f58a5e"
+     5'UTR           1026..1109
+                     /label="BCD2"
+                     /ApEinfo_revcolor="#f58a5e"
+                     /ApEinfo_fwdcolor="#f58a5e"
+     CDS             1114..1833
+                     /label="E0040m"
+                     /ApEinfo_revcolor="#faac61"
+                     /ApEinfo_fwdcolor="#faac61"
+     CDS             1114..1833
+                     /label="E0040m"
+                     /ApEinfo_revcolor="#faac61"
+                     /ApEinfo_fwdcolor="#faac61"
      CDS             1114..1830
                      /codon_start=1
                      /product="green fluorescent protein"
@@ -96,19 +134,24 @@ FEATURES             Location/Qualifiers
      primer_bind     1767..1787
                      /label="GFP-F"
                      /note="GFP, forward primer. Does NOT anneal to EGFP"
-     terminator      1846..1917
-                     /label="rrnB T1 terminator"
-                     /note="transcription terminator T1 from the E. coli rrnB
-                     gene"
-     terminator      1933..1960
-                     /label="T7Te terminator"
-                     /note="phage T7 early transcription terminator"
+     misc_feature    1838..1966
+                     /label="B0015"
+                     /ApEinfo_revcolor="#75c6a9"
+                     /ApEinfo_fwdcolor="#75c6a9"
+     misc_feature    1971..4070
+                     /label="DVL2"
+                     /ApEinfo_revcolor="#85dae9"
+                     /ApEinfo_fwdcolor="#85dae9"
      misc_feature    1978..1998
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"
      primer_bind     complement(2004..2021)
                      /label="L4440"
                      /note="L4440 vector, forward primer"
+     rep_origin      complement(2157..2839)
+                     /label="ColE1 origin"
+                     /ApEinfo_revcolor="#8493ca"
+                     /ApEinfo_fwdcolor="#8493ca"
      rep_origin      complement(2175..2763)
                      /direction=LEFT
                      /label="ori"
@@ -150,6 +193,10 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_revcolor="#9f4240"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
+     CDS             complement(2937..3596)
+                     /label="AmpR"
+                     /ApEinfo_revcolor="#fff79a"
+                     /ApEinfo_fwdcolor="#fff79a"
      primer_bind     3557..3576
                      /label="Amp-R"
                      /note="Ampicillin resistance gene, reverse primer"

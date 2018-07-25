@@ -4,7 +4,11 @@ DEFINITION  MoClo Basic Part: Controllable promoter - pBAD - araC regulated
             [A:I13453:B].
 ACCESSION   I13453_AB
 VERSION     I13453_AB
-KEYWORDS    I13453 (pBAD)_AB.
+KEYWORDS    "Cloned by (Date):SI 4/6/2014" "Glycerol:--" "Seq
+            Source:parts.igem.org/Part\:Bba_I13453" "Part subtype:Controllable"
+            "Backbone:DVA_AB" "Part type :Promoter" "Part Source:CIDAR" "Fusion
+            site(s):AB" "Plasmid:--" "Antibiotic:Ampicillin (AMP)" "Seq
+            Verify:--".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -29,10 +33,18 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     misc_feature    42..171
+                     /label="I13453"
+                     /ApEinfo_revcolor="#ffef86"
+                     /ApEinfo_fwdcolor="#ffef86"
      primer_bind     75..94
                      /label="pBAD Forward"
                      /note="For vectors with E. coli araBAD promoter, forward
                      primer"
+     misc_feature    176..2275
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    183..203
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

@@ -3,7 +3,10 @@ DEFINITION  MoClo Basic Part: CDS - Controller protein, araC repressor/activator
             (activates pBAD, I13453) [C:C0080:D].
 ACCESSION   C0080_CD
 VERSION     C0080_CD
-KEYWORDS    C0080 (araC)_CD.
+KEYWORDS    "Backbone:DVA_CD" "Fusion site(s):CD" "Plasmid:--" "Cloned by
+            (Date):SI 4/6/2014" "Seq Verify:--" "Antibiotic:Ampicillin (AMP)"
+            "Part type :CDS" "Seq Source:parts.igem.org/Part\:Bba_C0080" "Part
+            subtype:Transcription factor" "Glycerol:--" "Part Source:CIDAR".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -28,6 +31,10 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     CDS             42..956
+                     /label="C0080"
+                     /ApEinfo_revcolor="#faac61"
+                     /ApEinfo_fwdcolor="#faac61"
      CDS             42..917
                      /codon_start=1
                      /gene="araC"
@@ -39,6 +46,10 @@ FEATURES             Location/Qualifiers
                      MEAINESLHPPMDNRVREACQYISDHLADSNFDIASVAQHVCLSPSRLSHLFRQQLGIS
                      VLSWREDQRISQAKLLLSTTRMPIATVGRNVGFDDQLYFSRVFKKCTGASPSEFRAGCE
                      EKVNDVAVKLS"
+     misc_feature    961..3060
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    968..988
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

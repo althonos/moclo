@@ -3,7 +3,10 @@ DEFINITION  MoClo Basic Part: CDS - Fluorescent protein. Green. Modified from
             Bba_E0040 to fix illegal site. [C:E0040m:D].
 ACCESSION   E0040m_CD
 VERSION     E0040m_CD
-KEYWORDS    E0040m (GFP)_CD.
+KEYWORDS    "Seq Source:parts.igem.org/Part\:Bba_E0040" "Glycerol:--" "Cloned by
+            (Date):SI 4/6/2014" "Antibiotic:Ampicillin (AMP)" "Seq Verify:--"
+            "Part type :CDS" "Plasmid:--" "Part Source:CIDAR" "Fusion
+            site(s):CD" "Part subtype:Fluorescent reporter" "Backbone:DVA_CD".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -28,6 +31,10 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     CDS             42..761
+                     /label="E0040m"
+                     /ApEinfo_revcolor="#faac61"
+                     /ApEinfo_fwdcolor="#faac61"
      CDS             42..758
                      /codon_start=1
                      /product="green fluorescent protein"
@@ -59,6 +66,10 @@ FEATURES             Location/Qualifiers
      primer_bind     695..715
                      /label="GFP-F"
                      /note="GFP, forward primer. Does NOT anneal to EGFP"
+     misc_feature    766..2865
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    773..793
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

@@ -1,8 +1,11 @@
-LOCUS       pJ02B2Gm:RmA_AF         8062 bp    ds-DNA  circular SYN 10-JAN-2018
+LOCUS       pJ02B2Gm:Rm_AF          4033 bp    ds-DNA  circular SYN 10-JAN-2018
 DEFINITION  MoClo Device: FACS Standard Color Controls - High GFP (first unit).
-ACCESSION   pJ02B2Gm:RmA_AF
-VERSION     pJ02B2Gm:RmA_AF
-KEYWORDS    pJ02B2Gm:Rm_AF.
+ACCESSION   pJ02B2Gm:Rm_AF
+VERSION     pJ02B2Gm:Rm_AF
+KEYWORDS    "fusion-site:AF" "glycerol" "source:CIDAR" "antibiotic:Ampicillin
+            (AMP)" "plasmid:SIMC (SI Update)" "backbone:DVLA_AF (pSB1A2)"
+            "cloned-by:SI 4/10/14" "part-subtype:2 Color Control"
+            "part-type:Level 2 Unit" "2CC#:2CC42".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -20,15 +23,30 @@ REFERENCE   2  (bases 1 to 4033)
   JOURNAL   Distributed with the MoClo Python library
             https://github.com/althonos/moclo
 FEATURES             Location/Qualifiers
+     source          1..4033
+                     /organism="synthetic DNA construct"
+                     /mol_type="other DNA"
      misc_feature    2..23
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     misc_feature    42..76
+                     /label="J23102"
+                     /ApEinfo_revcolor="#ffef86"
+                     /ApEinfo_fwdcolor="#ffef86"
+     5'UTR           81..164
+                     /label="BCD2"
+                     /ApEinfo_revcolor="#f58a5e"
+                     /ApEinfo_fwdcolor="#f58a5e"
      RBS             151..159
                      /label="Shine-Dalgarno sequence"
                      /note="full consensus sequence for ribosome-binding sites
                      upstream of start codons in E. coli; complementary to a
                      region in the 3' end of the 16S rRNA (Chen et al., 1994)"
+     CDS             169..888
+                     /label="E0040m"
+                     /ApEinfo_revcolor="#faac61"
+                     /ApEinfo_fwdcolor="#faac61"
      CDS             169..885
                      /codon_start=1
                      /product="green fluorescent protein"
@@ -60,6 +78,10 @@ FEATURES             Location/Qualifiers
      primer_bind     822..842
                      /label="GFP-F"
                      /note="GFP, forward primer. Does NOT anneal to EGFP"
+     misc_feature    893..1021
+                     /label="B0015"
+                     /ApEinfo_revcolor="#75c6a9"
+                     /ApEinfo_fwdcolor="#75c6a9"
      terminator      901..972
                      /label="rrnB T1 terminator"
                      /note="transcription terminator T1 from the E. coli rrnB
@@ -67,11 +89,18 @@ FEATURES             Location/Qualifiers
      terminator      988..1015
                      /label="T7Te terminator"
                      /note="phage T7 early transcription terminator"
-     RBS             1135..1143
-                     /label="Shine-Dalgarno sequence"
-                     /note="full consensus sequence for ribosome-binding sites
-                     upstream of start codons in E. coli; complementary to a
-                     region in the 3' end of the 16S rRNA (Chen et al., 1994)"
+     misc_feature    1026..1060
+                     /label="J23102"
+                     /ApEinfo_revcolor="#ffef86"
+                     /ApEinfo_fwdcolor="#ffef86"
+     5'UTR           1065..1148
+                     /label="BCD2"
+                     /ApEinfo_revcolor="#f58a5e"
+                     /ApEinfo_fwdcolor="#f58a5e"
+     CDS             1153..1833
+                     /label="E1010m"
+                     /ApEinfo_revcolor="#faac61"
+                     /ApEinfo_fwdcolor="#faac61"
      CDS             1153..1830
                      /codon_start=1
                      /product="mRFP1"
@@ -93,13 +122,14 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_revcolor="#c16969"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
-     terminator      1846..1917
-                     /label="rrnB T1 terminator"
-                     /note="transcription terminator T1 from the E. coli rrnB
-                     gene"
-     terminator      1933..1960
-                     /label="T7Te terminator"
-                     /note="phage T7 early transcription terminator"
+     misc_feature    1838..1966
+                     /label="B0015"
+                     /ApEinfo_revcolor="#75c6a9"
+                     /ApEinfo_fwdcolor="#75c6a9"
+     misc_feature    1971..4033
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    1978..1998
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"
@@ -162,95 +192,6 @@ FEATURES             Location/Qualifiers
                      /note="pBR322 vectors, upsteam of EcoRI site, forward
                      primer"
      terminator      3989..4032
-                     /label="bacterial terminator"
-                     /note="putative bacterial transcription terminator"
-     RBS             4180..4188
-                     /label="Shine-Dalgarno sequence"
-                     /note="full consensus sequence for ribosome-binding sites
-                     upstream of start codons in E. coli; complementary to a
-                     region in the 3' end of the 16S rRNA (Chen et al., 1994)"
-     CDS             4198..4914
-                     /codon_start=1
-                     /product="Aequoria victoria green fluorescent protein"
-                     /label="GFP"
-                     /translation="MRKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLK
-                     FICTTGKLPVPWPTLVTTFGYGVQCFARYPDHMKQHDFFKSAMPEGYVQERTIFFKDDG
-                     NYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKV
-                     NFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDYMVLLE
-                     FVTAAGITHGMDELYK"
-     primer_bind     complement(4228..4256)
-                     /label="GFP-R"
-                     /note="GFP, reverse primer. Does NOT anneal to EGFP"
-     primer_bind     4851..4871
-                     /label="GFP-F"
-                     /note="GFP, forward primer. Does NOT anneal to EGFP"
-     terminator      4930..5001
-                     /label="rrnB T1 terminator"
-                     /note="transcription terminator T1 from the E. coli rrnB
-                     gene"
-     terminator      5017..5044
-                     /label="T7Te terminator"
-                     /note="phage T7 early transcription terminator"
-     RBS             5164..5172
-                     /label="Shine-Dalgarno sequence"
-                     /note="full consensus sequence for ribosome-binding sites
-                     upstream of start codons in E. coli; complementary to a
-                     region in the 3' end of the 16S rRNA (Chen et al., 1994)"
-     CDS             5182..5859
-                     /codon_start=1
-                     /product="monomeric derivative of DsRed (Campbell et al.,
-                     2002)"
-                     /label="mRFP1"
-                     /translation="MASSEDVIKEFMRFKVRMEGSVNGHEFEIEGEGEGRPYEGTQTAK
-                     LKVTKGGPLPFAWDILSPQFQYGSKAYVKHPADIPDYLKLSFPEGFKWERVMNFEDGGV
-                     VTVTQDSSLQDGEFIYKVKLRGTNFPSDGPVMQKKTMGWEASTERMYPEDGALKGEIKM
-                     RLKLKDGGHYDAEVKTTYMAKKPVQLPGAYKTDIKLDITSHNEDYTIVEQYERAEGRHS
-                     TGA"
-     terminator      5875..5946
-                     /label="rrnB T1 terminator"
-                     /note="transcription terminator T1 from the E. coli rrnB
-                     gene"
-     terminator      5962..5989
-                     /label="T7Te terminator"
-                     /note="phage T7 early transcription terminator"
-     misc_feature    6007..6027
-                     /label="BioBrick suffix"
-                     /note="universal suffix for all parts"
-     primer_bind     complement(6033..6050)
-                     /label="L4440"
-                     /note="L4440 vector, forward primer"
-     rep_origin      complement(6204..6792)
-                     /direction=LEFT
-                     /label="ori"
-                     /note="high-copy-number ColE1/pMB1/pBR322/pUC origin of
-                     replication"
-     primer_bind     complement(6284..6303)
-                     /label="pBR322ori-F"
-                     /note="pBR322 origin, forward primer"
-     CDS             complement(6963..7823)
-                     /codon_start=1
-                     /gene="bla"
-                     /product="beta-lactamase"
-                     /label="AmpR"
-                     /note="confers resistance to ampicillin, carbenicillin, and
-                     related antibiotics"
-                     /translation="MSIQHFRVALIPFFAAFCLPVFAHPETLVKVKDAEDQLGARVGYI
-                     ELDLNSGKILESFRPEERFPMMSTFKVLLCGAVLSRIDAGQEQLGRRIHYSQNDLVEYS
-                     PVTEKHLTDGMTVRELCSAAITMSDNTAANLLLTTIGGPKELTAFLHNMGDHVTRLDRW
-                     EPELNEAIPNDERDTTMPVAMATTLRKLLTGELLTLASRQQLIDWMEADKVAGPLLRSA
-                     LPAGWFIADKSGAGERGSRGIIAALGPDGKPSRIVVIYTTGSQATMDERNRQIAEIGAS
-                     LIKHW"
-     primer_bind     7586..7605
-                     /label="Amp-R"
-                     /note="Ampicillin resistance gene, reverse primer"
-     promoter        complement(7824..7928)
-                     /gene="bla"
-                     /label="AmpR promoter"
-     primer_bind     7996..8014
-                     /label="pBRforEco"
-                     /note="pBR322 vectors, upsteam of EcoRI site, forward
-                     primer"
-     terminator      8018..8061
                      /label="bacterial terminator"
                      /note="putative bacterial transcription terminator"
 ORIGIN
@@ -321,72 +262,5 @@ ORIGIN
      3841 ctcatgagcg gatacatatt tgaatgtatt tagaaaaata aacaaatagg ggttccgcgc
      3901 acatttcccc gaaaagtgcc acctgacgtc taagaaacca ttattatcat gacattaacc
      3961 tataaaaata ggcgtatcac gaggcagaat ttcagataaa aaaaatcctt agctttcgct
-     4021 aaggatgatt tcattcgcgg ccgcttctag agactagtgg gtctcaggag ttgacagcta
-     4081 gctcagtcct aggtactgtg ctagctactg ggcccaagtt cacttaaaaa ggagatcaac
-     4141 aatgaaagca attttcgtac tgaaacatct taatcatgct aaggaggttt tctaatgatg
-     4201 cgtaaaggag aagaactttt cactggagtt gtcccaattc ttgttgaatt agatggtgat
-     4261 gttaatgggc acaaattttc tgtcagtgga gagggtgaag gtgatgcaac atacggaaaa
-     4321 cttaccctta aatttatttg cactactgga aaactacctg ttccatggcc aacacttgtc
-     4381 actactttcg gttatggtgt tcaatgcttt gcgagatacc cagatcatat gaaacagcat
-     4441 gactttttca agagtgccat gcccgaaggt tatgtacagg aaagaactat atttttcaaa
-     4501 gatgacggga actacaagac acgtgctgaa gtcaagtttg aaggtgatac ccttgttaat
-     4561 agaatcgagt taaaaggtat tgattttaaa gaagatggaa acattcttgg acacaaattg
-     4621 gaatacaact ataactcaca caatgtatac atcatggcag acaaacaaaa gaatggaatc
-     4681 aaagttaact tcaaaattag acacaacatt gaagatggaa gcgttcaact agcagaccat
-     4741 tatcaacaaa atactccaat tggcgatggc cctgtccttt taccagacaa ccattacctg
-     4801 tccacacaat ctgccctttc gaaagatccc aacgaaaaga gagactacat ggtccttctt
-     4861 gagtttgtaa cagctgctgg gattacacat ggcatggatg aactatacaa ataataaagg
-     4921 tccaggcatc aaataaaacg aaaggctcag tcgaaagact gggcctttcg ttttatctgt
-     4981 tgtttgtcgg tgaacgctct ctactagagt cacactggct caccttcggg tgggcctttc
-     5041 tgcgtttata gcttttgaca gctagctcag tcctaggtac tgtgctagct actgggccca
-     5101 agttcactta aaaaggagat caacaatgaa agcaattttc gtactgaaac atcttaatca
-     5161 tgctaaggag gttttctaat gatggcttcc tccgaggatg ttatcaaaga gttcatgcgt
-     5221 ttcaaagttc gtatggaagg ttccgttaac ggtcacgagt tcgaaatcga aggtgaaggt
-     5281 gaaggtcgtc cgtacgaagg tacccagacc gctaaactga aagttaccaa aggtggtccg
-     5341 ctgccgttcg cttgggacat cctgtccccg cagttccagt acggttccaa agcttacgtt
-     5401 aaacacccgg ctgacatccc ggactacctg aaactgtcct tcccggaagg tttcaaatgg
-     5461 gaacgtgtta tgaacttcga agatggtggt gttgttaccg ttacccagga ctcctccctg
-     5521 caagacggtg agttcatcta caaagttaaa ctgcgtggta ccaacttccc gtccgacggt
-     5581 ccggttatgc agaaaaaaac catgggttgg gaagcttcca ccgaacgtat gtacccggag
-     5641 gatggtgctc tgaaaggtga aatcaaaatg cgtctgaaac tgaaagacgg tggtcactac
-     5701 gacgctgaag ttaaaaccac ctacatggct aaaaaaccgg ttcagctgcc gggtgcttac
-     5761 aaaaccgaca tcaaactgga catcacctcc cacaacgagg actacaccat cgttgaacag
-     5821 tacgaacgtg ctgaaggtcg tcactccacc ggtgcttaat aaaggtccag gcatcaaata
-     5881 aaacgaaagg ctcagtcgaa agactgggcc tttcgtttta tctgttgttt gtcggtgaac
-     5941 gctctctact agagtcacac tggctcacct tcgggtgggc ctttctgcgt ttatacgcta
-     6001 gagacctact agtagcggcc gctgcaggct tcctcgctca ctgactcgct gcgctcggtc
-     6061 gttcggctgc ggcgagcggt atcagctcac tcaaaggcgg taatacggtt atccacagaa
-     6121 tcaggggata acgcaggaaa gaacatgtga gcaaaaggcc agcaaaaggc caggaaccgt
-     6181 aaaaaggccg cgttgctggc gtttttccac aggctccgcc cccctgacga gcatcacaaa
-     6241 aatcgacgct caagtcagag gtggcgaaac ccgacaggac tataaagata ccaggcgttt
-     6301 ccccctggaa gctccctcgt gcgctctcct gttccgaccc tgccgcttac cggatacctg
-     6361 tccgcctttc tcccttcggg aagcgtggcg ctttctcata gctcacgctg taggtatctc
-     6421 agttcggtgt aggtcgttcg ctccaagctg ggctgtgtgc acgaaccccc cgttcagccc
-     6481 gaccgctgcg ccttatccgg taactatcgt cttgagtcca acccggtaag acacgactta
-     6541 tcgccactgg cagcagccac tggtaacagg attagcagag cgaggtatgt aggcggtgct
-     6601 acagagttct tgaagtggtg gcctaactac ggctacacta gaagaacagt atttggtatc
-     6661 tgcgctctgc tgaagccagt taccttcgga aaaagagttg gtagctcttg atccggcaaa
-     6721 caaaccaccg ctggtagcgg tggttttttt gtttgcaagc agcagattac gcgcagaaaa
-     6781 aaaggatctc aagaagatcc tttgatcttt tctacggggt ctgacgctca gtggaacgaa
-     6841 aactcacgtt aagggatttt ggtcatgaga ttatcaaaaa ggatcttcac ctagatcctt
-     6901 ttaaattaaa aatgaagttt taaatcaatc taaagtatat atgagtaaac ttggtctgac
-     6961 agttaccaat gcttaatcag tgaggcacct atctcagcga tctgtctatt tcgttcatcc
-     7021 atagttgcct gactccccgt cgtgtagata actacgatac gggagggctt accatctggc
-     7081 cccagtgctg caatgatacc gcgcgaccca cgctcaccgg ctccagattt atcagcaata
-     7141 aaccagccag ccggaagggc cgagcgcaga agtggtcctg caactttatc cgcctccatc
-     7201 cagtctatta attgttgccg ggaagctaga gtaagtagtt cgccagttaa tagtttgcgc
-     7261 aacgttgttg ccattgctac aggcatcgtg gtgtcacgct cgtcgtttgg tatggcttca
-     7321 ttcagctccg gttcccaacg atcaaggcga gttacatgat cccccatgtt gtgcaaaaaa
-     7381 gcggttagct ccttcggtcc tccgatcgtt gtcagaagta agttggccgc agtgttatca
-     7441 ctcatggtta tggcagcact gcataattct cttactgtca tgccatccgt aagatgcttt
-     7501 tctgtgactg gtgagtactc aaccaagtca ttctgagaat agtgtatgcg gcgaccgagt
-     7561 tgctcttgcc cggcgtcaat acgggataat accgcgccac atagcagaac tttaaaagtg
-     7621 ctcatcattg gaaaacgttc ttcggggcga aaactctcaa ggatcttacc gctgttgaga
-     7681 tccagttcga tgtaacccac tcgtgcaccc aactgatctt cagcatcttt tactttcacc
-     7741 agcgtttctg ggtgagcaaa aacaggaagg caaaatgccg caaaaaaggg aataagggcg
-     7801 acacggaaat gttgaatact catactcttc ctttttcaat attattgaag catttatcag
-     7861 ggttattgtc tcatgagcgg atacatattt gaatgtattt agaaaaataa acaaataggg
-     7921 gttccgcgca catttccccg aaaagtgcca cctgacgtct aagaaaccat tattatcatg
-     7981 acattaacct ataaaaatag gcgtatcacg aggcagaatt tcagataaaa aaaatcctta
-     8041 gctttcgcta aggatgattt ct
+     4021 aaggatgatt tct
 //

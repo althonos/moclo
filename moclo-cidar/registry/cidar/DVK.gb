@@ -3,7 +3,11 @@ DEFINITION  MoClo Destination Vector: Empty vector for creating new DVK. Cut
             with SpeI and insert amplified LacZa (based on pSB1K3).
 ACCESSION   DVK
 VERSION     DVK
-KEYWORDS    DVK.
+KEYWORDS    "Part subtype:Level 1 Kanamycin" "Glycerol:--" "Seq
+            Source:parts.igem.org/Part\:pSB1K3" "Backbone:DVK" "Part
+            Source:CIDAR" "Cloned by (Date):SI 4/6/2014" "Plasmid:--" "Fusion
+            site(s)" "Part type :Destination Vector" "Seq Verify:--"
+            "Antibiotic:Kanamycin (KAN)".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -28,6 +32,10 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     misc_feature    24..2226
+                     /label="DVL1"
+                     /ApEinfo_revcolor="#85dae9"
+                     /ApEinfo_fwdcolor="#85dae9"
      terminator      44..101
                      /label="his operon terminator"
                      /note="This putative transcriptin terminator from the E.

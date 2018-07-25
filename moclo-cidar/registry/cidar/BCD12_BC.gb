@@ -4,7 +4,11 @@ DEFINITION  MoClo Basic Part: RBS - BiCistronic Design, medium strength (RBS
             RBS) [B:BCD12:C].
 ACCESSION   BCD12_BC
 VERSION     BCD12_BC
-KEYWORDS    BCD12_BC.
+KEYWORDS    "Seq Verify:--" "Glycerol:--" "Fusion site(s):BC" "Part
+            Source:CIDAR" "Cloned by (Date):SI 4/6/2014" "Plasmid:--" "Part type
+            :5'UTR" "Part subtype:BiCistronic Design (BCD)"
+            "Antibiotic:Ampicillin (AMP)" "Backbone:DVA_BC" "Seq
+            Source:www.biofab.org".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -29,6 +33,14 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     5'UTR           42..125
+                     /label="BCD12"
+                     /ApEinfo_revcolor="#f58a5e"
+                     /ApEinfo_fwdcolor="#f58a5e"
+     misc_feature    130..2229
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    137..157
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

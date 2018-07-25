@@ -4,7 +4,10 @@ DEFINITION  MoClo Basic Part: Controllable promoter - pLuxR(pR) - luxR regulated
             combination with homoserine lactone (HSL)) [F:R0063:B].
 ACCESSION   R0063_FB
 VERSION     R0063_FB
-KEYWORDS    R0063 (pLuxR-pR)_FB.
+KEYWORDS    "Part subtype:Controllable" "Glycerol:--" "Part Source:CIDAR"
+            "Backbone:DVA_FB" "Seq Source:parts.igem.org/Part\:Bba_R0063"
+            "Antibiotic:Ampicillin (AMP)" "Plasmid:--" "Seq Verify:--" "Fusion
+            site(s):FB" "Cloned by (Date):SI 4/6/2014" "Part type :Promoter".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -29,6 +32,10 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
+     misc_feature    42..192
+                     /label="R0063"
+                     /ApEinfo_revcolor="#ffef86"
+                     /ApEinfo_fwdcolor="#ffef86"
      promoter        43..192
                      /label="Lux pL promoter"
                      /gene="luxR"
@@ -39,6 +46,10 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_revcolor="#00a1ee"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
+     misc_feature    197..2296
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    204..224
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"

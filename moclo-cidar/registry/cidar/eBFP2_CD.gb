@@ -3,7 +3,10 @@ DEFINITION  MoClo Basic Part: CDS - Fluorescent protein. Blue. Derived from
             Addgene#14891. [C:eBFP2:D].
 ACCESSION   eBFP2_CD
 VERSION     eBFP2_CD
-KEYWORDS    eBFP2 (eBFP2)_CD.
+KEYWORDS    "Fusion site(s):CD" "CLoned by (Date):TH 12/2014" "Seq Verify:--"
+            "Plasmid:--" "Seq Source:Addgene #14891" "Part subtype:Fluorescent
+            reporter" "Glycerol:--" "Part type:CDS" "Part Source:CIDAR"
+            "Antibiotic:Ampicillin (AMP)" "Backbone:DVA_CD".
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
             .
@@ -41,6 +44,10 @@ FEATURES             Location/Qualifiers
      primer_bind     complement(87..108)
                      /label="EGFP-N"
                      /note="EGFP, reverse primer"
+     misc_feature    766..2865
+                     /label="DVLA"
+                     /ApEinfo_revcolor="#6ecff6"
+                     /ApEinfo_fwdcolor="#6ecff6"
      misc_feature    773..793
                      /label="BioBrick suffix"
                      /note="universal suffix for all parts"
