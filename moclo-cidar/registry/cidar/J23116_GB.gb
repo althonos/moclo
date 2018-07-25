@@ -31,10 +31,14 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
-     misc_feature    42..76
-                     /label="J23116"
-                     /ApEinfo_revcolor="#ffef86"
-                     /ApEinfo_fwdcolor="#ffef86"
+     RBS             42..76
+                     /label="J23116 promoter"
+                     /note="Constitutive promoter - Anderson series - low
+                     strength"
+                     /ApEinfo_fwdcolor="#f58a5e"
+                     /ApEinfo_revcolor="#f58a5e"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      misc_feature    81..2180
                      /label="DVLA"
                      /ApEinfo_revcolor="#6ecff6"

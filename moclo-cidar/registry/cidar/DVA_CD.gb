@@ -72,10 +72,6 @@ FEATURES             Location/Qualifiers
      primer_bind     complement(350..372)
                      /label="M13/pUC Reverse"
                      /note="In lacZ gene"
-     misc_binding    complement(359..381)
-                     /label="LacO"
-                     /ApEinfo_revcolor="#7ea7d8"
-                     /ApEinfo_fwdcolor="#7ea7d8"
      protein_bind    361..377
                      /label="lac operator"
                      /bound_moiety="lac repressor encoded by lacI"

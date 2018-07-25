@@ -30,10 +30,14 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
-     misc_feature    42..76
-                     /label="J23102"
-                     /ApEinfo_revcolor="#ffef86"
-                     /ApEinfo_fwdcolor="#ffef86"
+     RBS             42..76
+                     /label="J23102 promoter"
+                     /note="Constitutive promoter - Anderson series - high
+                     strength"
+                     /ApEinfo_fwdcolor="#f58a5e"
+                     /ApEinfo_revcolor="#f58a5e"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      5'UTR           81..164
                      /label="BCD2"
                      /ApEinfo_revcolor="#f58a5e"
@@ -44,13 +48,11 @@ FEATURES             Location/Qualifiers
                      upstream of start codons in E. coli; complementary to a
                      region in the 3' end of the 16S rRNA (Chen et al., 1994)"
      CDS             169..888
-                     /label="E0040m"
-                     /ApEinfo_revcolor="#faac61"
-                     /ApEinfo_fwdcolor="#faac61"
-     CDS             169..885
+                     /label="GFP"
+                     /ApEinfo_revcolor="#34ff03"
+                     /ApEinfo_fwdcolor="#34ff03"
                      /codon_start=1
                      /product="green fluorescent protein"
-                     /label="GFP"
                      /translation="MRKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTLK
                      FICTTGKLPVPWPTLVTTFGYGVQCFARYPDHMKQHDFFKSAMPEGYVQERTIFFKDDG
                      NYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIKV
@@ -68,8 +70,6 @@ FEATURES             Location/Qualifiers
                      /db_xref="UniProtKB/Swiss-Prot:P42212"
                      /inference="DESCRIPTION:alignment:blastx:UniProtKB/Swiss-Pr
                      ot:P42212"
-                     /ApEinfo_fwdcolor="#34ff03"
-                     /ApEinfo_revcolor="#34ff03"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      primer_bind     complement(199..227)
@@ -78,10 +78,13 @@ FEATURES             Location/Qualifiers
      primer_bind     822..842
                      /label="GFP-F"
                      /note="GFP, forward primer. Does NOT anneal to EGFP"
-     misc_feature    893..1021
-                     /label="B0015"
-                     /ApEinfo_revcolor="#75c6a9"
-                     /ApEinfo_fwdcolor="#75c6a9"
+     terminator      893..1021
+                     /label="B0015 Double Terminator"
+                     /note=""iGEM Part: BBa_B0015""
+                     /ApEinfo_fwdcolor="#ff8eff"
+                     /ApEinfo_revcolor="#ff8eff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      terminator      901..972
                      /label="rrnB T1 terminator"
                      /note="transcription terminator T1 from the E. coli rrnB
@@ -97,10 +100,6 @@ FEATURES             Location/Qualifiers
                      /label="BCD2"
                      /ApEinfo_revcolor="#f58a5e"
                      /ApEinfo_fwdcolor="#f58a5e"
-     CDS             1153..1833
-                     /label="E1010m"
-                     /ApEinfo_revcolor="#faac61"
-                     /ApEinfo_fwdcolor="#faac61"
      CDS             1153..1830
                      /codon_start=1
                      /product="mRFP1"

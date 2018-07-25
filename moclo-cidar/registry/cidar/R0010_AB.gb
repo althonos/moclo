@@ -51,10 +51,6 @@ FEATURES             Location/Qualifiers
                      /label="lac promoter"
                      /ApEinfo_revcolor="#bc8dbf"
                      /ApEinfo_fwdcolor="#bc8dbf"
-     misc_binding    212..234
-                     /label="LacO"
-                     /ApEinfo_revcolor="#7ea7d8"
-                     /ApEinfo_fwdcolor="#7ea7d8"
      protein_bind    216..232
                      /label="lac operator"
                      /bound_moiety="lac repressor encoded by lacI"

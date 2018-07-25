@@ -30,10 +30,6 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
-     CDS             42..1194
-                     /label="C0012"
-                     /ApEinfo_revcolor="#faac61"
-                     /ApEinfo_fwdcolor="#faac61"
      CDS             51..1130
                      /codon_start=1
                      /gene="lacI"
@@ -53,6 +49,18 @@ FEATURES             Location/Qualifiers
      primer_bind     complement(70..89)
                      /label="LacI-R"
                      /note="LacI, reverse primer"
+     CDS             1131..1163
+                     /label="ssrA tag (LVA)"
+                     /product="C-terminal peptide that mediates degradation in
+                     bacteria through the ClpXP and ClpAP proteases (McGinness
+                     et al., 2006)"
+                     /translation="AANDENYALVA"
+                     /note="mutant LVA variant that confers accelerated
+                     degradation under some conditions (Andersen et al., 1998)"
+                     /ApEinfo_fwdcolor="#cc99b2"
+                     /ApEinfo_revcolor="#cc99b2"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      misc_feature    1199..3298
                      /label="DVLA"
                      /ApEinfo_revcolor="#6ecff6"

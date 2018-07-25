@@ -47,12 +47,17 @@ ZIP_URL = "https://media.addgene.org/cms/filer_public/00/cc/00cc5b92-36b4-48ed-a
 URL = "https://www.addgene.org/cloning/moclo/densmore/"
 UA = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
 
+# Part sequence for automatic annotation / annotation relocation
 DVK_AF = None
 DVLA_RX = None
-BB_PREFIX = "gaattcgcggccgcttctagag".upper()
+BB_PREFIX = DNARegex("gaattcgcggccgcttctagag")
+SSRA_TAG = DNARegex("gctgcaaacgacgaaaactacgctttagtagct")
 AMPR_TERM = "gattatcaaaaaggatctt".upper()  # Reverse 3' of AmpR terminator
 KANR_PROM = "aacaccccttgtattactgtttatgtaagcagacagtttt".upper()
 KANR_TERM = "gtgttacaaccaattaaccaattctga".upper()
+
+# Some descriptions (e.g. promoter) for device / cassettes annotation
+DESCS = {}
 
 NAME_REGEX = re.compile(r"([^ ]*) \(([^\)]*)\)(_[A-Z]{2})")
 COLOR_REGEX = re.compile(r"color: (#[0-9a-fA-F]{6})")
@@ -111,7 +116,7 @@ if __name__ == "__main__":
             name = match.group(2)
         # Find the corresponding zip sequence archive for the ID
         elif row_text.startswith(("pJ02B2Gm", "pJ02B2Rm")):
-            if resistance == "Ampicillin" and not ':' in row_text:
+            if resistance == "Ampicillin" and not ":" in row_text:
                 name = id_ = row_text + "(A)"
             else:
                 name = id_ = row_text
@@ -134,7 +139,7 @@ if __name__ == "__main__":
         # get the ZIP sequence
         with archive.open("{}.gb".format(id_)) as f:
             gb_archive = CircularRecord(read(f, "gb"))
-            pref = gb_archive.seq.find(BB_PREFIX)
+            pref, _ = BB_PREFIX.search(gb_archive).span()
             gb_archive <<= pref - 1
 
         # get the AddGene sequences page
@@ -192,7 +197,7 @@ if __name__ == "__main__":
                 )
 
         # Copy well documented information from one record to the other
-        gb.seq, gb_archive.seq = gb.seq.upper(), gb_archive.seq.upper()
+        gb.seq, gb_archive.seq = (gb.seq.upper(), gb_archive.seq.upper())
         gb.seq.alphabet = gb_archive.seq.alphabet = IUPAC.unambiguous_dna
         gb.id = gb_archive.id = id_
         gb.name = gb_archive.name = name
@@ -217,12 +222,12 @@ if __name__ == "__main__":
         gb <<= pref.location.start - 1
 
         # Check sequences are the same, or warn the user
-        if len(gb) != len(gb_archive):
-            print(
-                "lengths differ for", id_, ":", len(gb), "VS", len(gb_archive)
-            )
-        elif gb.seq != gb_archive.seq:
-            print("seqs differ for", id_)
+        # if len(gb) != len(gb_archive):
+        #     print(
+        #         "lengths differ for", id_, ":", len(gb), "VS", len(gb_archive)
+        #     )
+        # elif gb.seq != gb_archive.seq:
+        #     print("seqs differ for", id_)
 
         # Fix bad position of lacz-alpha
         if id_.startswith(("DVA_", "DVK_")):
@@ -546,9 +551,128 @@ if __name__ == "__main__":
         if bla is not None:
             gb_archive.features.remove(bla)
 
-        for f in gb_archive.features:
-            if f.location is None:
-                print(f)
+        # improve B0015 annotation
+        b0015 = next(get_features('B0015'), None)
+        if b0015 is not None:
+            b0015.type = 'terminator'
+            b0015.qualifiers = {
+                'label': 'B0015 Double Terminator',
+                'note': ['color: #ff8eff', '"iGEM Part: BBa_B0015"']
+            }
+
+        # merge Lux pL promoter
+        r0063 = next(get_features('R0063'), None)
+        if r0063 is not None:
+            luxpl = next(get_features('Lux pL promoter'))
+            luxpl.location = r0063.location
+            gb_archive.features.remove(r0063)
+
+
+        # add LVA ssrA tag
+        ssra_match = SSRA_TAG.search(gb_archive.seq)
+        if ssra_match is not None:
+            ssra = SeqFeature(type="CDS")
+            ssra.location = FeatureLocation(*ssra_match.span(), strand=1)
+            ssra.qualifiers = {
+                "label": ["ssrA tag (LVA)"],
+                "product": [
+                    "C-terminal peptide that mediates degradation in bacteria through the ClpXP and ClpAP proteases (McGinness et al., 2006)"
+                ],
+                "translation": "AANDENYALVA",
+                "note": [
+                    "mutant LVA variant that confers accelerated degradation under some conditions (Andersen et al., 1998)",
+                    "color: #cc99b2",
+                ],
+            }
+            gb_archive.features.append(ssra)
+
+        # Replace E0040m with well annotated GFP
+        e0040m = next(get_features("E0040m"), None)
+        if e0040m is not None:
+            if any(get_features("GFP")):
+                gb_archive.features.remove(next(get_features("GFP")))
+            e0040m.qualifiers.update(gfp.qualifiers)
+
+        # Replace E1010m with well annotated mRFP
+        e1010m = next(get_features("E1010m"), None)
+        if e1010m is not None:
+            gb_archive.features.remove(e1010m)
+
+        # Replace E0030m with well annotated YFP (TODO)
+        e0030 = next(get_features("E0030"), None)
+        if e0030 is not None:
+            gb_archive.features.remove(e0030)
+
+        # Replace C0080 with well annotated araC (TODO)
+        c0080 = next(get_features("C0080"), None)
+        if c0080 is not None:
+            gb_archive.features.remove(c0080)
+
+        # Replace C0040 with well annotated TetR (TODO)
+        c0040 = next(get_features("C0040"), None)
+        if c0040 is not None:
+            gb_archive.features.remove(c0040)
+
+        # Replace C0012 with well annotated LacI (TODO)
+        c0012 = next(get_features("C0012"), None)
+        if c0012 is not None:
+            gb_archive.features.remove(c0012)
+
+        # Replace C0062 with well annotated LuxR repressor (TODO)
+        # and fix LuxR repressor CDS to include STOP codon
+        c0062 = next(get_features('C0062'), None)
+        if c0062 is not None:
+            gb_archive.features.remove(c0062)
+            luxr_rep = next(get_features('LuxR repressor'))
+            luxr_rep.location = FeatureLocation(
+                luxr_rep.location.start,
+                luxr_rep.location.end + 3,
+                luxr_rep.location.strand
+            )
+
+        # Remove duplicate LacO
+        lacO = next(get_features("LacO"), None)
+        if lacO is not None:
+            gb_archive.features.remove(lacO)
+
+        # Annotate promoters
+        promoters = [
+            "J23102",
+            "J23100",
+            "J23103",
+            "J23106",
+            "J23107",
+            "J23116",
+            "I13453",
+        ]
+        j231 = next(iter(itertools.chain(*map(get_features, promoters))), None)
+        if j231 is not None:
+            name = j231.qualifiers["label"]
+            if isinstance(name, list):
+                name = name.pop()
+            if name not in DESCS:
+                DESCS[name] = re.search(
+                    r": (.*) \[", gb_archive.description
+                ).group(1)
+            j231.type = "promoter"
+            j231.qualifiers = {
+                "label": "{} promoter".format(name),
+                "note": [DESCS[name], "color: #00a1ee"],
+            }
+
+        # Annotate RBS
+        rbses = ["B0032m", "B0033m", "B0034m", "BCD2", "BCD8", "BCD12"]
+        rbs = next(iter(itertools.chain(*map(get_features, promoters))), None)
+        if rbs is not None:
+            name = rbs.qualifiers["label"]
+            if isinstance(name, list):
+                name = name.pop()
+            if name not in DESCS:
+                DESCS[name] = re.search(
+                    r": (.*) \[", gb_archive.description
+                ).group(1)
+            rbs.type = "RBS"
+            rbs.qualifiers["note"] = [DESCS[name], "color: #f58a5e"]
 
         # sort features by start location, source always first
         gb_archive.features.sort(

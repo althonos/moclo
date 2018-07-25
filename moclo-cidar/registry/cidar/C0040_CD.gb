@@ -45,13 +45,21 @@ FEATURES             Location/Qualifiers
                      KNKRALLDALAIEMLDRHHTHFCPLEGESWQDFLRNNAKSFRCALLSHRDGAKVHLGTR
                      PTEKQYETLENQLAFLCQQGFSLENALYALSAVGHFTLGCVLEDQEHQVAKEERETPTT
                      DSMPPLLRQAIELFDHQGAEPAFLFGLELIICGLEKQLKCESG"
-     CDS             42..698
-                     /label="C0040"
-                     /ApEinfo_revcolor="#faac61"
-                     /ApEinfo_fwdcolor="#faac61"
      primer_bind     complement(112..131)
                      /label="Tet-R"
                      /note="Tetracycline resistance gene, reverse primer"
+     CDS             660..692
+                     /label="ssrA tag (LVA)"
+                     /product="C-terminal peptide that mediates degradation in
+                     bacteria through the ClpXP and ClpAP proteases (McGinness
+                     et al., 2006)"
+                     /translation="AANDENYALVA"
+                     /note="mutant LVA variant that confers accelerated
+                     degradation under some conditions (Andersen et al., 1998)"
+                     /ApEinfo_fwdcolor="#cc99b2"
+                     /ApEinfo_revcolor="#cc99b2"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      misc_feature    703..2802
                      /label="DVLA"
                      /ApEinfo_revcolor="#6ecff6"

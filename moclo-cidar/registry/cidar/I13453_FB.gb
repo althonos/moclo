@@ -33,10 +33,14 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
-     misc_feature    42..171
-                     /label="I13453"
-                     /ApEinfo_revcolor="#ffef86"
-                     /ApEinfo_fwdcolor="#ffef86"
+     RBS             42..171
+                     /label="I13453 promoter"
+                     /note="Controllable promoter - pBAD - araC regulated (pBAD
+                     promoter, inducible by expression of AraC, C0080)"
+                     /ApEinfo_fwdcolor="#f58a5e"
+                     /ApEinfo_revcolor="#f58a5e"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      primer_bind     75..94
                      /label="pBAD Forward"
                      /note="For vectors with E. coli araBAD promoter, forward

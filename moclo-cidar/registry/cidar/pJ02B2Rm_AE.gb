@@ -32,10 +32,14 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
-     misc_feature    43..77
-                     /label="J23102"
-                     /ApEinfo_revcolor="#ffef86"
-                     /ApEinfo_fwdcolor="#ffef86"
+     RBS             43..77
+                     /label="J23102 promoter"
+                     /note="Constitutive promoter - Anderson series - high
+                     strength"
+                     /ApEinfo_fwdcolor="#f58a5e"
+                     /ApEinfo_revcolor="#f58a5e"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      5'UTR           82..165
                      /label="BCD2"
                      /ApEinfo_revcolor="#f58a5e"
@@ -45,10 +49,6 @@ FEATURES             Location/Qualifiers
                      /note="full consensus sequence for ribosome-binding sites
                      upstream of start codons in E. coli; complementary to a
                      region in the 3' end of the 16S rRNA (Chen et al., 1994)"
-     CDS             170..850
-                     /label="E1010m"
-                     /ApEinfo_revcolor="#faac61"
-                     /ApEinfo_fwdcolor="#faac61"
      CDS             170..847
                      /codon_start=1
                      /product="mRFP1"
@@ -70,10 +70,13 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_revcolor="#c16969"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
-     misc_feature    855..983
-                     /label="B0015"
-                     /ApEinfo_revcolor="#75c6a9"
-                     /ApEinfo_fwdcolor="#75c6a9"
+     terminator      855..983
+                     /label="B0015 Double Terminator"
+                     /note=""iGEM Part: BBa_B0015""
+                     /ApEinfo_fwdcolor="#ff8eff"
+                     /ApEinfo_revcolor="#ff8eff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      terminator      863..934
                      /label="rrnB T1 terminator"
                      /note="transcription terminator T1 from the E. coli rrnB

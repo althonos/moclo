@@ -33,11 +33,7 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
-     misc_feature    42..192
-                     /label="R0063"
-                     /ApEinfo_revcolor="#ffef86"
-                     /ApEinfo_fwdcolor="#ffef86"
-     promoter        43..192
+     promoter        42..192
                      /label="Lux pL promoter"
                      /gene="luxR"
                      /operon="lux"

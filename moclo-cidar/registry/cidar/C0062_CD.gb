@@ -32,11 +32,7 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
-     CDS             42..797
-                     /label="C0062"
-                     /ApEinfo_revcolor="#faac61"
-                     /ApEinfo_fwdcolor="#faac61"
-     CDS             42..791
+     CDS             42..794
                      /codon_start=1
                      /label="LuxR repressor"
                      /product="transcription factor LuxR"

@@ -31,10 +31,6 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
-     CDS             42..764
-                     /label="E0030"
-                     /ApEinfo_revcolor="#faac61"
-                     /ApEinfo_fwdcolor="#faac61"
      CDS             42..761
                      /codon_start=1
                      /product="enhanced YFP"
