@@ -13,6 +13,7 @@ import warnings
 
 import six
 from Bio import BiopythonWarning
+from Bio.Alphabet import IUPAC
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
@@ -136,7 +137,11 @@ class AbstractVector(StructuredRecord):
                 raise errors.DuplicateModules(mod2, mod, details=details)
 
         # Get the alphabet using the largest alphabet from source records
-        alphabets = [mod.seq.alphabet for mod in six.itervalues(modmap)]
+        alphabets = [
+            mod.seq.alphabet for mod in six.itervalues(modmap)
+            if mod.seq.alphabet.letters is not None
+        ]
+        alphabets.append(IUPAC.unambiguous_dna)
         alphabet = max(alphabets, key=lambda a: len(a.letters))
 
         # Generate the complete inserted sequence
