@@ -80,7 +80,7 @@ class CIDARRegistry(EmbeddedRegistry):
     def _load_entity(self, raw, index):
         match = self._ENTITY_RX.match(raw['record'].description)
         if match is not None:
-            class_, type_ = map(str.strip, match.groups())
+            class_, type_ = map(six.text_type.strip, match.groups())
             if class_ == 'Destination Vector':
                 if raw['id'].startswith('DVA'):
                     class_ = 'Entry Vector'
