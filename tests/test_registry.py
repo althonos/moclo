@@ -63,7 +63,7 @@ class TestEmbeddedRegistry(unittest.TestCase):
 
         # resistance check
         self.assertEqual(r['DVA_BC'].resistance, 'Ampicillin')
-        self.assertEqual(r['DVK_EF'].resistance, 'Kanamicyn')
+        self.assertEqual(r['DVK_EF'].resistance, 'Kanamycin')
 
 
 class TestFilesystemRegistry(unittest.TestCase):
