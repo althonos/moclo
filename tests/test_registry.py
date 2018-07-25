@@ -10,9 +10,10 @@ import fs
 import six
 from Bio.SeqIO import write
 
-from moclo.kits import ytk
+from moclo.kits import ytk, cidar
 from moclo.registry import base
 from moclo.registry.ytk import YTKRegistry, PTKRegistry
+from moclo.registry.cidar import CIDARRegistry
 
 from ._utils import build_registries
 
@@ -49,6 +50,20 @@ class TestEmbeddedRegistry(unittest.TestCase):
 
         # resistance check
         self.assertEqual(r['pPTK005'].resistance, 'Chloramphenicol')
+
+
+    def test_cidar_registry(self):
+        r = CIDARRegistry()
+
+        # typecheck
+        self.assertIsInstance(r['C0062_CD'].entity, cidar.CIDARCodingSequence)
+        self.assertIsInstance(r['BCD8_BC'].entity, cidar.CIDARRibosomeBindingSite)
+        self.assertIsInstance(r['DVA_GB'].entity, cidar.CIDAREntryVector)
+        self.assertIsInstance(r['DVK_GH'].entity, cidar.CIDARCassetteVector)
+
+        # resistance check
+        self.assertEqual(r['DVA_BC'].resistance, 'Ampicillin')
+        self.assertEqual(r['DVK_EF'].resistance, 'Kanamicyn')
 
 
 class TestFilesystemRegistry(unittest.TestCase):
