@@ -92,7 +92,7 @@ class TestCIDARAssembly(AssemblyTestCase):
         for x in ('J23102_EB', 'BCD2_BC', 'E0040m_CD', 'B0015_DF')]
         self.assertAssembly(vector, mods, expected)
 
-    # @unittest.expectedFailure
+    @unittest.expectedFailure
     def test_pJ02B2RmGm_AF(self):
         expected = self.registry['pJ02B2Rm:Gm_AF'].entity.record
         vector =  self.registry['DVA_AF'].entity
