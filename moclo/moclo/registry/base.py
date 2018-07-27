@@ -45,10 +45,14 @@ class CombinedRegistry(AbstractRegistry):
 
     def __lshift__(self, registry):
         self.add_registry(registry)
+        return self
 
     def add_registry(self, registry):
         for item in six.itervalues(registry):
             self._data.setdefault(item.id, item)
+
+    def __getitem__(self, item):
+        return self._data[item]
 
     def __contains__(self, item):
         return item in self._data

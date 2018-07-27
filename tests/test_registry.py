@@ -51,7 +51,6 @@ class TestEmbeddedRegistry(unittest.TestCase):
         # resistance check
         self.assertEqual(r['pPTK005'].resistance, 'Chloramphenicol')
 
-
     def test_cidar_registry(self):
         r = CIDARRegistry()
 
@@ -99,3 +98,17 @@ class TestFilesystemRegistry(unittest.TestCase):
     def test_invalid_base(self):
         r = base.FilesystemRegistry(self.memfs, ytk.YTKPart8)
         self.assertRaises(RuntimeError, r.__getitem__, 'pYTK002')
+
+
+class TestCombinedRegistry(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.registry = base.CombinedRegistry()
+        cls.registry << YTKRegistry()
+        cls.registry << PTKRegistry()
+
+    def test_contains(self):
+        self.assertIn('pYTK001', self.registry)
+        self.assertIn('pPTK001', self.registry)
+        self.assertNotIn('B0030_AF', self.registry)
