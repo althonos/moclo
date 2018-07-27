@@ -36,7 +36,6 @@ Registry (`moclo.registry.base`)
 
 
 .. currentmodule:: moclo.core
-.. automodule:: moclo.core
 
 
 Modules (`moclo.core.modules`)
