@@ -43,6 +43,17 @@ class AbstractVector(StructuredRecord):
 
     @classmethod
     def structure(cls):
+        # type: () -> Text
+        """Get the vector structure, as a DNA regex pattern.
+
+        Warning:
+            If overloading this method, the returned pattern must include 3
+            capture groups to capture the following features:
+
+            1. The downstream (3') overhang sequence
+            2. The vector placeholder sequence
+            3. The upstream (5') overhang sequence
+        """
         downstream = cls.cutter.elucidate()
         upstream = str(Seq(downstream).reverse_complement())
         return ''.join([

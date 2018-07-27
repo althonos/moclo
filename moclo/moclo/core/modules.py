@@ -18,7 +18,7 @@ from ._structured import StructuredRecord
 from ._utils import cutter_check, add_as_source
 
 if typing.TYPE_CHECKING:
-    from typing import Union             # noqa: F401
+    from typing import Union, Text       # noqa: F401
     from Bio.SeqRecord import SeqRecord  # noqa: F401
 
 
@@ -41,6 +41,17 @@ class AbstractModule(StructuredRecord):
 
     @classmethod
     def structure(cls):
+        # type: () -> Text
+        """Get the module structure, as a DNA regex pattern.
+
+        Warning:
+            If overloading this method, the returned pattern must include 3
+            capture groups to capture the following features:
+
+            1. The upstream (5') overhang sequence
+            2. The module target sequence
+            3. The downstream (3') overhang sequence
+        """
         upstream = cls.cutter.elucidate()
         downstream = str(Seq(upstream).reverse_complement())
         return ''.join([

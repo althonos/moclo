@@ -46,6 +46,21 @@ class AbstractPart(StructuredRecord):
 
     @classmethod
     def structure(cls):
+        # type: () -> Text
+        """Get the part structure, as a DNA regex pattern.
+
+        The structure of most parts can be obtained automatically from the
+        part signature and the restriction enzyme used in the Golden Gate
+        assembly.
+
+        Warning:
+            If overloading this method, the returned pattern must include 3
+            capture groups to capture the following features:
+
+            1. The upstream (5') overhang sequence
+            2. The vector placeholder sequence
+            3. The downstream (3') overhang sequence
+        """
 
         if cls.signature is NotImplemented:
             raise NotImplementedError('no signature defined')

@@ -37,7 +37,7 @@ class CIDAREntryVector(vectors.EntryVector):
     cutter = BbsI
 
     @staticmethod
-    def structure():
+    def structure():  # noqa: D105
         return (
             'GGTCTC'  # BsaI
             'N'
@@ -64,7 +64,7 @@ class CIDARCassetteVector(vectors.CassetteVector):
     cutter = BsaI
 
     @staticmethod
-    def structure():
+    def structure():  # noqa: D105
         return (
             'GAAGAC'  # BbsI
             'NN'
@@ -91,7 +91,7 @@ class CIDARDeviceVector(vectors.DeviceVector):
     cutter = BbsI
 
     @staticmethod
-    def structure():
+    def structure():  # noqa: D105
         return (
             'GGTCTC'  # BsaI
             'N'

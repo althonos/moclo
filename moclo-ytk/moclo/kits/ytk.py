@@ -125,7 +125,7 @@ class YTKProduct(modules.Product):  # FIXME ?
     cutter = BsmBI
 
     @staticmethod
-    def structure():
+    def structure():  # noqa: D105
         return (
             'CGTCTC'  # BsmBI
             'N'
@@ -363,7 +363,7 @@ class YTKPart234r(YTKPart, YTKEntry):
     signature = ('AACG', 'GCTG')
 
     @staticmethod
-    def structure():
+    def structure():  # noqa: D105
         return '(AACG)(NGAGACCN*?GGTCTCN)(GCTG)'
 
 

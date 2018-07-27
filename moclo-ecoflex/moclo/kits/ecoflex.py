@@ -46,7 +46,7 @@ class EcoFlexCassetteVector(vectors.CassetteVector):
     cutter = BsaI
 
     @staticmethod
-    def structure():
+    def structure():  # noqa: D105
         return (
             'CGTCTC'  # BsmBI
             'N'
@@ -71,7 +71,7 @@ class EcoFlexDeviceVector(vectors.DeviceVector):
     cutter = BsmBI
 
     @staticmethod
-    def structure():
+    def structure():  # noqa: D105
         return (
             'GGTCTC'  # BsaI
             'NNNN'    # Device overhang (start)
