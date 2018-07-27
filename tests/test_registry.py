@@ -99,16 +99,37 @@ class TestFilesystemRegistry(unittest.TestCase):
         r = base.FilesystemRegistry(self.memfs, ytk.YTKPart8)
         self.assertRaises(RuntimeError, r.__getitem__, 'pYTK002')
 
+    def test_len(self):
+        r = base.FilesystemRegistry(self.memfs, ytk.YTKPart)
+        self.assertEqual(len(r), len(list(r)))
+        self.assertEqual(len(r), len(self.memfs.listdir('/')))
+
+    def test_iter(self):
+        r = base.FilesystemRegistry(self.memfs, ytk.YTKPart)
+        self.assertTrue(all(x in r for x in r))
+        self.assertEqual(sorted(r), ['pYTK002', 'pYTK038'])
 
 class TestCombinedRegistry(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        cls.ptk = PTKRegistry()
+        cls.ytk = YTKRegistry()
         cls.registry = base.CombinedRegistry()
-        cls.registry << YTKRegistry()
-        cls.registry << PTKRegistry()
+        cls.registry << cls.ytk << cls.ptk
 
     def test_contains(self):
         self.assertIn('pYTK001', self.registry)
         self.assertIn('pPTK001', self.registry)
         self.assertNotIn('B0030_AF', self.registry)
+
+    def test_length(self):
+        self.assertEqual(len(self.registry), len(YTKRegistry()) + len(PTKRegistry()))
+
+    def test_getitem(self):
+        self.assertIs(self.registry['pYTK001'], self.ytk['pYTK001'])
+        self.assertIs(self.registry['pPTK003'], self.ptk['pPTK003'])
+        self.assertRaises(KeyError, self.registry.__getitem__, 'B0030_AF')
+
+    def test_iter(self):
+        self.assertEqual(sorted(self.registry), sorted(self.ptk) + sorted(self.ytk))
