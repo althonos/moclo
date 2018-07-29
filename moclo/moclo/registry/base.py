@@ -154,7 +154,7 @@ class FilesystemRegistry(AbstractRegistry):
 
     def __iter__(self):
         for f in self.fs.filterdir('/', files=self._files, exclude_dirs=['*']):
-            name, _ = splitext(f)
+            name, _ = splitext(f.name)
             yield name
 
     def __len__(self):
