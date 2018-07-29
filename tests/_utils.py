@@ -82,8 +82,8 @@ class PartsMetaCase(object):
         attrs['__module__'] = self.module
         return type(name, (unittest.TestCase,), attrs)
 
-    def make(self, id_, type_, name, desc, seq, part_cls, part_name):
-        rec = CircularRecord(Seq(seq), name=name, id=id_)
+    def make(self, id_, type_, name_, desc, seq, part_cls, part_name):
+        rec = CircularRecord(Seq(seq), name=name_, id=id_)
         if type_ == part_name:
             def test(self_):
                 err = '{} is not a valid {} {} but should be!'
@@ -103,7 +103,7 @@ class PartsMetaCase(object):
             name = "test_{}_is_not_{}"
             doc = 'Check that {} ({} - {}) is not a {} {}.\n'
         test.__name__ = str(name.format(id_, part_name))
-        test.__doc__ = str(doc.format(id_, type_, name, self.kit_name, part_name))
+        test.__doc__ = str(doc.format(id_, type_, name_, self.kit_name, part_name))
         return test
 
 
