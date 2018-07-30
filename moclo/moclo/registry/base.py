@@ -5,7 +5,6 @@ from __future__ import unicode_literals
 import abc
 import io
 import itertools
-import inspect
 import typing
 
 import Bio.SeqIO
@@ -19,7 +18,7 @@ from fs.path import splitext
 from .._impl import bz2, json
 from ..record import CircularRecord
 from ..core import AbstractModule, AbstractVector, AbstractPart
-from .utils import find_resistance
+from .utils import find_resistance, find_type
 
 
 class Item(typing.NamedTuple('Item', [
@@ -142,16 +141,6 @@ class FilesystemRegistry(AbstractRegistry):
     def _files(self):
         return ['*.{}'.format(extension) for extension in self._extensions]
 
-    def _find_type(self, record):
-        classes = list(self.base.__subclasses__())
-        if not inspect.isabstract(self.base):
-            classes.append(self.base)
-        for cls in classes:
-            entity = cls(record)
-            if entity.is_valid():
-                return entity
-        raise RuntimeError("could not find the type for '{}'".format(record.id))
-
     def __iter__(self):
         for f in self.fs.filterdir('/', files=self._files, exclude_dirs=['*']):
             name, _ = splitext(f.name)
@@ -170,7 +159,7 @@ class FilesystemRegistry(AbstractRegistry):
                 return Item(
                     id=record.id,
                     name=record.description,
-                    entity=self._find_type(record),
+                    entity=find_type(record, self.base),
                     resistance=find_resistance(record),
                 )
         raise KeyError(item)
