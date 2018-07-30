@@ -172,7 +172,9 @@ class AbstractVector(StructuredRecord):
             warnings.warn(errors.UnusedModules(*modmap.values()))
 
         # Replace placeholder in the vector
-        return CircularRecord(assembly + self.target_sequence())
+        result = CircularRecord(assembly + self.target_sequence())
+        result.annotations['topology'] = 'circular'
+        return result
 
 
 class EntryVector(AbstractVector):
