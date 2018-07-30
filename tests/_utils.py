@@ -13,6 +13,7 @@ import Bio.SeqIO
 import contexter
 import fs.path
 import fs.archive.tarfs
+import six
 from Bio.Seq import Seq
 
 try:
@@ -103,7 +104,7 @@ class PartsMetaCase(object):
             name = "test_{}_is_not_{}"
             doc = 'Check that {} ({} - {}) is not a {} {}.\n'
         test.__name__ = str(name.format(id_, part_name))
-        test.__doc__ = str(doc.format(id_, type_, name_, self.kit_name, part_name))
+        test.__doc__ = doc.format(id_, type_, name_, self.kit_name, part_name)
         return test
 
 
