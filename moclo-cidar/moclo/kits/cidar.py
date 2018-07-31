@@ -15,7 +15,6 @@ References:
 
 import abc
 
-import six
 from Bio.Restriction import BsaI, BbsI
 
 from ..core import parts, modules, vectors

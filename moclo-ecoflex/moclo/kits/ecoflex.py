@@ -14,8 +14,6 @@ References:
 
 """
 
-import abc
-
 import six
 from Bio.Restriction import BsmBI, BsaI
 

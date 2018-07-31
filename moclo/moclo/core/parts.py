@@ -2,13 +2,11 @@
 """Moclo part classes.
 """
 
-import abc
 import typing
 
 import six
 from Bio.Seq import Seq
 
-from .._utils import classproperty
 from .modules import AbstractModule
 from .vectors import AbstractVector
 from ._structured import StructuredRecord
@@ -19,7 +17,6 @@ if typing.TYPE_CHECKING:
     from Bio.SeqRecord import SeqRecord  # noqa: F401
 
 
-@six.add_metaclass(abc.ABCMeta)
 class AbstractPart(StructuredRecord):
     """An abstract modular cloning part.
 

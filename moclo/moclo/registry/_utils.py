@@ -6,7 +6,7 @@ _ANTIBIOTICS = {
     'KanR': 'Kanamycin',
     'CamR': 'Chloramphenicol',
     'CmR': 'Chloramphenicol',
-    'KanR': 'Kanamycin',
+    'KnR': 'Kanamycin',
     'AmpR': 'Ampicillin',
     'SmR': 'Spectinomycin',
     'SpecR': 'Spectinomycin',

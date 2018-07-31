@@ -8,12 +8,10 @@ target sequence with Type IIS restriction sites, which depend on the level of
 the module, as well as the chosen MoClo protocol.
 """
 
-import abc
 import typing
 
 from Bio.Seq import Seq
 
-from .._utils import classproperty
 from ._structured import StructuredRecord
 from ._utils import cutter_check, add_as_source
 

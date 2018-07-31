@@ -7,14 +7,13 @@ import cached_property
 import six
 
 from .. import errors
-from .._utils import classproperty
 from ..regex import DNARegex
 from ..record import CircularRecord
 
 if typing.TYPE_CHECKING:
-    from typing import Dict, Optional, Text, Type  # noqa: F401
-    from Bio.SeqRecord import SeqRecord            # noqa: F401
-    from ..regex import SeqMatch                   # noqa: F401
+    from typing import Optional, Text, Type  # noqa: F401
+    from Bio.SeqRecord import SeqRecord      # noqa: F401
+    from ..regex import SeqMatch             # noqa: F401
 
 
 @six.add_metaclass(abc.ABCMeta)

@@ -7,7 +7,6 @@ contain a placeholder sequence that is replaced by the concatenation of the
 modules during the Golden Gate assembly.
 """
 
-import abc
 import typing
 import warnings
 
@@ -19,7 +18,7 @@ from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 
 from .. import errors
-from .._utils import catch_warnings, classproperty
+from .._utils import catch_warnings
 from ..record import CircularRecord
 from ._utils import cutter_check, add_as_source
 from ._structured import StructuredRecord

@@ -6,7 +6,6 @@ import Bio.SeqIO
 import six
 
 from ..core import AbstractModule, AbstractVector, AbstractPart
-from .._utils import catch_warnings
 from .._impl import json, ssl
 from .base import AbstractRegistry, Item
 from ._utils import find_resistance, find_type
@@ -94,7 +93,7 @@ class ELabFTWRegistry(AbstractRegistry):
                 with self._request(url) as res:
                     data = six.StringIO(res.read().decode('utf-8'))
                     record = Bio.SeqIO.read(data, 'genbank')
-            except (ValueError, UnicodeDecodeError) as err:
+            except (ValueError, UnicodeDecodeError):
                 continue
             else:
                 break
@@ -122,8 +121,7 @@ class ELabFTWRegistry(AbstractRegistry):
         for item in self._get_all_items():
             if item['category'] == self.category and item['title'] == key:
                 return self._item_from_id(item['id'])
-        else:
-            raise KeyError(key)
+        raise KeyError(key)
 
     def __iter__(self):
         for item in self._get_all_items():

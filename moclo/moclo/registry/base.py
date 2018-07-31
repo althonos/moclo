@@ -2,9 +2,7 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-import abc
 import io
-import itertools
 import typing
 
 import Bio.SeqIO
@@ -34,6 +32,7 @@ class Item(typing.NamedTuple('Item', [
 class AbstractRegistry(typing.Mapping[typing.Text, Item]):
     """An abstract registry holding MoClo plasmids.
     """
+
 
 class CombinedRegistry(AbstractRegistry):
     """A registry combining several registries into a single collection.
