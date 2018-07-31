@@ -18,7 +18,7 @@ from fs.path import splitext
 from .._impl import bz2, json
 from ..record import CircularRecord
 from ..core import AbstractModule, AbstractVector, AbstractPart
-from .utils import find_resistance, find_type
+from ._utils import find_resistance, find_type
 
 
 class Item(typing.NamedTuple('Item', [

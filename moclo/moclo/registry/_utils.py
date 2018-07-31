@@ -1,6 +1,6 @@
 # coding: utf-8
 
-import inspect
+from .._utils import isabstract
 
 _ANTIBIOTICS = {
     'KanR': 'Kanamycin',
@@ -37,7 +37,7 @@ def find_type(record, base):
     """Infer the type of the record from the given base type.
     """
     classes = list(base.__subclasses__())
-    if not inspect.isabstract(base):
+    if not isabstract(base):
         classes.append(base)
     for cls in classes:
         entity = cls(record)

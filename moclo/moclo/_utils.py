@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 
 import functools
+import inspect
 import warnings
 
 
@@ -15,6 +16,14 @@ class classproperty(object):
 
     def __get__(self, instance, owner):
         return self.getter(owner)
+
+
+def isabstract(cls):
+    return inspect.isabstract(cls) \
+        or any(
+            getattr(cls, attr, None) is NotImplemented
+            for attr in dir(cls)
+        )
 
 
 def catch_warnings(action, category=Warning, lineno=0, append=False):
