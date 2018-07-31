@@ -19,12 +19,14 @@ if typing.TYPE_CHECKING:
 
 @six.add_metaclass(abc.ABCMeta)
 class StructuredRecord(object):
+    """A DNA record with a specific structure.
+    """
 
     _regex = None
 
     def __init__(self, record):
         # type: (SeqRecord) -> None
-        self.record = record 
+        self.record = record
         self.seq = record.seq
 
     @classmethod

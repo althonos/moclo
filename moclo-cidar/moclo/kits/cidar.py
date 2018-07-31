@@ -147,6 +147,7 @@ class CIDARPart(parts.AbstractPart):
     """
 
     cutter = BsaI
+    signature = NotImplemented
 
 
 class CIDARPromoter(CIDARPart, CIDAREntry):

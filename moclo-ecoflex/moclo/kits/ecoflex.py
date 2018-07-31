@@ -128,6 +128,7 @@ class EcoFlexPart(parts.AbstractPart):
     """
 
     cutter = BsaI
+    signature = NotImplemented
 
 
 class EcoFlexPromoter(EcoFlexPart, EcoFlexEntry):

@@ -189,6 +189,7 @@ class YTKPart(parts.AbstractPart):
     """
 
     cutter = BsaI
+    signature = NotImplemented
 
 
 class YTKPart1(YTKPart, YTKEntry):
