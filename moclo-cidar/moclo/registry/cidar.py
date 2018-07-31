@@ -33,7 +33,7 @@ import six
 
 from ..kits import cidar
 from .base import EmbeddedRegistry
-from .utils import find_resistance
+from ._utils import find_resistance
 
 
 class CIDARRegistry(EmbeddedRegistry):

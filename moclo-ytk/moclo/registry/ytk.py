@@ -37,7 +37,7 @@ import six
 
 from ..kits import ytk
 from .base import EmbeddedRegistry
-from .utils import find_resistance
+from ._utils import find_resistance
 
 
 class YTKRegistry(EmbeddedRegistry):
