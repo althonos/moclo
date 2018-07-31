@@ -11,9 +11,9 @@ from ..regex import DNARegex
 from ..record import CircularRecord
 
 if typing.TYPE_CHECKING:
-    from typing import Optional, Text, Type  # noqa: F401
-    from Bio.SeqRecord import SeqRecord      # noqa: F401
-    from ..regex import SeqMatch             # noqa: F401
+    from typing import Text, Type          # noqa: F401
+    from Bio.SeqRecord import SeqRecord    # noqa: F401
+    from ..regex import SeqMatch           # noqa: F401
 
 
 @six.add_metaclass(abc.ABCMeta)

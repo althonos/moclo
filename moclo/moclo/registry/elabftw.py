@@ -45,6 +45,12 @@ class ELabFTWRegistry(AbstractRegistry):
         if not isinstance(base, type) or not issubclass(base, (bases)):
             raise TypeError("base cannot be '{}'".format(base))
 
+        if not isinstance(server, six.string_types):
+            msg = "server must be a string, not '{}'"
+            raise TypeError(msg.format(type(server).__name__))
+        elif not server.startswith('http'):
+            raise ValueError("bad server URL: '{}'".format(server))
+
         self.base = base
         self.server = server
         self.token = token
@@ -53,7 +59,7 @@ class ELabFTWRegistry(AbstractRegistry):
 
     def _request(self, url):
 
-        req = six.moves.urllib.request.Request(url)
+        req = six.moves.urllib.request.Request(url)  # noqa: B310
         req.add_header('Authorization', self.token)
 
         if ssl is None:
