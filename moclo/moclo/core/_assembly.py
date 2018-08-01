@@ -13,7 +13,7 @@ from Bio.Alphabet import IUPAC
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
-from .. import errors
+from .. import errors, __version__
 from ..record import CircularRecord
 from .._utils import catch_warnings
 
@@ -104,4 +104,15 @@ class AssemblyManager(object):
     def _annotate_assembly(self, assembly):
         assembly.id = self.id
         assembly.name = self.name
-        assembly.annotations['topology'] = 'circular'
+        ants = assembly.annotations
+
+        ants['topology'] = 'circular'
+        ants['organism'] = ants['source'] = 'synthetic DNA construct'
+        ants['source'] = 'synthetic DNA construct'
+        ants['molecule_type'] = 'ds-DNA'
+        ants['data_file_division'] = 'SYN'
+        ants['comment'] = [
+            'Generated with moclo v{}'.format(__version__),
+            'Vector: {}'.format(self.vector.id),
+            'Modules: {}'.format(', '.join(self.modules))
+        ]
