@@ -11,20 +11,18 @@ import typing
 import warnings
 
 import six
-from Bio import BiopythonWarning
 from Bio.Alphabet import IUPAC
 from Bio.Seq import Seq
-from Bio.SeqRecord import SeqRecord
 from Bio.SeqFeature import SeqFeature, FeatureLocation
 
 from .. import errors
-from .._utils import catch_warnings
-from ..record import CircularRecord
+from ._assembly import AssemblyManager
 from ._utils import cutter_check, add_as_source
 from ._structured import StructuredRecord
 
 if typing.TYPE_CHECKING:
     from typing import Any, MutableMapping, Union           # noqa: F401
+    from Bio.SeqRecord import SeqRecord                     # noqa: F401
     from Bio.Restriction.Restriction import RestrictionType # noqa: F401
     from .modules import AbstractModule                     # noqa: F401
 
@@ -100,7 +98,6 @@ class AbstractVector(StructuredRecord):
             start, end = self._match.span(1)[0], self._match.span(2)[1]
         return add_as_source(self.record, (self.record << start)[end - start:])
 
-    @catch_warnings('ignore', category=BiopythonWarning)
     def assemble(self, module, *modules, **kwargs):
         # type: (AbstractModule, *AbstractModule, **Any) -> SeqRecord
         """Assemble the provided modules into the vector.
@@ -131,49 +128,14 @@ class AbstractVector(StructuredRecord):
                 during the assembly (mostly caused by duplicate parts).
 
         """
-        # If the start and end overhangs are the same, the assembly will
-        # not be the only stable product in the bioreactor.
-        if self.overhang_start() == self.overhang_end():
-            details = 'vector is not suitable for assembly'
-            raise errors.InvalidSequence(self, details=details)
 
-        # Identify all modules by their respective overhangs, checking
-        # for possible duplicates.
-        modmap = {module.overhang_start(): module}  # type: MutableMapping[Seq, AbstractModule]
-        for mod in modules:
-            mod2 = modmap.setdefault(mod.overhang_start(), mod)
-            if mod2 is not mod:
-                details = "same start overhang: '{}'".format(mod.overhang_start())
-                raise errors.DuplicateModules(mod2, mod, details=details)
-
-        # Get the alphabet using the largest alphabet from source records
-        alphabets = [
-            mod.seq.alphabet for mod in six.itervalues(modmap)
-            if mod.seq.alphabet.letters is not None
-        ]
-        alphabets.append(IUPAC.unambiguous_dna)
-        alphabet = max(alphabets, key=lambda a: len(a.letters))
-
-        # Generate the complete inserted sequence
-        try:
-            overhang_next = self.overhang_end()
-            assembly = SeqRecord(Seq('', alphabet), id='assembly')
-            while overhang_next != self.overhang_start():
-                module = modmap.pop(overhang_next)
-                assembly += module.target_sequence()
-                overhang_next = module.overhang_end()
-        except KeyError as ke:
-            # Raise the MissingModule error without the KeyError traceback
-            raise six.raise_from(errors.MissingModule(ke.args[0]), None)
-
-        # Check all modules were used
-        if modmap:
-            warnings.warn(errors.UnusedModules(*modmap.values()))
-
-        # Replace placeholder in the vector
-        result = CircularRecord(assembly + self.target_sequence())
-        result.annotations['topology'] = 'circular'
-        return result
+        mgr = AssemblyManager(
+            vector=self,
+            modules=[module] + list(modules),
+            name=kwargs.get('name', 'assembly'),
+            id_=kwargs.get('id', 'assembly'),
+        )
+        return mgr.assemble()
 
 
 class EntryVector(AbstractVector):
