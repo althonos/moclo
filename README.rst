@@ -61,9 +61,10 @@ Registries
 
 Kit-specific modules and vectors are distributed with the library files, so that
 each library provides the base parts needed to create an assembly. They can be
-found in the ``moclo.registry`` namespace. See also the `registry folder
-<https://github.com/althonos/moclo/tree/master/registry>`_ for a detail of how
-the records were obtained.
+found in the ``moclo.registry`` namespace. See also the documentation of each
+``moclo.registry`` submodule for a detail of how sequences were obtained. The 
+embedded sequences are distributed in GenBank format with the source distributions
+of each plugin.
 
 
 About
