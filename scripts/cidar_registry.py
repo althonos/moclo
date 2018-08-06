@@ -123,6 +123,10 @@ if __name__ == "__main__":
         else:
             id_ = name = row_text
 
+        # DVA and DVK are empty vectors, they are not valid MoClo elements
+        if id_ in ('DVA', 'DVK'):
+            continue
+
         # Update the progress bar
         it.set_description(id_)
 
