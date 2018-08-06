@@ -24,26 +24,17 @@ from ._utils import AssemblyTestCase, PartsMetaCase, build_registries
 if six.PY3:
 
     def setUpModule():
-        build_registries('ytk')
-        build_registries('cidar')
         warnings.simplefilter('ignore', category=ResourceWarning)
 
     def tearDownModule():
         warnings.simplefilter(warnings.defaultaction)
 
-else:
-
-    def setUpModule():
-        build_registries('ytk')
-        build_registries('cidar')
-
 
 ### Test Yeast ToolKit plasmids
 
 # metaclass for test suites
-_Meta = PartsMetaCase(
-    'YTK', lambda: CombinedRegistry() << YTKRegistry() << PTKRegistry(), __name__,
-)
+registry_factory = lambda: CombinedRegistry() << YTKRegistry() << PTKRegistry()
+_Meta = PartsMetaCase('YTK', registry_factory, __name__)
 
 # Generate test cases
 TestYTKPart1 = _Meta(ytk.YTKPart1, '1')
@@ -70,6 +61,10 @@ TestYTKPart678 = _Meta(ytk.YTKPart678, '678')
 ### Test Yeast ToolKit multigene assembly
 
 class TestYTKAssembly(AssemblyTestCase, unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        build_registries('ytk')
 
     def test_ytk_device(self):
         """Check a YTK device assembly using several cassettes.

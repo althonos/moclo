@@ -18,12 +18,12 @@ from moclo.registry.cidar import CIDARRegistry
 from ._utils import build_registries
 
 
-def setUpModule():
-    build_registries('ytk')
-    build_registries('cidar')
-
-
 class TestEmbeddedRegistry(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        build_registries('ytk')
+        build_registries('cidar')
 
     def test_ytk_registry(self):
         r = YTKRegistry()
@@ -69,6 +69,7 @@ class TestFilesystemRegistry(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        build_registries('ytk')
         r = YTKRegistry()
 
         cls.memfs = fs.open_fs(u'mem://')
@@ -114,6 +115,7 @@ class TestCombinedRegistry(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        build_registries('ytk')
         cls.ptk = PTKRegistry()
         cls.ytk = YTKRegistry()
         cls.registry = base.CombinedRegistry()

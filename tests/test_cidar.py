@@ -21,10 +21,6 @@ from moclo.registry.cidar import CIDARRegistry
 from ._utils import PartsMetaCase, AssemblyTestCase, build_registries
 
 
-def setUpModule():
-    build_registries('cidar')
-
-
 ### Test CIDAR plasmids
 
 # test suite metaclass
@@ -47,6 +43,7 @@ class TestCIDARAssembly(AssemblyTestCase):
 
     @classmethod
     def setUpClass(cls):
+        build_registries('cidar')
         cls.registry = CIDARRegistry()
 
     def test_pJ02B2Rm_EF(self):

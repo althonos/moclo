@@ -57,6 +57,7 @@ build_registries = Registries()
 class PartsMetaCase(object):
 
     def __init__(self, kit_name, registry_factory, module):
+        build_registries(kit_name.lower())
         self.kit_name = kit_name
         self.registry = registry_factory()
         self.module = module

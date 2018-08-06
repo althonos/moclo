@@ -19,10 +19,6 @@ from moclo.registry.ecoflex import EcoFlexRegistry
 from ._utils import PartsMetaCase, build_registries
 
 
-def setUpModule():
-    build_registries('ecoflex')
-
-
 ### Test EcoFlex MoClo plasmids
 
 # metaclass for test suites
@@ -32,7 +28,6 @@ exclude_tu2a = lambda item: item.id.startswith('pTU2-A')
 exclude_tu2d = lambda item: item.id.startswith('pTU2-D')
 exclude_tu3 = lambda item: item.id.startswith('pTU3')
 exclude_cassette = lambda item: item.id.startswith(('pTU1', 'pTU3'))
-
 
 # Generate test cases
 TestEcoFlexPromoter = _Meta(ecoflex.EcoFlexPromoter, 'Promoter', exclude_tu2a)
