@@ -79,9 +79,6 @@ class EmbeddedRegistry(AbstractRegistry):
     def _load_name(self, raw, index):
         return raw['name']
 
-    def _load_location(self, raw, index):
-        return raw['location']
-
     def _load_resistance(self, raw, index):
         return raw['resistance']
 
@@ -102,7 +99,6 @@ class EmbeddedRegistry(AbstractRegistry):
                 Item(
                     id=self._load_id(raw, index),
                     name=self._load_name(raw, index),
-                    # location=self._load_location(raw, index),
                     resistance=self._load_resistance(raw, index),
                     entity=self._load_entity(raw, index),
                 )
