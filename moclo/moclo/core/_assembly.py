@@ -113,6 +113,8 @@ class AssemblyManager(object):
         ants['data_file_division'] = 'SYN'
         ants['comment'] = [
             'Generated with moclo v{}'.format(__version__),
-            'Vector: {}'.format(self.vector.id),
-            'Modules: {}'.format(', '.join(self.modules))
+            'Vector: {}'.format(self.vector.record.id),
+            'Modules: {}'.format(', '.join(
+                mod.record.id for mod in self.modules
+            )),
         ]
