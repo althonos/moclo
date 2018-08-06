@@ -30,11 +30,12 @@ __version__ = (
 
 ### VECTORS
 
-class EcoFlexEntryVector(vectors.EntryVector):
-    """An EcoFlex MoClo entry vector.
-    """
-
-    cutter = BsmBI
+# TODO
+# class EcoFlexEntryVector(vectors.EntryVector):
+#     """An EcoFlex MoClo entry vector.
+#     """
+#
+#     cutter = NotImplemented
 
 
 class EcoFlexCassetteVector(vectors.CassetteVector):
@@ -72,6 +73,7 @@ class EcoFlexDeviceVector(vectors.DeviceVector):
     def structure():  # noqa: D105
         return (
             'GGTCTC'  # BsaI
+            'N'
             'NNNN'    # Device overhang (start)
             '(NNNN)'  # Vector overhang (start)
             '(N'
@@ -81,12 +83,14 @@ class EcoFlexDeviceVector(vectors.DeviceVector):
             'N)'
             '(NNNN)'  # Vector overhang (end)
             'NNNN'    # Device overhang (end)
+            'N'
             'GAGACC'  # BsaI
         )
 
 
 ### MODULES
 
+# TODO
 # class EcoFlexProduct(modules.Product):
 #     """An EcoFlex MoClo product.
 #     """
