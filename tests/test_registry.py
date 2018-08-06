@@ -109,6 +109,7 @@ class TestFilesystemRegistry(unittest.TestCase):
         self.assertTrue(all(x in r for x in r))
         self.assertEqual(sorted(r), ['pYTK002', 'pYTK038'])
 
+
 class TestCombinedRegistry(unittest.TestCase):
 
     @classmethod

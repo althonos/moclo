@@ -15,23 +15,35 @@ from Bio.Seq import Seq
 
 from moclo.record import CircularRecord
 from moclo.kits import ytk
+from moclo.registry.base import CombinedRegistry
+from moclo.registry.ytk import YTKRegistry, PTKRegistry
 
-from ._utils import DATAFS, AssemblyTestCase, PartsMetaCase
+from ._utils import AssemblyTestCase, PartsMetaCase, build_registries
 
 
 if six.PY3:
+
     def setUpModule():
+        build_registries('ytk')
+        build_registries('cidar')
         warnings.simplefilter('ignore', category=ResourceWarning)
 
     def tearDownModule():
         warnings.simplefilter(warnings.defaultaction)
 
+else:
+
+    def setUpModule():
+        build_registries('ytk')
+        build_registries('cidar')
 
 
 ### Test Yeast ToolKit plasmids
 
 # metaclass for test suites
-_Meta = PartsMetaCase('YTK', 'ytk.tsv.xz', __name__)
+_Meta = PartsMetaCase(
+    'YTK', lambda: CombinedRegistry() << YTKRegistry() << PTKRegistry(), __name__,
+)
 
 # Generate test cases
 TestYTKPart1 = _Meta(ytk.YTKPart1, '1')
@@ -43,7 +55,9 @@ TestYTKPart4 = _Meta(ytk.YTKPart4, '4')
 TestYTKPart4a = _Meta(ytk.YTKPart4a, '4a')
 TestYTKPart4b = _Meta(ytk.YTKPart4b, '4b')
 TestYTKPart234 = _Meta(ytk.YTKPart234, '234')
-TestYTKPart234r = _Meta(ytk.YTKPart234r, '234r', exclude={'pYTK096'})
+TestYTKPart234r = _Meta(
+    ytk.YTKPart234r, '234r', exclude=lambda item: item.id == 'pYTK096'
+)
 TestYTKPart5 = _Meta(ytk.YTKPart5, '5')
 TestYTKPart6 = _Meta(ytk.YTKPart6, '6')
 TestYTKPart7 = _Meta(ytk.YTKPart7, '7')

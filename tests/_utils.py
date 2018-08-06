@@ -53,44 +53,42 @@ build_registries = Registries()
 
 ### Tests helper
 
+
 class PartsMetaCase(object):
 
-    _plasmids = None
-
-    def __init__(self, kit_name, archive, module):
+    def __init__(self, kit_name, registry_factory, module):
         self.kit_name = kit_name
-        self.archive = archive
+        self.registry = registry_factory()
         self.module = module
 
-    def plasmids(self, datafs=DATAFS.opendir('parts')):
-        with io.TextIOWrapper(lzma.open(datafs.openbin(self.archive))) as f:
-            for line in f:
-                if not line.startswith('Plasmid Name'):
-                    yield line.strip().split('\t')
-
-    def __call__(self, part_cls, part_name, exclude=frozenset()):
-        if self._plasmids is None:
-            self._plasmids = list(self.plasmids())
-        attrs = {
-            test.__name__: test
-            for test in (
-                self.make(*plasmid, part_cls=part_cls, part_name=part_name)
-                for plasmid in self._plasmids
-                if plasmid[0] not in exclude
-            )
-        }
+    def __call__(self, part_cls, part_name, exclude=lambda item: False):
+        """Create a whole test case for the given class.
+        """
+        tests = (
+            self.make_test(item, part_cls=part_cls, part_name=part_name)
+            for item in self.registry.values()
+            if not exclude(item)
+        )
+        attrs = {test.__name__:test for test in tests}
         attrs['__name__'] = name = str('Test{}'.format(part_cls.__name__))
         attrs['__module__'] = self.module
         return type(name, (unittest.TestCase,), attrs)
 
-    def make(self, id_, type_, name_, desc, seq, part_cls, part_name):
-        rec = CircularRecord(Seq(seq), name=name_, id=id_)
-        if type_ == part_name:
+    def make_test(self, item, part_cls, part_name):
+        """Create a single test for the given item.
+
+        If ``ìtem.entity`` is a ``part_cls`` instance, it will check that
+        ``part_cls(item.entity.record).is_valid()`` is `True` (`False`
+        otherwise), i.e. it checks that the record is only identified as
+        the actual type it should be.
+        """
+        rec = item.entity.record
+        if isinstance(item.entity, part_cls):
             def test(self_):
                 err = '{} is not a valid {} {} but should be!'
                 self_.assertTrue(
                     part_cls(rec).is_valid(),
-                    err.format(id_, self.kit_name, part_name)
+                    err.format(item.id, self.kit_name, part_name)
                 )
             name = 'test_{}_is_{}'
             doc = 'Check that {} ({}) is a {} {}.\n'
@@ -99,12 +97,14 @@ class PartsMetaCase(object):
                 err = '{} is a valid {} {} but should not be!'
                 self_.assertFalse(
                     part_cls(rec).is_valid(),
-                    err.format(id_, self.kit_name, part_name)
+                    err.format(item.id, self.kit_name, part_name)
                 )
-            name = "test_{}_is_not_{}"
-            doc = 'Check that {} ({} - {}) is not a {} {}.\n'
-        test.__name__ = str(name.format(id_, part_name))
-        test.__doc__ = doc.format(id_, type_, name_, self.kit_name, part_name)
+            name = 'test_{}_is_not_{}'
+            doc = 'Check that {} ({}) is not a {} {}.\n'
+        test.__name__ = str(name.format(item.id, part_name))
+        test.__doc__ = doc.format(
+            item.id, item.entity.record.name, self.kit_name, part_name
+        )
         return test
 
 

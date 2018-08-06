@@ -15,8 +15,8 @@ sys.path.insert(0, os.path.join(proj, "moclo"))
 import moclo.kits
 import moclo.registry
 
-# Compile and load extensions
-for extension in ["cidar", "ytk", "ecoflex"]:
+# Load extensions
+for extension in ["cidar", "ytk", "ecoflex", "ig"]:
     extension_dir = os.path.join(proj, "moclo-{}".format(extension))
     moclo.kits.__path__.append(os.path.join(extension_dir, "moclo", "kits"))
     moclo.registry.__path__.append(os.path.join(extension_dir, "moclo", "registry"))

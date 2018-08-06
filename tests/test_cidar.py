@@ -28,13 +28,19 @@ def setUpModule():
 ### Test CIDAR plasmids
 
 # test suite metaclass
-_Meta = PartsMetaCase('CIDAR', 'cidar.tsv.xz', __name__)
+_Meta = PartsMetaCase('CIDAR', CIDARRegistry, __name__)
+exclude_dva = lambda item: item.id.startswith('DVA_')
+exclude_dvk = lambda item: item.id.startswith('DVK_')
 
 # Generate test cases for each parts
-TestCIDARPromoter = _Meta(cidar.CIDARPromoter, 'Promoter')
-TestCIDARibosomeBindingSite = _Meta(cidar.CIDARRibosomeBindingSite, 'RBS')
-TestCIDARCodingSequence = _Meta(cidar.CIDARCodingSequence, 'CDS')
-TestCIDARTerminator = _Meta(cidar.CIDARTerminator, 'Terminator')
+TestCIDARPromoter = _Meta(cidar.CIDARPromoter, 'Promoter', exclude_dva)
+TestCIDARibosomeBindingSite = _Meta(cidar.CIDARRibosomeBindingSite, 'RBS', exclude_dva)
+TestCIDARCodingSequence = _Meta(cidar.CIDARCodingSequence, 'CDS', exclude_dva)
+TestCIDARTerminator = _Meta(cidar.CIDARTerminator, 'Terminator', exclude_dva)
+
+# Generate test cases for vectors
+TestCIDAREntryVector = _Meta(cidar.CIDAREntryVector, 'EntryVector', exclude_dvk)
+TestCIDARCassetteVector = _Meta(cidar.CIDARCassetteVector, 'CassetteVector', exclude_dva)
 
 # Generate test cases based on test assemblies
 class TestCIDARAssembly(AssemblyTestCase):
