@@ -67,10 +67,6 @@ class YTKRegistry(EmbeddedRegistry):
         'entry vector': ytk.YTKEntryVector,
     }
 
-    def __init__(self, location='YTK Plate'):
-        super(YTKRegistry, self).__init__()
-        self.location = location
-
     def _load_name(self, raw, index):
         return raw['record'].description
 
@@ -92,14 +88,7 @@ class YTKRegistry(EmbeddedRegistry):
         _, type_ = hint.strip().split(':', 1)
         return self._types[type_](raw['record'])
 
-    def _load_location(self, raw, index):
-        x, y = index % 12, index // 12
-        return '{}, {}{}'.format(self.location, chr(ord('A') + y), x+1)
-
 
 class PTKRegistry(YTKRegistry):
 
     _file = "ptk.json.bz2"
-
-    def __init__(self, location='PTK Plate'):
-        super(PTKRegistry, self).__init__(location)
