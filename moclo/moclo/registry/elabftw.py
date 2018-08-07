@@ -116,6 +116,10 @@ class ELabFTWRegistry(AbstractRegistry):
         entity = find_type(record, self.base)
         resistance = find_resistance(record)
 
+        # When exported with Snapgene, the record does not have any name / id
+        if record.name == 'Exported':
+            record.id = record.name = plasmid['title']
+
         return Item(
             entity=entity,
             id=plasmid["title"],
