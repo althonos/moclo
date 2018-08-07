@@ -15,13 +15,15 @@ class ELabFTWRegistry(AbstractRegistry):
     """A registry in a running ``eLabFTW`` server.
     """
 
-    def __init__(self,
-                 server,
-                 token,
-                 base,
-                 category="Plasmids",      # type: Text
-                 strict_ssl=False,         # type: bool
-                ):
+    def __init__(
+        self,
+        server,
+        token,
+        base,
+        category="Plasmids",  # type: Text
+        strict_ssl=False,  # type: bool
+        ignore_unknown=True,  # type: bool
+    ):
         """Open the registry located on the given ``eLabFTW`` instance.
 
         Arguments:
@@ -35,9 +37,13 @@ class ELabFTWRegistry(AbstractRegistry):
 
         Keyword Arguments:
             category (str): the item category to filter items with in the
-                ``eLabFTW`` item inventory. [default: ``Plasmids``]
+                ``eLabFTW`` item inventory. [default: ``"Plasmids"``]
             strict_ssl (bool): set to `True` to enforce verification of the SSL
                 certificate when connecting to the server [default: `False`].
+            ignore_unknown (bool): ignore any record which type cannot be
+                identified. Set to `False` to raise a `RuntimeError` instead.
+                This will also silence entries without attached GenBank files.
+                [default: `True`]
 
         """
 
@@ -48,7 +54,7 @@ class ELabFTWRegistry(AbstractRegistry):
         if not isinstance(server, six.string_types):
             msg = "server must be a string, not '{}'"
             raise TypeError(msg.format(type(server).__name__))
-        elif not server.startswith('http'):
+        elif not server.startswith("http"):
             raise ValueError("bad server URL: '{}'".format(server))
 
         self.base = base
@@ -56,11 +62,12 @@ class ELabFTWRegistry(AbstractRegistry):
         self.token = token
         self.category = category
         self._strict = strict_ssl
+        self._ignore_unknown = ignore_unknown
 
     def _request(self, url):
 
         req = six.moves.urllib.request.Request(url)  # noqa: B310
-        req.add_header('Authorization', self.token)
+        req.add_header("Authorization", self.token)
 
         if ssl is None:
             ctx = None
@@ -93,12 +100,12 @@ class ELabFTWRegistry(AbstractRegistry):
 
         plasmid = self._get_item(item_id)
 
-        for attachment in plasmid.get('uploads', []):
-            url = '{}/uploads/{}'.format(self.server, attachment['long_name'])
+        for attachment in plasmid.get("uploads", []):
+            url = "{}/uploads/{}".format(self.server, attachment["long_name"])
             try:
                 with self._request(url) as res:
-                    data = six.StringIO(res.read().decode('utf-8'))
-                    record = Bio.SeqIO.read(data, 'genbank')
+                    data = six.StringIO(res.read().decode("utf-8"))
+                    record = Bio.SeqIO.read(data, "genbank")
             except (ValueError, UnicodeDecodeError):
                 continue
             else:
@@ -111,25 +118,31 @@ class ELabFTWRegistry(AbstractRegistry):
 
         return Item(
             entity=entity,
-            id=plasmid['title'],
-            name=plasmid['title'],
+            id=plasmid["title"],
+            name=plasmid["title"],
             resistance=resistance,
         )
 
     def __len__(self):
+        return sum(1 for item in self)
+
+    def __length_hint__(self):
         return sum(
-            1
-            for item in self._get_all_items()
-            if item['category'] == self.category
+            1 for item in self._get_all_items() if item["category"] == self.category
         )
 
     def __getitem__(self, key):
         for item in self._get_all_items():
-            if item['category'] == self.category and item['title'] == key:
-                return self._item_from_id(item['id'])
+            if item["category"] == self.category and item["title"] == key:
+                return self._item_from_id(item["id"])
         raise KeyError(key)
 
     def __iter__(self):
         for item in self._get_all_items():
-            if item['category'] == self.category:
-                yield item['title']
+            if item["category"] == self.category:
+                try:
+                    self._item_from_id(item["id"])
+                    yield item['title']
+                except RuntimeError:
+                    if not self._ignore_unknown:
+                        raise
