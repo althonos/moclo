@@ -23,9 +23,6 @@ class EcoFlexRegistry(EmbeddedRegistry):
     _module = __name__
     _file = "ecoflex.json.bz2"
 
-    def __init__(self):
-        super(EcoFlexRegistry, self).__init__()
-
     def _load_name(self, raw, index):
         return raw['record'].name
 
@@ -39,24 +36,6 @@ class EcoFlexRegistry(EmbeddedRegistry):
             msg = "could not find antibiotics resistance of '{}'"
             six.raise_from(RuntimeError(msg.format(raw['record'].id)), None)
         return raw['resistance']
-
-    # _ENTITY_RX = re.compile(r'MoClo (.*): ([^\-\[\(]*)')
-    #
-    # _CLASSES = {
-    #     'Cassette Vector': cidar.CIDARCassetteVector,
-    #     'Entry Vector': cidar.CIDAREntryVector,
-    #     'Device': cidar.CIDARDevice,
-    #     'Transcriptional Unit': cidar.CIDARCassette,
-    #     'Basic Part': cidar.CIDARPart,
-    # }
-    #
-    # _TYPES = {
-    #     'Double terminator': cidar.CIDARTerminator,
-    #     'RBS': cidar.CIDARRibosomeBindingSite,
-    #     'CDS': cidar.CIDARCodingSequence,
-    #     'Controllable promoter': cidar.CIDARPromoter,
-    #     'Constitutive promoter': cidar.CIDARPromoter,
-    # }
 
     _PREFIXES = collections.OrderedDict([
         ('pBP-T7_', ecoflex.EcoFlexPromoterRBS),
