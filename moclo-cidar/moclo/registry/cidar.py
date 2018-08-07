@@ -41,10 +41,6 @@ class CIDARRegistry(EmbeddedRegistry):
     _module = __name__
     _file = "cidar.json.bz2"
 
-    def __init__(self, location='CIDAR Plate'):
-        super(CIDARRegistry, self).__init__()
-        self.location = location
-
     def _load_name(self, raw, index):
         return raw['record'].name
 
@@ -91,7 +87,3 @@ class CIDARRegistry(EmbeddedRegistry):
             if type_ in self._TYPES:
                 return self._TYPES[type_](raw['record'])
         raise RuntimeError("could not find type of '{}'".format(raw['id']))
-
-    def _load_location(self, raw, index):
-        x, y = index % 12, index // 12
-        return '{}, {}{}'.format(self.location, chr(ord('A') + y), x+1)
