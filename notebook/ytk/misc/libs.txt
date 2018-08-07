@@ -1,0 +1,6 @@
+musl-dev
+libpng-dev
+freetype-dev
+libxml2-dev
+libxslt-dev
+libstdc++

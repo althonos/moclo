@@ -1,0 +1,9 @@
+jupyter
+ipywidgets
+jupyterlab
+qgrid
+biopython
+pandas
+moclo
+moclo-ytk
+moclo-cidar

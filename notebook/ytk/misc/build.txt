@@ -1,0 +1,9 @@
+git
+nodejs
+npm
+ca-certificates
+gcc
+make
+cmake
+g++
+gfortran
