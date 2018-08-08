@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # coding: utf-8
-"""Automatic CIDAR sequences annotation pipeline.
+"""Automatic EcoFlex sequences annotation pipeline.
 
 Edits:
 - Recolor all AmpR with the same color as YTK parts
