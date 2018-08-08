@@ -16,7 +16,7 @@ from fs.path import splitext
 from .._impl import bz2, json
 from ..record import CircularRecord
 from ..core import AbstractModule, AbstractVector, AbstractPart
-from ._utils import find_resistance, find_type
+from ._utils import find_resistance
 
 
 class Item(typing.NamedTuple('Item', [
@@ -154,7 +154,7 @@ class FilesystemRegistry(AbstractRegistry):
                 return Item(
                     id=record.id,
                     name=record.description,
-                    entity=find_type(record, self.base),
+                    entity=self.base.characterize(record),
                     resistance=find_resistance(record),
                 )
         raise KeyError(item)

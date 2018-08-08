@@ -8,7 +8,7 @@ import six
 from ..core import AbstractModule, AbstractVector, AbstractPart
 from .._impl import json, ssl
 from .base import AbstractRegistry, Item
-from ._utils import find_resistance, find_type
+from ._utils import find_resistance
 
 
 class ELabFTWRegistry(AbstractRegistry):
@@ -113,7 +113,7 @@ class ELabFTWRegistry(AbstractRegistry):
         else:
             raise RuntimeError("no GenBank file for: '{}'".format(item_id))
 
-        entity = find_type(record, self.base)
+        entity = self.base.characterize(record)
         resistance = find_resistance(record)
 
         # When exported with Snapgene, the record does not have any name / id

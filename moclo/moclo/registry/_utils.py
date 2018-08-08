@@ -31,16 +31,3 @@ def find_resistance(record):
         elif len(cassettes) == 1:
             return _ANTIBIOTICS.get(cassettes.pop())
     raise RuntimeError("could not find the resistance of '{}'".format(record.id))
-
-
-def find_type(record, base):
-    """Infer the type of the record from the given base type.
-    """
-    classes = list(base.__subclasses__())
-    if not isabstract(base):
-        classes.append(base)
-    for cls in classes:
-        entity = cls(record)
-        if entity.is_valid():
-            return entity
-    raise RuntimeError("could not find the type for '{}'".format(record.id))

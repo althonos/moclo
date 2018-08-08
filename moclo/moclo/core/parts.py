@@ -7,6 +7,7 @@ import typing
 import six
 from Bio.Seq import Seq
 
+from .._utils import isabstract
 from .modules import AbstractModule
 from .vectors import AbstractVector
 from ._structured import StructuredRecord
@@ -15,6 +16,9 @@ from ._utils import cutter_check
 if typing.TYPE_CHECKING:
     from typing import Union             # noqa: F401
     from Bio.SeqRecord import SeqRecord  # noqa: F401
+
+
+__all__ = ['AbstractPart']
 
 
 class AbstractPart(StructuredRecord):
@@ -88,3 +92,16 @@ class AbstractPart(StructuredRecord):
             ])
         else:
             raise RuntimeError("Part must be either a module or a vector!")
+
+    @classmethod
+    def characterize(cls, record):
+        """Load the record in a concrete subclass of this type.
+        """
+        classes = list(cls.__subclasses__())
+        if not isabstract(cls):
+            classes.append(cls)
+        for subclass in classes:
+            entity = subclass(record)
+            if entity.is_valid():
+                return entity
+        raise RuntimeError("could not find the type for '{}'".format(record.id))
