@@ -4,6 +4,7 @@ jupyterlab
 qgrid
 biopython
 pandas
+fs
+six
 moclo
 moclo-ytk
-moclo-cidar
