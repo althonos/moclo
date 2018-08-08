@@ -1,51 +1,82 @@
 sudo: false
-dist: xenial
 language: python
 cache: pip
 
-python:
-- '2.7'
-- '3.4'
-- '3.5'
-- '3.6'
-- '3.7'
-- pypy
-- pypy3.5
+services:
+  - docker
 
-matrix:
-  allow_failures:
-  - python: pypy
-  - python: pypy3.5
-  - python: '3.7'
+stages:
+  - name: CPython
+  - name: PyPy
 
-before_install:
-- ci/travis/decrypt-all.sh
-- pip install -U -r ci/requirements.txt
+# .deploy: &deploy
+#   provider: script
+#   script: twine upload --skip-existing dist/*
+#   skip_cleanup: true
+#   on:
+#     tags: true
+#     repo: althonos/moclo
 
-install:
-- pip install ./moclo ./moclo-ytk ./moclo-cidar ./moclo-ecoflex
+.test-native: &test-native
+  before_install:
+    - ci/travis/decrypt-all.sh
+    - pip install -U -r ci/requirements.txt
+  install:
+    - pip install ./moclo ./moclo-ytk ./moclo-cidar ./moclo-ecoflex
+  before_script:
+    - pip install -U -r tests/requirements.txt
+  script:
+    - green
+  after_script:
+    - python -m codecov
+    - python -m codacy
 
-before_script:
-- pip install -U -r tests/requirements.txt
+.test-docker: &test-docker
+  before_script:
+    - docker pull $IMAGE
+  script:
+    - docker run -it -v "$TRAVIS_BUILD_DIR":/py $IMAGE sh -c /py/ci/travis/test-docker.sh
 
-script:
-- green
+jobs:
+  include:
 
-after_script:
-- python -m codecov
-- python -m codacy
+    # Tests using the default Travis-CI provided Python
+    - python: pypy
+      stage: PyPy
+      <<: *test-native
+    - python: pypy3
+      stage: PyPy
+      <<: *test-native
 
-before_deploy:
-- python ci/travis/before-deploy.py
+    # Tests against CPython using the native Travis-CI Python binaries
+    - python: 2.7
+      stage: CPython
+      <<: *test-native
+    - python: 3.4
+      stage: CPython
+      <<: *test-native
+    - python: 3.5
+      stage: CPython
+      <<: *test-native
+    - python: 3.6
+      stage: CPython
+      <<: *test-native
+      before_deploy:
+        - python ci/travis/before-deploy
+      deploy:
+        provider: script
+        script: twine upload --skip-existing dist/*
+        skip_cleanup: true
+        on:
+          tags: true
+          repo: althonos/moclo
 
-deploy:
-  provider: script
-  script: twine upload --skip-existing dist/*
-  skip_cleanup: true
-  on:
-    tags: true
-    python: '3.6'
-    repo: althonos/moclo
+    # Tests using a Docker image
+    - env:
+      - IMAGE=python:3.7
+      stage: CPython
+      <<: *test-docker
+
 
 notifications:
   email:
