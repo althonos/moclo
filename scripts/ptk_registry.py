@@ -42,7 +42,9 @@ from moclo.record import CircularRecord
 from moclo.regex import DNARegex
 
 
-URL = "https://www.addgene.org/kits/sieber-moclo-pichia-toolkit/#protocols-and-resources"
+URL = (
+    "https://www.addgene.org/kits/sieber-moclo-pichia-toolkit/#protocols-and-resources"
+)
 UA = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
 
 # minimal Sequence from Bxb1 attB site from 10.1371/journal.pgen.1003490
@@ -122,9 +124,7 @@ if __name__ == "__main__":
         section = soup.find("ul", class_="addgene-document-list")
         gb_url = section.find("a").get("href")
         with requests.get(gb_url) as res:
-            gba = info["gb_addgene"] = CircularRecord(
-                read(io.StringIO(res.text), "gb")
-            )
+            gba = info["gb_addgene"] = CircularRecord(read(io.StringIO(res.text), "gb"))
 
         # Sanity check
         if len(gba) != len(gbd):
@@ -152,9 +152,7 @@ if __name__ == "__main__":
         features = gba.features + gbd.features
 
         def get_features(label):
-            return (
-                f for f in features if label in f.qualifiers.get("label", [])
-            )
+            return (f for f in features if label in f.qualifiers.get("label", []))
 
         def get_features_from_note(note):
             return (f for f in features if note in f.qualifiers.get("note", []))
@@ -172,10 +170,7 @@ if __name__ == "__main__":
                     #          "2: 10 .. 13 / #ff0000\n"]
                 },
                 location=CompoundLocation(
-                    [
-                        FeatureLocation(2, 8, strand=1),
-                        FeatureLocation(9, 13, strand=1),
-                    ]
+                    [FeatureLocation(2, 8, strand=1), FeatureLocation(9, 13, strand=1)]
                 ),
             )
         )
@@ -209,11 +204,7 @@ if __name__ == "__main__":
         features.remove(camr)
         cmr.type = "CDS"
         cmr.qualifiers.update(
-            {
-                k: v
-                for k, v in camr.qualifiers.items()
-                if k not in cmr.qualifiers
-            }
+            {k: v for k, v in camr.qualifiers.items() if k not in cmr.qualifiers}
         )
         cmr.qualifiers.update(
             {
@@ -237,18 +228,12 @@ if __name__ == "__main__":
         cmr_prom = next(get_features("CamR Promoter"))
         cmr_prom.type = "promoter"
         cmr_prom.qualifiers.update(
-            {
-                "label": ["CmR Promoter"],
-                "note": ["color: #66ccff; direction: LEFT"],
-            }
+            {"label": ["CmR Promoter"], "note": ["color: #66ccff; direction: LEFT"]}
         )
         cmr_term = next(get_features("CamR Terminator"))
         cmr_term.type = "terminator"
         cmr_term.qualifiers.update(
-            {
-                "label": ["CmR Terminator"],
-                "note": ["color: #66ccff; direction: LEFT"],
-            }
+            {"label": ["CmR Terminator"], "note": ["color: #66ccff; direction: LEFT"]}
         )
 
         # Make sure ColE1 is grayed
@@ -296,10 +281,7 @@ if __name__ == "__main__":
 
             mod = next(get_features_from_note("Modification for no digestion"))
             mod.type = "misc_difference"
-            mod.qualifiers = {
-                "replace": ["c"],
-                "note": ["remove BsmBI cutting site"],
-            }
+            mod.qualifiers = {"replace": ["c"], "note": ["remove BsmBI cutting site"]}
 
         elif id_ == "pPTK003":
             pENO = next(get_features_from_note("pENO"))
@@ -379,9 +361,7 @@ if __name__ == "__main__":
                     # 'direction': ['RIGHT'],
                     "label": ["MF-alpha-1 signal (no EAEA)"],
                     "gene": ["S. cerevisiae MF(ALPHA)1"],
-                    "product": [
-                        "mating factor alpha-1 secretion signal, no EAEA"
-                    ],
+                    "product": ["mating factor alpha-1 secretion signal, no EAEA"],
                     "note": [
                         "Cleavage by the Kex2 protease occurs after the "
                         "dibasic KR sequence.",
@@ -406,9 +386,7 @@ if __name__ == "__main__":
                     # 'direction': ['RIGHT'],
                     "label": ["MF-alpha-1-delta signal"],
                     "gene": ["S. cerevisiae MF(ALPHA)1"],
-                    "product": [
-                        "mating factor alpha-1 secretion signal, shortened"
-                    ],
+                    "product": ["mating factor alpha-1 secretion signal, shortened"],
                     "note": ["color: #ffcbbf; direction: RIGHT"],
                     "db_xref": [
                         "UniProtKB/Swiss-Prot:P01149",
@@ -431,9 +409,7 @@ if __name__ == "__main__":
             adk.qualifiers = {
                 "label": ["MF-alpha-1 signal pre-sequence"],
                 "gene": ["S. cerevisiae MF(ALPHA1)"],
-                "product": [
-                    "mating factor alpha-1 secretion signal pre-sequence"
-                ],
+                "product": ["mating factor alpha-1 secretion signal pre-sequence"],
                 "note": ["color: #ff6600; direction: RIGHT"],
                 "db_xref": [
                     "UniProtKB/Swiss-Prot:P01149",
@@ -449,9 +425,7 @@ if __name__ == "__main__":
 
             ank = next(get_features_from_note("AlphaT 3"))
             ank.type = "sig_peptide"
-            ank.location = FeatureLocation(
-                adk.location.start + 58, ank.location.end, 1
-            )
+            ank.location = FeatureLocation(adk.location.start + 58, ank.location.end, 1)
             ank.qualifiers = {
                 "codon_start": ["1"],
                 # 'direction': ['RIGHT'],
@@ -472,9 +446,7 @@ if __name__ == "__main__":
         elif id_ == "pPTK009":
             am = next(get_features_from_note("alpha-amylase"))
             am.type = "sig_peptide"
-            am.location = FeatureLocation(
-                am.location.start, am.location.start + 60, +1
-            )
+            am.location = FeatureLocation(am.location.start, am.location.start + 60, +1)
             am.qualifiers = {
                 "gene": ["amy"],
                 "product": ["alpha-amylase signal"],
@@ -570,9 +542,7 @@ if __name__ == "__main__":
             uas.type = "misc_feature"
             uas.qualifiers = {
                 "label": ["TKL2 3' Homology"],
-                "function": [
-                    "upstream activation site for ribosomal protein genes"
-                ],
+                "function": ["upstream activation site for ribosomal protein genes"],
                 "note": [
                     "color: #6685ca",
                     "TEF2 UASrpg from S. cerevisiae chromosome II",
@@ -617,9 +587,7 @@ if __name__ == "__main__":
                     "label": ["RFP"],
                     "gene": ["mCherry"],
                     "product": ["mCherry"],
-                    "translation": str(
-                        translate(rfp.extract(gba.seq), to_stop=True)
-                    ),
+                    "translation": str(translate(rfp.extract(gba.seq), to_stop=True)),
                     "note": ["color: #c16969; direction: RIGHT"],
                     "db_xref": [
                         "UniProtKB/Swiss-Prot:X5DSL3",
@@ -635,9 +603,7 @@ if __name__ == "__main__":
             )
 
             alert = next(
-                get_features_from_note(
-                    "Start with second codon!!! ATG deleted!"
-                )
+                get_features_from_note("Start with second codon!!! ATG deleted!")
             )
             features.remove(alert)
 
@@ -653,10 +619,7 @@ if __name__ == "__main__":
             features.remove(t2)
             t1.qualifiers.update(
                 {
-                    "note": [
-                        "transcription terminator for AOX1",
-                        "color: #ff8eff",
-                    ],
+                    "note": ["transcription terminator for AOX1", "color: #ff8eff"],
                     "label": ["PpAOX1 Terminator"],
                 }
             )
