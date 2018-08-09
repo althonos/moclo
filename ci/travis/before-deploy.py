@@ -10,13 +10,8 @@ import sys
 tag = os.getenv('TRAVIS_TAG')
 lib = tag.split('/')[0]
 
-if lib == 'ytk':
-    libdir = 'moclo-ytk'
-elif lib == 'cidar':
-    libdir = 'moclo-cidar'
-elif lib == 'eclofex':
-    libdir = 'moclo-ecoflex'
-else:
+libdir = 'moclo-{}'.format(lib)
+if not os.path.exists(libdir):
     libdir = 'moclo'
 
 args = [
