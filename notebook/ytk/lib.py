@@ -19,14 +19,22 @@ from moclo.registry.ytk import YTKRegistry, PTKRegistry
 from moclo.registry.elabftw import ELabFTWRegistry
 
 
-def load_registry(ptk=False, elab_server=None, elab_token=None):
+def load_embedded_registry(ptk=False):
     registry = CombinedRegistry() << YTKRegistry()
     if ptk:
         registry << PTKRegistry()
-    if elab_server is not None and elab_token is not None:
-        registry << ELabFTWRegistry(elab_server, elab_token, ytk.YTKPart)
     return registry
 
+def load_elab_registry(registry,
+                       server=None,
+                       token=None,
+                       category='Plasmids',
+                       tags=frozenset({'YTK'}),
+                      ):
+    if server is not None and token is not None:
+        registry << ELabFTWRegistry(
+            server, token, ytk.YTKPart, category=category, # TODO, tags=tags,
+        )
 
 def ask_plasmids():
     print(textwrap.dedent("""
@@ -84,6 +92,7 @@ def validate_assemblies(registry, qgrid_parts):
         *parts, plasmid_id, plasmid_name = filter(None, row)
         for part_id, part_name in (p.split(' - ') for p in parts):
             part = registry[part_id]
+            # We know the location of official YTK parts but not others
             match = re.search('pYTK(\d\d\d)', part_id)
             if match is not None:
                 idx = int(match.group(1)) - 1
@@ -158,10 +167,7 @@ def dilution_table(df_strains, concentration_widget):
 
 def generate_gb_files(assemblies):
 
-
-    now = datetime.datetime.now()
-
-    filename = "MoClo - {}.zip".format(datetime.datetime.now())
+    filename = "sequences.zip"
     with fs.open_fs('zip://{}'.format(filename), create=True) as archive:
 
         for plasmid_id in set(assemblies['Plasmid ID']):
@@ -185,4 +191,39 @@ def generate_gb_files(assemblies):
 
 
     server = next(notebookapp.list_running_servers())
-    display(HTML("<a href='{0}files/{1}'>{1}<a>".format(server['url'], filename)))
+    display(HTML((
+        """
+        <p>Your files are available in to download <a href='{0}files/{1}'>here<a></p>
+        """).format(server['url'], filename)))
+
+
+def generate_protocol(strains, assemblies):
+
+    protocol = []
+
+    for idx, plasmid_id in enumerate(assemblies['Plasmid ID'].unique()):
+
+        parts = assemblies[assemblies['Plasmid ID'] == plasmid_id]
+        protocol.append("<h1>Tube {} - Plasmid {}</h1>".format(idx, plasmid_id))
+        protocol.append('<h3>DNA Inserts</h3>')
+
+        protocol.append('<p>')
+        protocol.append('Mix DNA to equimolar quantities, ')
+        protocol.append('1µL each with the following dilution factors:')
+        protocol.append('<ul>')
+
+        for _, part in parts.iterrows():
+            dilution = strains[strains['Part ID'] == part['Part ID']]['Dilution factor to 20fmol/µL']
+            tube = strains[strains['Part ID'] == part['Part ID']].index[0]
+            protocol.append('<li>')
+            protocol.append('{} - Strain {} (diluted {} time·s)'.format(part['Part ID'], tube, int(dilution)))
+            protocol.append('</li>')
+
+        protocol.append('</ul>')
+        protocol.append('Add {:.2f} µL of water (q.s.p 7.2 µL)'.format(7.2 - len(parts)))
+        protocol.append('</p>')
+
+        protocol.append('<h3>Master Mix</h3>')
+        protocol.append('')
+
+    display(HTML(''.join(protocol)))
