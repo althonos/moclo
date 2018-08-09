@@ -160,8 +160,8 @@ if __name__ == "__main__":
             # FIXME: pAGM1276 sequences differ
             print("lengths differ for", id_, ":", len(gb), "VS", len(gb_archive))
 
-            # gb = gb.reverse_complement(True, True, True, True, True, True, True)
-            #
+            gb = gb.reverse_complement(True, True, True, True, True, True, True)
+
             # anchor = gb.seq.lower().find("gcctcgtgatacgcctatt")
             # anchor_archive = gb_archive.seq.lower().find("gcctcgtgatacgcctatt")
             #
@@ -180,6 +180,37 @@ if __name__ == "__main__":
 
         else:
             assert gb.seq == gb_archive.seq
+
+        # Copy AddGene annotations to the archive record
+        for feature in gb.features:
+            # get the feature sequence
+            seq = feature.extract(gb.seq + gb.seq)
+            if feature.location.strand == -1:
+                seq = seq.reverse_complement()
+            # search the feature in the
+            match = DNARegex(seq).search(gb_archive)
+            if match is not None:
+                start, end = match.span()
+                loc = FeatureLocation(start, end, feature.location.strand)
+                # remove possibly duplicate annotation
+                if any(f.location == loc for f in gb_archive.features):
+                    other = next(f for f in gb_archive.features if f.location == loc)
+                    gb_archive.features.remove(other)
+                # add the annotation to the archive record
+                new_feature = copy.deepcopy(feature)
+                new_feature.location = loc
+                gb_archive.features.append(new_feature)
+
+        # quick feature accessor for amalgamated record
+        def get_features(label):
+            return (
+                f for f in gb_archive.features if label in f.qualifiers.get("label", [])
+            )
+
+        def get_features_from_note(note):
+            return (
+                f for f in gb_archive.features if note in f.qualifiers.get("note", [])
+            )
 
         # AmpR recolor and annotations
         ampr = next(get_features("AmpR"), None)
@@ -314,37 +345,6 @@ if __name__ == "__main__":
         #         }
         #     )
 
-        # Copy AddGene annotations to the archive record
-        for feature in gb.features:
-            # get the feature sequence
-            seq = feature.extract(gb.seq + gb.seq)
-            if feature.location.strand == -1:
-                seq = seq.reverse_complement()
-            # search the feature in the
-            match = DNARegex(seq).search(gb_archive)
-            if match is not None:
-                start, end = match.span()
-                loc = FeatureLocation(start, end, feature.location.strand)
-                # remove possibly duplicate annotation
-                if any(f.location == loc for f in gb_archive.features):
-                    other = next(f for f in gb_archive.features if f.location == loc)
-                    gb_archive.features.remove(other)
-                # add the annotation to the archive record
-                new_feature = copy.deepcopy(feature)
-                new_feature.location = loc
-                gb_archive.features.append(new_feature)
-
-        # quick feature accessor for amalgamated record
-        def get_features(label):
-            return (
-                f for f in gb_archive.features if label in f.qualifiers.get("label", [])
-            )
-
-        def get_features_from_note(note):
-            return (
-                f for f in gb_archive.features if note in f.qualifiers.get("note", [])
-            )
-
         # remove bla annotation since we have a better AmpR
         # bla = next(get_features("bla"), None)
         # if bla is not None:
@@ -356,14 +356,29 @@ if __name__ == "__main__":
             r"Sm/Sp\no\DraIII",
             r"spec orf?",
             r"spec\orf?",
+            r"Kan\(no\BpiI)",
             r"spec",
             "NPTII",
             "AP(R)",
+            r"AP\r",
+            "ALPHA",
+            "Kan",
         ]
         for label in rm_feats:
             f = next(get_features(label), None)
             if f is not None:
                 gb_archive.features.remove(f)
+
+        # FIXME
+        # have all the plasmids in the same direction, i.e. so that the
+        # antibiotics resistance cassette is always on the reverse strand
+        # antibio = next(x for y in ('AmpR', 'SmR', 'KanR') for x in get_features(y))
+        # if antibio.location.strand != -1:
+        #     gb_archive = gb_archive.reverse_complement(True, True, True, True, True, True, True,)
+
+        # Remove all "/vntifkey" feature qualifier
+        for feature in gb_archive.features:
+            feature.qualifiers.pop("vntifkey", None)
 
         # sort features by start location, source always first
         gb_archive.features.sort(
