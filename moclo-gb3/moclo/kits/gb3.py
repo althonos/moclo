@@ -135,11 +135,11 @@ class GB3NTag(GB3Part, GB3OmegaModule):
     signature = ("CCAT", "AATG")
 
 
-class GB3CodingSequence1(GB3Part, GB3OmegaModule):
+class GB3UpstreamCodingSequence(GB3Part, GB3OmegaModule):
     signature = ("AATG", "AGCC")
 
 
-class GB3CodingSequence2(GB3Part, GB3OmegaModule):
+class GB3DownstreamCodingSequence(GB3Part, GB3OmegaModule):
     signature = ("AGCC", "TTCG")
 
 
@@ -193,6 +193,16 @@ class GB3sgRNA(GB3Part, GB3OmegaModule):
 # Composite Parts ############################################################
 
 
+class GB3Operator(GB3Part, GB3OmegaModule):
+    """A GoldenBraid 3.0 Operator.
+
+    An Operator takes the same location as the Distal and Proximal Operators,
+    which is useful when only one operator is needed.
+    """
+
+    signature = ("GGAG", "TCCC")
+
+
 class GB3InteractionAdaptor(GB3Part, GP3OmegaModule):
     """A GoldenBraid 3.0 Interaction Adaptor.
 
@@ -201,3 +211,27 @@ class GB3InteractionAdaptor(GB3Part, GP3OmegaModule):
     """
 
     signature = ("GGAG", "AATG")
+
+
+class GB3CodingSequence(GB3Part, GB3OmegaModule):
+    """A GoldenBraid 3.0 Coding Sequence.
+
+    A Coding Sequence takes the same location as the upstream and downstream
+    coding sequences.
+    """
+
+    signature = ("AATG", "TTCG")
+
+
+class GB3TaggedSequence(GB3Part, GB3OmegaModule):
+    """A GoldenBraid 3.0 Coding Sequence fused with a C-terminal tag.
+    """
+
+    signature = ("AATG", "GCTT")
+
+
+class GB3DownstreamTaggedSequence(GB3Part, GB3OmegaModule):
+    """A GoldenBraid 3.0 5' Coding Sequence fused with a C-terminal tag.
+    """
+
+    signature = ("AGCC", "TTCG")
