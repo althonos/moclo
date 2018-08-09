@@ -54,6 +54,6 @@ class build_ext(_build_ext):
 if __name__ == '__main__':
     setuptools.setup(
         ext_package='moclo.registry',
-        ext_modules=[Registry('ig')],
+        ext_modules=[],
         cmdclass={'build_ext': build_ext},
     )
