@@ -16,13 +16,17 @@ from IPython.display import display, HTML
 from moclo.kits import ytk
 from moclo.registry.base import CombinedRegistry
 from moclo.registry.ytk import YTKRegistry, PTKRegistry
+from moclo.registry.elabftw import ELabFTWRegistry
 
 
-def load_registry(ptk=False):
+def load_registry(ptk=False, elab_server=None, elab_token=None):
     registry = CombinedRegistry() << YTKRegistry()
     if ptk:
         registry << PTKRegistry()
+    if elab_server is not None and elab_token is not None:
+        registry << ELabFTWRegistry(elab_server, elab_token, ytk.YTKPart)
     return registry
+
 
 def ask_plasmids():
     print(textwrap.dedent("""
@@ -33,6 +37,7 @@ def ask_plasmids():
     qgrid_plasmids = qgrid.QgridWidget(df=df_plasmids, show_toolbar=True)
     display(qgrid_plasmids)
     return qgrid_plasmids
+
 
 def ask_parts(registry, qgrid_plasmids):
     print(textwrap.dedent("""
@@ -79,12 +84,17 @@ def validate_assemblies(registry, qgrid_parts):
         *parts, plasmid_id, plasmid_name = filter(None, row)
         for part_id, part_name in (p.split(' - ') for p in parts):
             part = registry[part_id]
-            idx = int(re.search('pYTK(\d\d\d)', part_id).group(1)) - 1
+            match = re.search('pYTK(\d\d\d)', part_id)
+            if match is not None:
+                idx = int(match.group(1)) - 1
+                loc = "{}{}".format(chr(ord('A') + idx // 12), idx % 12 + 1)
+            else:
+                loc = "unknown"
             full.append({
                 'Plasmid Name': plasmid_name,
                 'Plasmid ID': plasmid_id,
                 'Part ID': part_id,
-                'Part Position': "{}{}".format(chr(ord('A') + idx // 12), idx % 12 + 1),
+                'Part Position': loc,
                 'Part Name': part.entity.record.description,
                 'Resistance': part.resistance,
                 'Record': part.entity.record,
@@ -101,7 +111,7 @@ def validate_assemblies(registry, qgrid_parts):
         print("✓")
 
     df_full = pandas.DataFrame(full)
-    df_full = df_full[['Plasmid ID', 'Plasmid Name', 'Part ID', 'Part Name', 'Resistance', 'Record', 'Typed part']]
+    df_full = df_full[['Plasmid ID', 'Plasmid Name', 'Part ID', 'Part Name', 'Part Position', 'Resistance', 'Record', 'Typed part']]
 
     display(df_full
                 .drop(columns=['Record', 'Typed part'])
@@ -135,6 +145,7 @@ def ask_concentrations(assemblies):
     concentration_widget = qgrid.QGridWidget(df=df_strains[['Part ID', 'Sample concentration (ng/µL)']])
     display(concentration_widget)
     return df_strains, concentration_widget
+
 
 def dilution_table(df_strains, concentration_widget):
     df_strains['Sample concentration (ng/µL)'] = concentration_widget.get_changed_df().sort_index()['Sample concentration (ng/µL)']
