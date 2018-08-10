@@ -18,16 +18,17 @@ from Bio.Restriction import BsaI, BpiI
 
 from ..core import parts, modules, vectors
 
-__author__ = 'Martin Larralde <martin.larralde@ens-paris-saclay.fr>'
+__author__ = "Martin Larralde <martin.larralde@ens-paris-saclay.fr>"
 __version__ = (
-    __import__('pkg_resources')
-        .resource_string(__name__, 'ig.version')
-        .strip()
-        .decode('ascii')
+    __import__("pkg_resources")
+    .resource_string(__name__, "ig.version")
+    .strip()
+    .decode("ascii")
 )
 
 
-### Vectors
+# VECTORS ####################################################################
+
 
 class IGEntryVector(vectors.EntryVector):
     """An Icon Genetics entry vector.
@@ -42,18 +43,18 @@ class IGEntryVector(vectors.EntryVector):
     @classmethod
     def structure(cls):
         return (
-            'GGTCTC'  # BsaI
-            'N'
-            '(NNNN)'  # Downstream overhang
-            '(NN'
-            'GTCTTC'  # BpiI
-            'N*'      # Placeholder sequence
-            'GAAGAC'  # BpiI
-            'NN)'
-            '(NNNN)'  # Upstream overhang
-            'N'
-            'GAGACC'  # BsaI
-    )
+            "GGTCTC"  # BsaI
+            "N"
+            "(NNNN)"  # Downstream overhang
+            "(NN"
+            "GTCTTC"  # BpiI
+            "N*"  # Placeholder sequence
+            "GAAGAC"  # BpiI
+            "NN)"
+            "(NNNN)"  # Upstream overhang
+            "N"
+            "GAGACC"  # BsaI
+        )
 
 
 class IGCassetteVector(vectors.CassetteVector):
@@ -69,19 +70,19 @@ class IGCassetteVector(vectors.CassetteVector):
     @classmethod
     def structure(cls):  # noqa: D105
         return (
-            'GAAGAC'  # BpiI
-            'NN'
-            'NNNN'    # Cassette upstream overhang
-            '(NNNN)'  # Cassette vector downstream overhang
-            '(N'
-            'GAGACC'  # BsaI
-            'N*'      # Placeholder sequence
-            'GGTCTC'  # BsaI
-            'N)'
-            '(NNNN)'  # Cassette vector upstream overhang
-            'NNNN'    # Cassette downstream overhang
-            'NN'
-            'GTCTTC'  # BbsI
+            "GAAGAC"  # BpiI
+            "NN"
+            "NNNN"  # Cassette upstream overhang
+            "(NNNN)"  # Cassette vector downstream overhang
+            "(N"
+            "GAGACC"  # BsaI
+            "N*"  # Placeholder sequence
+            "GGTCTC"  # BsaI
+            "N)"
+            "(NNNN)"  # Cassette vector upstream overhang
+            "NNNN"  # Cassette downstream overhang
+            "NN"
+            "GTCTTC"  # BbsI
         )
 
 
@@ -115,7 +116,8 @@ class IGDeviceVector(vectors.DeviceVector):
     cutter = BpiI
 
 
-### Modules
+# MODULES ####################################################################
+
 
 class IGProduct(modules.Product):
     """An Icon Genetics MoClo product.
@@ -138,7 +140,10 @@ class IGCassette(modules.Cassette):
     cutter = BpiI
 
 
-### Parts
+# PARTS ######################################################################
+
+# Abstract ###################################################################
+
 
 class IGPart(parts.AbstractPart):
     """An Icon Genetics MoClo standard part.
@@ -151,39 +156,45 @@ class IGPart(parts.AbstractPart):
     signature = NotImplemented
 
 
+# Level 0 ####################################################################
+
+
 class IGPromoter(IGPart, IGEntry):
     """An Icon Genetics promoter part.
     """
 
-    signature = ('GGAG', 'TACT')
+    signature = ("GGAG", "TACT")
 
 
 class IGUntranslatedRegion(IGPart, IGEntry):
     """An Icon Genetics 5' UTR part.
     """
 
-    signature = ('TACT', 'AATG')
+    signature = ("TACT", "AATG")
 
 
 class IGSignalPeptide(IGPart, IGEntry):
     """An Icon Genetics signal peptide part.
     """
 
-    signature = ('AATG', 'AGGT')
+    signature = ("AATG", "AGGT")
 
 
 class IGCodingSequence(IGPart, IGEntry):
     """An Icon Genetics CDS part.
     """
 
-    signature = ('AGGT', 'GCTT')
+    signature = ("AGGT", "GCTT")
 
 
 class IGTerminator(IGPart, IGEntry):
     """An Icon Genetics terminator part.
     """
 
-    signature = ('GCTT', 'CGCT')
+    signature = ("GCTT", "CGCT")
+
+
+# Level 0 ####################################################################
 
 
 class IGEndLinker(IGPart, IGCassette):
@@ -194,12 +205,15 @@ class IGEndLinker(IGPart, IGCassette):
 
     """
 
-    signature = ('NNNN', 'GGGA')
+    signature = ("NNNN", "GGGA")
+
+
+# Level M ####################################################################
 
 
 class IGLevelMEndLinker(IGPart, IGCassette):
 
-    signature = ('NNNN', 'GGGA')
+    signature = ("NNNN", "GGGA")
 
     # FIXME: add prefix BsaI
     @classmethod
@@ -210,7 +224,7 @@ class IGLevelMEndLinker(IGPart, IGCassette):
 class IGLevelMVector(IGPart, IGDeviceVector):
 
     cutter = BpiI
-    signature = ('GGGA', 'NNNN')
+    signature = ("GGGA", "NNNN")
 
     # FIXME: add prefix BsaI
     @classmethod
@@ -218,10 +232,13 @@ class IGLevelMVector(IGPart, IGDeviceVector):
         return super(IGLevelMVector, cls).structure()
 
 
+# Level P ####################################################################
+
+
 class IGLevelPEndLinker(IGPart, IGEntry):  # FIXME: hierarchy ?
 
     cutter = BsaI
-    signature = ('NNNN', 'GGGA')
+    signature = ("NNNN", "GGGA")
 
     # FIXME: add prefix BpiI
     @classmethod
@@ -232,7 +249,7 @@ class IGLevelPEndLinker(IGPart, IGEntry):  # FIXME: hierarchy ?
 class IGLevelPVector(IGPart, IGCassetteVector):  # FIXME: hierarchy ?
 
     cutter = BsaI
-    signature = ('GGGA', 'NNNN')
+    signature = ("GGGA", "NNNN")
 
     # FIXME: add prefix BpiI
     @classmethod

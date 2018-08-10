@@ -17,6 +17,15 @@ import datetime
 import semantic_version
 import sphinx_bootstrap_theme
 
+# -- Globals -----------------------------------------------------------------
+
+KITS = [
+    'cidar',
+    'ecoflex',
+    'gb3',
+    'ig',
+    'ytk',
+]
 
 # -- Path setup --------------------------------------------------------------
 
@@ -33,9 +42,9 @@ sys.path.append(os.path.join(docssrc_dir))
 
 # Add path to moclo kits
 import moclo.kits
-moclo.kits.__path__.append(os.path.join(project_dir, 'moclo-ecoflex', 'moclo', 'kits'))
-moclo.kits.__path__.append(os.path.join(project_dir, 'moclo-cidar', 'moclo', 'kits'))
-moclo.kits.__path__.append(os.path.join(project_dir, 'moclo-ytk', 'moclo', 'kits'))
+for kit in KITS:
+    name = 'moclo-{}'.format(kit)
+    moclo.kits.__path__.append(os.path.join(project_dir, name, 'moclo', 'kits'))
 
 # -- Files setup -------------------------------------------------------------
 
@@ -44,10 +53,11 @@ from _scripts import ytk_parts, registries
 # Generate SVG files from template SVG
 ytk_parts.generate_svg()
 
-# Force `build_ext --inplace` in `moclo-ytk` and `moclo-cidar`
-registries.build_registries('cidar')
-registries.build_registries('ytk')
+# Force `build_ext --inplace` in moclo kits
+for kit in KITS:
+    registries.build_registries(kit)
 
+# Copy CHANGELOG.rst file to the doc source directory
 # with open(os.path.join(project_dir, "CHANGELOG.rst"), 'rb') as src:
 #     with open(os.path.join(docsrc_dir, "changelog.rst"), 'wb') as dst:
 #         dst.write(b":tocdepth: 2\n\n")

@@ -68,9 +68,11 @@ Kits
 .. toctree::
   :maxdepth: 2
 
-  kits/ytk/index
   kits/cidar/index
   kits/ecoflex/index
+  kits/ig/index
+  kits/ytk/index
+
 
 
 Indices and tables

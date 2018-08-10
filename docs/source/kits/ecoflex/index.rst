@@ -5,8 +5,8 @@ EcoFlex Kit
 
 .. automodule:: moclo.kits.ecoflex
 
-Level -1
---------
+.. Level -1
+.. --------
 
 .. Module
 .. ^^^^^^
@@ -16,12 +16,12 @@ Level -1
 ..    :special-members: __init__
 
 
-Vector
-^^^^^^
-.. autoclass:: EcoFlexEntryVector(EntryVector)
-   :members:
-   :inherited-members:
-   :special-members: __init__
+.. Vector
+.. ^^^^^^
+.. .. autoclass:: EcoFlexEntryVector(EntryVector)
+..    :members:
+..    :inherited-members:
+..    :special-members: __init__
 
 
 Level 0
@@ -46,12 +46,12 @@ Vector
 Parts
 ^^^^^
 
-.. autoclass:: EcoFlexPromoter(EcoFlexPart)
-.. autoclass:: EcoFlexRBS(EcoFlexPart)
-.. autoclass:: EcoFlexTagLinker(EcoFlexPart)
-.. autoclass:: EcoFlexTag(EcoFlexPart)
-.. autoclass:: EcoFlexCodingSequence(EcoFlexPart)
-.. autoclass:: EcoFlexTerminator(EcoFlexPart)
+.. autoclass:: EcoFlexPromoter(EcoFlexPart, EcoFlexEntry)
+.. autoclass:: EcoFlexRBS(EcoFlexPart, EcoFlexEntry)
+.. autoclass:: EcoFlexTagLinker(EcoFlexPart, EcoFlexEntry)
+.. autoclass:: EcoFlexTag(EcoFlexPart, EcoFlexEntry)
+.. autoclass:: EcoFlexCodingSequence(EcoFlexPart, EcoFlexEntry)
+.. autoclass:: EcoFlexTerminator(EcoFlexPart, EcoFlexEntry)
 
 
 

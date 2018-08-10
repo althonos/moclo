@@ -49,27 +49,27 @@ Parts
 Base Parts
 ''''''''''
 
-.. autoclass:: YTKPart1(YTKPart)
-.. autoclass:: YTKPart2(YTKPart)
-.. autoclass:: YTKPart3(YTKPart)
-.. autoclass:: YTKPart3a(YTKPart)
-.. autoclass:: YTKPart3b(YTKPart)
-.. autoclass:: YTKPart4(YTKPart)
-.. autoclass:: YTKPart4a(YTKPart)
-.. autoclass:: YTKPart4b(YTKPart)
-.. autoclass:: YTKPart5(YTKPart)
-.. autoclass:: YTKPart6(YTKPart)
-.. autoclass:: YTKPart7(YTKPart)
-.. autoclass:: YTKPart8(YTKPart)
-.. autoclass:: YTKPart8a(YTKPart)
-.. autoclass:: YTKPart8b(YTKPart)
+.. autoclass:: YTKPart1(YTKPart, YTKEntry)
+.. autoclass:: YTKPart2(YTKPart, YTKEntry)
+.. autoclass:: YTKPart3(YTKPart, YTKEntry)
+.. autoclass:: YTKPart3a(YTKPart, YTKEntry)
+.. autoclass:: YTKPart3b(YTKPart, YTKEntry)
+.. autoclass:: YTKPart4(YTKPart, YTKEntry)
+.. autoclass:: YTKPart4a(YTKPart, YTKEntry)
+.. autoclass:: YTKPart4b(YTKPart, YTKEntry)
+.. autoclass:: YTKPart5(YTKPart, YTKEntry)
+.. autoclass:: YTKPart6(YTKPart, YTKEntry)
+.. autoclass:: YTKPart7(YTKPart, YTKEntry)
+.. autoclass:: YTKPart8(YTKPart, YTKCassetteVector)
+.. autoclass:: YTKPart8a(YTKPart, YTKCassetteVector)
+.. autoclass:: YTKPart8b(YTKPart, YTKEntry)
 
 Composite
 '''''''''
 
-.. autoclass:: YTKPart234(YTKPart)
-.. autoclass:: YTKPart234r(YTKPart)
-.. autoclass:: YTKPart678(YTKPart)
+.. autoclass:: YTKPart234(YTKPart, YTKEntry)
+.. autoclass:: YTKPart234r(YTKPart, YTKEntry)
+.. autoclass:: YTKPart678(YTKPart, YTKCassetteVector)
 
 
 Level 1

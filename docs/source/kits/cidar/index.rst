@@ -46,10 +46,10 @@ Vector
 Parts
 ^^^^^
 
-.. autoclass:: CIDARPromoter(CIDARPart)
-.. autoclass:: CIDARRibosomeBindingSite(CIDARPart)
-.. autoclass:: CIDARCodingSequence(CIDARPart)
-.. autoclass:: CIDARTerminator(CIDARPart)
+.. autoclass:: CIDARPromoter(CIDARPart, CIDAREntry)
+.. autoclass:: CIDARRibosomeBindingSite(CIDARPart, CIDAREntry)
+.. autoclass:: CIDARCodingSequence(CIDARPart, CIDAREntry)
+.. autoclass:: CIDARTerminator(CIDARPart, CIDAREntry)
 
 
 
