@@ -62,7 +62,7 @@ jobs:
       stage: CPython
       <<: *test-native
       before_deploy:
-        - python ci/travis/before-deploy
+        - python ci/travis/before-deploy.py
       deploy:
         provider: script
         script: twine upload --skip-existing dist/*
