@@ -24,9 +24,11 @@ any specific sequence structure, and is not usable alone. You must install a kit
 Additional kits can be installed separately depending on what's needed. The
 following implementations are available:
 
-* [Yeast ToolKit (`moclo-ytk`)](<https://github.com/althonos/moclo/tree/master/moclo-ytk)
+* [Yeast ToolKit (`moclo-ytk`)](https://github.com/althonos/moclo/tree/master/moclo-ytk)
 * [CIDAR Kit (`moclo-cidar`)](https://github.com/althonos/moclo/tree/master/moclo-cidar)
-* [EcoFlex Kit (`moclo-ecoflex`)](<https://github.com/althonos/moclo/tree/master/moclo-ecoflex)
+* [EcoFlex Kit (`moclo-ecoflex`)](https://github.com/althonos/moclo/tree/master/moclo-ecoflex)
+* [Icon Genetics / original MoClo (`moclo-ig`)](https://github.com/althonos/moclo/tree/master/moclo-ig)
+* [GoldenBraid 3.0 (`moclo-gb3`)](https://github.com/althonos/moclo/tree/master/moclo-gb3)
 
 Once installed, kits are available in the `moclo.kits` namespace module.
 [Kit-specific documentation](https://moclo.readthedocs.io/en/latest/#kits) is

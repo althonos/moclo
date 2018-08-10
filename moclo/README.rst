@@ -95,6 +95,10 @@ you can install some of the following toolkits:
   *Douglas Densmore Lab*
 - `moclo-ecoflex <https://pypi.org/project/moclo-ecoflex>`_: MoClo EcoFlex,
   *Paul Freemont Lab*
+- `moclo-ig <https://pypi.org/project/moclo-ig>`_: Icon Genetics MoClo,
+  *Sylvestre Marillonnet Lab*
+- `moclo-gb3 <https://pypi.org/project/moclo-gb3>`_: Golden Braid 3.0,
+  *Diego Orzaez Lab*
 
 Toolkits ship with concrete implementation of the MoClo logic (using the DNA
 signatures and restriction enzymes from the reference paper), as well as official
