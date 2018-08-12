@@ -10,5 +10,7 @@ def build_registries(name):
     cmd = subprocess.Popen(
         [sys.executable, 'setup.py', 'build_ext', '--inplace'],
         cwd=_EXT_DIR.format(name),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
     )
     cmd.communicate()
