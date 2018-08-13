@@ -15,7 +15,7 @@ import datetime
 import semantic_version
 import sphinx.util.logging
 import sphinx_bootstrap_theme
-from sphinx.util.console import bold, green
+from sphinx.util.console import bold, darkgreen
 
 # -- Globals -----------------------------------------------------------------
 
@@ -50,14 +50,11 @@ from _scripts import ytk_parts, registries
 ytk_parts.generate_svg()
 
 # Force `build_ext --inplace` in moclo kits
+n = len(darkgreen(max(KITS, key=len)))
+msg = "\r{} [{{:4.0%}}] {{:{n}}}".format(bold("building registries..."), n=n)
 for index, kit in enumerate(KITS):
-    percent = int(index * 100 / (len(KITS) - 1))
-    LOGGER.info(
-        "{} [{:3}%] {:{l}}         \r".format(
-            bold("building registries..."), percent, green(kit), l=max(map(len, KITS))
-        ),
-        nonl=index != len(KITS) - 1,
-    )
+    percent = index / (len(KITS) - 1)
+    LOGGER.info(msg.format(percent, darkgreen(kit)), nonl=index != len(KITS) - 1)
     registries.build_registries(kit)
 
 # Copy CHANGELOG.rst file to the doc source directory
