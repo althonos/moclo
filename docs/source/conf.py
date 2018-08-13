@@ -15,7 +15,7 @@ import datetime
 import semantic_version
 import sphinx.util.logging
 import sphinx_bootstrap_theme
-from sphinx.util.console import bold, darkgreen
+from sphinx.util.console import bold, darkgreen, reset
 
 # -- Globals -----------------------------------------------------------------
 
@@ -42,26 +42,31 @@ for kit in KITS:
     name = "moclo-{}".format(kit)
     moclo.kits.__path__.append(os.path.join(project_dir, name, "moclo", "kits"))
 
-# -- Files setup -------------------------------------------------------------
+# -- Sphinx setup ------------------------------------------------------------
 
 from _scripts import ytk_parts, registries
 
-# Generate SVG files from template SVG
-ytk_parts.generate_svg()
+def setup(app):
+    # Add custom math admonition classes
+    app.add_stylesheet("bootstrap-math.css")
 
-# Force `build_ext --inplace` in moclo kits
-n = len(darkgreen(max(KITS, key=len)))
-msg = "\r{} [{{:4.0%}}] {{:{n}}}".format(bold("building registries..."), n=n)
-for index, kit in enumerate(KITS):
-    percent = index / (len(KITS) - 1)
-    LOGGER.info(msg.format(percent, darkgreen(kit)), nonl=index != len(KITS) - 1)
-    registries.build_registries(kit)
+    # Generate SVG files from template SVG
+    ytk_parts.generate_svg()
 
-# Copy CHANGELOG.rst file to the doc source directory
-# with open(os.path.join(project_dir, "CHANGELOG.rst"), 'rb') as src:
-#     with open(os.path.join(docsrc_dir, "changelog.rst"), 'wb') as dst:
-#         dst.write(b":tocdepth: 2\n\n")
-#         shutil.copyfileobj(src, dst)
+    # Force `build_ext --inplace` in moclo kits
+    n = len(darkgreen(max(KITS, key=len)))
+    msg = "{} [{{:4.0%}}] {{:{n}}}\r".format(bold("building registries..."), n=n)
+    for index, kit in enumerate(KITS):
+        percent = index / (len(KITS) - 1)
+        LOGGER.info(msg.format(percent, darkgreen(kit)), nonl=index != len(KITS) - 1)
+        registries.build_registries(kit)
+
+    # Copy CHANGELOG.rst file to the doc source directory
+    # with open(os.path.join(project_dir, "CHANGELOG.rst"), 'rb') as src:
+    #     with open(os.path.join(docsrc_dir, "changelog.rst"), 'wb') as dst:
+    #         dst.write(b":tocdepth: 2\n\n")
+    #         shutil.copyfileobj(src, dst)
+
 
 # -- Project information -----------------------------------------------------
 
@@ -105,7 +110,7 @@ extensions = [
     "sphinx.ext.todo",
     "sphinx.ext.coverage",
     "sphinx.ext.mathjax",
-    # 'sphinx.ext.imgmath',
+    # "sphinx.ext.imgmath",
     "sphinx.ext.ifconfig",
     "sphinx.ext.viewcode",
     "sphinx.ext.githubpages",
