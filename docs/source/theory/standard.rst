@@ -1,4 +1,4 @@
-Standard Modular Cloning system
+*Standard Modular Cloning system
 ===============================
 
 .. toctree::
@@ -112,7 +112,7 @@ Modules
 
 
 .. admonition:: Demonstration
-    :class: math-demonstration
+    :class: math-demo
 
     Let there be a genetic alphabet :math:`\langle \Sigma, \sim \rangle`
     and a Modular Cloning System :math:`(M_l, V_l, e_l)_ {l \ge -1}` over
