@@ -297,6 +297,33 @@ if __name__ == "__main__":
             )
             gb.features.append(kanr_prom)
 
+        # SpecR recolor and annotations
+        smr = next(get_features('SmR'), None)
+        if smr is not None:
+            smr.qualifiers.update({
+                'label': 'SmR',
+                'gene': 'aadA',
+                'product': 'aminoglycoside adenylyltransferase',
+                'function': 'spectinomycin and streptomycin resistance',
+                'note': ['color: #ffff00'],
+            })
+
+        # Remove duplicate crtI
+        if len(list(get_features('crtI'))) == 2:
+            x, y = get_features('crtI')
+            gb_archive.features.remove(x if x.type == 'misc_feature' else y)
+
+        # Remove duplicate crtB
+        if len(list(get_features('crtB'))) == 2:
+            x, y = get_features('crtB')
+            gb_archive.features.remove(x if x.type == 'misc_feature' else y)
+
+        # Remove duplicate oriV
+        if len(list(get_features('oriV'))) == 2:
+            gb_archive.features.remove(min(get_features('oriV'), key=lambda f: len(f.qualifiers)))
+
+
+
         # GFP recolor and annotations
         # gfp = next(get_features("GFP"), None)
         # if gfp is not None:
@@ -358,6 +385,8 @@ if __name__ == "__main__":
             r"spec\orf?",
             r"Kan\(no\BpiI)",
             r"spec",
+            r"rep\(pMB1)",
+            r'rep - pMB1',
             "NPTII",
             "AP(R)",
             r"AP\r",
@@ -365,8 +394,7 @@ if __name__ == "__main__":
             "Kan",
         ]
         for label in rm_feats:
-            f = next(get_features(label), None)
-            if f is not None:
+            for f in get_features(label):
                 gb_archive.features.remove(f)
 
         # FIXME
