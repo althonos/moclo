@@ -8,6 +8,7 @@ import Bio.SeqIO
 import six
 
 from ..core import AbstractModule, AbstractVector, AbstractPart
+from ..record import CircularRecord
 from .._impl import json, ssl
 from .base import AbstractRegistry, Item
 from ._utils import find_resistance
@@ -119,7 +120,7 @@ class ELabFTWRegistry(AbstractRegistry):
             try:
                 with self._request(url) as res:
                     data = six.StringIO(res.read().decode("utf-8"))
-                    record = Bio.SeqIO.read(data, "genbank")
+                    record = CircularRecord(Bio.SeqIO.read(data, "genbank"))
             except (ValueError, UnicodeDecodeError):
                 continue
             else:

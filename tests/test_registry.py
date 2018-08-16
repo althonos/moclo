@@ -11,6 +11,7 @@ import six
 from Bio.SeqIO import write
 
 from moclo.kits import ytk, cidar
+from moclo.record import CircularRecord
 from moclo.registry import base
 from moclo.registry.ytk import YTKRegistry, PTKRegistry
 from moclo.registry.cidar import CIDARRegistry
@@ -24,6 +25,10 @@ class TestEmbeddedRegistry(unittest.TestCase):
     def setUpClass(cls):
         build_registries('ytk')
         build_registries('cidar')
+
+    def test_circular_record(self):
+        r = YTKRegistry()
+        self.assertIsInstance(r['pYTK002'].entity.record, CircularRecord)
 
     def test_ytk_registry(self):
         r = YTKRegistry()
@@ -109,6 +114,10 @@ class TestFilesystemRegistry(unittest.TestCase):
         r = base.FilesystemRegistry(self.memfs, ytk.YTKPart)
         self.assertTrue(all(x in r for x in r))
         self.assertEqual(sorted(r), ['pYTK002', 'pYTK038'])
+
+    def test_circular_record(self):
+        r = base.FilesystemRegistry(self.memfs, ytk.YTKPart)
+        self.assertIsInstance(r['pYTK002'].entity.record, CircularRecord)
 
 
 class TestCombinedRegistry(unittest.TestCase):

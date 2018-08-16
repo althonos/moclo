@@ -149,7 +149,7 @@ class FilesystemRegistry(AbstractRegistry):
         for name in files:
             if self.fs.isfile(name):
                 with self.fs.open(name) as handle:
-                    record = Bio.SeqIO.read(handle, 'genbank')
+                    record = CircularRecord(Bio.SeqIO.read(handle, 'genbank'))
                     record.id, _ = splitext(name)
                 return Item(
                     id=record.id,
