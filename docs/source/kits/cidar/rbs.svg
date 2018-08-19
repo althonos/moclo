@@ -25,17 +25,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="98.774399"
-     inkscape:cy="-89.830613"
+     inkscape:zoom="2"
+     inkscape:cx="265.41268"
+     inkscape:cy="-50.186751"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:measure-start="405.071,969.746"
      inkscape:measure-end="0,0"
      inkscape:window-width="1278"
-     inkscape:window-height="1370"
-     inkscape:window-x="1280"
+     inkscape:window-height="1080"
+     inkscape:window-x="640"
      inkscape:window-y="39"
      inkscape:window-maximized="0" />
   <metadata
@@ -101,14 +101,14 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.09874201px;line-height:1.25;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.12746596"
-       x="61.366581"
+       x="61.791805"
        y="31.059258"
        id="text4526-43-6"
        inkscape:transform-center-x="6.314444"
        inkscape:transform-center-y="-0.71037673"><tspan
          sodipodi:role="line"
          id="tspan900"
-         x="61.366581"
+         x="61.791805"
          y="31.059258"
          style="stroke-width:0.12746596">N</tspan></text>
     <g
@@ -183,11 +183,11 @@
          sodipodi:role="line"
          id="tspan934-9"
          x="149.82396"
-         y="30.970186">CCAGAG</tspan></text>
+         y="30.970186">GAGACC</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.09874201px;line-height:1.25;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.12746596"
-       x="146.808"
+       x="146.52452"
        y="30.99003"
        id="text4526-43-6-9-2"
        inkscape:transform-center-x="6.3144398"
@@ -195,7 +195,7 @@
          style="stroke-width:0.12746596"
          sodipodi:role="line"
          id="tspan936-2"
-         x="146.808"
+         x="146.52452"
          y="30.99003">N</tspan></text>
     <g
        id="g4874"
@@ -241,16 +241,16 @@
          y="42.281841"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.76111126px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332">Ribosome Binding Site</tspan></text>
     <path
-       style="fill:#8000b4;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.59484583;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 103.92966,17.563929 A 15.009316,15.009316 0 0 0 88.945534,32.069525 H 118.92114 A 15.009316,15.009316 0 0 0 103.92966,17.563929 Z"
+       style="fill:#8000b4;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.46324027;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 104.02098,20.838995 A 11.688608,11.688608 0 0 0 92.351989,32.135328 H 115.69569 A 11.688608,11.688608 0 0 0 104.02098,20.838995 Z"
        id="path1167"
        inkscape:connector-curvature="0" />
     <rect
-       style="fill:#8000b4;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.22663879;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0"
+       style="fill:#8000b4;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.33920407;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0"
        id="rect1185"
-       width="29.362747"
-       height="0.91863632"
-       x="89.249092"
-       y="31.641476" />
+       width="22.854942"
+       height="0.79386014"
+       x="92.594444"
+       y="31.816416" />
   </g>
 </svg>
