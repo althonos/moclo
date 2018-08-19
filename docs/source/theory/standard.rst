@@ -1,4 +1,4 @@
-*Standard Modular Cloning system
+Standard Modular Cloning System
 ===============================
 
 .. toctree::

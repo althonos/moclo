@@ -182,7 +182,7 @@ Restriction Enzymes
     Given a genetic alphabet :math:`\langle \Sigma, \sim \rangle`, a restriction enzyme :math:`e` can
     be defined as a tuple :math:`(S, n, k)` where:
 
-    * :math:`S \subseteq \Sigma^\star` if the finite set of *recognition sites*
+    * :math:`S \subseteq \Sigma^\star` is the finite set of *recognition sites*
       that :math:`e` binds to
     * :math:`\forall (s, s\prime) \in S^2, \lvert s \rvert = \lvert s\prime \rvert`
     * :math:`n \in \mathbb{Z}` is the *cutting offset* between the last nucleotides
