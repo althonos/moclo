@@ -9,9 +9,10 @@
 # -- Imports -----------------------------------------------------------------
 
 import configparser
-import os
-import sys
 import datetime
+import os
+import re
+import sys
 import semantic_version
 import sphinx.util.logging
 import sphinx_bootstrap_theme
@@ -72,8 +73,12 @@ def setup(app):
 
 # General information
 project = moclo.__name__
-copyright = "2018-{}, {}".format(datetime.date.today().year, moclo.__author__)
-author = moclo.__author__
+author = re.match('(.*) <.*>', moclo.__author__).group(1)
+year = datetime.date.today().year
+copyright = "{}, {}".format(
+    "2018-{}".format(year) if year > 2018 else "2018",
+    author,
+)
 
 # The parsed semantic version
 semver = semantic_version.Version.coerce(moclo.__version__)
