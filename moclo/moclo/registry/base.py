@@ -28,6 +28,10 @@ class Item(typing.NamedTuple('Item', [
     """A uniquely identified record in a registry.
     """
 
+    @property
+    def record(self):
+        return self.entity.record
+
 
 class AbstractRegistry(typing.Mapping[typing.Text, Item]):
     """An abstract registry holding MoClo plasmids.
