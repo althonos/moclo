@@ -1,5 +1,5 @@
-Formal Language Theory
-======================
+Descriptive Theory
+==================
 
 .. toctree::
   :maxdepth: 2

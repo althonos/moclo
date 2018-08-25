@@ -45,11 +45,9 @@ Concepts and Definitions
 .. toctree::
   :maxdepth: 2
 
-  process
-  definitions
+  concepts/index
+  concepts/definitions
   theory/index
-
-
 
 
 Library

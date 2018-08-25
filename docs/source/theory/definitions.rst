@@ -31,30 +31,11 @@ Genetic Alphabet
     :class: math-example
 
     * :math:`(\{A, T, G, C\}, \sim)` is the standard genetic alphabet, with
-      :math:`\sim` defined as:
-
-      .. math::
-
-         \forall x \in \{A, T, G, C\}, \widetilde{x} = \overline{\mu(x)}
-
-      where:
-
-      * :math:`\overline{y}` is the *reversal* of :math:`y`
-      * :math:`\mu` is the *automorphism* defined as :math:`\mu(A) = T`, :math:`\mu(C) = G`
+      :math:`\sim` defined as :math:`\widetilde{A \cdot G} = C \cdot T`.
 
     * :math:`(\{A, T, G, C, d5SICS, dNaM\}, \sim)` is the genetic alphabet using the
-      unnatural base pairs from
-      `Malyshev et al., Nature 2014 <https://www.nature.com/articles/nature13314>`_
-      defined as:
-
-      .. math::
-
-          \forall x \in \{A, T, G, C, d5ICS, dNaM\}, \widetilde{x} = \overline{\mu\prime(x)}
-
-      where:
-
-      * :math:`\mu\prime` is the automorphism defined as :math:`\mu\prime(A) = T`,
-        :math:`\mu\prime(C) = G`, :math:`\mu\prime(d5SICS) = dNaM`
+      unnatural base pairs from `Malyshev et al., Nature 2014 <https://www.nature.com/articles/nature13314>`_,
+      with :math:`\sim` defined as :math:`\widetilde{A \cdot G \cdot d5ICS} = dNaM \cdot C \cdot T`
 
 
 
@@ -103,7 +84,6 @@ Circular Sequences
         \quad \quad \sigma(u_1 \cdot u_2 \cdot\,\dots\,\cdot u_k) =
         u_k \cdot u_1 \cdot u_2 \cdot \, \dots \, \cdot u_{k-1}
         \end{array}
-
 
 
 .. admonition:: Property
@@ -187,12 +167,14 @@ Restriction Enzymes
     * :math:`\forall (s, s\prime) \in S^2, \lvert s \rvert = \lvert s\prime \rvert`
     * :math:`n \in \mathbb{Z}` is the *cutting offset* between the last nucleotides
       of the site and the first nucleotide of the restriction cut
-    * :math:`n \ge \lvert -s \rvert, s \in S`
     * :math:`k \in \mathbb{Z}` is the *overhang length*:
 
-      * :math:`k = 0` if the enzyme produces blunt cuts
-      * :math:`k > 0` if the enzyme produces :math:`5\prime` overhangs
-      * :math:`k < 0` if the enzyme produce :math:`3\prime` overhangs
+      - :math:`k = 0` if the enzyme produces blunt cuts
+      - :math:`k > 0` if the enzyme produces :math:`5\prime` overhangs
+      - :math:`k < 0` if the enzyme produce :math:`3\prime` overhangs
+
+    * :math:`\forall (s, s\prime) \in S^2, \lvert s \rvert = \lvert s\prime \rvert`
+    * :math:`n \ge - \lvert s \rvert, s \in S`
 
 
 .. note::
@@ -229,4 +211,4 @@ Golden Gate Assembly
 
     The notation for an assembly is:
 
-    .. math:: d_1 + \dots d_m \xrightarrow{\quad e_1, \dots, e_n \quad} A
+    .. math:: d_1 + \dots d_m \xrightarrow{\quad e_1, \dots, e_n \quad} a_1 + \dots + a_k

@@ -47,6 +47,13 @@ as much as 256 fragments combined together in a deterministic way in a single
 assembly, although *in vivo* the chemical properties of the nucleotides will
 most likely prevent assemblies that large to succeed.
 
+.. figure:: assembly.svg
+    :align: center
+
+    *Example GoldenGate assembly of two modules in a vector using*
+    `BsaI <https://international.neb.com/products/r0535-bsai#Product%20Information>`_.
+
+
 
 The MoClo system
 ----------------
@@ -71,22 +78,13 @@ structural and transcriptional features:
 - Level 2 modules are multigenic units, containing several transcription units,
   and are able to express many genes at onces.
 
-The MoClo assembly follows the following hierarchical rule:
-
-.. math::
-
-   m_i + \dots + m_i + v_{i+1} = m_{i+1}
-
-where :math:`m_i` is a module of level :math:`i`, and :math:`v_j` a vector of
-level :math:`j`.
-
 Furthermore, the enzyme used during the Golden Gate Assembly depends on the
 assembly level. Alternating between the two enzymes makes it possible for an
 infinite number of genes to be inserted in the same plasmid, although biological
 limits are reached *in vivo*.
 
 
-Parts definition
+Types definition
 ''''''''''''''''
 
 Although transcription units can be assembled in any possible order in their
@@ -112,4 +110,4 @@ using two different factors:
 
 This double screening makes it possible to select only the bacterias that
 contain the expected construct, discarding the others, and retrieving the
-assembled plasmid.
+assembled plasmid through a miniprep.
