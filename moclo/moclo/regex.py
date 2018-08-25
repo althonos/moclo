@@ -16,16 +16,15 @@ if typing.TYPE_CHECKING:
 
 
 # typing.TypeVar: a generic sequence
-_S = typing.TypeVar('_S', bound=typing.Sequence)
+_S = typing.TypeVar("_S", bound=typing.Sequence)
 
 
 class SeqMatch(typing.Generic[_S]):
-
     def __init__(self, match, rec, shift=0):
         # type: (Match, _S, int) -> None  # type: ignore
         self.match = match
         self.shift = shift
-        self.rec = rec      # type: _S
+        self.rec = rec  # type: _S
 
     def end(self):
         # type: () -> int
@@ -43,12 +42,15 @@ class SeqMatch(typing.Generic[_S]):
         # type: (int) -> _S
         span = self.match.span(index)
         if span[1] >= span[0] >= len(self.rec):
-            return self.rec[span[0] % len(self.rec) : span[1] % len(self.rec)]  # type: ignore
-        elif span[1] >= len(self.rec) > span[0] :
-            return self.rec[:span[1] % len(self.rec)] + self.rec[span[0]:]      # type: ignore
+            return self.rec[
+                span[0] % len(self.rec) : span[1] % len(self.rec)
+            ]  # type: ignore
+        elif span[1] >= len(self.rec) > span[0]:
+            return (
+                self.rec[: span[1] % len(self.rec)] + self.rec[span[0] :]
+            )  # type: ignore
         else:
-            return self.rec[span[0]:span[1]]  # type: ignore
-
+            return self.rec[span[0] : span[1]]  # type: ignore
 
 
 class DNARegex(object):
@@ -57,26 +59,26 @@ class DNARegex(object):
 
     # dict: single-letter code to regex syntax for nucleotides
     _lettermap = {
-        'B': '[CGT]',
-        'D': '[AGT]',
-        'H': '[ACT]',
-        'K': '[GT]',
-        'M': '[AC]',
-        'N': '[ACGT]',
-        'R': '[AG]',
-        'S': '[CG]',
-        'V': '[ACG]',
-        'W': '[AT]',
-        'Y': '[CT]'
-    } # type: Mapping[Text, Text]
+        "B": "[CGT]",
+        "D": "[AGT]",
+        "H": "[ACT]",
+        "K": "[GT]",
+        "M": "[AC]",
+        "N": "[ACGT]",
+        "R": "[AG]",
+        "S": "[CG]",
+        "V": "[ACG]",
+        "W": "[AT]",
+        "Y": "[CT]",
+    }  # type: Mapping[Text, Text]
 
     @classmethod
     def _transcribe(cls, pattern):
         # type: (Text) -> Text
-        target = ['(?i)']
+        target = ["(?i)"]
         for letter in pattern:
             target.append(cls._lettermap.get(letter, letter))
-        return ''.join(target)
+        return "".join(target)
 
     def __init__(self, pattern):
         # type: (Text, bool) -> None

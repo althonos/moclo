@@ -12,18 +12,16 @@ class classproperty(object):
     """
 
     def __init__(self, getter):
-        self.getter= getter
+        self.getter = getter
 
     def __get__(self, instance, owner):
         return self.getter(owner)
 
 
 def isabstract(cls):
-    return inspect.isabstract(cls) \
-        or any(
-            getattr(cls, attr, None) is NotImplemented
-            for attr in dir(cls)
-        )
+    return inspect.isabstract(cls) or any(
+        getattr(cls, attr, None) is NotImplemented for attr in dir(cls)
+    )
 
 
 def catch_warnings(action, category=Warning, lineno=0, append=False):
@@ -43,11 +41,14 @@ def catch_warnings(action, category=Warning, lineno=0, append=False):
         False
 
     """
+
     def decorator(func):
         @functools.wraps(func)
         def newfunc(*args, **kwargs):
             with warnings.catch_warnings():
                 warnings.simplefilter(action, category, lineno, append)
                 return func(*args, **kwargs)
+
         return newfunc
+
     return decorator

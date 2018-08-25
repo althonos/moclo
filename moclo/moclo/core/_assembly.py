@@ -17,11 +17,10 @@ from .._utils import catch_warnings
 
 
 class AssemblyManager(object):
-
     def __init__(self, vector, modules, id_="assembly", name="assembly"):
 
         if vector.overhang_start() == vector.overhang_end():
-            details = 'vector is not suitable for assembly'
+            details = "vector is not suitable for assembly"
             raise errors.InvalidSequence(vector, details=details)
 
         self.vector = vector
@@ -30,7 +29,7 @@ class AssemblyManager(object):
         self.name = name
         self.id = id_
 
-    @catch_warnings('ignore', category=BiopythonWarning)
+    @catch_warnings("ignore", category=BiopythonWarning)
     def assemble(self):
         modmap = self._generate_modules_map()
         alphabet = self._get_alphabet(modmap)
@@ -58,7 +57,8 @@ class AssemblyManager(object):
 
     def _get_alphabet(self, modmap):
         alphabets = [
-            mod.seq.alphabet for mod in six.itervalues(modmap)
+            mod.seq.alphabet
+            for mod in six.itervalues(modmap)
             if mod.seq.alphabet.letters is not None
         ]
         alphabets.append(IUPAC.unambiguous_dna)
@@ -67,7 +67,7 @@ class AssemblyManager(object):
     def _generate_assembly(self, modmap, alphabet):
         try:
             overhang_next = self.vector.overhang_end()
-            assembly = SeqRecord(Seq('', alphabet))
+            assembly = SeqRecord(Seq("", alphabet))
             while overhang_next != self.vector.overhang_start():
                 module = modmap.pop(overhang_next)
                 assembly += module.target_sequence()
@@ -78,41 +78,39 @@ class AssemblyManager(object):
             warnings.warn(errors.UnusedModules(*modmap.values()))
         return CircularRecord(assembly + self.vector.target_sequence())
 
-    _CITATION_RX = re.compile(r'\[(\d*)\]')
+    _CITATION_RX = re.compile(r"\[(\d*)\]")
 
     def _deref_citations(self, record):
-        references = record.annotations.get('references', [])
+        references = record.annotations.get("references", [])
         for feature in record.features:
-            for i, ref in enumerate(feature.qualifiers.get('citation', [])):
+            for i, ref in enumerate(feature.qualifiers.get("citation", [])):
                 match = self._CITATION_RX.match(ref)
                 if match is None:
                     raise ValueError("invalid citation: '{}'".format(ref))
                 ref_index = int(match.group(1)) - 1
-                feature.qualifiers['citation'][i] = references[ref_index]
+                feature.qualifiers["citation"][i] = references[ref_index]
 
     def _ref_citations(self, record):
-        references = record.annotations.setdefault('references', [])
+        references = record.annotations.setdefault("references", [])
         for feature in record.features:
-            for i, ref in enumerate(feature.qualifiers.get('citation', [])):
+            for i, ref in enumerate(feature.qualifiers.get("citation", [])):
                 if ref not in references:
                     references.append(ref)
                 ref_index = references.find(ref) + 1
-                feature.qualifiers['citation'][i] = "{}".format(ref_index)
+                feature.qualifiers["citation"][i] = "{}".format(ref_index)
 
     def _annotate_assembly(self, assembly):
         assembly.id = self.id
         assembly.name = self.name
         ants = assembly.annotations
 
-        ants['topology'] = 'circular'
-        ants['organism'] = ants['source'] = 'synthetic DNA construct'
-        ants['source'] = 'synthetic DNA construct'
-        ants['molecule_type'] = 'ds-DNA'
-        ants['data_file_division'] = 'SYN'
-        ants['comment'] = [
-            'Generated with moclo v{}'.format(__version__),
-            'Vector: {}'.format(self.vector.record.id),
-            'Modules: {}'.format(', '.join(
-                mod.record.id for mod in self.modules
-            )),
+        ants["topology"] = "circular"
+        ants["organism"] = ants["source"] = "synthetic DNA construct"
+        ants["source"] = "synthetic DNA construct"
+        ants["molecule_type"] = "ds-DNA"
+        ants["data_file_division"] = "SYN"
+        ants["comment"] = [
+            "Generated with moclo v{}".format(__version__),
+            "Vector: {}".format(self.vector.record.id),
+            "Modules: {}".format(", ".join(mod.record.id for mod in self.modules)),
         ]

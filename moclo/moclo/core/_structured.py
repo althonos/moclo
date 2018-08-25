@@ -12,9 +12,9 @@ from .. import errors
 from ..regex import DNARegex
 
 if typing.TYPE_CHECKING:
-    from typing import Text, Type          # noqa: F401
-    from Bio.SeqRecord import SeqRecord    # noqa: F401
-    from ..regex import SeqMatch           # noqa: F401
+    from typing import Text, Type  # noqa: F401
+    from Bio.SeqRecord import SeqRecord  # noqa: F401
+    from ..regex import SeqMatch  # noqa: F401
 
 
 @six.add_metaclass(abc.ABCMeta)
@@ -46,8 +46,8 @@ class StructuredRecord(object):
     @cached_property.cached_property
     def _match(self):
         # type: () -> SeqMatch[SeqRecord]
-        topology = self.record.annotations.get('topology', 'circular').lower()
-        match = self._get_regex().search(self.record, linear=topology != 'circular')
+        topology = self.record.annotations.get("topology", "circular").lower()
+        match = self._get_regex().search(self.record, linear=topology != "circular")
         if match is None:
             details = "does not match '{}' structure".format(type(self).__name__)
             raise errors.InvalidSequence(self.record, details=details)

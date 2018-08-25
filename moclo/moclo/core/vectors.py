@@ -16,18 +16,18 @@ from ._utils import cutter_check, add_as_source
 from ._structured import StructuredRecord
 
 if typing.TYPE_CHECKING:
-    from typing import Any, MutableMapping, Union           # noqa: F401
-    from Bio.SeqRecord import SeqRecord                     # noqa: F401
-    from Bio.Restriction.Restriction import RestrictionType # noqa: F401
-    from .modules import AbstractModule                     # noqa: F401
+    from typing import Any, MutableMapping, Union  # noqa: F401
+    from Bio.SeqRecord import SeqRecord  # noqa: F401
+    from Bio.Restriction.Restriction import RestrictionType  # noqa: F401
+    from .modules import AbstractModule  # noqa: F401
 
 
 class AbstractVector(StructuredRecord):
     """An abstract modular cloning vector.
     """
 
-    _level = None           # type: Union[None, int]
-    cutter = NotImplemented # type: Union[NotImplemented, RestrictionType]
+    _level = None  # type: Union[None, int]
+    cutter = NotImplemented  # type: Union[NotImplemented, RestrictionType]
 
     def __new__(cls, *args, **kwargs):
         cutter_check(cls.cutter, name=cls.__name__)
@@ -48,11 +48,13 @@ class AbstractVector(StructuredRecord):
         """
         downstream = cls.cutter.elucidate()
         upstream = str(Seq(downstream).reverse_complement())
-        return ''.join([
-            upstream.replace('^', ')(').replace('_', '('),
-            'N*',
-            downstream.replace('^', ')(').replace('_', ')')
-        ])
+        return "".join(
+            [
+                upstream.replace("^", ")(").replace("_", "("),
+                "N*",
+                downstream.replace("^", ")(").replace("_", ")"),
+            ]
+        )
 
     def overhang_start(self):
         # type: () -> Seq
@@ -91,7 +93,7 @@ class AbstractVector(StructuredRecord):
             start, end = self._match.span(2)[0], self._match.span(3)[1]
         else:
             start, end = self._match.span(1)[0], self._match.span(2)[1]
-        return add_as_source(self.record, (self.record << start)[end - start:])
+        return add_as_source(self.record, (self.record << start)[end - start :])
 
     def assemble(self, module, *modules, **kwargs):
         # type: (AbstractModule, *AbstractModule, **Any) -> SeqRecord
@@ -127,8 +129,8 @@ class AbstractVector(StructuredRecord):
         mgr = AssemblyManager(
             vector=self,
             modules=[module] + list(modules),
-            name=kwargs.get('name', 'assembly'),
-            id_=kwargs.get('id', 'assembly'),
+            name=kwargs.get("name", "assembly"),
+            id_=kwargs.get("id", "assembly"),
         )
         return mgr.assemble()
 

@@ -16,7 +16,7 @@ from ._structured import StructuredRecord
 from ._utils import cutter_check, add_as_source
 
 if typing.TYPE_CHECKING:
-    from typing import Union, Text       # noqa: F401
+    from typing import Union, Text  # noqa: F401
     from Bio.SeqRecord import SeqRecord  # noqa: F401
 
 
@@ -31,7 +31,7 @@ class AbstractModule(StructuredRecord):
     """
 
     _level = None  # type: Union[None, int]
-    cutter = NotImplemented # type: Union[NotImplemented, RestrictionType]
+    cutter = NotImplemented  # type: Union[NotImplemented, RestrictionType]
 
     def __new__(cls, *args, **kwargs):
         cutter_check(cls.cutter, name=cls.__name__)
@@ -52,11 +52,13 @@ class AbstractModule(StructuredRecord):
         """
         upstream = cls.cutter.elucidate()
         downstream = str(Seq(upstream).reverse_complement())
-        return ''.join([
-            upstream.replace('^', '(').replace('_', ')('),
-            'N*',
-            downstream.replace('^', ')').replace('_', ')(')
-        ])
+        return "".join(
+            [
+                upstream.replace("^", "(").replace("_", ")("),
+                "N*",
+                downstream.replace("^", ")").replace("_", ")("),
+            ]
+        )
 
     def overhang_start(self):
         # type: () -> Seq
@@ -101,7 +103,7 @@ class AbstractModule(StructuredRecord):
             start, end = self._match.span(2)[0], self._match.span(3)[1]
         else:
             start, end = self._match.span(1)[0], self._match.span(2)[1]
-        return add_as_source(self.record, (self.record << start)[:end - start])
+        return add_as_source(self.record, (self.record << start)[: end - start])
 
 
 class Product(AbstractModule):

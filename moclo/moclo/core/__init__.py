@@ -16,14 +16,14 @@ from .modules import AbstractModule, Cassette, Entry, Device, Product
 from .vectors import AbstractVector, CassetteVector, EntryVector, DeviceVector
 
 __all__ = [
-    'AbstractPart',
-    'AbstractModule',
-    'AbstractVector',
-    'Cassette',
-    'CassetteVector',
-    'Entry',
-    'EntryVector',
-    'Device',
-    'DeviceVector',
-    'Product',
+    "AbstractPart",
+    "AbstractModule",
+    "AbstractVector",
+    "Cassette",
+    "CassetteVector",
+    "Entry",
+    "EntryVector",
+    "Device",
+    "DeviceVector",
+    "Product",
 ]

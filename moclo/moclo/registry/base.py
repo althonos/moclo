@@ -19,12 +19,17 @@ from ..core import AbstractModule, AbstractVector, AbstractPart
 from ._utils import find_resistance
 
 
-class Item(typing.NamedTuple('Item', [
-            ('id', typing.Text),
-            ('name', typing.Text),
-            ('entity', typing.Union[AbstractModule, AbstractVector]),
-            ('resistance', typing.Text),
-        ])):
+class Item(
+    typing.NamedTuple(
+        "Item",
+        [
+            ("id", typing.Text),
+            ("name", typing.Text),
+            ("entity", typing.Union[AbstractModule, AbstractVector]),
+            ("resistance", typing.Text),
+        ],
+    )
+):
     """A uniquely identified record in a registry.
     """
 
@@ -78,16 +83,16 @@ class EmbeddedRegistry(AbstractRegistry):
     _types = NotImplemented
 
     def _load_id(self, raw, index):
-        return raw['id']
+        return raw["id"]
 
     def _load_name(self, raw, index):
-        return raw['name']
+        return raw["name"]
 
     def _load_resistance(self, raw, index):
-        return raw['resistance']
+        return raw["resistance"]
 
     def _load_entity(self, raw, index):
-        return self._types[raw['type']](raw['record'])
+        return self._types[raw["type"]](raw["record"])
 
     @cached_property.cached_property
     def _data(self):
@@ -95,8 +100,8 @@ class EmbeddedRegistry(AbstractRegistry):
             with io.TextIOWrapper(bz2.BZ2File(rs)) as decomp:
                 raw_data = json.load(decomp)
         for raw in raw_data:
-            record = Bio.SeqIO.read(six.StringIO(raw['gb']), 'gb')
-            raw['record'] = CircularRecord(record)
+            record = Bio.SeqIO.read(six.StringIO(raw["gb"]), "gb")
+            raw["record"] = CircularRecord(record)
         return {
             item.id: item
             for item in (
@@ -124,7 +129,7 @@ class FilesystemRegistry(AbstractRegistry):
     """A registry located on a filesystem.
     """
 
-    def __init__(self, fs_url, base, extensions=('gb', 'gbk')):
+    def __init__(self, fs_url, base, extensions=("gb", "gbk")):
 
         bases = (AbstractPart, AbstractModule, AbstractVector)
         if not isinstance(base, type) or not issubclass(base, (bases)):
@@ -138,22 +143,24 @@ class FilesystemRegistry(AbstractRegistry):
 
     @cached_property.cached_property
     def _files(self):
-        return ['*.{}'.format(extension) for extension in self._extensions]
+        return ["*.{}".format(extension) for extension in self._extensions]
 
     def __iter__(self):
-        for f in self.fs.filterdir('/', files=self._files, exclude_dirs=['*']):
+        for f in self.fs.filterdir("/", files=self._files, exclude_dirs=["*"]):
             name, _ = splitext(f.name)
             yield name
 
     def __len__(self):
-        return sum(1 for _ in self.fs.filterdir('/', files=self._files, exclude_dirs=['*']))
+        return sum(
+            1 for _ in self.fs.filterdir("/", files=self._files, exclude_dirs=["*"])
+        )
 
     def __getitem__(self, item):
-        files = ('{}.{}'.format(item, extension) for extension in self._extensions)
+        files = ("{}.{}".format(item, extension) for extension in self._extensions)
         for name in files:
             if self.fs.isfile(name):
                 with self.fs.open(name) as handle:
-                    record = CircularRecord(Bio.SeqIO.read(handle, 'genbank'))
+                    record = CircularRecord(Bio.SeqIO.read(handle, "genbank"))
                     record.id, _ = splitext(name)
                 return Item(
                     id=record.id,

@@ -23,13 +23,13 @@ class ELabFTWRegistry(AbstractRegistry):
 
     def __init__(
         self,
-        server,               # type: Text
-        token,                # type: Text
-        base,                 # type: Type[AbstractPart]
+        server,  # type: Text
+        token,  # type: Text
+        base,  # type: Type[AbstractPart]
         category="Plasmids",  # type: Text
-        include_tags=None,    # type: Optional[Collection[Text]]
-        exclude_tags=None,    # type: Optional[Collection[Text]]
-        strict_ssl=False,     # type: bool
+        include_tags=None,  # type: Optional[Collection[Text]]
+        exclude_tags=None,  # type: Optional[Collection[Text]]
+        strict_ssl=False,  # type: bool
         ignore_unknown=True,  # type: bool
     ):
         # type: (...) -> None
@@ -133,8 +133,8 @@ class ELabFTWRegistry(AbstractRegistry):
         resistance = find_resistance(record)
 
         # When exported with Snapgene, the record does not have any name / id
-        if record.name == 'Exported':
-            record.id = record.name = plasmid['title']
+        if record.name == "Exported":
+            record.id = record.name = plasmid["title"]
 
         return Item(
             entity=entity,
@@ -159,9 +159,9 @@ class ELabFTWRegistry(AbstractRegistry):
 
     def __iter__(self):
         for item in self._get_all_items():
-            tags = item['tags'].split('|') if item['tags'] else []
+            tags = item["tags"].split("|") if item["tags"] else []
 
-            if item['category'] != self.category:
+            if item["category"] != self.category:
                 continue
             if self._include is not None and self._include.isdisjoint(tags):
                 continue
@@ -170,7 +170,7 @@ class ELabFTWRegistry(AbstractRegistry):
 
             try:
                 self._item_from_id(item["id"])
-                yield item['title']
+                yield item["title"]
             except RuntimeError:
                 if not self._ignore_unknown:
                     raise

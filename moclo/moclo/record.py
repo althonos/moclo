@@ -12,13 +12,14 @@ from Bio.SeqRecord import SeqRecord
 
 if typing.TYPE_CHECKING:
     from typing import Dict, List, Text, Union  # noqa: F401
-    from Bio.Seq import Seq                     # noqa: F401
+    from Bio.Seq import Seq  # noqa: F401
 
 
 def _ambiguous(func):
     @functools.wraps(func)
     def newfunc(self, *args, **kwargs):
         raise TypeError("ambiguous operation: '{}'".format(func.__name__))
+
     return newfunc
 
 
@@ -39,16 +40,17 @@ class CircularRecord(SeqRecord):
     # Patch constructor to allow constructing a CircularRecord from
     # a SeqRecord argument (other arguments are ignored).
 
-    def __init__(self,
-                 seq,                                   # type: Union[Seq, SeqRecord]
-                 id='<unknown id>',                     # type: Text
-                 name='<unknown name>',                 # type: Text
-                 description='<unknown description>',   # type: Text
-                 dbxrefs=None,                          # type: List[Text]
-                 features=None,                         # type: List[SeqFeature]
-                 annotations=None,                      # type: Dict[Text, Any]
-                 letter_annotations=None
-                 ):
+    def __init__(
+        self,
+        seq,  # type: Union[Seq, SeqRecord]
+        id="<unknown id>",  # type: Text
+        name="<unknown name>",  # type: Text
+        description="<unknown description>",  # type: Text
+        dbxrefs=None,  # type: List[Text]
+        features=None,  # type: List[SeqFeature]
+        annotations=None,  # type: Dict[Text, Any]
+        letter_annotations=None,
+    ):
         # type: (...) -> None
         """Create a new `CircularRecord` instance.
 
@@ -57,7 +59,7 @@ class CircularRecord(SeqRecord):
         records, then loading them into a `CircularRecord`.
         """
         if isinstance(seq, SeqRecord):
-            self.__init__(   # noqa: T484
+            self.__init__(  # noqa: T484
                 seq.seq,
                 seq.id,
                 seq.name,
@@ -65,12 +67,13 @@ class CircularRecord(SeqRecord):
                 copy.deepcopy(seq.dbxrefs),
                 copy.deepcopy(seq.features),
                 copy.deepcopy(seq.annotations),
-                copy.deepcopy(seq.letter_annotations))
+                copy.deepcopy(seq.letter_annotations),
+            )
         else:
             if annotations is not None:
-                topology = annotations.get('topology', 'circular')
-                if topology.lower() != 'circular':
-                    raise ValueError('record does not describe a circular sequence')
+                topology = annotations.get("topology", "circular")
+                if topology.lower() != "circular":
+                    raise ValueError("record does not describe a circular sequence")
             super(CircularRecord, self).__init__(
                 seq,
                 id,
@@ -79,7 +82,8 @@ class CircularRecord(SeqRecord):
                 dbxrefs,
                 features,
                 annotations,
-                letter_annotations)
+                letter_annotations,
+            )
 
     # Patch methods that are ambiguous with a non-linear sequence.
 
@@ -94,7 +98,7 @@ class CircularRecord(SeqRecord):
         return NotImplemented
 
     @_ambiguous
-    def __radd__(self, other):   # noqa: D105
+    def __radd__(self, other):  # noqa: D105
         """Add another sequence or string to this sequence (from the left).
 
         Since adding an arbitrary sequence to a plasmid is ambiguous (there is
@@ -119,8 +123,8 @@ class CircularRecord(SeqRecord):
         rec = super(CircularRecord, self).__getitem__(index)
         if isinstance(index, slice):
             annotations = copy.deepcopy(rec.annotations)
-            if 'topology' in annotations:
-                annotations['topology'] = 'linear'
+            if "topology" in annotations:
+                annotations["topology"] = "linear"
             return SeqRecord(
                 rec.seq,
                 rec.id,
@@ -129,30 +133,34 @@ class CircularRecord(SeqRecord):
                 copy.deepcopy(rec.dbxrefs),
                 copy.deepcopy(rec.features),
                 annotations,
-                copy.deepcopy(rec.letter_annotations))
+                copy.deepcopy(rec.letter_annotations),
+            )
         else:
             return rec
 
-    def reverse_complement(self,
-                           id=False,
-                           name=False,
-                           description=False,
-                           features=True,
-                           annotations=False,
-                           letter_annotations=True,
-                           dbxrefs=False,
-                          ):
+    def reverse_complement(
+        self,
+        id=False,
+        name=False,
+        description=False,
+        features=True,
+        annotations=False,
+        letter_annotations=True,
+        dbxrefs=False,
+    ):
         """Return a new ``CircularRecord`` with reverse complement sequence.
         """
-        return type(self)(super(CircularRecord, self).reverse_complement(
-            id=id,
-            name=name,
-            description=description,
-            features=features,
-            annotations=annotations,
-            letter_annotations=letter_annotations,
-            dbxrefs=dbxrefs
-        ))
+        return type(self)(
+            super(CircularRecord, self).reverse_complement(
+                id=id,
+                name=name,
+                description=description,
+                features=features,
+                annotations=annotations,
+                letter_annotations=letter_annotations,
+                dbxrefs=dbxrefs,
+            )
+        )
 
     # Additional methods
 
@@ -174,8 +182,7 @@ class CircularRecord(SeqRecord):
         newseq = self.seq[-index:] + self.seq[:-index]
         newfeats = []
         newletan = {
-            k: v[index:] + v[:index]
-            for k, v in six.iteritems(self.letter_annotations)
+            k: v[index:] + v[:index] for k, v in six.iteritems(self.letter_annotations)
         }
 
         for feature in self.features:
@@ -188,21 +195,29 @@ class CircularRecord(SeqRecord):
                 _newloc = []
                 for part in (loc + index).parts:
                     if part.end >= len(newseq) and part.start >= len(newseq):
-                        r = part.start // len(newseq)             # remainder is used to
-                        _newloc.append(FeatureLocation(           # make sure that part.end
-                            start=part.start - r * len(newseq),   # is always after part.start
-                            end=part.end - r * len(newseq),       # even on additional end
-                            strand=part.strand,                   # overlap
-                            ref=part.ref,
-                            ref_db=part.ref_db))
+                        r = part.start // len(newseq)  # remainder is used to
+                        _newloc.append(
+                            FeatureLocation(  # make sure that part.end
+                                start=part.start
+                                - r * len(newseq),  # is always after part.start
+                                end=part.end
+                                - r * len(newseq),  # even on additional end
+                                strand=part.strand,  # overlap
+                                ref=part.ref,
+                                ref_db=part.ref_db,
+                            )
+                        )
                     else:
                         _newloc.append(part)
                 newloc = _newloc[0] if len(_newloc) == 1 else CompoundLocation(_newloc)
-            newfeats.append(SeqFeature(
-                location=newloc,
-                type=feature.type,
-                id=feature.id,
-                qualifiers=feature.qualifiers))
+            newfeats.append(
+                SeqFeature(
+                    location=newloc,
+                    type=feature.type,
+                    id=feature.id,
+                    qualifiers=feature.qualifiers,
+                )
+            )
 
         return type(self)(
             seq=newseq,
@@ -212,4 +227,5 @@ class CircularRecord(SeqRecord):
             dbxrefs=self.dbxrefs,
             features=newfeats,
             annotations=self.annotations,
-            letter_annotations=newletan)
+            letter_annotations=newletan,
+        )
