@@ -10,7 +10,6 @@ import six
 
 from .. import errors
 from ..regex import DNARegex
-from ..record import CircularRecord
 
 if typing.TYPE_CHECKING:
     from typing import Text, Type          # noqa: F401

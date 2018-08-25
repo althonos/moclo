@@ -14,7 +14,8 @@ from .base import AbstractRegistry, Item
 from ._utils import find_resistance
 
 if typing.TYPE_CHECKING:
-    from typing import Collection, Optional, Text
+    from typing import Collection, Optional, Text  # noqa: F401
+
 
 class ELabFTWRegistry(AbstractRegistry):
     """A registry in a running ``eLabFTW`` server.

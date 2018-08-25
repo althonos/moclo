@@ -8,14 +8,9 @@ modules during the Golden Gate assembly.
 """
 
 import typing
-import warnings
 
-import six
-from Bio.Alphabet import IUPAC
 from Bio.Seq import Seq
-from Bio.SeqFeature import SeqFeature, FeatureLocation
 
-from .. import errors
 from ._assembly import AssemblyManager
 from ._utils import cutter_check, add_as_source
 from ._structured import StructuredRecord

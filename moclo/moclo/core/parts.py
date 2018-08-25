@@ -4,7 +4,6 @@
 
 import typing
 
-import six
 from Bio.Seq import Seq
 
 from .._utils import isabstract
