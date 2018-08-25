@@ -19,15 +19,16 @@ from Bio.Restriction import BsaI, BbsI
 
 from ..core import parts, modules, vectors
 
-__author__ = 'Martin Larralde <martin.larralde@ens-paris-saclay.fr>'
+__author__ = "Martin Larralde <martin.larralde@ens-paris-saclay.fr>"
 __version__ = (
-    __import__('pkg_resources')
-        .resource_string(__name__, 'cidar.version')
-        .strip()
-        .decode('ascii')
+    __import__("pkg_resources")
+    .resource_string(__name__, "cidar.version")
+    .strip()
+    .decode("ascii")
 )
 
 ### VECTORS
+
 
 class CIDAREntryVector(vectors.EntryVector):
     """A CIDAR MoClo entry vector.
@@ -38,18 +39,18 @@ class CIDAREntryVector(vectors.EntryVector):
     @staticmethod
     def structure():  # noqa: D105
         return (
-            'GGTCTC'  # BsaI
-            'N'
-            '(NNNN)'  # Downstream overhang
-            '(NN'
-            'GTCTTC'  # BbsI
-            'N*'      # Placeholder sequence
-            'GAAGAC'  # BbsI
-            'NN)'
-            '(NNNN)'  # Upstream overhang
-            'N'
-            'GAGACC'  # BsaI
-    )
+            "GGTCTC"  # BsaI
+            "N"
+            "(NNNN)"  # Downstream overhang
+            "(NN"
+            "GTCTTC"  # BbsI
+            "N*"  # Placeholder sequence
+            "GAAGAC"  # BbsI
+            "NN)"
+            "(NNNN)"  # Upstream overhang
+            "N"
+            "GAGACC"  # BsaI
+        )
 
 
 class CIDARCassetteVector(vectors.CassetteVector):
@@ -65,17 +66,17 @@ class CIDARCassetteVector(vectors.CassetteVector):
     @staticmethod
     def structure():  # noqa: D105
         return (
-            'GAAGAC'  # BbsI
-            'NN'
-            '(NNNN)'  # Downstream overhang
-            '(N'
-            'GAGACC'  # BsaI
-            'N*'      # Placeholder sequence
-            'GGTCTC'  # BsaI
-            'N)'
-            '(NNNN)'  # Upstream overhang
-            'NN'
-            'GTCTTC'  # BbsI
+            "GAAGAC"  # BbsI
+            "NN"
+            "(NNNN)"  # Downstream overhang
+            "(N"
+            "GAGACC"  # BsaI
+            "N*"  # Placeholder sequence
+            "GGTCTC"  # BsaI
+            "N)"
+            "(NNNN)"  # Upstream overhang
+            "NN"
+            "GTCTTC"  # BbsI
         )
 
 
@@ -92,21 +93,22 @@ class CIDARDeviceVector(vectors.DeviceVector):
     @staticmethod
     def structure():  # noqa: D105
         return (
-            'GGTCTC'  # BsaI
-            'N'
-            '(NNNN)'  # Downstream overhang
-            '(NN'
-            'GTCTTC'  # BbsI
-            'N*'      # Placeholder sequence
-            'GAAGAC'  # BbsI
-            'NN)'
-            '(NNNN)'  # Upstream overhang
-            'N'
-            'GAGACC'  # BsaI
+            "GGTCTC"  # BsaI
+            "N"
+            "(NNNN)"  # Downstream overhang
+            "(NN"
+            "GTCTTC"  # BbsI
+            "N*"  # Placeholder sequence
+            "GAAGAC"  # BbsI
+            "NN)"
+            "(NNNN)"  # Upstream overhang
+            "N"
+            "GAGACC"  # BsaI
         )
 
 
 ### MODULES
+
 
 class CIDARProduct(modules.Product):
     """A CIDAR MoClo product.
@@ -138,6 +140,7 @@ class CIDARDevice(modules.Device):
 
 ### PARTS
 
+
 class CIDARPart(parts.AbstractPart):
     """A CIDAR MoClo standard part.
 
@@ -168,7 +171,7 @@ class CIDARPromoter(CIDARPart, CIDAREntry):
     """
 
     # FIXME: enforce official upstream overhangs or not ?
-    signature = ('NNNN', 'TACT')
+    signature = ("NNNN", "TACT")
 
 
 class CIDARRibosomeBindingSite(CIDARPart, CIDAREntry):
@@ -182,7 +185,7 @@ class CIDARRibosomeBindingSite(CIDARPart, CIDAREntry):
 
     """
 
-    signature = ('TACT', 'AATG')
+    signature = ("TACT", "AATG")
 
 
 class CIDARCodingSequence(CIDARPart, CIDAREntry):
@@ -200,7 +203,7 @@ class CIDARCodingSequence(CIDARPart, CIDAREntry):
         the downstream overhang.
     """
 
-    signature = ('AATG', 'AGGT')
+    signature = ("AATG", "AGGT")
 
 
 class CIDARTerminator(CIDARPart, CIDAREntry):
@@ -222,4 +225,4 @@ class CIDARTerminator(CIDARPart, CIDAREntry):
 
     """
 
-    signature = ('AGGT', 'NNNN')
+    signature = ("AGGT", "NNNN")

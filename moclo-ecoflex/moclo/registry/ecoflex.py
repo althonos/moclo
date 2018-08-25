@@ -24,32 +24,34 @@ class EcoFlexRegistry(EmbeddedRegistry):
     _file = "ecoflex.json.bz2"
 
     def _load_name(self, raw, index):
-        return raw['record'].name
+        return raw["record"].name
 
     def _load_id(self, raw, index):
-        return raw['record'].id
+        return raw["record"].id
 
     def _load_resistance(self, raw, index):
         try:
-            return find_resistance(raw['record'])
+            return find_resistance(raw["record"])
         except RuntimeError:
             msg = "could not find antibiotics resistance of '{}'"
-            six.raise_from(RuntimeError(msg.format(raw['record'].id)), None)
-        return raw['resistance']
+            six.raise_from(RuntimeError(msg.format(raw["record"].id)), None)
+        return raw["resistance"]
 
-    _PREFIXES = collections.OrderedDict([
-        ('pBP-T7_', ecoflex.EcoFlexPromoterRBS),
-        ('pBP-Tag_linker', ecoflex.EcoFlexTagLinker),
-        ('pTU1', ecoflex.EcoFlexCassetteVector),
-        ('pTU2', ecoflex.EcoFlexDeviceVector),
-        ('pTU3', ecoflex.EcoFlexCassetteVector),
-        ('pBP-TL', ecoflex.EcoFlexRBS),
-        (('pBP-BBa', 'pBP-L'), ecoflex.EcoFlexTerminator),
-        (('pBP-J', 'pBP-SJ', 'pBP-T7'), ecoflex.EcoFlexPromoter),
-    ])
+    _PREFIXES = collections.OrderedDict(
+        [
+            ("pBP-T7_", ecoflex.EcoFlexPromoterRBS),
+            ("pBP-Tag_linker", ecoflex.EcoFlexTagLinker),
+            ("pTU1", ecoflex.EcoFlexCassetteVector),
+            ("pTU2", ecoflex.EcoFlexDeviceVector),
+            ("pTU3", ecoflex.EcoFlexCassetteVector),
+            ("pBP-TL", ecoflex.EcoFlexRBS),
+            (("pBP-BBa", "pBP-L"), ecoflex.EcoFlexTerminator),
+            (("pBP-J", "pBP-SJ", "pBP-T7"), ecoflex.EcoFlexPromoter),
+        ]
+    )
 
     def _load_entity(self, raw, index):
         for prefix, cls in six.iteritems(self._PREFIXES):
-            if raw['record'].id.startswith(prefix):
-                return cls(raw['record'])
-        raise RuntimeError(raw['record'].id)
+            if raw["record"].id.startswith(prefix):
+                return cls(raw["record"])
+        raise RuntimeError(raw["record"].id)

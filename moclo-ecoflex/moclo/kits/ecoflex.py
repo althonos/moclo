@@ -19,12 +19,12 @@ from Bio.Restriction import BsmBI, BsaI
 
 from ..core import parts, modules, vectors
 
-__author__ = 'Martin Larralde <martin.larralde@ens-paris-saclay.fr>'
+__author__ = "Martin Larralde <martin.larralde@ens-paris-saclay.fr>"
 __version__ = (
-    __import__('pkg_resources')
-        .resource_string(__name__, 'ecoflex.version')
-        .strip()
-        .decode('ascii')
+    __import__("pkg_resources")
+    .resource_string(__name__, "ecoflex.version")
+    .strip()
+    .decode("ascii")
 )
 
 
@@ -47,19 +47,19 @@ class EcoFlexCassetteVector(vectors.CassetteVector):
     @staticmethod
     def structure():  # noqa: D105
         return (
-            'CGTCTC'  # BsmBI
-            'N'
-            'NNNN'    # Cassette overhang (start)
-            '(NNNN)'  # Vector overhang (start)
-            '(N'
-            'GAGACC'  # BsaI
-            'N*?'     # Placeholder sequence
-            'GGTCTC'  # BsaI
-            'N)'
-            '(NNNN)'  # Vector overhang (end)
-            'NNNN'    # Cassette overhang (end)
-            'N'
-            'GAGACG'  # BsmBI
+            "CGTCTC"  # BsmBI
+            "N"
+            "NNNN"  # Cassette overhang (start)
+            "(NNNN)"  # Vector overhang (start)
+            "(N"
+            "GAGACC"  # BsaI
+            "N*?"  # Placeholder sequence
+            "GGTCTC"  # BsaI
+            "N)"
+            "(NNNN)"  # Vector overhang (end)
+            "NNNN"  # Cassette overhang (end)
+            "N"
+            "GAGACG"  # BsmBI
         )
 
 
@@ -72,19 +72,19 @@ class EcoFlexDeviceVector(vectors.DeviceVector):
     @staticmethod
     def structure():  # noqa: D105
         return (
-            'GGTCTC'  # BsaI
-            'N'
-            'NNNN'    # Device overhang (start)
-            '(NNNN)'  # Vector overhang (start)
-            '(N'
-            'GAGACG'  # BsmBI
-            'N*'      # Placeholder sequence
-            'CGTCTC'  # BsmBI
-            'N)'
-            '(NNNN)'  # Vector overhang (end)
-            'NNNN'    # Device overhang (end)
-            'N'
-            'GAGACC'  # BsaI
+            "GGTCTC"  # BsaI
+            "N"
+            "NNNN"  # Device overhang (start)
+            "(NNNN)"  # Vector overhang (start)
+            "(N"
+            "GAGACG"  # BsmBI
+            "N*"  # Placeholder sequence
+            "CGTCTC"  # BsmBI
+            "N)"
+            "(NNNN)"  # Vector overhang (end)
+            "NNNN"  # Device overhang (end)
+            "N"
+            "GAGACC"  # BsaI
         )
 
 
@@ -96,7 +96,6 @@ class EcoFlexDeviceVector(vectors.DeviceVector):
 #     """
 #
 #     cutter = BsaI
-
 
 
 class EcoFlexEntry(modules.Entry):
@@ -125,6 +124,7 @@ class EcoFlexDevice(modules.Device):
 
 ### PARTS
 
+
 class EcoFlexPart(parts.AbstractPart):
     """An EcoFlex MoClo standard part.
     """
@@ -141,7 +141,7 @@ class EcoFlexPromoter(EcoFlexPart, EcoFlexEntry):
 
     """
 
-    signature = ('CTAT', 'GTAC')
+    signature = ("CTAT", "GTAC")
 
 
 class EcoFlexRBS(EcoFlexPart, EcoFlexEntry):
@@ -154,7 +154,7 @@ class EcoFlexRBS(EcoFlexPart, EcoFlexEntry):
     adenosine serves as the beginning of the start codon of the following CDS.
     """
 
-    signature = ('GTAC', 'CATA')
+    signature = ("GTAC", "CATA")
 
 
 class EcoFlexTagLinker(EcoFlexPart, EcoFlexEntry):
@@ -167,7 +167,7 @@ class EcoFlexTagLinker(EcoFlexPart, EcoFlexEntry):
     tag sequence before the CDS.
     """
 
-    signature = ('GTAC', 'TAAA')
+    signature = ("GTAC", "TAAA")
 
 
 class EcoFlexTag(EcoFlexPart, EcoFlexEntry):
@@ -180,7 +180,7 @@ class EcoFlexTag(EcoFlexPart, EcoFlexEntry):
     of the translated protein, such as a *hexa histidine* or a *Strep(II)* tag.
     """
 
-    signature = ('TAAA', 'CATA')
+    signature = ("TAAA", "CATA")
 
 
 class EcoFlexCodingSequence(EcoFlexPart, EcoFlexEntry):
@@ -198,7 +198,7 @@ class EcoFlexCodingSequence(EcoFlexPart, EcoFlexEntry):
         the downstream overhang.
     """
 
-    signature = ('CATA', 'TCGA')
+    signature = ("CATA", "TCGA")
 
 
 class EcoFlexTerminator(EcoFlexPart, EcoFlexEntry):
@@ -209,7 +209,7 @@ class EcoFlexTerminator(EcoFlexPart, EcoFlexEntry):
 
     """
 
-    signature = ('TCGA', 'TGTT')
+    signature = ("TCGA", "TGTT")
 
 
 class EcoFlexPromoterRBS(EcoFlexPart, EcoFlexEntry):
@@ -222,4 +222,4 @@ class EcoFlexPromoterRBS(EcoFlexPart, EcoFlexEntry):
     followed by a ribosome binding site, and possibly a proteic tag.
     """
 
-    signature = ('CTAT', 'CATA')
+    signature = ("CTAT", "CATA")

@@ -19,10 +19,10 @@ class IGRegistry(EmbeddedRegistry):
     _file = "ig.json.bz2"
 
     def _load_name(self, raw, index):
-        return raw['record'].name
+        return raw["record"].name
 
     def _load_id(self, raw, index):
-        return raw['record'].id
+        return raw["record"].id
 
     def _load_resistance(self, raw, index):
         # TODO: sanitize sequences in `moclo-ig/registry/ig` to use the
@@ -35,17 +35,24 @@ class IGRegistry(EmbeddedRegistry):
         #     six.raise_from(RuntimeError(msg.format(raw['record'].id)), None)
         # return raw['resistance']
         #
-        labels =  [label for f in raw['record'].features
-                         for label in f.qualifiers.get('label', [])]
-        if 'AP r' in labels or 'AP\\r' in labels or 'AP(R)' in labels:
-            return 'Ampicillin'
-        elif 'Sm/Sp\\no\\DraIII' in labels or 'Sm/Sp' in labels or 'spec' in labels or 'spec\orf?' in labels:
-            return 'Spectinomycin'
-        elif 'NPTII' in labels or 'Kan\(no\BpiI)' in labels:
-            return 'Kanamycin'
+        labels = [
+            label
+            for f in raw["record"].features
+            for label in f.qualifiers.get("label", [])
+        ]
+        if "AP r" in labels or "AP\\r" in labels or "AP(R)" in labels:
+            return "Ampicillin"
+        elif (
+            "Sm/Sp\\no\\DraIII" in labels
+            or "Sm/Sp" in labels
+            or "spec" in labels
+            or "spec\orf?" in labels
+        ):
+            return "Spectinomycin"
+        elif "NPTII" in labels or "Kan\(no\BpiI)" in labels:
+            return "Kanamycin"
         else:
-            raise RuntimeError('antibio of ' + raw['record'].name)
-
+            raise RuntimeError("antibio of " + raw["record"].name)
 
     # _ENTITY_RX = re.compile(r'MoClo (.*): ([^\-\[\(]*)')
     #
@@ -85,10 +92,10 @@ class IGRegistry(EmbeddedRegistry):
         ]
 
         for t in types:
-            entity = t(raw['record'])
+            entity = t(raw["record"])
             if entity.is_valid():
                 return entity
-        raise RuntimeError('entity of ' + raw['record'].name)
+        raise RuntimeError("entity of " + raw["record"].name)
 
         # match = self._ENTITY_RX.match(raw['record'].description)
         # if match is not None:

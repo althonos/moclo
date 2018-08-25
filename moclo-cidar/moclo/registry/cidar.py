@@ -42,48 +42,48 @@ class CIDARRegistry(EmbeddedRegistry):
     _file = "cidar.json.bz2"
 
     def _load_name(self, raw, index):
-        return raw['record'].name
+        return raw["record"].name
 
     def _load_id(self, raw, index):
-        return raw['record'].id
+        return raw["record"].id
 
     def _load_resistance(self, raw, index):
         try:
-            return find_resistance(raw['record'])
+            return find_resistance(raw["record"])
         except RuntimeError:
             msg = "could not find antibiotics resistance of '{}'"
-            six.raise_from(RuntimeError(msg.format(raw['record'].id)), None)
-        return raw['resistance']
+            six.raise_from(RuntimeError(msg.format(raw["record"].id)), None)
+        return raw["resistance"]
 
-    _ENTITY_RX = re.compile(r'MoClo (.*): ([^\-\[\(]*)')
+    _ENTITY_RX = re.compile(r"MoClo (.*): ([^\-\[\(]*)")
 
     _CLASSES = {
-        'Cassette Vector': cidar.CIDARCassetteVector,
-        'Entry Vector': cidar.CIDAREntryVector,
-        'Device': cidar.CIDARDevice,
-        'Transcriptional Unit': cidar.CIDARCassette,
-        'Basic Part': cidar.CIDARPart,
+        "Cassette Vector": cidar.CIDARCassetteVector,
+        "Entry Vector": cidar.CIDAREntryVector,
+        "Device": cidar.CIDARDevice,
+        "Transcriptional Unit": cidar.CIDARCassette,
+        "Basic Part": cidar.CIDARPart,
     }
 
     _TYPES = {
-        'Double terminator': cidar.CIDARTerminator,
-        'RBS': cidar.CIDARRibosomeBindingSite,
-        'CDS': cidar.CIDARCodingSequence,
-        'Controllable promoter': cidar.CIDARPromoter,
-        'Constitutive promoter': cidar.CIDARPromoter,
+        "Double terminator": cidar.CIDARTerminator,
+        "RBS": cidar.CIDARRibosomeBindingSite,
+        "CDS": cidar.CIDARCodingSequence,
+        "Controllable promoter": cidar.CIDARPromoter,
+        "Constitutive promoter": cidar.CIDARPromoter,
     }
 
     def _load_entity(self, raw, index):
-        match = self._ENTITY_RX.match(raw['record'].description)
+        match = self._ENTITY_RX.match(raw["record"].description)
         if match is not None:
             class_, type_ = map(six.text_type.strip, match.groups())
-            if class_ == 'Destination Vector':
-                if raw['id'].startswith('DVA'):
-                    class_ = 'Entry Vector'
-                elif raw['id'].startswith('DVK'):
-                    class_ = 'Cassette Vector'
-            if class_ != 'Basic Part':
-                return self._CLASSES[class_](raw['record'])
+            if class_ == "Destination Vector":
+                if raw["id"].startswith("DVA"):
+                    class_ = "Entry Vector"
+                elif raw["id"].startswith("DVK"):
+                    class_ = "Cassette Vector"
+            if class_ != "Basic Part":
+                return self._CLASSES[class_](raw["record"])
             if type_ in self._TYPES:
-                return self._TYPES[type_](raw['record'])
-        raise RuntimeError("could not find type of '{}'".format(raw['id']))
+                return self._TYPES[type_](raw["record"])
+        raise RuntimeError("could not find type of '{}'".format(raw["id"]))

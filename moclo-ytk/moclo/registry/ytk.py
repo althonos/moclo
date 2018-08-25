@@ -46,47 +46,47 @@ class YTKRegistry(EmbeddedRegistry):
     _file = "ytk.json.bz2"
 
     _types = {
-        '1': ytk.YTKPart1,
-        '2': ytk.YTKPart2,
-        '3': ytk.YTKPart3,
-        '3a': ytk.YTKPart3a,
-        '3b': ytk.YTKPart3b,
-        '4': ytk.YTKPart4,
-        '4a': ytk.YTKPart4a,
-        '4b': ytk.YTKPart4b,
-        '234': ytk.YTKPart234,
-        '234r': ytk.YTKPart234r,
-        '5': ytk.YTKPart5,
-        '6': ytk.YTKPart6,
-        '7': ytk.YTKPart7,
-        '8': ytk.YTKPart8,
-        '8a': ytk.YTKPart8a,
-        '8b': ytk.YTKPart8b,
-        '678': ytk.YTKPart678,
-        'cassette vector': ytk.YTKCassetteVector,
-        'entry vector': ytk.YTKEntryVector,
+        "1": ytk.YTKPart1,
+        "2": ytk.YTKPart2,
+        "3": ytk.YTKPart3,
+        "3a": ytk.YTKPart3a,
+        "3b": ytk.YTKPart3b,
+        "4": ytk.YTKPart4,
+        "4a": ytk.YTKPart4a,
+        "4b": ytk.YTKPart4b,
+        "234": ytk.YTKPart234,
+        "234r": ytk.YTKPart234r,
+        "5": ytk.YTKPart5,
+        "6": ytk.YTKPart6,
+        "7": ytk.YTKPart7,
+        "8": ytk.YTKPart8,
+        "8a": ytk.YTKPart8a,
+        "8b": ytk.YTKPart8b,
+        "678": ytk.YTKPart678,
+        "cassette vector": ytk.YTKCassetteVector,
+        "entry vector": ytk.YTKEntryVector,
     }
 
     def _load_name(self, raw, index):
-        return raw['record'].description
+        return raw["record"].description
 
     def _load_id(self, raw, index):
-        return raw['record'].id
+        return raw["record"].id
 
     def _load_resistance(self, raw, index):
         try:
-            return find_resistance(raw['record'])
+            return find_resistance(raw["record"])
         except StopIteration:
             msg = "could not find antibiotics resistance of '{}'"
-            six.raise_from(RuntimeError(msg.format(raw['record'].id)), None)
+            six.raise_from(RuntimeError(msg.format(raw["record"].id)), None)
 
     def _load_entity(self, raw, index):
-        comments = raw['record'].annotations['comment'].splitlines()
-        hint = next(c for c in comments if c.startswith('YTK:'))
+        comments = raw["record"].annotations["comment"].splitlines()
+        hint = next(c for c in comments if c.startswith("YTK:"))
         comments.remove(hint)
-        raw['record'].annotations['comment'] = "\n".join(comments)
-        _, type_ = hint.strip().split(':', 1)
-        return self._types[type_](raw['record'])
+        raw["record"].annotations["comment"] = "\n".join(comments)
+        _, type_ = hint.strip().split(":", 1)
+        return self._types[type_](raw["record"])
 
 
 class PTKRegistry(YTKRegistry):
