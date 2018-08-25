@@ -8,9 +8,7 @@ import unittest
 from moclo._utils import isabstract
 
 
-
 class TestIsAbstract(unittest.TestCase):
-
     def test_abstract_method(self):
         self.assertTrue(isabstract(collections.Iterable))
         self.assertFalse(isabstract(int))
@@ -18,4 +16,5 @@ class TestIsAbstract(unittest.TestCase):
     def test_abstract_attribute(self):
         class Abstract(object):
             thingy = NotImplemented
+
         self.assertTrue(isabstract(Abstract))

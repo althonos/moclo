@@ -16,7 +16,6 @@ from moclo.core.modules import AbstractModule
 
 
 class TestAssembly(unittest.TestCase):
-
     class MockVector(AbstractVector):
         cutter = BpiI
 
@@ -94,4 +93,4 @@ class TestAssembly(unittest.TestCase):
         self.assertEqual(len(captured), 1)
         self.assertIsInstance(captured[0].message, errors.UnusedModules)
         self.assertEqual(captured[0].message.remaining, (mod2,))
-        self.assertEqual(str(captured[0].message), 'unused: mod2')
+        self.assertEqual(str(captured[0].message), "unused: mod2")

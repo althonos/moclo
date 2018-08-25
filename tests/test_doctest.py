@@ -30,10 +30,17 @@ class IgnoreUnicodeChecker(doctest.OutputChecker):
 def _load_tests_from_module(tests, module, globs, setUp, tearDown):
     """Load tests from module, iterating through submodules.
     """
-    for attr in (getattr(module, x) for x in dir(module) if not x.startswith('_')):
+    for attr in (getattr(module, x) for x in dir(module) if not x.startswith("_")):
         if isinstance(attr, types.ModuleType):
-            tests.addTests(doctest.DocTestSuite(attr, globs=globs,
-                setUp=setUp, tearDown=tearDown, checker=IgnoreUnicodeChecker()))
+            tests.addTests(
+                doctest.DocTestSuite(
+                    attr,
+                    globs=globs,
+                    setUp=setUp,
+                    tearDown=tearDown,
+                    checker=IgnoreUnicodeChecker(),
+                )
+            )
     return tests
 
 
@@ -48,8 +55,8 @@ def load_tests(loader=None, tests=unittest.TestSuite(), ignore=False):
 
     globs = {
         # Biopython
-        'Seq': Bio.Seq.Seq,
-        'SeqRecord': Bio.SeqRecord.SeqRecord,
+        "Seq": Bio.Seq.Seq,
+        "SeqRecord": Bio.SeqRecord.SeqRecord,
     }
 
     # Load all abstract base classes in the namespace
@@ -63,7 +70,7 @@ def load_tests(loader=None, tests=unittest.TestSuite(), ignore=False):
         if isinstance(attr, type) and issubclass(attr, RestrictionType):
             globs[name] = attr
 
-    if not sys.argv[0].endswith('green'):
+    if not sys.argv[0].endswith("green"):
         _load_tests_from_module(tests, moclo, globs, _setUp, _tearDown)
         _load_tests_from_module(tests, moclo.core, globs, _setUp, _tearDown)
         _load_tests_from_module(tests, moclo.kits, globs, _setUp, _tearDown)
@@ -72,7 +79,7 @@ def load_tests(loader=None, tests=unittest.TestSuite(), ignore=False):
 
 
 def setUpModule():
-    warnings.simplefilter('ignore')
+    warnings.simplefilter("ignore")
 
 
 def tearDownModule():

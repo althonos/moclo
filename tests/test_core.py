@@ -13,7 +13,6 @@ from moclo.record import CircularRecord
 
 
 class TestEntryVector(unittest.TestCase):
-
     class MockEntryVector(EntryVector):
         cutter = BpiI
 
@@ -21,28 +20,34 @@ class TestEntryVector(unittest.TestCase):
         cutter = BpiI
 
     def test_module_structure(self):
-        self.assertEqual(self.MockProduct.structure(), (
-            "GAAGAC"  # BpiI
-            "NN"
-            "(NNNN)"  # Product overhangs (start)
-            "(NN*N)"  # Target
-            "(NNNN)"  # Product overhangs (end)
-            "NN"
-            "GTCTTC"  # BpiI
-        ))
+        self.assertEqual(
+            self.MockProduct.structure(),
+            (
+                "GAAGAC"  # BpiI
+                "NN"
+                "(NNNN)"  # Product overhangs (start)
+                "(NN*N)"  # Target
+                "(NNNN)"  # Product overhangs (end)
+                "NN"
+                "GTCTTC"  # BpiI
+            ),
+        )
 
     def test_vector_structure(self):
-        self.assertEqual(self.MockEntryVector.structure(), (
-            "N"
-            "(NNNN)"
-            "(NN"
-            "GTCTTC"  # BpiI
-            "N*"      # Placeholder
-            "GAAGAC"  # BpiI
-            "NN)"
-            "(NNNN)"
-            "N"
-        ))
+        self.assertEqual(
+            self.MockEntryVector.structure(),
+            (
+                "N"
+                "(NNNN)"
+                "(NN"
+                "GTCTTC"  # BpiI
+                "N*"  # Placeholder
+                "GAAGAC"  # BpiI
+                "NN)"
+                "(NNNN)"
+                "N"
+            ),
+        )
 
     def test_valid(self):
         """Assert a valid product is considered valid.
@@ -68,7 +73,6 @@ class TestEntryVector(unittest.TestCase):
         seqv = Seq("ATG")
         vector = self.MockEntryVector(CircularRecord(seqv, "vector"))
         self.assertFalse(vector.is_valid())
-
 
     # def test_insert_linear(self):
     #     # Non-circular sequence

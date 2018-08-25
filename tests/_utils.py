@@ -25,15 +25,15 @@ from moclo.record import CircularRecord
 
 
 # fs.osfs.OSFS: FS located at the root of the project
-PROJFS = fs.open_fs(os.path.join(__file__, '..', '..'))
+PROJFS = fs.open_fs(os.path.join(__file__, "..", ".."))
 
 # fs.osfs.OSFS: FS where test data is located
-DATAFS = PROJFS.opendir('tests/data')
+DATAFS = PROJFS.opendir("tests/data")
 
 ### Setup helper
 
-class Registries(object):
 
+class Registries(object):
     def __init__(self):
         self._built = set()
 
@@ -41,7 +41,7 @@ class Registries(object):
         if name not in self._built:
             subprocess.Popen(
                 args=[sys.executable, "setup.py", "build_ext", "-i"],
-                cwd=PROJFS.getsyspath('moclo-{}'.format(name)),
+                cwd=PROJFS.getsyspath("moclo-{}".format(name)),
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
             ).communicate()
@@ -55,7 +55,6 @@ build_registries = Registries()
 
 
 class PartsMetaCase(object):
-
     def __init__(self, kit_name, registry_factory, module):
         build_registries(kit_name.lower())
         self.kit_name = kit_name
@@ -70,9 +69,9 @@ class PartsMetaCase(object):
             for item in self.registry.values()
             if not exclude(item)
         )
-        attrs = {test.__name__:test for test in tests}
-        attrs['__name__'] = name = str('Test{}'.format(part_cls.__name__))
-        attrs['__module__'] = self.module
+        attrs = {test.__name__: test for test in tests}
+        attrs["__name__"] = name = str("Test{}".format(part_cls.__name__))
+        attrs["__module__"] = self.module
         return type(name, (unittest.TestCase,), attrs)
 
     def make_test(self, item, part_cls, part_name):
@@ -85,23 +84,27 @@ class PartsMetaCase(object):
         """
         rec = item.entity.record
         if isinstance(item.entity, part_cls):
+
             def test(self_):
-                err = '{} is not a valid {} {} but should be!'
+                err = "{} is not a valid {} {} but should be!"
                 self_.assertTrue(
                     part_cls(rec).is_valid(),
-                    err.format(item.id, self.kit_name, part_name)
+                    err.format(item.id, self.kit_name, part_name),
                 )
-            name = 'test_{}_is_{}'
-            doc = 'Check that {} ({}) is a {} {}.\n'
+
+            name = "test_{}_is_{}"
+            doc = "Check that {} ({}) is a {} {}.\n"
         else:
+
             def test(self_):
-                err = '{} is a valid {} {} but should not be!'
+                err = "{} is a valid {} {} but should not be!"
                 self_.assertFalse(
                     part_cls(rec).is_valid(),
-                    err.format(item.id, self.kit_name, part_name)
+                    err.format(item.id, self.kit_name, part_name),
                 )
-            name = 'test_{}_is_not_{}'
-            doc = 'Check that {} ({}) is not a {} {}.\n'
+
+            name = "test_{}_is_not_{}"
+            doc = "Check that {} ({}) is not a {} {}.\n"
         test.__name__ = str(name.format(item.id, part_name))
         test.__doc__ = doc.format(
             item.id, item.entity.record.name, self.kit_name, part_name
@@ -110,29 +113,28 @@ class PartsMetaCase(object):
 
 
 class AssemblyTestCase(unittest.TestCase):
-
     def assertAssembly(self, vector, modules, result):
         assembly = vector.assemble(*modules)
-        self.assertEqual(len(assembly), len(result), 'lengths differ')
-        self.assertIn(assembly.seq, result.seq + result.seq, 'sequences differ')
+        self.assertEqual(len(assembly), len(result), "lengths differ")
+        self.assertIn(assembly.seq, result.seq + result.seq, "sequences differ")
 
     def load_data(self, name):
-        archive_path = 'cases/{}.tar.xz'.format(name)
+        archive_path = "cases/{}.tar.xz".format(name)
 
         if not DATAFS.exists(archive_path):
-            raise unittest.SkipTest('no test case found')
+            raise unittest.SkipTest("no test case found")
 
         with contexter.Contexter() as ctx:
             # open FASTA files
             casefs = ctx << fs.archive.open_archive(DATAFS, archive_path)
-            result_fa = ctx << casefs.open('result.fa')
-            vector_fa = ctx << casefs.open('vector.fa')
-            modules_fa = ctx << casefs.open('modules.fa')
+            result_fa = ctx << casefs.open("result.fa")
+            vector_fa = ctx << casefs.open("vector.fa")
+            modules_fa = ctx << casefs.open("modules.fa")
             # load records from FASTA handles
-            res = CircularRecord(Bio.SeqIO.read(result_fa, 'fasta'))
-            vec = CircularRecord(Bio.SeqIO.read(vector_fa, 'fasta'))
+            res = CircularRecord(Bio.SeqIO.read(result_fa, "fasta"))
+            vec = CircularRecord(Bio.SeqIO.read(vector_fa, "fasta"))
             mods = {
                 record.id: CircularRecord(record)
-                for record in Bio.SeqIO.parse(modules_fa, 'fasta')
+                for record in Bio.SeqIO.parse(modules_fa, "fasta")
             }
         return res, vec, mods
