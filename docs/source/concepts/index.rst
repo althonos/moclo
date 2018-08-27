@@ -1,18 +1,18 @@
-Modular Cloning concepts
-========================
+Concepts
+========
 
 Introduction
 ------------
 
-The MoClo standard was first presented in the *Weber et al., 2011* [21364738]
+The MoClo standard was first presented in the *Weber et al., 2011* [21364738]_
 paper, as an attempt to standardize the process of assembling complex DNA
 molecules from smaller genetic elements. It is inspired by two previous
 standards:
 
-- NOMAD[8855278], which proposed generic notions of *modules* and *vectors*,
+- NOMAD [8855278]_, which proposed generic notions of *modules* and *vectors*,
   as well as assembly using Type IIS enzymes. Modules can be combined in any
   order, but are clone sequentially one module at a time.
-- BioBrick[18410688], which defines *parts* with a stable structure: assembling
+- BioBrick [18410688]_, which defines *parts* with a stable structure: assembling
   two parts together always gives a part with the same flanking restriction
   sites.
 
@@ -111,3 +111,23 @@ using two different factors:
 This double screening makes it possible to select only the bacterias that
 contain the expected construct, discarding the others, and retrieving the
 assembled plasmid through a miniprep.
+
+
+References
+----------
+
+
+.. [8855278] Rebatchouk, D, N Daraselia, and J O Narita.
+             ‘NOMAD: A Versatile Strategy for in Vitro DNA Manipulation Applied to Promoter Analysis and Vector Design.’
+             *Proceedings of the National Academy of Sciences of the United States of America* 93, no. 20 (1 October 1996): 10891–96.
+             `pmid:8855278 <https://www.ncbi.nlm.nih.gov/pubmed/8855278>`_
+
+.. [18410688] Shetty, Reshma P, Drew Endy, and Thomas F Knight.
+              ‘Engineering BioBrick Vectors from BioBrick Parts’.
+              *Journal of Biological Engineering* 2 (14 April 2008): 5.
+              `doi:10.1186/1754-1611-2-5 <https://doi.org/10.1186/1754-1611-2-5>`_
+
+.. [21364738] Weber, Ernst, Carola Engler, Ramona Gruetzner, Stefan Werner, and Sylvestre Marillonnet.
+              ‘A Modular Cloning System for Standardized Assembly of Multigene Constructs’.
+              *PLOS ONE* 6, no. 2 (18 February 2011): e16765.
+              `doi:10.1371/journal.pone.0016765 <https://doi.org/10.1371/journal.pone.0016765>`_
