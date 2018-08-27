@@ -118,22 +118,148 @@ Modules
     and a Modular Cloning System :math:`(M_l, V_l, e_l)_ {l \ge -1}` over
     it.
 
+
     :math:`\forall l \ge -1`, the regular expression:
 
     .. math::
 
         \begin{array}l
         \bigcup_{\begin{array}l(S, n, k) \in e_l \\ (S\prime, n\prime, k\prime) \in e_l\end{array}}
-        \bigcup_{\begin{array}l s \in S \\ s\prime \in S\prime\end{array}}
-        x^\star \cdot  s \cdot x^n \cdot x^{abs(k)} \cdot x^\star \cdot x^{abs(k\prime)} \cdot x^{n\prime} \cdot \widetilde{\,s\prime\,} \cdot x^\star \\
+        \Sigma^\star \cdot S \cdot \Sigma^n \cdot \Sigma^{abs(k)} \cdot \Sigma^\star \cdot \overline{(S | S^\prime)} \cdot \Sigma^\star \cdot \Sigma^{abs(k\prime)} \cdot \Sigma^{n\prime} \cdot \widetilde{\,S\prime\,} \cdot \Sigma^\star \\
         \end{array}
 
     where:
 
-    * :math:`x` is the regular expression accepting any single letter
-      of :math:`\Sigma`
+    * :math:`\star` is the `Kleene star <https://en.wikipedia.org/wiki/Kleene_star>`_.
+    * :math:`\widetilde{S} = \{\widetilde{s}, s \in S\}` (reverse complementation operator).
+    * :math:`\overline{S} = \{w \in \Sigma^\star, w \not \in S\}` (`complement <https://en.wikipedia.org/wiki/Complement_(set_theory)>`_ operator).
+    * :math:`S | S^\prime = S \cup S^\prime` (`alternation <https://en.wikipedia.org/wiki/Alternation_(formal_language_theory)>`_ operator).
+
 
     matches a sequence :math:`m \in \Sigma^\star \cup \Sigma^{(c)}` if and only if
     :math:`m \in M_l`.
 
     :math:`M_l` is regular, so given Kleene's Theorem, :math:`M_l` is rational.
+
+
+
+Vectors
+-------
+
+.. admonition:: Definition
+    :class: math-definition
+
+    For a given level :math:`l`, :math:`V_l` is defined as the set of vectors :math:`v \in \Sigma^{(c)}`
+    for which:
+
+    .. math::
+
+        \begin{array}{l}
+        \exists ! (S, n, k) \in e_l, \\
+        \exists ! (S^\prime, n^\prime, k^\prime) \in e_l,  \\
+        \exists ! (s, s^\prime) \in S \times S^\prime, \\
+        \exists ! (x, y, o_5, o_3) \in (\Sigma^\star)^4, \\
+        \\
+        \quad \exists ! (b, p) \in (\Sigma^\star)^2,
+        \exists ! b \in \Sigma^\star,\ & m = (o_3 \cdot b \cdot o_5 \cdot y \cdot \widetilde{s} \cdot p \cdot s\prime \cdot x)^{(c)}, & \text{ if } m \in \Sigma^{(c)}\\
+        \end{array}
+
+    with:
+
+    * :math:`|x| = n`
+    * :math:`|y| = n^\prime`
+    * :math:`|o_5| = abs(k)`
+    * :math:`|o_3| = abs(k^\prime)`
+    * :math:`o_3 \ne o_5`
+
+.. note::
+
+    This decomposition is called the *canonic vector decomposition*, where:
+
+    * :math:`p` is the *placeholder sequence* of the vector :math:`v`
+    * :math:`b` is the *backbone* of the vector :math:`v`
+    * :math:`o_3` and :math:`o_5` are the *upstream* and *downstream overhangs* respectively.
+
+
+Overhangs
+---------
+
+By definition, every valid level :math:`l` module and vector only have a single canonic
+decomposition where they have unique :math:`o_5` and :math:`o_3` overhangs. As such,
+let the function :math:`up` (resp. :math:`down`) be defined as the function which:
+
+* to a module :math:`m` associates the word :math:`o_5` (resp. :math:`o_3`) from its
+  canonic module decomposition
+* to a vector :math:`v` associates the word :math:`o_3` (resp. :math:`o_5`) from its
+  canonic vector decomposition.
+
+
+
+Standard Assembly
+-----------------
+
+.. admonition:: Definition: *Standard MoClo Assembly*
+    :class: math-definition
+
+    Given an assembly of level :math:`l`, where :math:`m_1, \dots, m_k \in M_l^k, v \in V_l`:
+
+    .. math::
+
+        m_1 + \dots + m_k \xrightarrow{\quad e_l \quad} A \subset (\Sigma^\star \cup \Sigma^{(c)})
+
+    and the partial order :math:`ge` over :math:`S = \{m_1, \dots, m_k\}` defined as:
+
+    .. math::
+
+        \begin{array}{l}
+        \forall x, y \in S^2, \\
+        \quad x \le y \iff \begin{cases}
+        x = y & \\
+        down(x) = up(y) & \text{ if } x \ne y\\
+        \exists z \in S \backslash \{x, y\}, down(x) = up(z), \ z \le y & \text{ if } x \ne y \text{ and } down(x) \ne up(y)
+        \end{cases}
+        \end{array}
+
+    then a chain :math:`\langle S\prime, \ge \rangle \subset \langle S, \ge \rangle` is
+    an *insert* if:
+
+    .. math::
+
+        \begin{cases}
+        v \le min(S^\prime) \\
+        max(S^\prime) \le v
+        \end{cases}
+        \iff
+        \begin{cases}
+        down(v) = up(min(S^\prime)) \\
+        up(v) = down(max(S^\prime))
+        \end{cases}
+
+    The assembly is:
+
+    * *invalid* if  :math:`\langle S, \ge \rangle` is an antichain or :math:`\langle S, \ge \rangle`
+      has no insert.
+    * *valid* if :math:`\langle S, \ge \rangle` has at least one insert.
+    * *ambiguous* if :math:`\langle S, \ge \rangle` has more than one insert.
+    * *unambiguous* if :math:`\langle S, \ge \rangle` has exactly one insert.
+    * *complete* if :math:`\langle S, \ge \rangle` is an insert.
+
+
+
+.. admonition:: Property: *Uniqueness of the assembled plasmid*
+    :class: math-property
+
+    If an assembly
+
+    .. math:: m_1 + \dots + m_k \xrightarrow{\quad e_l \quad} A \subset (\Sigma^\star \cup \Sigma^{(c)})
+
+    is complete, then
+
+    .. math:: A \cap \Sigma^{(c)} = \{p\}
+
+    with
+
+    .. math:: p = \left( up(v) \cdot b \cdot up(m_{\pi(1)}) \cdot t_{\pi(1)} \cdot \, \dots \, \cdot up(m_{\pi(k)}) \cdot t_{\pi(k)} \right) ^{(c)}
+
+    ..
+    .. math
