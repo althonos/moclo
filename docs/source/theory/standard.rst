@@ -207,7 +207,7 @@ Standard Assembly
 
         m_1 + \dots + m_k \xrightarrow{\quad e_l \quad} A \subset (\Sigma^\star \cup \Sigma^{(c)})
 
-    and the partial order :math:`ge` over :math:`S = \{m_1, \dots, m_k\}` defined as:
+    and the partial order :math:`le` over :math:`S = \{m_1, \dots, m_k\}` defined as:
 
     .. math::
 
@@ -220,7 +220,7 @@ Standard Assembly
         \end{cases}
         \end{array}
 
-    then a chain :math:`\langle S\prime, \ge \rangle \subset \langle S, \ge \rangle` is
+    then a chain :math:`\langle S\prime, \le \rangle \subset \langle S, \le \rangle` is
     an *insert* if:
 
     .. math::
@@ -237,13 +237,30 @@ Standard Assembly
 
     The assembly is:
 
-    * *invalid* if  :math:`\langle S, \ge \rangle` is an antichain or :math:`\langle S, \ge \rangle`
+    * *invalid* if  :math:`\langle S, \le \rangle` is an antichain or :math:`\langle S, \ge \rangle`
       has no insert.
-    * *valid* if :math:`\langle S, \ge \rangle` has at least one insert.
-    * *ambiguous* if :math:`\langle S, \ge \rangle` has more than one insert.
-    * *unambiguous* if :math:`\langle S, \ge \rangle` has exactly one insert.
-    * *complete* if :math:`\langle S, \ge \rangle` is an insert.
+    * *valid* if :math:`\langle S, \le \rangle` has at least one insert.
+    * *ambiguous* if :math:`\langle S, \le \rangle` has more than one insert.
+    * *unambiguous* if :math:`\langle S, \le \rangle` has exactly one insert.
+    * *complete* if :math:`\langle S, \le \rangle` is an insert.
 
+
+.. admonition:: Corollary
+    :class: math-property
+
+    If the assembly is complete, then there exist a permutation :math:`\pi` of
+    :math:`[\![1, k]\!]` such that:
+
+    .. math:: m_{\pi(1)} \le m_{\pi(2)} \le \dots \le m_{\pi(k-1)} \le m_{\pi(k)}
+
+    and:
+
+    .. math::
+
+        \begin{array}{lll}
+        up(m_{\pi(1)}) &=& down(v) \\
+        down(m_{\pi(k)} &=& up(v)
+        \end{array}
 
 
 .. admonition:: Property: *Uniqueness of the assembled plasmid*
@@ -261,5 +278,9 @@ Standard Assembly
 
     .. math:: p = \left( up(v) \cdot b \cdot up(m_{\pi(1)}) \cdot t_{\pi(1)} \cdot \, \dots \, \cdot up(m_{\pi(k)}) \cdot t_{\pi(k)} \right) ^{(c)}
 
-    ..
-    .. math
+
+
+
+.. admonition:: Demonstration
+    :class: math-demonstration
+
