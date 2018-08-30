@@ -73,7 +73,7 @@ Circular Sequences
 
     let the :math:`=` relation be defined as:
 
-    .. math:: a = b \iff \exists k \in \mathbb{N}, a = \sigma^{k}(b)
+    .. math:: a^{(c)} = b^{(c)} \iff \exists k \in \mathbb{N}, a = \sigma^{k}(b)
 
     where :math:`\sigma` is the circular shift defined as:
 
@@ -143,7 +143,7 @@ Circular Sequences
 .. admonition:: Definition: *Automaton acception*
     :class: math-definition
 
-    Given a finite automate :math:`A` over an alphabet :math:`\Sigma`, and
+    Given a finite automaton :math:`A` over an alphabet :math:`\Sigma`, and
     :math:`u^{(c)}` a sequence of :math:`\Sigma^{(c)}`, :math:`A` *accepts*
     :math:`u^{(c)}` iff there exist a sequence :math:`v` of :math:`\Sigma^\star`
     such that:
