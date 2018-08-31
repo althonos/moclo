@@ -6,6 +6,8 @@ Preliminary Definitions
 
 
 
+.. _reverse-complement:
+
 Genetic Alphabet
 ----------------
 

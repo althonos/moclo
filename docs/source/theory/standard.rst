@@ -5,6 +5,7 @@ Standard Modular Cloning System
   :maxdepth: 1
 
 
+
 System Definition
 -----------------
 
@@ -24,6 +25,7 @@ System Definition
     * :math:`V_l \subseteq \Sigma^{(c)}` is the set of vectors of level :math:`l`
     * :math:`e_l \subseteq E` is the finite, non-empty set of *asymmetric*,
       *Type IIS* restriction enzymes of level :math:`l`
+
 
 .. admonition:: Definition: :math:`k`-*cyclicity*
     :class: math-definition
@@ -58,6 +60,7 @@ System Definition
         e_l = \emptyset
 
 
+
 Modules
 -------
 
@@ -89,6 +92,7 @@ Modules
     * :math:`|y| = n^\prime`
     * :math:`|o_5| = abs(k)`
     * :math:`|o_3| = abs(k^\prime)`
+
 
 .. note::
 
@@ -131,7 +135,7 @@ Modules
     where:
 
     * :math:`\star` is the `Kleene star <https://en.wikipedia.org/wiki/Kleene_star>`_.
-    * :math:`\widetilde{S} = \{\widetilde{s}, s \in S\}` (reverse complementation operator).
+    * :math:`\widetilde{S} = \{\widetilde{s}, s \in S\}` (:ref:`reverse complementation <reverse-complement>` operator).
     * :math:`\overline{S} = \{w \in \Sigma^\star, w \not \in S\}` (`complement <https://en.wikipedia.org/wiki/Complement_(set_theory)>`_ operator).
     * :math:`S | S^\prime = S \cup S^\prime` (`alternation <https://en.wikipedia.org/wiki/Alternation_(formal_language_theory)>`_ operator).
 
@@ -161,7 +165,7 @@ Vectors
         \exists ! (x, y, o_5, o_3) \in (\Sigma^\star)^4, \\
         \\
         \quad \exists ! (b, p) \in (\Sigma^\star)^2,
-        \exists ! b \in \Sigma^\star,\ & m = (o_3 \cdot b \cdot o_5 \cdot y \cdot \widetilde{s} \cdot p \cdot s\prime \cdot x)^{(c)}, & \text{ if } m \in \Sigma^{(c)}\\
+        \exists ! b \in \Sigma^\star,\ v = (o_3 \cdot b \cdot o_5 \cdot y \cdot \widetilde{s} \cdot p \cdot s\prime \cdot x)^{(c)} \\
         \end{array}
 
     with:
@@ -172,6 +176,7 @@ Vectors
     * :math:`|o_3| = abs(k^\prime)`
     * :math:`o_3 \ne o_5`
 
+
 .. note::
 
     This decomposition is called the *canonic vector decomposition*, where:
@@ -179,6 +184,7 @@ Vectors
     * :math:`p` is the *placeholder sequence* of the vector :math:`v`
     * :math:`b` is the *backbone* of the vector :math:`v`
     * :math:`o_3` and :math:`o_5` are the *upstream* and *downstream overhangs* respectively.
+
 
 
 Overhangs
@@ -198,6 +204,7 @@ let the function :math:`up` (resp. :math:`down`) be defined as the function whic
 Standard Assembly
 -----------------
 
+
 .. admonition:: Definition: *Standard MoClo Assembly*
     :class: math-definition
 
@@ -205,7 +212,7 @@ Standard Assembly
 
     .. math::
 
-        m_1 + \dots + m_k \xrightarrow{\quad e_l \quad} A \subset (\Sigma^\star \cup \Sigma^{(c)})
+        a:\quad m_1 + \dots + m_k \xrightarrow{\quad e_l \quad} A \subset (\Sigma^\star \cup \Sigma^{(c)})
 
     and the partial order :math:`le` over :math:`S = \{m_1, \dots, m_k\}` defined as:
 
@@ -235,7 +242,7 @@ Standard Assembly
         up(v) = down(max(S^\prime))
         \end{cases}
 
-    The assembly is:
+    :math:`a` is:
 
     * *invalid* if  :math:`\langle S, \le \rangle` is an antichain or :math:`\langle S, \ge \rangle`
       has no insert.
@@ -248,8 +255,8 @@ Standard Assembly
 .. admonition:: Corollary
     :class: math-property
 
-    If the assembly is complete, then there exist a permutation :math:`\pi` of
-    :math:`[\![1, k]\!]` such that:
+    If an assembly :math:`a` is complete, then there exist a permutation
+    :math:`\pi` of :math:`[\![1, k]\!]` such that:
 
     .. math:: m_{\pi(1)} \le m_{\pi(2)} \le \dots \le m_{\pi(k-1)} \le m_{\pi(k)}
 
@@ -259,8 +266,78 @@ Standard Assembly
 
         \begin{array}{lll}
         up(m_{\pi(1)}) &=& down(v) \\
-        down(m_{\pi(k)} &=& up(v)
+        down(m_{\pi(k)}) &=& up(v)
         \end{array}
+
+
+.. admonition:: Property: *Uniqueness of the cohesive ends*
+   :class: math-property
+
+   If an assembly
+
+   .. math:: m_1 + \dots + m_k \xrightarrow{\quad e_l \quad} A \subset (\Sigma^\star \cup \Sigma^{(c)})
+
+   is unambiguous and complete, then :math:`\forall i \in [\![1, k]\!]`,
+
+   .. math::
+
+       \left\{
+       \begin{array}{llll}
+       up(m_i) &\ne& down(m_i)& \\
+       up(m_i) &\ne& up(m_j),     & j \in [\![1, k]\!] \backslash \{i\} \\
+       down(m_i) &\ne& down(m_j), & j \in [\![1, k]\!] \backslash \{i\} \\
+       \end{array}
+       \right .
+
+
+
+.. admonition:: Demonstration
+    :class: math-demo
+
+    Let there be an unambiguous complete assembly
+
+    .. math:: a:\quad m_1 + \dots + m_k \xrightarrow{\quad e_l \quad} A
+
+
+
+    .. rubric:: :math:`up(m_i) \ne down(m_i)`
+
+    Let's suppose that :math:`\exists i \in [\![1, k]\!]` such that
+
+    .. math:: up(m_i) = down(m_i)
+
+    then :math:`\langle \{m_1, \dots, m_k\} \backslash \{m_i\}, \le \rangle`
+    is also an insert, which cannot be since :math:`a` is complete.
+
+
+
+    .. rubric:: :math:`up(m_i) \ne up(m_j)`
+
+
+    Let's suppose that :math:`\exists (i, j) \in [\![1, k]\!]^2` such that
+
+    .. math:: up(m_i) = up(m_j)
+
+    Since the :math:`a` is complete, there exists :math:`pi` such that
+
+    .. math:: m_{\pi(1)} \le m_{\pi(2)} \le \dots \le m_{\pi(k-1)} \le m_{\pi(k)}
+
+    and since :math:`a` is unambiguous, :math:`\langle \{m_1, \dots, m_k\}, \le \rangle`
+    is the only insert.
+
+    Or if :math:`up(m_i) = up(m_j)`, then
+
+    .. TODO
+
+    .. .. math:: \langle \{m_1, \dots, m_k\} \backslash \{m_\pi(i), \le \rangle
+
+    is also an insert, which cannot be since :math:`a` is unambiguous.
+
+
+
+    .. rubric:: :math:`down(m_i) \ne down(m_j)`
+
+    TODO
 
 
 .. admonition:: Property: *Uniqueness of the assembled plasmid*
@@ -270,17 +347,20 @@ Standard Assembly
 
     .. math:: m_1 + \dots + m_k \xrightarrow{\quad e_l \quad} A \subset (\Sigma^\star \cup \Sigma^{(c)})
 
-    is complete, then
+    is unambiguous, then
 
     .. math:: A \cap \Sigma^{(c)} = \{p\}
 
     with
 
-    .. math:: p = \left( up(v) \cdot b \cdot up(m_{\pi(1)}) \cdot t_{\pi(1)} \cdot \, \dots \, \cdot up(m_{\pi(k)}) \cdot t_{\pi(k)} \right) ^{(c)}
+    .. math:: p = \left( up(v) \cdot b \cdot up(m_{\pi(1)}) \cdot t_{\pi(1)} \cdot \, \dots \, \cdot up(m_{\pi(n)}) \cdot t_{\pi(n)} \right) ^{(c)}
+
+    (:math:`n \le k`, :math:`n = k` if :math:`a` is complete).
 
 
 
 
 .. admonition:: Demonstration
-    :class: math-demonstration
+    :class: math-demo
 
+    TODO
