@@ -300,44 +300,34 @@ Standard Assembly
 
 
 
-    .. rubric:: :math:`up(m_i) \ne down(m_i)`
+    * :math:`up(m_i) \ne down(m_i)`
 
-    Let's suppose that :math:`\exists i \in [\![1, k]\!]` such that
+      Let's suppose that :math:`\exists i \in [\![1, k]\!]` such that
 
-    .. math:: up(m_i) = down(m_i)
+      .. math:: up(m_i) = down(m_i)
 
-    then :math:`\langle \{m_1, \dots, m_k\} \backslash \{m_i\}, \le \rangle`
-    is also an insert, which cannot be since :math:`a` is complete.
-
-
-
-    .. rubric:: :math:`up(m_i) \ne up(m_j)`
-
-
-    Let's suppose that :math:`\exists (i, j) \in [\![1, k]\!]^2` such that
-
-    .. math:: up(m_i) = up(m_j)
-
-    Since the :math:`a` is complete, there exists :math:`pi` such that
-
-    .. math:: m_{\pi(1)} \le m_{\pi(2)} \le \dots \le m_{\pi(k-1)} \le m_{\pi(k)}
-
-    and since :math:`a` is unambiguous, :math:`\langle \{m_1, \dots, m_k\}, \le \rangle`
-    is the only insert.
-
-    Or if :math:`up(m_i) = up(m_j)`, then
-
-    .. TODO
-
-    .. .. math:: \langle \{m_1, \dots, m_k\} \backslash \{m_\pi(i), \le \rangle
-
-    is also an insert, which cannot be since :math:`a` is unambiguous.
+      then :math:`\langle \{m_1, \dots, m_k\} \backslash \{m_i\}, \le \rangle`
+      is also an insert, which cannot be since :math:`a` is complete.
 
 
 
-    .. rubric:: :math:`down(m_i) \ne down(m_j)`
+    * :math:`up(m_i) \ne up(m_j)`
 
-    TODO
+
+      Let's suppose that :math:`\exists (i, j) \in [\![1, k]\!]^2` such that
+
+      .. math:: up(m_i) = up(m_j)
+
+      Since the :math:`a` is complete, there exists :math:`pi` such that
+
+      .. math:: m_{\pi(1)} \le m_{\pi(2)} \le \dots \le m_{\pi(k-1)} \le m_{\pi(k)}
+
+      and since :math:`a` is unambiguous, :math:`\langle \{m_1, \dots, m_k\}, \le \rangle`
+      is the only insert.
+
+    * :math:`down(m_i) \ne down(m_j)`
+
+      TODO
 
 
 .. admonition:: Property: *Uniqueness of the assembled plasmid*
@@ -356,8 +346,6 @@ Standard Assembly
     .. math:: p = \left( up(v) \cdot b \cdot up(m_{\pi(1)}) \cdot t_{\pi(1)} \cdot \, \dots \, \cdot up(m_{\pi(n)}) \cdot t_{\pi(n)} \right) ^{(c)}
 
     (:math:`n \le k`, :math:`n = k` if :math:`a` is complete).
-
-
 
 
 .. admonition:: Demonstration
