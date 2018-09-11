@@ -216,7 +216,7 @@ if __name__ == "__main__":
         ampr = next(get_features("AmpR"), None)
         if ampr is not None:
             ampr.qualifiers = {
-                "label": "AmpR",
+                "label": ["AmpR"],
                 "codon_start": 1,
                 "gene": "bla",
                 "product": "beta-lactamase",
@@ -259,7 +259,7 @@ if __name__ == "__main__":
                     "gene": "aphA1",
                     "product": "aminoglycoside phosphotransferase",
                     "EC_number": "2.7.1.95",
-                    "label": "KanR",
+                    "label": ["KanR"],
                     "function": "kanamicyn resistance",
                     "db_xref": [
                         "CDD:cd05150",
@@ -301,7 +301,7 @@ if __name__ == "__main__":
         smr = next(get_features('SmR'), None)
         if smr is not None:
             smr.qualifiers.update({
-                'label': 'SmR',
+                'label': ['SmR'],
                 'gene': 'aadA',
                 'product': 'aminoglycoside adenylyltransferase',
                 'function': 'spectinomycin and streptomycin resistance',
