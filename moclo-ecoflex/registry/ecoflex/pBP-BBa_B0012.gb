@@ -1,0 +1,114 @@
+LOCUS       pBP-BBa_B0012           2151 bp    ds-DNA  circular SYN 06-NOV-2015
+DEFINITION  synthetic circular DNA.
+ACCESSION   pBP-BBa_B0012
+VERSION     pBP-BBa_B0012
+KEYWORDS    pBP-B0012.
+SOURCE      synthetic DNA construct
+  ORGANISM  synthetic DNA construct
+            .
+REFERENCE   1
+  AUTHORS   Moore SJ, Lai HE, Kelwick RJ, Chee SM, Bell DJ, Polizzi KM, Freemont
+            PS.
+  TITLE     EcoFlex: A Multifunctional MoClo Kit for E. coli Synthetic Biology.
+  JOURNAL   ACS Synth Biol 2016;5:1059-1069.
+   PUBMED   27096716
+REFERENCE   2  (bases 1 to 2151)
+  AUTHORS   Larralde M
+  TITLE     Direct Submission
+  JOURNAL   Distributed with the MoClo Python library
+            https://github.com/althonos/moclo
+FEATURES             Location/Qualifiers
+     source          1..2151
+                     /organism="synthetic DNA construct"
+                     /mol_type="other DNA"
+     misc_feature    2..21
+                     /note="BioBrick prefix"
+                     /note="BioBrick prefix for parts that start with ATG"
+     repeat_region   47..50
+                     /note="GG scar"
+     misc_feature    92..95
+                     /note="GG scar"
+     terminator      126..183
+                     /note="his operon terminator"
+                     /note="This putative transcriptin terminator from the E.
+                     coli his operon has a 2-bp deletion introduced during
+                     synthesis. Its efficiency has not been determined."
+     rep_origin      complement(378..966)
+                     /direction=LEFT
+                     /note="ori"
+                     /note="high-copy-number ColE1/pMB1/pBR322/pUC origin of
+                     replication"
+     terminator      complement(1155..1263)
+                     /label="CmR Terminator"
+                     /ApEinfo_fwdcolor="#66ccff"
+                     /ApEinfo_revcolor="#66ccff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     CDS             complement(1264..1923)
+                     /codon_start=1
+                     /gene="cat"
+                     /product="chloramphenicol acetyltransferase"
+                     /translation="MEKKITGYTTVDISQWHRKEHFEAFQSVAQCTYNQTVQLDITAFL
+                     KTVKKNKHKFYPAFIHILARLMNAHPEFRMAMKDGELVIWDSVHPCYTVFHEQTETFSS
+                     LWSEYHDDFRQFLHIYSQDVACYGENLAYFPKGFIENMFFVSANPWVSFTSFDLNVANM
+                     DNFFAPVFTMGKYYTQGDKVLMPLAIQVHHAVCDGFHVGRMLNELQQYCDEWQGGA"
+                     /label="CmR"
+                     /function="chloramphenicol resistance"
+                     /EC_number="2.3.1.28"
+                     /db_xref="UniProtKB/Swiss-Prot:P62577"
+                     /db_xref="GO:0008811"
+                     /db_xref="GO:0016740"
+                     /db_xref="GO:0016746"
+                     /db_xref="GO:0046677"
+                     /db_xref="PFAM:PF00302"
+                     /ApEinfo_fwdcolor="#0000ff"
+                     /ApEinfo_revcolor="#0000ff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     promoter        complement(1924..2028)
+                     /label="CmR Promoter"
+                     /ApEinfo_fwdcolor="#66ccff"
+                     /ApEinfo_revcolor="#66ccff"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
+     terminator      2107..2150
+                     /note="bacterial terminator"
+                     /note="putative bacterial transcription terminator"
+ORIGIN
+        1 ggaattcgcg gccgcttcta gaatctagag acgcatatgg gtctcatcga tcacactggc
+       61 tcaccttcgg gtgggccttt ctgcgtttat atgttagaga ccgcatgccg tctcattagc
+      121 tgcagtccgg caaaaaaggg caaggtgtca ccaccctgcc ctttttcttt aaaaccgaaa
+      181 agattacttc gcgttatgca ggcttcctcg ctcactgact cgctgcgctc ggtcgttcgg
+      241 ctgcggcgag cggtatcagc tcactcaaag gcggtaatac ggttatccac agaatcaggg
+      301 gataacgcag gaaagaacat gtgagcaaaa ggccagcaaa aggccaggaa ccgtaaaaag
+      361 gccgcgttgc tggcgttttt ccacaggctc cgcccccctg acgagcatca caaaaatcga
+      421 cgctcaagtc agaggtggcg aaacccgaca ggactataaa gataccaggc gtttccccct
+      481 ggaagctccc tcgtgcgctc tcctgttccg accctgccgc ttaccggata cctgtccgcc
+      541 tttctccctt cgggaagcgt ggcgctttct catagctcac gctgtaggta tctcagttcg
+      601 gtgtaggtcg ttcgctccaa gctgggctgt gtgcacgaac cccccgttca gcccgaccgc
+      661 tgcgccttat ccggtaacta tcgtcttgag tccaacccgg taagacacga cttatcgcca
+      721 ctggcagcag ccactggtaa caggattagc agagcgaggt atgtaggcgg tgctacagag
+      781 ttcttgaagt ggtggcctaa ctacggctac actagaagaa cagtatttgg tatctgcgct
+      841 ctgctgaagc cagttacctt cggaaaaaga gttggtagct cttgatccgg caaacaaacc
+      901 accgctggta gcggtggttt ttttgtttgc aagcagcaga ttacgcgcag aaaaaaagga
+      961 tctcaagaag atcctttgat cttttctacg gggtctgacg ctcagtggaa cgaaaactca
+     1021 cgttaaggga ttttggtcat gagattatca aaaaggatct tcacctagat ccttttaaat
+     1081 taaaaatgaa gttttaaatc aatctaaagt atatatgagt aaacttggtc tgacagctcg
+     1141 aggcttggat tctcaccaat aaaaaacgcc cggcggcaac cgagcgttct gaacaaatcc
+     1201 agatggagtt ctgaggtcat tactggatct atcaacagga gtccaagcga gctcgatatc
+     1261 aaattacgcc ccgccctgcc actcatcgca gtactgttgt aattcattaa gcattctgcc
+     1321 gacatggaag ccatcacaaa cggcatgatg aacctgaatc gccagcggca tcagcacctt
+     1381 gtcgccttgc gtataatatt tgcccatggt gaaaacgggg gcgaagaagt tgtccatatt
+     1441 ggccacgttt aaatcaaaac tggtgaaact cacccaggga ttggctgaca cgaaaaacat
+     1501 attctcaata aaccctttag ggaaataggc caggttttca ccgtaacacg ccacatcttg
+     1561 cgaatatatg tgtagaaact gccggaaatc gtcgtggtat tcactccaga gcgatgaaaa
+     1621 cgtttcagtt tgctcatgga aaacggtgta acaagggtga acactatccc atatcaccag
+     1681 ctcaccgtct ttcattgcca tacgaaattc cggatgagca ttcatcaggc gggcaagaat
+     1741 gtgaataaag gccggataaa acttgtgctt atttttcttt acggtcttta aaaaggccgt
+     1801 aatatccagc tgaacggtct ggttataggt acattgagca actgactgaa atgcctcaaa
+     1861 atgttcttta cgatgccatt gggatatatc aacggtggta tatccagtga tttttttctc
+     1921 cattttagct tccttagctc ctgaaaatct cgataactca aaaaatacgc ccggtagtga
+     1981 tcttatttca ttatggtgaa agttggaacc tcttacgtgc ccgatcaact cgagtgccac
+     2041 ctgacgtcta agaaaccatt attatcatga cattaaccta taaaaatagg cgtatcacga
+     2101 ggcagaattt cagataaaaa aaatccttag ctttcgctaa ggatgatttc t
+//

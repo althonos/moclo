@@ -120,7 +120,14 @@ if __name__ == "__main__":
         }
 
         # get the ZIP sequence
-        path = next(archive.walk.files('/', filter=['{}.gb'.format(id_)]), None)
+        path = next(
+            (
+                f
+                for f in archive.walk.files('/')
+                if f.lower() == '{}.gb'.format(id_).lower()
+            ),
+            None,
+        )
         if path is None:
             print("COULD NOT FIND", id_)
             continue
