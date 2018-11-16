@@ -35,7 +35,7 @@ stages:
   before_script:
     - docker pull $IMAGE
   script:
-    - docker run -it -v "$TRAVIS_BUILD_DIR":/py $IMAGE sh -c /py/ci/travis/test-docker.sh
+    - docker run -it -v "$TRAVIS_BUILD_DIR":"/py" -v "$HOME/.cache/pip":"/root/.cache" $IMAGE sh -c /py/ci/travis/test-docker.sh
 
 jobs:
   include:

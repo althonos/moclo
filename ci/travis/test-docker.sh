@@ -7,6 +7,7 @@ cd /py
 
 echo ""
 echo "> before_install"
+chown root /root/.cache
 pip install -U -r ci/requirements.txt
 
 echo ""
