@@ -34,6 +34,11 @@ TestCIDARibosomeBindingSite = _Meta(cidar.CIDARRibosomeBindingSite, "RBS", exclu
 TestCIDARCodingSequence = _Meta(cidar.CIDARCodingSequence, "CDS", exclude_dva)
 TestCIDARTerminator = _Meta(cidar.CIDARTerminator, "Terminator", exclude_dva)
 
+# ERRORS BELOW CAUSED BY 3 BsaI SITES IN R0063_AB SEQUENCES
+TestCIDARPromoter.test_R0063_AB_is_Promoter = unittest.expectedFailure(
+    TestCIDARPromoter.test_R0063_AB_is_Promoter
+)
+
 # Generate test cases for vectors
 TestCIDAREntryVector = _Meta(cidar.CIDAREntryVector, "EntryVector", exclude_dvk)
 TestCIDARCassetteVector = _Meta(
