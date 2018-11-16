@@ -44,9 +44,10 @@ jobs:
     - python: pypy
       stage: PyPy
       <<: *test-native
-    - python: pypy3
+    - env:
+      - IMAGE=pypy:3
       stage: PyPy
-      <<: *test-native
+      <<: *test-docker
 
     # Tests against CPython using the native Travis-CI Python binaries
     - python: 2.7
