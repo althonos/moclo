@@ -18,6 +18,7 @@ Errors
 
 .. autoclass:: DuplicateModules(AssemblyError)
 .. autoclass:: InvalidSequence(MocloError, ValueError)
+.. autoclass:: IllegalSite(InvalidSequence)
 .. autoclass:: MissingModule(AssemblyError)
 
 

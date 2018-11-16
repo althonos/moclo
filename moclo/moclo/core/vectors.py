@@ -9,8 +9,10 @@ modules during the Golden Gate assembly.
 
 import typing
 
+import cached_property
 from Bio.Seq import Seq
 
+from .. import errors
 from ._assembly import AssemblyManager
 from ._utils import cutter_check, add_as_source
 from ._structured import StructuredRecord
@@ -45,6 +47,7 @@ class AbstractVector(StructuredRecord):
             1. The downstream (3') overhang sequence
             2. The vector placeholder sequence
             3. The upstream (5') overhang sequence
+
         """
         downstream = cls.cutter.elucidate()
         upstream = str(Seq(downstream).reverse_complement())
@@ -94,6 +97,13 @@ class AbstractVector(StructuredRecord):
         else:
             start, end = self._match.span(1)[0], self._match.span(2)[1]
         return add_as_source(self.record, (self.record << start)[end - start :])
+
+    @cached_property.cached_property
+    def _match(self):
+        _match = super(AbstractVector, self)._match
+        if len(self.cutter.catalyse(_match.group(0).seq)) > 3:
+            raise errors.IllegalSite(self.seq)
+        return _match
 
     def assemble(self, module, *modules, **kwargs):
         # type: (AbstractModule, *AbstractModule, **Any) -> SeqRecord

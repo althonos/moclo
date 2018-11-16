@@ -22,16 +22,25 @@ class InvalidSequence(ValueError, MocloError):
     """Invalid sequence provided.
     """
 
+    _msg = "invalid sequence: {}"
+
     def __init__(self, sequence, exc=None, details=None):
         self.sequence = sequence
         self.exc = exc
         self.details = details
 
     def __str__(self):
-        s = "invalid sequence: {}"
+        s = self._msg
         if self.details is not None:
             s = "".join([s, " ", "(", self.details, ")"])
         return s.format(self.sequence)
+
+
+class IllegalSite(InvalidSequence):
+    """Sequence with illegal site provided.
+    """
+
+    _msg = "illegal site in sequence: {}"
 
 
 class AssemblyError(MocloError, RuntimeError):

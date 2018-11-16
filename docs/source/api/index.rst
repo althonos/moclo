@@ -91,6 +91,7 @@ Errors (`moclo.errors`)
 
    DuplicateModules
    InvalidSequence
+   IllegalSite
    MissingModule
 
 .. rubric:: Warnings

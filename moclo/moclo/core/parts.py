@@ -35,6 +35,7 @@ class AbstractPart(StructuredRecord):
         ...
         >>> ExamplePart.structure()
         'GGTCTCN(ATGC)(NN*N)(ATTC)NGAGACC'
+        
     """
 
     cutter = NotImplemented
@@ -60,6 +61,7 @@ class AbstractPart(StructuredRecord):
             1. The upstream (5') overhang sequence
             2. The vector placeholder sequence
             3. The downstream (3') overhang sequence
+
         """
 
         if cls.signature is NotImplemented:
