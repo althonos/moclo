@@ -5,10 +5,8 @@ from __future__ import unicode_literals
 import unittest
 
 from Bio.Seq import Seq
-from Bio.SeqRecord import SeqRecord
 
 from moclo.regex import DNARegex
-from moclo.record import CircularRecord
 
 
 class TestDNARegex(unittest.TestCase):

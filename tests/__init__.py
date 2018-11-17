@@ -2,18 +2,16 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-import importlib
 import os
 import sys
-import subprocess
 
 # Patch the PYTHONPATH to find the base moclo package
 proj = os.path.abspath(os.path.join(__file__, "..", ".."))
 sys.path.insert(0, os.path.join(proj, "moclo"))
 
 # Load the kits namespace and add additional plugins packages
-import moclo.kits
-import moclo.registry
+import moclo.kits  # noqa: E402
+import moclo.registry  # noqa: E402
 
 # Load extensions
 for extension in ["cidar", "ytk", "ecoflex", "ig"]:

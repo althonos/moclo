@@ -110,7 +110,7 @@ class TestCircularRecord(unittest.TestCase):
         """
         cr = CircularRecord(seq=Seq("ATGCATGCATGC"), id="test_shift_seq")
         with self.assertRaises(TypeError):
-            _ = cr + cr
+            cr + cr
 
     def test_radd(self):
         """Assert right-adding to a `CircularRecord` raises a type error.

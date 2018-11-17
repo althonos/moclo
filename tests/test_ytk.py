@@ -2,41 +2,27 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-import gzip
-import io
-import itertools
-import os
-import textwrap
 import unittest
-import warnings
 
-import six
-from Bio.Seq import Seq
-
-from moclo.record import CircularRecord
 from moclo.kits import ytk
 from moclo.registry.base import CombinedRegistry
 from moclo.registry.ytk import YTKRegistry, PTKRegistry
 
 from ._utils import AssemblyTestCase, PartsMetaCase, build_registries
 
+# --- Test Suite Metaclass ---------------------------------------------------
 
-if six.PY3:
-
-    def setUpModule():
-        warnings.simplefilter("ignore", category=ResourceWarning)
-
-    def tearDownModule():
-        warnings.simplefilter(warnings.defaultaction)
+_Meta = PartsMetaCase(
+    "YTK", lambda: CombinedRegistry() << YTKRegistry() << PTKRegistry(), __name__
+)
 
 
-### Test Yeast ToolKit plasmids
+def exclude_96(item):
+    return item.id == "pYTK096"
 
-# metaclass for test suites
-registry_factory = lambda: CombinedRegistry() << YTKRegistry() << PTKRegistry()
-_Meta = PartsMetaCase("YTK", registry_factory, __name__)
 
-# Generate test cases
+# --- Test YTK Parts ---------------------------------------------------------
+
 TestYTKPart1 = _Meta(ytk.YTKPart1, "1")
 TestYTKPart2 = _Meta(ytk.YTKPart2, "2")
 TestYTKPart3 = _Meta(ytk.YTKPart3, "3")
@@ -46,9 +32,7 @@ TestYTKPart4 = _Meta(ytk.YTKPart4, "4")
 TestYTKPart4a = _Meta(ytk.YTKPart4a, "4a")
 TestYTKPart4b = _Meta(ytk.YTKPart4b, "4b")
 TestYTKPart234 = _Meta(ytk.YTKPart234, "234")
-TestYTKPart234r = _Meta(
-    ytk.YTKPart234r, "234r", exclude=lambda item: item.id == "pYTK096"
-)
+TestYTKPart234r = _Meta(ytk.YTKPart234r, "234r", exclude_96)
 TestYTKPart5 = _Meta(ytk.YTKPart5, "5")
 TestYTKPart6 = _Meta(ytk.YTKPart6, "6")
 TestYTKPart7 = _Meta(ytk.YTKPart7, "7")
@@ -57,8 +41,15 @@ TestYTKPart8a = _Meta(ytk.YTKPart8a, "8a")
 TestYTKPart8b = _Meta(ytk.YTKPart8b, "8b")
 TestYTKPart678 = _Meta(ytk.YTKPart678, "678")
 
+# --- Test YTK Vectors -------------------------------------------------------
 
-### Test Yeast ToolKit multigene assembly
+# TestYTKEntryVector = _Meta(ytk.YTKEntryVector, "EntryVector")
+# TestYTKCassetteVector = _Meta(ytk.YTKCassetteVector, "CassetteVector")
+# TestYTKDeviceVector = _Meta(ytk.YTKDeviceVector, "DeviceVector")
+
+# --- Test YTK Assemblies ----------------------------------------------------
+
+# Generate test cases based on test assembly + reference assembly
 
 
 class TestYTKAssembly(AssemblyTestCase, unittest.TestCase):

@@ -2,27 +2,19 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-import io
 import os
 import unittest
 import subprocess
 import sys
-import warnings
 
 import Bio.SeqIO
 import contexter
 import fs.path
 import fs.archive.tarfs
-import six
-from Bio.Seq import Seq
-
-try:
-    import lzma
-except ImportError:
-    from backports import lzma
 
 from moclo.record import CircularRecord
 
+# --- Constants --------------------------------------------------------------
 
 # fs.osfs.OSFS: FS located at the root of the project
 PROJFS = fs.open_fs(os.path.join(__file__, "..", ".."))
@@ -30,8 +22,8 @@ PROJFS = fs.open_fs(os.path.join(__file__, "..", ".."))
 # fs.osfs.OSFS: FS where test data is located
 DATAFS = PROJFS.opendir("tests/data")
 
-### Setup helper
 
+# --- Setup Helper -----------------------------------------------------------
 
 class Registries(object):
     def __init__(self):
@@ -51,7 +43,10 @@ class Registries(object):
 build_registries = Registries()
 
 
-### Tests helper
+# --- Tests helpers ----------------------------------------------------------
+
+def expectFailure(cls, method):
+    setattr(cls, method, unittest.expectedFailure(getattr(cls, method)))
 
 
 class PartsMetaCase(object):

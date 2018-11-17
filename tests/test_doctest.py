@@ -3,10 +3,8 @@
 """
 
 import doctest
-import os
 import sys
 import re
-import shutil
 import types
 import unittest
 import warnings
@@ -14,9 +12,10 @@ import warnings
 import Bio.Seq
 import Bio.SeqRecord
 import Bio.Restriction
-import six
 
-import moclo, moclo.core, moclo.kits
+import moclo
+import moclo.core
+import moclo.kits
 
 
 class IgnoreUnicodeChecker(doctest.OutputChecker):

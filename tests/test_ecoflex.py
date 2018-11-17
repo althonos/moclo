@@ -2,54 +2,48 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-import gzip
-import io
-import itertools
-import os
-import textwrap
-import unittest
-
-import six
-from Bio.Seq import Seq
-
-from moclo.record import CircularRecord
 from moclo.kits import ecoflex
 from moclo.registry.ecoflex import EcoFlexRegistry
 
-from ._utils import PartsMetaCase, build_registries
+from ._utils import PartsMetaCase
 
 
-### Test EcoFlex MoClo plasmids
+# --- Test Suite Metaclass ---------------------------------------------------
 
-# metaclass for test suites
 _Meta = PartsMetaCase("EcoFlex", EcoFlexRegistry, __name__)
-exclude_tu2 = lambda item: item.id.startswith("pTU2")
-exclude_tu2a = lambda item: item.id.startswith("pTU2-A")
-exclude_tu2d = lambda item: item.id.startswith("pTU2-D")
-exclude_tu3 = lambda item: item.id.startswith("pTU3")
-exclude_cassette = lambda item: item.id.startswith(("pTU1", "pTU3"))
 
-# Generate test cases
+
+def exclude_tu2(item):
+    return item.id.startswith("pTU2")
+
+
+def exclude_tu2a(item):
+    return item.id.startswith(("pTU2-A", "pTU2-a"))
+
+
+def exclude_tu2d(item):
+    return item.id.startswith("pTU2-D")
+
+
+def exclude_tu3(item):
+    return item.id.startswith("pTU3")
+
+
+def exclude_cassette(item):
+    return item.id.startswith(("pTU1", "pTU3"))
+
+# --- Test EcoFlex Parts -----------------------------------------------------
+
+
 TestEcoFlexPromoter = _Meta(ecoflex.EcoFlexPromoter, "Promoter", exclude_tu2a)
 TestEcoFlexRBS = _Meta(ecoflex.EcoFlexRBS, "RBS")
 TestEcoFlexTag = _Meta(ecoflex.EcoFlexTag, "Tag")
 TestEcoFlexTerminator = _Meta(ecoflex.EcoFlexTerminator, "Terminator", exclude_tu2d)
 TestEcoFlexCodingSequence = _Meta(ecoflex.EcoFlexCodingSequence, "CDS")
 TestEcoFlexPromoterRBS = _Meta(ecoflex.EcoFlexPromoterRBS, "PromoterRBS")
-TestEcoFlexCassetteVector = _Meta(
-    ecoflex.EcoFlexCassetteVector, "CassetteVector", exclude_tu2
-)
-TestEcoFlexDeviceVector = _Meta(
-    ecoflex.EcoFlexDeviceVector, "DeviceVector", exclude_cassette
-)
+TestEcoFlexTagLinker = _Meta(ecoflex.EcoFlexTagLinker, "TagLinker")
 
-# Patch expected failures:
-# - pTU2-a-RFP has the same overhangs as a Promoter even though it's a
-#   device vector
-setattr(
-    TestEcoFlexPromoter,
-    "test_pTU2-a-RFP_is_not_Promoter",
-    unittest.expectedFailure(
-        getattr(TestEcoFlexPromoter, "test_pTU2-a-RFP_is_not_Promoter")
-    )
-)
+# --- Test EcoFlex Vectors ---------------------------------------------------
+
+TestEcoFlexCassetteVector = _Meta(ecoflex.EcoFlexCassetteVector, "CassetteVector", exclude_tu2)
+TestEcoFlexDeviceVector = _Meta(ecoflex.EcoFlexDeviceVector, "DeviceVector", exclude_cassette)

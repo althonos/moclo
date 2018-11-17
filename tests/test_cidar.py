@@ -2,52 +2,48 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-import gzip
-import io
-import itertools
-import operator
-import os
-import textwrap
-import sys
 import unittest
 
-import six
-from Bio.Seq import Seq
-
-from moclo.record import CircularRecord
 from moclo.kits import cidar
 from moclo.registry.cidar import CIDARRegistry
 
-from ._utils import PartsMetaCase, AssemblyTestCase, build_registries
+from ._utils import PartsMetaCase, AssemblyTestCase, build_registries, expectFailure
 
 
-### Test CIDAR plasmids
+# --- Test Suite Metaclass ---------------------------------------------------
 
-# test suite metaclass
 _Meta = PartsMetaCase("CIDAR", CIDARRegistry, __name__)
-exclude_dva = lambda item: item.id.startswith("DVA_")
-exclude_dvk = lambda item: item.id.startswith("DVK_")
 
-# Generate test cases for each parts
+
+def exclude_dva(item):
+    return item.id.startswith("DVA_")
+
+
+def exclude_dvk(item):
+    return item.id.startswith("DVK_")
+
+# --- Test CIDAR Parts -------------------------------------------------------
+
+
 TestCIDARPromoter = _Meta(cidar.CIDARPromoter, "Promoter", exclude_dva)
 TestCIDARibosomeBindingSite = _Meta(cidar.CIDARRibosomeBindingSite, "RBS", exclude_dva)
 TestCIDARCodingSequence = _Meta(cidar.CIDARCodingSequence, "CDS", exclude_dva)
 TestCIDARTerminator = _Meta(cidar.CIDARTerminator, "Terminator", exclude_dva)
 
-
 # Patch expected failures:
 # - R0063_AB contains 3 BsaI sites instead of 2
-TestCIDARPromoter.test_R0063_AB_is_Promoter = unittest.expectedFailure(
-    TestCIDARPromoter.test_R0063_AB_is_Promoter
-)
+expectFailure(TestCIDARPromoter, "test_R0063_AB_is_Promoter")
 
-# Generate test cases for vectors
+# --- Test CIDAR vectors -----------------------------------------------------
+
 TestCIDAREntryVector = _Meta(cidar.CIDAREntryVector, "EntryVector", exclude_dvk)
-TestCIDARCassetteVector = _Meta(
-    cidar.CIDARCassetteVector, "CassetteVector", exclude_dva
-)
+TestCIDARCassetteVector = _Meta(cidar.CIDARCassetteVector, "CassetteVector", exclude_dva)
+
+# --- Test CIDAR Assemblies --------------------------------------------------
 
 # Generate test cases based on test assemblies
+
+
 class TestCIDARAssembly(AssemblyTestCase):
     @classmethod
     def setUpClass(cls):
