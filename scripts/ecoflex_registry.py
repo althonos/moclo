@@ -18,6 +18,7 @@ import warnings
 import sys
 
 import bs4 as bs
+import fs.path
 import six
 import tqdm
 import requests
@@ -124,10 +125,14 @@ if __name__ == "__main__":
             (
                 f
                 for f in archive.walk.files('/')
-                if f.lower() == '{}.gb'.format(id_).lower()
+                if fs.path.basename(f).lower() == '{}.gb'.format(id_).lower()
             ),
             None,
         )
+        if id_ == "pBP-HexHis":
+            path = "/Level 0/Tags/pBP-His6_tag.gb"
+        if id_ == "pBP-Strep(II)":
+            path = "/Level 0/Tags/pBP-StrepII_tag.gb"
         if path is None:
             print("COULD NOT FIND", id_)
             continue
