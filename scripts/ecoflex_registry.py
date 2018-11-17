@@ -56,6 +56,12 @@ NAME_REGEX = re.compile(r"([^ ]*) \(([^\)]*)\)(_[A-Z]{2})")
 COLOR_REGEX = re.compile(r"color: (#[0-9a-fA-F]{6})")
 
 
+FULL_SEQUENCES = {
+    #"pBP_BBa_B0034": "https://media.addgene.org/snapgene-media/v1.6.2-0-g4b4ed87/sequences/38/25/133825/addgene-plasmid-72980-sequence-133825.gbk"
+}
+
+
+
 def translate_color(feature):
     notes = feature.qualifiers.get("note", [])
     color_note = next((n for n in notes if n.startswith("color: #")), None)
@@ -110,7 +116,11 @@ if __name__ == "__main__":
         if id_ in ('pBP', 'pBP-ORF', 'pBP-lacZ'):
             continue
         elif id_ == "pBP-T7_RBS-His6-Thrombin":
-            name = id_ = "pBP-T7_RBS_His6"
+            name = id_ = "pBP-T7-RBS-His6"
+        elif id_.startswith("pBP-T7_"):
+            name = id_ = id_.replace("_", "-")
+        elif id_.startswith("pBP-ORF-"):
+            name = id_ = id_.replace("pBP-ORF-", "pBP-")
 
         # extract info
         info = {
@@ -122,24 +132,36 @@ if __name__ == "__main__":
             "addgene_id": row.find("a").get("href").strip("/"),
         }
 
+        # get the online full sequence
+        if id_ in FULL_SEQUENCES:
+            url = FULL_SEQUENCES[id_]
+            with session.get(url) as res:
+                gb = CircularRecord(read(io.StringIO(res.text), "gb"))
         # get the ZIP sequence
-        path = next(
-            (
-                f
-                for f in archive.walk.files('/')
-                if fs.path.basename(f).lower() == '{}.gb'.format(id_).lower()
-            ),
-            None,
-        )
-        if id_ == "pBP-HexHis":
-            path = "/Level 0/Tags/pBP-His6_tag.gb"
-        if id_ == "pBP-Strep(II)":
-            path = "/Level 0/Tags/pBP-StrepII_tag.gb"
-        if path is None:
-            print("COULD NOT FIND", id_)
-            continue
-        with archive.open(path) as f:
-            gb = CircularRecord(read(f, "gb"))
+        else:
+            path = next(
+                (
+                    f
+                    for f in archive.walk.files('/')
+                    if fs.path.basename(f).lower() == '{}.gb'.format(id_).lower()
+                ),
+                None,
+            )
+            if id_ == "pBP-HexHis":
+                path = "/Level 0/Tags/pBP-His6_tag.gb"
+            elif id_ == "pBP-T7-RBS-His6":
+                path = "/Level 0/T7 parts/pBP-T7_RBS_His6.gb"
+            elif id_ == "pBP-T7-RBS":
+                path = "/Level 0/T7 parts/pBP-T7_RBS.gb"
+            elif id_ == "pBP-Strep(II)":
+                path = "/Level 0/Tags/pBP-StrepII_tag.gb"
+            elif id_ == "pBP-pET-RBS":
+                path = "/Level 0/RBS/pBP-PET_RBS.gb"
+            if path is None:
+                print("COULD NOT FIND", id_)
+                continue
+            with archive.open(path) as f:
+                gb = CircularRecord(read(f, "gb"))
 
 
 

@@ -1,7 +1,7 @@
-LOCUS       pBP-T7_RBS_His6         2264 bp    ds-DNA  circular SYN 05-OCT-2015
+LOCUS       pBP-T7-RBS-His6         2264 bp    ds-DNA  circular SYN 05-OCT-2015
 DEFINITION  synthetic circular DNA.
-ACCESSION   pBP-T7_RBS_His6
-VERSION     pBP-T7_RBS_His6
+ACCESSION   pBP-T7-RBS-His6
+VERSION     pBP-T7-RBS-His6
 KEYWORDS    pBP-T7_RBS_His6.
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
