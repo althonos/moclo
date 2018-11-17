@@ -109,6 +109,8 @@ if __name__ == "__main__":
         # TODO: entry vector not supported
         if id_ in ('pBP', 'pBP-ORF', 'pBP-lacZ'):
             continue
+        elif id_ == "pBP-T7_RBS-His6-Thrombin":
+            name = id_ = "pBP-T7_RBS_His6"
 
         # extract info
         info = {
@@ -146,6 +148,8 @@ if __name__ == "__main__":
         gb.seq.alphabet = IUPAC.unambiguous_dna
         gb.id = id_
         gb.name = name
+
+
 
         # quick feature accessor
         def get_features(label):
