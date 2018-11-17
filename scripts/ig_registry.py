@@ -322,8 +322,6 @@ if __name__ == "__main__":
         if len(list(get_features('oriV'))) == 2:
             gb_archive.features.remove(min(get_features('oriV'), key=lambda f: len(f.qualifiers)))
 
-
-
         # GFP recolor and annotations
         # gfp = next(get_features("GFP"), None)
         # if gfp is not None:

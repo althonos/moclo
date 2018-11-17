@@ -1,4 +1,4 @@
-LOCUS       pLacI                   2308 bp    ds-DNA  circular SYN 10-JAN-2018
+LOCUS       pLacI                   2308 bp    ds-DNA  circular SYN 06-AUG-2018
 DEFINITION  MoClo Basic Part: Controllable promoter - pLacI - lacI regulated
             (repressed by LacI+CAP. LacI, C0012, inhibited by IPTG) [E:R0010:B].
 ACCESSION   R0010_EB

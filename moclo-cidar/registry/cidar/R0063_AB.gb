@@ -1,4 +1,4 @@
-LOCUS       pLuxR-pR                2259 bp    ds-DNA  circular SYN 10-JAN-2018
+LOCUS       pLuxR-pR                2259 bp    ds-DNA  circular SYN 06-AUG-2018
 DEFINITION  MoClo Basic Part: Controllable promoter - pLuxR(pR) - luxR regulated
             (right promoter, weak constitutive down regulated by LuxR, C0062 in
             combination with homoserine lactone (HSL)) [A:R0063:B].

@@ -46,10 +46,14 @@ UA = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)
 
 AMPR_TERM = DNARegex("gattatcaaaaaggatctt")  # Reverse 3' of AmpR terminator
 BB_PREFIX = DNARegex("gaattcgcggccgcttctag")
-CMR_PROMOTER = DNARegex('tttagcttccttagctcctgaaaatctcgataactcaaaaaatacgcccggtagtgatcttatttcattatggtgaaagttggaacctcttacgtgcccgatcaa')
-CMR_TERMINATOR = DNARegex('accaataaaaaacgcccggcggcaaccgagcgttctgaacaaatccagatggagttctgaggtcattactggatctatcaacaggagtccaagcgagctcgatatcaaa')
-AMPR_PROMOTER = DNARegex('actcttcctttttcaatattattgaagcatttatcagggttattgtctcatgagcggatacatatttgaatgtatttagaaaaataaacaaataggggttccgcgcacatttccccgaaaagtgccacctg')
-AMPR_TERMINATOR = DNARegex('gattatcaaaaaggatcttcacctagatccttttaaattaaaaatgaagttttaaatcaatctaaagtatatatgagtaaacttggtctgacag')
+CMR_PROMOTER = DNARegex(
+    'tttagcttccttagctcctgaaaatctcgataactcaaaaaatacgcccggtagtgatcttatttcattatggtgaaagttggaacctcttacgtgcccgatcaa')
+CMR_TERMINATOR = DNARegex(
+    'accaataaaaaacgcccggcggcaaccgagcgttctgaacaaatccagatggagttctgaggtcattactggatctatcaacaggagtccaagcgagctcgatatcaaa')
+AMPR_PROMOTER = DNARegex(
+    'actcttcctttttcaatattattgaagcatttatcagggttattgtctcatgagcggatacatatttgaatgtatttagaaaaataaacaaataggggttccgcgcacatttccccgaaaagtgccacctg')
+AMPR_TERMINATOR = DNARegex(
+    'gattatcaaaaaggatcttcacctagatccttttaaattaaaaatgaagttttaaatcaatctaaagtatatatgagtaaacttggtctgacag')
 
 
 NAME_REGEX = re.compile(r"([^ ]*) \(([^\)]*)\)(_[A-Z]{2})")
@@ -57,10 +61,9 @@ COLOR_REGEX = re.compile(r"color: (#[0-9a-fA-F]{6})")
 
 
 FULL_SEQUENCES = {
-    "pBP_BBa_B0034": "https://media.addgene.org/snapgene-media/v1.6.2-0-g4b4ed87/sequences/38/25/133825/addgene-plasmid-72980-sequence-133825.gbk",
-    "pBP-SJM901": "https://media.addgene.org/snapgene-media/v1.6.2-0-g4b4ed87/sequences/19/38/141938/addgene-plasmid-72966-sequence-141938.gbk",
+    "pBP_BBa_B0034": "https://www.addgene.org/72980/sequences/",
+    "pBP-SJM901": "https://www.addgene.org/72966/sequences/",
 }
-
 
 
 def translate_color(feature):
@@ -135,8 +138,13 @@ if __name__ == "__main__":
 
         # get the online full sequence
         if id_ in FULL_SEQUENCES:
-            url = FULL_SEQUENCES[id_]
-            with session.get(url) as res:
+            # Load the AddGene sequences page and get the full sequence
+            with requests.get(FULL_SEQUENCES[id_]) as res:
+                soup = bs.BeautifulSoup(res.text, "html.parser")
+                section = soup.find("section", id="depositor-full")
+                gb_url = soup.find("a", class_="genbank-file-download").get('href')
+            # Get the Genbank file
+            with requests.get(gb_url) as res:
                 gb = CircularRecord(read(io.StringIO(res.text), "gb"))
         # get the ZIP sequence
         else:
@@ -164,16 +172,12 @@ if __name__ == "__main__":
             with archive.open(path) as f:
                 gb = CircularRecord(read(f, "gb"))
 
-
-
         # Copy well documented information from one record to the other
         gb.seq = gb.seq.upper()
         gb.seq.alphabet = IUPAC.unambiguous_dna
         gb.id = id_
         gb.name = name
         gb.annotations['references'].clear()  # FIXME ?
-
-
 
         # quick feature accessor
         def get_features(label):
@@ -302,7 +306,6 @@ if __name__ == "__main__":
             if old_term is not None:
                 gb.features.remove(old_term)
 
-
         # GFP recolor and annotations
         gfp = next(get_features("GFP"), None)
         if gfp is not None:
@@ -350,7 +353,6 @@ if __name__ == "__main__":
                     ],
                 }
             )
-
 
         # if any(f.location is None for f in gb.features):
         #     continue

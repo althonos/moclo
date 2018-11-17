@@ -42,9 +42,7 @@ from moclo.record import CircularRecord
 from moclo.regex import DNARegex
 
 
-URL = (
-    "https://www.addgene.org/kits/sieber-moclo-pichia-toolkit/#protocols-and-resources"
-)
+URL = "https://www.addgene.org/kits/sieber-moclo-pichia-toolkit/#protocols-and-resources"
 UA = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
 
 # minimal Sequence from Bxb1 attB site from 10.1371/journal.pgen.1003490

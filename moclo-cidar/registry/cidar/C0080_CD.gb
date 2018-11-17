@@ -1,4 +1,4 @@
-LOCUS       araC                    3023 bp    ds-DNA  circular SYN 10-JAN-2018
+LOCUS       araC                    3023 bp    ds-DNA  circular SYN 06-AUG-2018
 DEFINITION  MoClo Basic Part: CDS - Controller protein, araC repressor/activator
             (activates pBAD, I13453) [C:C0080:D].
 ACCESSION   C0080_CD

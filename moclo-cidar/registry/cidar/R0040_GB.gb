@@ -1,4 +1,4 @@
-LOCUS       pTet                    2162 bp    ds-DNA  circular SYN 10-JAN-2018
+LOCUS       pTet                    2162 bp    ds-DNA  circular SYN 06-AUG-2018
 DEFINITION  MoClo Basic Part: Controllable promoter - pTet - tetR regulated
             (strong constitutive promoter repressed by tetR, C0040, which can
             itself be inhibited by tetracycline or aTc) [G:R0040:B].

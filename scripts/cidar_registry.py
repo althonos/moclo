@@ -156,12 +156,15 @@ if __name__ == "__main__":
         # fine
         if id_ in ("DVK_AE", "DVK_AF"):
 
+            # Load the DVK_EF page and find the GenBank file link
+            with requests.get("https://www.addgene.org/66069/sequences/") as res:
+                soup = bs.BeautifulSoup(res.text, "html.parser")
+                section = soup.find("section", id="depositor-full")
+                gb_url = soup.find("a", class_="genbank-file-download").get('href')
+
             # DVK_EF
-            gb_url = "https://media.addgene.org/snapgene-media/v1.5.26-0-g82d7ad5/sequences/44/95/114495/addgene-plasmid-66069-sequence-114495.gbk"
             with requests.get(gb_url) as res:
-                gb = info["gb"] = CircularRecord(
-                    read(io.StringIO(res.text), "gb")
-                )
+                gb = info["gb"] = CircularRecord(read(io.StringIO(res.text), "gb"))
 
             if id_ == "DVK_AE":
                 gb.seq = Seq(  # replace E:lacz:F with A:lacz:E
@@ -251,7 +254,7 @@ if __name__ == "__main__":
         # Patch duplicated fusion sites in AddGene sequences
         if "pJ02B2Gm" in id_ and "AGGTAGGT" in gb.seq:
             d_site = gb.seq.find("AGGTAGGT")
-            new_gb = gb[:d_site] + gb[d_site + 4 :]
+            new_gb = gb[:d_site] + gb[d_site + 4:]
             new_gb.annotations = gb.annotations
             new_gb.id = gb.id
             new_gb.name = gb.name
@@ -570,7 +573,6 @@ if __name__ == "__main__":
             luxpl = next(get_features('Lux pL promoter'))
             luxpl.location = r0063.location
             gb_archive.features.remove(r0063)
-
 
         # add LVA ssrA tag
         ssra_match = SSRA_TAG.search(gb_archive.seq)

@@ -1,4 +1,4 @@
-LOCUS       luxR                    2864 bp    ds-DNA  circular SYN 10-JAN-2018
+LOCUS       luxR                    2864 bp    ds-DNA  circular SYN 06-AUG-2018
 DEFINITION  MoClo Basic Part: CDS - Controller protein, luxR repressor/activator
             (in concert with HSL, represses pLuxR(pR) R0063. Also up-regulates
             pLuxR(pL) R0062) [C:C0062:D].
