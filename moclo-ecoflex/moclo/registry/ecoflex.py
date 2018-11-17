@@ -37,21 +37,16 @@ class EcoFlexRegistry(EmbeddedRegistry):
             six.raise_from(RuntimeError(msg.format(raw["record"].id)), None)
         return raw["resistance"]
 
-    _PREFIXES = collections.OrderedDict(
+    _VECTORS = collections.OrderedDict(
         [
-            ("pBP-T7_", ecoflex.EcoFlexPromoterRBS),
-            ("pBP-Tag_linker", ecoflex.EcoFlexTagLinker),
             ("pTU1", ecoflex.EcoFlexCassetteVector),
             ("pTU2", ecoflex.EcoFlexDeviceVector),
             ("pTU3", ecoflex.EcoFlexCassetteVector),
-            ("pBP-TL", ecoflex.EcoFlexRBS),
-            (("pBP-BBa", "pBP-L"), ecoflex.EcoFlexTerminator),
-            (("pBP-J", "pBP-SJ", "pBP-T7"), ecoflex.EcoFlexPromoter),
         ]
     )
 
     def _load_entity(self, raw, index):
-        for prefix, cls in six.iteritems(self._PREFIXES):
+        for prefix, cls in six.iteritems(self._VECTORS):
             if raw["record"].id.startswith(prefix):
                 return cls(raw["record"])
-        raise RuntimeError(raw["record"].id)
+        return ecoflex.EcoFlexPart.characterize(raw["record"])

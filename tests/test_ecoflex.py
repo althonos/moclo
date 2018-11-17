@@ -42,3 +42,14 @@ TestEcoFlexCassetteVector = _Meta(
 TestEcoFlexDeviceVector = _Meta(
     ecoflex.EcoFlexDeviceVector, "DeviceVector", exclude_cassette
 )
+
+# Patch expected failures:
+# - pTU2-a-RFP has the same overhangs as a Promoter even though it's a
+#   device vector
+setattr(
+    TestEcoFlexPromoter,
+    "test_pTU2-a-RFP_is_not_Promoter",
+    unittest.expectedFailure(
+        getattr(TestEcoFlexPromoter, "test_pTU2-a-RFP_is_not_Promoter")
+    )
+)

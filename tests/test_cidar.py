@@ -33,7 +33,10 @@ TestCIDARPromoter = _Meta(cidar.CIDARPromoter, "Promoter", exclude_dva)
 TestCIDARibosomeBindingSite = _Meta(cidar.CIDARRibosomeBindingSite, "RBS", exclude_dva)
 TestCIDARCodingSequence = _Meta(cidar.CIDARCodingSequence, "CDS", exclude_dva)
 TestCIDARTerminator = _Meta(cidar.CIDARTerminator, "Terminator", exclude_dva)
-# ERRORS BELOW CAUSED BY 3 BsaI SITES IN R0063_AB SEQUENCES
+
+
+# Patch expected failures:
+# - R0063_AB contains 3 BsaI sites instead of 2
 TestCIDARPromoter.test_R0063_AB_is_Promoter = unittest.expectedFailure(
     TestCIDARPromoter.test_R0063_AB_is_Promoter
 )
