@@ -57,7 +57,8 @@ COLOR_REGEX = re.compile(r"color: (#[0-9a-fA-F]{6})")
 
 
 FULL_SEQUENCES = {
-    #"pBP_BBa_B0034": "https://media.addgene.org/snapgene-media/v1.6.2-0-g4b4ed87/sequences/38/25/133825/addgene-plasmid-72980-sequence-133825.gbk"
+    "pBP_BBa_B0034": "https://media.addgene.org/snapgene-media/v1.6.2-0-g4b4ed87/sequences/38/25/133825/addgene-plasmid-72980-sequence-133825.gbk",
+    "pBP-SJM901": "https://media.addgene.org/snapgene-media/v1.6.2-0-g4b4ed87/sequences/19/38/141938/addgene-plasmid-72966-sequence-141938.gbk",
 }
 
 
@@ -170,6 +171,7 @@ if __name__ == "__main__":
         gb.seq.alphabet = IUPAC.unambiguous_dna
         gb.id = id_
         gb.name = name
+        gb.annotations['references'].clear()  # FIXME ?
 
 
 
@@ -186,7 +188,10 @@ if __name__ == "__main__":
 
         # Correct overlapping features by setting the origin just before the
         # biobrick prefix
-        pref = next(get_features_from_note("BioBrick prefix"))
+        pref = next(itertools.chain(
+            get_features("BioBrick prefix"),
+            get_features_from_note("BioBrick prefix")
+        ))
         if pref.location is None:
             match = BB_PREFIX.search(gb)
             pref.location = FeatureLocation(
@@ -369,12 +374,15 @@ if __name__ == "__main__":
         ref.title = 'EcoFlex: A Multifunctional MoClo Kit for E. coli Synthetic Biology.'
         ref.journal = 'ACS Synth Biol 2016;5:1059-1069.'
         ref.pubmed_id = '27096716'
-        gb.annotations['references'].insert(0, ref)
+        gb.annotations['references'].append(ref)
 
         # Fix the direct submission reference
-        ref = gb.annotations["references"][-1]
+        ref = Reference()
+        # ref = gb.annotations["references"][-1]
         ref.authors = "Larralde M"
+        ref.title = "Direct Submission"
         ref.journal = "Distributed with the MoClo Python library\nhttps://github.com/althonos/moclo"
+        gb.annotations['references'].append(ref)
 
         # write the final record
         dst_dir = os.path.abspath(

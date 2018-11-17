@@ -12,7 +12,7 @@ REFERENCE   1
   TITLE     EcoFlex: A Multifunctional MoClo Kit for E. coli Synthetic Biology.
   JOURNAL   ACS Synth Biol 2016;5:1059-1069.
    PUBMED   27096716
-REFERENCE   2  (bases 1 to 2506)
+REFERENCE   2
   AUTHORS   Larralde M
   TITLE     Direct Submission
   JOURNAL   Distributed with the MoClo Python library
