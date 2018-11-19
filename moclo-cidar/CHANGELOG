@@ -1,0 +1,75 @@
+Changelog
+=========
+
+All notable changes to this project will be documented in this file.
+
+The format is based on `Keep a Changelog <http://keepachangelog.com>`_ and this
+project adheres to `Semantic Versioning <http://semver.org/spec/v2.0.0.html>`_.
+
+Unreleased_
+-----------
+
+Added
+'''''
+- This *CHANGELOG* file.
+
+Changed
+'''''''
+- Update CIDAR sequences to latest AddGene data update (``1.6.2``).
+
+
+v0.4.0_ - 2018-08-16
+--------------------
+
+Changed
+'''''''
+- Bumped ``moclo`` minimal required version to ``v0.4.0``.
+
+Documented
+''''''''''
+- Add *SVG* images illustrating CIDAR parts to the API documentation.
+- Fixed class hierarchy in API documentation.
+
+
+v0.3.0_ - 2018-08-07
+--------------------
+
+Changed
+'''''''
+- Bumped ``moclo`` minimal required version to ``v0.3.0``.
+
+Removed
+'''''''
+- Location attribute handler from ``CIDARRegistry``.
+- *DVA* and *DVK* sequences from the registry as they are not MoClo elements.
+
+
+v0.2.0_ - 2018-07-25
+--------------------
+
+Added
+'''''
+- Partial reference CIDAR sequences in ``moclo.registry.cidar.CIDARRegistry``.
+
+Changed
+'''''''
+- Use signature and cutter to generate structures of ``moclo.kits.cidar.CIDARPart``
+  subclasses.
+- Bumped ``moclo`` minimal required version to ``v0.2.0``.
+
+Documented
+''''''''''
+- Fixed link to documentation in ``README.rst``.
+
+
+v0.1.0_ - 2018-07-12
+--------------------
+
+Initial public release.
+
+
+.. _Unreleased: https://github.com/althonos/moclo/compare/cidar/v0.4.0...HEAD
+.. _v0.4.0: https://github.com/althonos/moclo/compare/cidar/v0.3.0...cidar/v0.4.0
+.. _v0.3.0: https://github.com/althonos/moclo/compare/cidar/v0.2.0...cidar/v0.3.0
+.. _v0.2.0: https://github.com/althonos/moclo/compare/cidar/v0.1.0...cidar/v0.2.0
+.. _v0.1.0: https://github.com/althonos/moclo/compare/20aa50fb2202279215c36e2b687a7e989667e34f...cidar/v0.1.0
