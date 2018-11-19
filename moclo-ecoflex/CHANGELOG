@@ -13,6 +13,17 @@ Added
 '''''
 - This *CHANGELOG* file.
 
+Fixed
+'''''
+- Wheel distribution not embedding the ``moclo.registry.ecoflex`` module.
+- Add missing sequences to the EcoFlex registry:
+
+  * Promoters: ``pBP-BBa_B0012``, ``pBP-BBa_B0015``, ``pBP-BBa_B0034``,
+  * Tags: ``pBP-HexHis``
+  * CDS: ``pBP-eCFP``, ``pBP-eGFP``
+  * Promoter + RBS: ``pBP-T7-RBS-His6``
+  * Device Vectors: ``pTU2-a-RFP``, ``pTU2-b-RFP``
+
 
 v0.3.0_ - 2018-08-16
 --------------------

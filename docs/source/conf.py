@@ -75,9 +75,11 @@ def setup(app):
         if os.path.exists(changelog_src):
             with open(changelog_src, 'rb') as src:
                 src.readline()  # remove title
+                src.readline()  # and underline
                 with open(changelog_dst, 'wb') as dst:
                     dst.write(b":tocdepth: 2\n\n")
                     dst.write("``{}``\n".format(lib).encode('utf-8'))
+                    dst.write("{}\n".format("=" * (len(lib) + 4)).encode('utf-8'))
                     shutil.copyfileobj(src, dst)
 
 # -- Project information -----------------------------------------------------
