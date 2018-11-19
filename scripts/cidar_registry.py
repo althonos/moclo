@@ -17,27 +17,18 @@ Edits:
 import copy
 import io
 import itertools
-import json
 import re
 import os
 import warnings
-import sys
 
 import bs4 as bs
 import six
 import tqdm
 import requests
 from Bio.Alphabet import IUPAC
-from Bio.Seq import Seq, translate
-from Bio.SeqFeature import (
-    SeqFeature,
-    FeatureLocation,
-    CompoundLocation,
-    Reference,
-)
+from Bio.Seq import Seq
+from Bio.SeqFeature import SeqFeature, FeatureLocation, Reference
 from Bio.SeqIO import read, write
-from Bio.SeqRecord import SeqRecord
-from Bio.Restriction import BsaI
 from fs.zipfs import ReadZipFS
 
 from moclo.record import CircularRecord
@@ -62,10 +53,8 @@ KANR_TERM = "gtgttacaaccaattaaccaattctga".upper()
 # Some descriptions (e.g. promoter) for device / cassettes annotation
 DESCS = {}
 
+# Regexes
 NAME_REGEX = re.compile(r"([^ ]*) \(([^\)]*)\)(_[A-Z]{2})")
-
-
-
 
 
 if __name__ == "__main__":
@@ -180,13 +169,9 @@ if __name__ == "__main__":
 
             # get the addgene full sequence
             section = soup.find("section", id="depositor-full")
-            gb_url = section.find("a", class_="genbank-file-download").get(
-                "href"
-            )
+            gb_url = section.find("a", class_="genbank-file-download").get("href")
             with requests.get(gb_url) as res:
-                gb = info["gb"] = CircularRecord(
-                    read(io.StringIO(res.text), "gb")
-                )
+                gb = info["gb"] = CircularRecord(read(io.StringIO(res.text), "gb"))
 
         # Copy well documented information from one record to the other
         gb.seq, gb_archive.seq = (gb.seq.upper(), gb_archive.seq.upper())
@@ -199,14 +184,10 @@ if __name__ == "__main__":
 
         # quick feature accessor
         def get_features(label):
-            return (
-                f for f in gb.features if label in f.qualifiers.get("label", [])
-            )
+            return (f for f in gb.features if label in f.qualifiers.get("label", []))
 
         def get_features_from_note(note):
-            return (
-                f for f in gb.features if note in f.qualifiers.get("note", [])
-            )
+            return (f for f in gb.features if note in f.qualifiers.get("note", []))
 
         # Correct overlapping features by setting the origin just before the
         # biobrick prefix
@@ -252,35 +233,7 @@ if __name__ == "__main__":
             end = start + gb.seq[start:].translate().find("*") * 3
             loc = FeatureLocation(start, end, 1)
             lux = SeqFeature(location=loc, type="CDS")
-            lux.qualifiers.update(
-                {
-                    "codon_start": "1",
-                    "label": "LuxR repressor",
-                    "product": "transcription factor LuxR",
-                    "function": ["represses Lux pL promoter"],
-                    "gene": "luxR",
-                    "operon": "lux",
-                    "db_xref": [
-                        "UniProtKB/Swiss-Prot:P12746",
-                        "GO:0008218",
-                        "GO:0045893",
-                        "GO:0009371",
-                        "GO:0006351",
-                        "InterPro:IPR016032",
-                        "InterPro:IPR005143",
-                        "InterPro:IPR036693",
-                        "InterPro:IPR000792",
-                        "InterPro:IPR036388",
-                        "PFAM:PF03472",
-                        "PFAM:PF00196",
-                    ],
-                    "note": "iGEM Part: BBa_R0040",
-                    "translation": lux.extract(gb.seq).translate(),
-                    "inference": [
-                        "DESCRIPTION:alignment:blastx:UniProtKB/Swiss-Prot:P12746"
-                    ],
-                }
-            )
+            annotate("luxr", lux, gb.seq)
             gb.features.append(lux)
 
         # Add missing Lux pL promoter
@@ -560,9 +513,7 @@ if __name__ == "__main__":
             if isinstance(name, list):
                 name = name.pop()
             if name not in DESCS:
-                DESCS[name] = re.search(
-                    r": (.*) \[", gb_archive.description
-                ).group(1)
+                DESCS[name] = re.search(r": (.*) \[", gb_archive.description).group(1)
             j231.type = "promoter"
             j231.qualifiers = {
                 "label": "{} promoter".format(name),

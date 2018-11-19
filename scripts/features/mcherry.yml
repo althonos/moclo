@@ -1,0 +1,16 @@
+type: "CDS"
+label: "mCherry"
+codon_start: 1
+gene: "mCherry"
+product: "mCherry"
+note:
+  - "color: #c16969; direction: RIGHT"
+db_xref:
+  - "UniProtKB/Swiss-Prot:X5DSL3"
+  - "PDB:4ZIN"
+  - "InterPro:IPR009017"
+  - "InterPro:IPR011584"
+  - "InterPro:IPR000786"
+  - "PFAM:PF01353"
+  - "GO:0006091"
+  - "GO:0008218"

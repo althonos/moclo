@@ -32,15 +32,10 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      CDS             26..733
+                     /label="mCherry"
                      /codon_start=1
-                     /label="RFP"
                      /gene="mCherry"
                      /product="mCherry"
-                     /translation="MVSKGEENNMAIIKEFMRFKVHMEGSVNGHEFEIEGEGEGRPYEG
-                     TQTAKLKVTKGGPLPFAWDILSPQFMYGSKAYVKHPADIPDYLKLSFPEGFKWERVMNF
-                     EDGGVVTVTQDSSLQDGEFIYKVKLRGTNFPSDGPVMQKKTMGWEASSERMYPEDGALK
-                     GEIKQRLKLKDGGHYDAEVKTTYKAKKPVQLPGAYNVNIKLDITSHNEDYTIVEQYERA
-                     EGRHSTGGMDELYK"
                      /db_xref="UniProtKB/Swiss-Prot:X5DSL3"
                      /db_xref="PDB:4ZIN"
                      /db_xref="InterPro:IPR009017"
@@ -49,6 +44,11 @@ FEATURES             Location/Qualifiers
                      /db_xref="PFAM:PF01353"
                      /db_xref="GO:0006091"
                      /db_xref="GO:0008218"
+                     /translation="MVSKGEENNMAIIKEFMRFKVHMEGSVNGHEFEIEGEGEGRPYEG
+                     TQTAKLKVTKGGPLPFAWDILSPQFMYGSKAYVKHPADIPDYLKLSFPEGFKWERVMNF
+                     EDGGVVTVTQDSSLQDGEFIYKVKLRGTNFPSDGPVMQKKTMGWEASSERMYPEDGALK
+                     GEIKQRLKLKDGGHYDAEVKTTYKAKKPVQLPGAYNVNIKLDITSHNEDYTIVEQYERA
+                     EGRHSTGGMDELYK"
                      /ApEinfo_fwdcolor="#c16969"
                      /ApEinfo_revcolor="#c16969"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}

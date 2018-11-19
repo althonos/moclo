@@ -182,22 +182,13 @@ if __name__ == "__main__":
         # Fix annotations of Chloramphenicol resistance cassette
         camr, cmr = next(get_features("CamR")), next(get_features("CmR"))
         features.remove(camr)
-        cmr.type = "CDS"
-        cmr.qualifiers.update(
-            {k: v for k, v in camr.qualifiers.items() if k not in cmr.qualifiers}
-        )
+        cmr.qualifiers.update({k: v for k, v in camr.qualifiers.items() if k not in cmr.qualifiers})
         annotate("cmr", cmr, gba.seq)
 
         cmr_prom = next(get_features("CamR Promoter"))
-        cmr_prom.type = "promoter"
-        cmr_prom.qualifiers.update(
-            {"label": ["CmR Promoter"], "note": ["color: #66ccff; direction: LEFT"]}
-        )
+        annotate("cmr-prom", cmr_prom, gba.seq)
         cmr_term = next(get_features("CamR Terminator"))
-        cmr_term.type = "terminator"
-        cmr_term.qualifiers.update(
-            {"label": ["CmR Terminator"], "note": ["color: #66ccff; direction: LEFT"]}
-        )
+        annotate("cmr-term", cmr_term, gba.seq)
 
         # Make sure ColE1 is grayed
         cole1 = next(get_features("ColE1"))
@@ -516,58 +507,14 @@ if __name__ == "__main__":
         if egfp2 is not None:
             egfp1 = next(get_features_from_note("EGFP"))
             features.remove(egfp2)
-            egfp1.qualifiers.update(
-                {
-                    "codon_start": 1,
-                    "label": ["eGFP"],
-                    "gene": ["GFP"],
-                    "product": ["enhanced green fluorescent protein"],
-                    "note": [
-                        "mammalian codon-optimized",
-                        "color: #34FF03; direction: RIGHT",
-                    ],
-                    "db_xref": [
-                        "UniProtKB/Swiss-Prot:P42212",
-                        "PDB:1EMA",
-                        "InterPro:IPR009017",
-                        "InterPro:IPR011584",
-                        "InterPro:IPR000786",
-                        "PFAM:PF01353",
-                        "GO:0008218",
-                        "GO:0018298",
-                    ],
-                }
-            )
+            annotate("egfp", egfp1, gba.seq)
 
         rfp = next(get_features_from_note("RFP"), None)
         if rfp is not None:
-            rfp.type = "CDS"
             start = rfp.location.start + rfp.extract(gba.seq).find("ATG", 1)
             rfp.location = FeatureLocation(start, start + 708, 1)
-            rfp.qualifiers.update(
-                {
-                    "codon_start": 1,
-                    "label": ["RFP"],
-                    "gene": ["mCherry"],
-                    "product": ["mCherry"],
-                    "translation": str(translate(rfp.extract(gba.seq), to_stop=True)),
-                    "note": ["color: #c16969; direction: RIGHT"],
-                    "db_xref": [
-                        "UniProtKB/Swiss-Prot:X5DSL3",
-                        "PDB:4ZIN",
-                        "InterPro:IPR009017",
-                        "InterPro:IPR011584",
-                        "InterPro:IPR000786",
-                        "PFAM:PF01353",
-                        "GO:0006091",
-                        "GO:0008218",
-                    ],
-                }
-            )
-
-            alert = next(
-                get_features_from_note("Start with second codon!!! ATG deleted!")
-            )
+            annotate("mcherry", rfp, gba.seq)
+            alert = next(get_features_from_note("Start with second codon!!! ATG deleted!"))
             features.remove(alert)
 
         pars = next(get_features_from_note("PARS-1"), None)

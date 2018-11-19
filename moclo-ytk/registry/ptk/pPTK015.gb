@@ -50,6 +50,8 @@ FEATURES             Location/Qualifiers
                      /db_xref="PFAM:PF01353"
                      /db_xref="GO:0008218"
                      /db_xref="GO:0018298"
+                     /inference="DESCRIPTION:alignment:blastx:UniProtKB/Swiss-Pr
+                     ot:P42212"
                      /ApEinfo_fwdcolor="#34ff03"
                      /ApEinfo_revcolor="#34ff03"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}

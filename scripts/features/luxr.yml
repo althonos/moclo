@@ -1,0 +1,24 @@
+type: "CDS"
+label: "LuxR repressor"
+codon_start: 1
+gene: "luxR"
+operon: "lux"
+product: "transcription factor LuxR"
+function: "represses Lux pL promoter"
+note:
+  - "iGEM Part: BBa_R0040"
+db_xref:
+  - "UniProtKB/Swiss-Prot:P12746"
+  - "GO:0008218"
+  - "GO:0045893"
+  - "GO:0009371"
+  - "GO:0006351"
+  - "InterPro:IPR016032"
+  - "InterPro:IPR005143"
+  - "InterPro:IPR036693"
+  - "InterPro:IPR000792"
+  - "InterPro:IPR036388"
+  - "PFAM:PF03472"
+  - "PFAM:PF00196"
+inference:
+  - "DESCRIPTION:alignment:blastx:UniProtKB/Swiss-Prot:P12746"
