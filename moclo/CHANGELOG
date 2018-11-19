@@ -1,0 +1,123 @@
+Changelog
+=========
+
+All notable changes to this project will be documented in this file.
+
+The format is based on `Keep a Changelog <http://keepachangelog.com>`_ and this
+project adheres to `Semantic Versioning <http://semver.org/spec/v2.0.0.html>`_.
+
+Unreleased_
+-----------
+
+Added
+'''''
+- Add ``Item.record`` shortcut to ``Item.entity.record`` in ``moclo.registry``.
+- Make ``moclo.core`` abstract classes check for illegal sites in sequence to
+  be identified as *valid*.
+- This *CHANGELOG* file.
+
+Documented
+''''''''''
+- Fix typos.
+
+
+v0.4.2_ - 2018-08-16
+--------------------
+
+Fixed
+'''''
+- Some registries not loading ``CircularRecord`` instances.
+
+
+v0.4.1_ - 2018-08-16
+--------------------
+
+Changed
+'''''''
+- Bump required ``fs`` version to ``2.1.0``.
+
+
+v0.4.0_ - 2018-08-10
+--------------------
+
+Added
+'''''
+- ``AbstractPart.characterize`` to load a record into a part instance.
+- Option to include / exclude ``ELabFTWRegistry`` items using tags.
+
+
+v0.3.0_ - 2018-08-07
+--------------------
+
+Added
+'''''
+- Annotate assembled vectors as *circular* in ``AbstractVector.assemble``.
+- *eLabFTW* registry connector in ``moclo.registry.elabftw``.
+
+Changed
+'''''''
+- Move ``Item._find_type`` to public function ``moclo.registry.utils.find_type``.
+- Improve annotation generated in ``AbstractVector.assemble``.
+
+Fixed
+'''''
+- ``AbstractPart`` subclasses not being recognized as abstract.
+
+
+v0.2.1_ - 2018-07-27
+--------------------
+
+Added
+'''''
+- ``moclo.registry.utils`` module with resistance idenfication function.
+- Make ``AbstractVector.assemble`` add an alphabet to the generated sequence.
+
+Documented
+''''''''''
+- Improved ``README.rst`` file.
+
+
+v0.2.0_ - 2018-07-24
+--------------------
+
+Added
+'''''
+- Use ``AbstracModule.cutter`` and ``AbstractVector.cutter`` to deduce the
+  required structure for modules and vectors.
+- ``AbstractPart`` class to generate sequence structure based on part signature.
+- Add registry API in ``moclo.registry`` module.
+
+Changed
+'''''''
+- Make ``StructuredRecord`` convert ``SeqRecord`` to ``CircularRecord`` on
+  instantiation if needed.
+- Use ``target_sequence`` method in ``AbstractVector.assemble``.
+- Make modules and vectors add sources to their target sequences when assembled.
+- Patch ``CircularRecord.reverse_complement`` to return a ``CircularRecord``.
+
+
+Documented
+''''''''''
+- Add ``moclo.base.parts`` to documentation.
+- Add example in ``AbstractPart`` docstring.
+- Fix documentation of ``moclo.base``
+
+Fixed
+'''''
+- Fix ``AbstracModule.target_sequence`` and ``AbstractVector.target_sequence`` to
+  take into account cutter overhand position.
+
+
+v0.1.0_ - 2018-07-12
+--------------------
+
+Initial public release.
+
+.. _Unreleased: https://github.com/althonos/moclo/compare/v0.4.2...HEAD
+.. _v0.4.2: https://github.com/althonos/moclo/compare/v0.4.1...v0.4.2
+.. _v0.4.1: https://github.com/althonos/moclo/compare/v0.4.0...v0.4.1
+.. _v0.4.0: https://github.com/althonos/moclo/compare/v0.3.0...v0.4.0
+.. _v0.3.0: https://github.com/althonos/moclo/compare/v0.2.1...v0.3.0
+.. _v0.2.1: https://github.com/althonos/moclo/compare/v0.2.0...v0.2.1
+.. _v0.2.0: https://github.com/althonos/moclo/compare/v0.1.0...v0.2.0
+.. _v0.1.0: https://github.com/althonos/moclo/compare/20aa50fb2202279215c36e2b687a7e989667e34f...v0.1.0
