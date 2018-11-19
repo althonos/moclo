@@ -59,6 +59,7 @@ Library
   install
   examples/index
   api/index
+  changes/index
   about
 
 

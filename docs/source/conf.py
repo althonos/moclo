@@ -13,6 +13,7 @@ import datetime
 import os
 import re
 import sys
+import shutil
 import semantic_version
 import sphinx.util.logging
 import sphinx_bootstrap_theme
@@ -21,6 +22,7 @@ from sphinx.util.console import bold, darkgreen, reset
 # -- Globals -----------------------------------------------------------------
 
 KITS = ["cidar", "ecoflex", "gb3", "ig", "ytk"]
+LIBS = ["moclo"] + ["moclo-{}".format(kit) for kit in KITS]
 LOGGER = sphinx.util.logging.getLogger(__name__)
 
 # -- Path setup --------------------------------------------------------------
@@ -47,6 +49,7 @@ for kit in KITS:
 
 from _scripts import ytk_parts, registries
 
+
 def setup(app):
     # Add custom math admonition classes
     app.add_stylesheet("bootstrap-math.css")
@@ -62,14 +65,23 @@ def setup(app):
         LOGGER.info(msg.format(percent, darkgreen(kit)), nonl=index != len(KITS) - 1)
         registries.build_registries(kit)
 
-    # Copy CHANGELOG.rst file to the doc source directory
-    # with open(os.path.join(project_dir, "CHANGELOG.rst"), 'rb') as src:
-    #     with open(os.path.join(docsrc_dir, "changelog.rst"), 'wb') as dst:
-    #         dst.write(b":tocdepth: 2\n\n")
-    #         shutil.copyfileobj(src, dst)
-
+    # Copy CHANGELOG files to the doc source directory
+    n = len(darkgreen(max(KITS, key=len)))
+    msg = "{} [{{:4.0%}}] {{:{n}}}\r".format(bold("collecting changelogs..."), n=n)
+    for index, lib in enumerate(LIBS):
+        LOGGER.info(msg.format(percent, darkgreen(kit)), nonl=index != len(LIBS) - 1)
+        changelog_src = os.path.join(project_dir, lib, "CHANGELOG")
+        changelog_dst = os.path.join(docssrc_dir, "changes", "{}.rst".format(lib))
+        if os.path.exists(changelog_src):
+            with open(changelog_src, 'rb') as src:
+                src.readline()  # remove title
+                with open(changelog_dst, 'wb') as dst:
+                    dst.write(b":tocdepth: 2\n\n")
+                    dst.write("``{}``\n".format(lib).encode('utf-8'))
+                    shutil.copyfileobj(src, dst)
 
 # -- Project information -----------------------------------------------------
+
 
 # General information
 project = moclo.__name__
@@ -183,8 +195,11 @@ html_theme_options = {
     # Render the current pages TOC in the navbar. (Default: true)
     "navbar_pagenav": False,
     # A list of tuples containing pages or urls to link to.
-    "navbar_links": [("GitHub", _parser.get("metadata", "home-page").strip(), True)]
-    + [(k, v, True) for k, v in project_urls.items() if k != "Documentation"],
+    "navbar_links": [
+        ("GitHub", _parser.get("metadata", "home-page").strip(), True)
+    ] + [
+        (k, v, True) for k, v in project_urls.items() if k != "Documentation"
+    ],
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -207,6 +222,7 @@ html_sidebars = {
     os.path.join("examples", "*"): ["localtoc.html"],
     os.path.join("kits", "*", "*"): ["localtoc.html"],
     os.path.join("theory", "*"): ["localtoc.html"],
+    os.path.join("changes", "*"): ["localtoc.html"],
 }
 
 
