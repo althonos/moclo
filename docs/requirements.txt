@@ -10,7 +10,7 @@ typing ~=3.6                           ; python_version < '3.6'
 
 # sphinx development version (1.8) and bootstrap theme
 sphinx-bootstrap-theme ~=0.6
-https://github.com/sphinx-doc/Sphinx/archive/1.8.zip
+Sphinx ~=1.8
 
 # nbsphinx dependencies
 nbsphinx
