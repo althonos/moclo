@@ -41,6 +41,8 @@ from Bio.Restriction import BsaI
 from moclo.record import CircularRecord
 from moclo.regex import DNARegex
 
+from features import annotate, translate_color
+
 
 URL = "https://www.addgene.org/kits/sieber-moclo-pichia-toolkit/#protocols-and-resources"
 UA = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
@@ -50,26 +52,6 @@ ATTB = DNARegex("GGCC(GGCTTGTCGACGACGGCGGTCNCCGTCGTCAGGATCAT)CCGG")
 ALPHA_MF_DELTA = None
 
 COLOR_REGEX = re.compile(r"color: (#[0-9a-fA-F]{6})")
-
-
-def translate_color(feature):
-    notes = feature.qualifiers.get("note", [])
-    color_note = next((n for n in notes if n.startswith("color: #")), None)
-
-    if color_note is None:
-        return
-
-    hex_color = COLOR_REGEX.match(color_note).group(1).lower()
-    feature.qualifiers["note"].remove(color_note)
-    feature.qualifiers.update(
-        {
-            "ApEinfo_fwdcolor": [hex_color],
-            "ApEinfo_revcolor": [hex_color],
-            "ApEinfo_graphicformat": [
-                "arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0"
-            ],
-        }
-    )
 
 
 if __name__ == "__main__":
@@ -204,25 +186,8 @@ if __name__ == "__main__":
         cmr.qualifiers.update(
             {k: v for k, v in camr.qualifiers.items() if k not in cmr.qualifiers}
         )
-        cmr.qualifiers.update(
-            {
-                "codon_start": [1],
-                "gene": ["cat"],
-                "product": ["chloramphenicol acetyltransferase"],
-                "label": ["CmR"],
-                "function": ["chloramphenicol resistance"],
-                "note": ["color: #0000ff; direction: LEFT"],
-                "EC_number": ["2.3.1.28"],
-                "db_xref": [
-                    "UniProtKB/Swiss-Prot:P62577",
-                    "GO:0008811",
-                    "GO:0016740",
-                    "GO:0016746",
-                    "GO:0046677",
-                    "PFAM:PF00302",
-                ],
-            }
-        )
+        annotate("cmr", cmr, gba.seq)
+
         cmr_prom = next(get_features("CamR Promoter"))
         cmr_prom.type = "promoter"
         cmr_prom.qualifiers.update(

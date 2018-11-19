@@ -1,0 +1,19 @@
+type: "CDS"
+label: "GFP"
+codon_start: 1
+gene: "GFP"
+product: "green fluorescent protein"
+note:
+  - "color: #34ff03"
+db_xref:
+  - "PDB:1H6R"
+  - "InterPro:IPR009017"
+  - "InterPro:IPR011584"
+  - "InterPro:IPR000786"
+  - "PFAM:PF01353"
+  - "GO:0008218"
+  - "GO:0006091"
+  - "GO:0018298"
+  - "UniProtKB/Swiss-Prot:P42212"
+inference:
+  - "DESCRIPTION:alignment:blastx:UniProtKB/Swiss-Prot:P42212"

@@ -57,7 +57,8 @@ FEATURES             Location/Qualifiers
                      LKVTKGGPLPFAWDILSPQFQYGSKAYVKHPADIPDYLKLSFPEGFKWERVMNFEDGGV
                      VTVTQDSSLQDGEFIYKVKLRGTNFPSDGPVMQKKTMGWEASTERMYPEDGALKGEIKM
                      RLKLKDGGHYDAEVKTTYMAKKPVQLPGAYKTDIKLDITSHNEDYTIVEQYERAEGRHS
-                     TGA"
+                     TGA*"
+                     /gene="cat"
                      /note="monomeric derivative of DsRed (Campbell et al.,
                      2002)"
                      /note="iGEM Part: BBa_E1010"
@@ -122,8 +123,7 @@ FEATURES             Location/Qualifiers
                      KPDAPELFLKHGKGSVANDVTDEMVRLNWLTEFMPLPTIKHFIRTPDDAWLLTTAIPGK
                      TAFQVLEEYPDSGENIVDALAVFLRRLHSIPVCNCPFNSDRVFRLAQAQSRMNNGLVDA
                      SDFDDERNGWPVEQVWKEMHKLLPFSPDSVVTHGDFSLDNLIFDEGKLIGCIDVGRVGI
-                     ADRYQDLAILWNCLGEFSPSLQKRLFQKYGIDNPDMNKLQFHLMLDEFF"
-                     /EC_number="2.7.1.95"
+                     ADRYQDLAILWNCLGEFSPSLQKRLFQKYGIDNPDMNKLQFHLMLDEFF*"
                      /function="kanamicyn resistance"
                      /db_xref="CDD:cd05150"
                      /db_xref="GO:0000166"
@@ -139,6 +139,7 @@ FEATURES             Location/Qualifiers
                      /db_xref="InterPro:IPR002575"
                      /db_xref="PFAM:PF01636"
                      /db_xref="UniProtKB/Swiss-Prot:P00551"
+                     /EC_number="2.7.1.95"
                      /ApEinfo_fwdcolor="#008000"
                      /ApEinfo_revcolor="#008000"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}

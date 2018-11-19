@@ -1,0 +1,20 @@
+type: "CDS"
+label: "AmpR"
+codon_start: 1
+gene: "bla"
+product: "beta-lactamase"
+function: "ampicilin and caribenicillin resistance"
+note:
+  - "color: #9F4240"
+db_xref:
+  - "GO:0005515"
+  - "GO:0008800"
+  - "GO:0016787"
+  - "GO:0030655"
+  - "GO:0046677"
+  - "InterPro:IPR000871"
+  - "InterPro:IPR023650"
+  - "InterPro:IPR012338"
+  - "PDB:1ZG4"
+  - "UniProtKB/Swiss-Prot:P62593"
+EC_number: "3.5.2.6"

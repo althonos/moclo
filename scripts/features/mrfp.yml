@@ -1,0 +1,15 @@
+type: "CDS"
+label: "mRFP"
+codon_start: 1
+gene: "cat"
+product: "mRFP1"
+note:
+  - "monomeric derivative of DsRed (Campbell et al., 2002)"
+  - "iGEM Part: BBa_E1010"
+  - "color: #c16969"
+db_xref:
+  - "UniProtKB/Swiss-Prot:Q9U6Y8"
+  - "GO:0008218"
+  - "GO:0006091"
+  - "GO:0018298"
+  - "PDB:2H5R"

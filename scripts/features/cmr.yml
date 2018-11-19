@@ -1,0 +1,16 @@
+type: "CDS"
+label: "CmR"
+codon_start: 1
+gene: "cat"
+product: "chloramphenicol acetyltransferase"
+function: "chloramphenicol resistance"
+note:
+  - "color: #0000ff; direction: LEFT"
+db_xref:
+  - "UniProtKB/Swiss-Prot:P62577"
+  - "GO:0008811"
+  - "GO:0016740"
+  - "GO:0016746"
+  - "GO:0046677"
+  - "PFAM:PF00302"
+EC_number: "2.3.1.28"

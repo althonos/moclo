@@ -27,6 +27,9 @@ from fs.zipfs import ReadZipFS
 from moclo.record import CircularRecord
 from moclo.regex import DNARegex
 
+from features import annotate, translate_color
+
+
 ZIP_URL = "https://media.addgene.org/cms/filer_public/b6/f8/b6f82f82-4604-4444-9886-f8577018aee4/moclo_tool_kit_genbank_files_2_1.zip"
 URL = "https://www.addgene.org/cloning/moclo/marillonnet/"
 UA = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36"
@@ -48,26 +51,6 @@ DESCS = {}
 
 NAME_REGEX = re.compile(r"([^ ]*) \(([^\)]*)\)(_[A-Z]{2})")
 COLOR_REGEX = re.compile(r"color: (#[0-9a-fA-F]{6})")
-
-
-def translate_color(feature):
-    notes = feature.qualifiers.get("note", [])
-    color_note = next((n for n in notes if n.startswith("color: #")), None)
-
-    if color_note is None:
-        return
-
-    hex_color = COLOR_REGEX.match(color_note).group(1).lower()
-    feature.qualifiers["note"].remove(color_note)
-    feature.qualifiers.update(
-        {
-            "ApEinfo_fwdcolor": [hex_color],
-            "ApEinfo_revcolor": [hex_color],
-            "ApEinfo_graphicformat": [
-                "arrow_data {{0 1 2 0 0 -1} {} 0} width 5 offset 0"
-            ],
-        }
-    )
 
 
 if __name__ == "__main__":
@@ -215,28 +198,8 @@ if __name__ == "__main__":
         # AmpR recolor and annotations
         ampr = next(get_features("AmpR"), None)
         if ampr is not None:
-            ampr.qualifiers = {
-                "label": ["AmpR"],
-                "codon_start": 1,
-                "gene": "bla",
-                "product": "beta-lactamase",
-                "function": "ampicilin and caribenicillin resistance",
-                "translation": ampr.extract(gb.seq).translate(),
-                "note": ["color: #9F4240"],
-                "db_xref": [
-                    "GO:0005515",
-                    "GO:0008800",
-                    "GO:0016787",
-                    "GO:0030655",
-                    "GO:0046677",
-                    "InterPro:IPR000871",
-                    "InterPro:IPR023650",
-                    "InterPro:IPR012338",
-                    "PDB:1ZG4",
-                    "UniProtKB/Swiss-Prot:P62593",
-                ],
-                "EC_number": "3.5.2.6",
-            }
+            annotate("ampr", ampr, gb.seq)
+             
         ampr_prom = next(get_features("AmpR promoter"), None)
         ampr_prom = ampr_prom or next(get_features("AmpR Promoter"), None)
         if ampr_prom is not None:
@@ -254,32 +217,8 @@ if __name__ == "__main__":
         # KanR recolor and annotations
         kanr = next(get_features("KanR"), None)
         if kanr is not None:
-            kanr.qualifiers.update(
-                {
-                    "gene": "aphA1",
-                    "product": "aminoglycoside phosphotransferase",
-                    "EC_number": "2.7.1.95",
-                    "label": ["KanR"],
-                    "function": "kanamicyn resistance",
-                    "db_xref": [
-                        "CDD:cd05150",
-                        "GO:0000166",
-                        "GO:0005524",
-                        "GO:0008910",
-                        "GO:0016301",
-                        "GO:0016740",
-                        "GO:0016773",
-                        "GO:0016310",
-                        "GO:0046677",
-                        "InterPro:IPR024165",
-                        "InterPro:IPR011009",
-                        "InterPro:IPR002575",
-                        "PFAM:PF01636",
-                        "UniProtKB/Swiss-Prot:P00551",
-                    ],
-                    "note": ["color: #008000"],
-                }
-            )
+            annotate("kanr", kanr, gb.seq)
+
         kanr_term_start = gb.seq.find(KANR_TERM)
         if kanr is not None and kanr_term_start >= 0:
             kanr_term = SeqFeature(

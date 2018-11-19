@@ -40,7 +40,8 @@ FEATURES             Location/Qualifiers
                      LKVTKGGPLPFAWDILSPQFQYGSKAYVKHPADIPDYLKLSFPEGFKWERVMNFEDGGV
                      VTVTQDSSLQDGEFIYKVKLRGTNFPSDGPVMQKKTMGWEASTERMYPEDGALKGEIKM
                      RLKLKDGGHYDAEVKTTYMAKKPVQLPGAYKTDIKLDITSHNEDYTIVEQYERAEGRHS
-                     TGA"
+                     TGA*"
+                     /gene="cat"
                      /note="monomeric derivative of DsRed (Campbell et al.,
                      2002)"
                      /note="iGEM Part: BBa_E1010"
@@ -78,17 +79,17 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      CDS             complement(1690..2550)
-                     /label="AmpR"
                      /codon_start=1
                      /gene="bla"
                      /product="beta-lactamase"
-                     /function="ampicilin and caribenicillin resistance"
+                     /label="AmpR"
                      /translation="MSIQHFRVALIPFFAAFCLPVFAHPETLVKVKDAEDQLGARVGYI
                      ELDLNSGKILESFRPEERFPMMSTFKVLLCGAVLSRIDAGQEQLGRRIHYSQNDLVEYS
                      PVTEKHLTDGMTVRELCSAAITMSDNTAANLLLTTIGGPKELTAFLHNMGDHVTRLDRW
                      EPELNEAIPNDERDTTMPVAMATTLRKLLTGELLTLASRQQLIDWMEADKVAGPLLRSA
                      LPAGWFIADKSGAGERGSRGIIAALGPDGKPSRIVVIYTTGSQATMDERNRQIAEIGAS
                      LIKHW*"
+                     /function="ampicilin and caribenicillin resistance"
                      /db_xref="GO:0005515"
                      /db_xref="GO:0008800"
                      /db_xref="GO:0016787"
