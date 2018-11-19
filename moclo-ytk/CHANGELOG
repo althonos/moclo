@@ -1,0 +1,69 @@
+Changelog
+=========
+
+All notable changes to this project will be documented in this file.
+
+The format is based on `Keep a Changelog <http://keepachangelog.com>`_ and this
+project adheres to `Semantic Versioning <http://semver.org/spec/v2.0.0.html>`_.
+
+Unreleased_
+-----------
+
+Changed
+'''''''
+- Update Pichia ToolKit sequences to latest AddGene data update (``1.6.2``).
+
+Added
+'''''
+- This *CHANGELOG* file.
+
+
+v0.4.0_ - 2018-08-16
+--------------------
+
+Changed
+'''''''
+- Bumped ``moclo`` minimal required version to ``v0.4.0``.
+
+Documented
+''''''''''
+- Fixed class hierarchy in API documentation.
+
+
+v0.3.0_ - 2018-08-07
+--------------------
+
+Changed
+'''''''
+- Bumped ``moclo`` minimal required version to ``v0.3.0``.
+
+Documented
+''''''''''
+- Fix links to documentation in ``README.rst``.
+- Add YTK specific notebook in a Docker image.
+
+
+v0.2.0_ - 2018-07-24
+--------------------
+
+Added
+'''''
+- Reference Yeast ToolKit sequences in ``moclo.registry.ytk.YTKRegistry``.
+- Reference Pichia ToolKit sequences in ``moclo.registry.ytk.PTKRegistry``.
+
+Changed
+'''''''
+- Redefined ``YTKProduct._structure`` as a public static method.
+
+
+v0.1.0_ - 2018-07-12
+--------------------
+
+Initial public release.
+
+
+.. _Unreleased: https://github.com/althonos/moclo/compare/ytk/v0.4.0...HEAD
+.. _v0.4.0: https://github.com/althonos/moclo/compare/ytk/v0.3.0...ytk/v0.4.0
+.. _v0.3.0: https://github.com/althonos/moclo/compare/ytk/v0.2.0...ytk/v0.3.0
+.. _v0.2.0: https://github.com/althonos/moclo/compare/ytk/v0.1.0...ytk/v0.2.0
+.. _v0.1.0: https://github.com/althonos/moclo/compare/20aa50fb2202279215c36e2b687a7e989667e34f...ytk/v0.1.0
