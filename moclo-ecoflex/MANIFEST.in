@@ -1,0 +1,3 @@
+include COPYING
+include README.rst
+recursive-include registry *.gb

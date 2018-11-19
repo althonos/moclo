@@ -1,0 +1,52 @@
+Changelog
+=========
+
+All notable changes to this project will be documented in this file.
+
+The format is based on `Keep a Changelog <http://keepachangelog.com>`_ and this
+project adheres to `Semantic Versioning <http://semver.org/spec/v2.0.0.html>`_.
+
+Unreleased_
+-----------
+
+Added
+'''''
+- This *CHANGELOG* file.
+
+
+v0.3.0_ - 2018-08-16
+--------------------
+
+Changed
+'''''''
+- Bumped ``moclo`` minimal required version to ``v0.4.0``.
+
+Documented
+''''''''''
+- Fixed class hierarchy in API documentation.
+
+
+v0.2.0_ - 2018-08-07
+--------------------
+
+Added
+'''''
+- Partial reference EcoFlex sequences in ``moclo.registry.ecoflex.EcoFlexRegistry``.
+
+Changed
+'''''''
+- Use signature and cutter to generate structures of ``moclo.kits.ecoflex.EcoFlexPart``
+  subclasses.
+- Bumped ``moclo`` minimal required version to ``v0.3.0``.
+
+
+v0.1.0_ - 2018-07-12
+--------------------
+
+Initial public release.
+
+
+.. _Unreleased: https://github.com/althonos/moclo/compare/ecoflex/v0.3.0...HEAD
+.. _v0.3.0: https://github.com/althonos/moclo/compare/ecoflex/v0.2.0...ecoflex/v0.3.0
+.. _v0.2.0: https://github.com/althonos/moclo/compare/ecoflex/v0.1.0...ecoflex/v0.2.0
+.. _v0.1.0: https://github.com/althonos/moclo/compare/20aa50fb2202279215c36e2b687a7e989667e34f...ecoflex/v0.1.0
