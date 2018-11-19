@@ -8,7 +8,7 @@ Sequences were obtained from two sources:
   the *full depositor* sequences. Missing sequences (*DVA_AE* and *DVA_AF*)
   were obtained by editing the overhangs of *DVA_EF*.
 
-Plasmids were rotated to share the same origin, using the the start of the
+Plasmids were rotated to share the same origin, using the start of the
 *BioBrick* prefix as a reference location. This ensures no feature overlaps
 the zero coordinate, which was the case beforehand, to ensure a complete
 ``biopython`` compatibility.

@@ -66,6 +66,19 @@ FULL_SEQUENCES = {
 }
 
 
+# PROMOTERS = {
+#     "pBP-SJM901": "J23119",
+#     "pBP-SJM911": "J23102",
+#     "pBP-SJM912": "J23101",
+#     "pBP-SJM914": "J23113",
+#     "pBP-SJM915": "J23101",
+#     "pBP-SJM905": "J23112",
+#     "pBP-SJM908": "J23115",
+#     "pBP-SJM906": "J23113",
+#     "pBP-SJM910": "J23101",
+# }
+
+
 def translate_color(feature):
     notes = feature.qualifiers.get("note", [])
     color_note = next((n for n in notes if n.startswith("color: #")), None)
