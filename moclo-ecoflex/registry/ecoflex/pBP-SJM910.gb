@@ -1,7 +1,7 @@
-LOCUS       pBP-SJM901              3020 bp    ds-DNA  circular SYN 06-AUG-2018
-DEFINITION  Level 0 - SJM901 promoter (5' CTAT/3' GTAC fusion).
-ACCESSION   pBP-SJM901
-VERSION     pBP-SJM901
+LOCUS       pBP-SJM910              3020 bp    ds-DNA  circular SYN 06-AUG-2018
+DEFINITION  Level 0 - SJM910 promoter (5' CTAT/3' GTAC fusion).
+ACCESSION   pBP-SJM910
+VERSION     pBP-SJM910
 KEYWORDS    pBP-SJM901.
 SOURCE      synthetic DNA construct
   ORGANISM  synthetic DNA construct
@@ -25,8 +25,8 @@ FEATURES             Location/Qualifiers
                      /label="BioBrick prefix"
                      /note="BioBrick prefix for parts that start with ATG"
      promoter        46..80
-                     /label="J23119 Promoter"
-                     /note="Anderson series consensus promoter"
+                     /label="SJM910 Promoter"
+                     /note="derived from pBP-SJM901 (BBa_J23119)"
                      /function="strong constitutive promoter"
                      /ApEinfo_fwdcolor="#00a1ee"
                      /ApEinfo_revcolor="#00a1ee"
@@ -133,8 +133,8 @@ FEATURES             Location/Qualifiers
                      /label="bacterial terminator"
                      /note="putative bacterial transcription terminator"
 ORIGIN
-        1 ggaattcgcg gccgcttcta gaacgtctca atctggtctc actattttac agctagctca
-       61 gtcctaggta taatgctagc gtacagagac cagatctttt aactttaaga aggagatata
+        1 ggaattcgcg gccgcttcta gaacgtctca atctggtctc actatttgat ggctagctca
+       61 gtccttggta ttatgctagc gtacagagac cagatctttt aactttaaga aggagatata
       121 catatgcgta aaggagaaga acttttcact ggagttgtcc caattcttgt tgaattagat
       181 ggtgatgtta atgggcacaa attttctgtc agtggagagg gtgaaggtga tgcaacatac
       241 ggaaaactta cccttaaatt tatttgcact actggaaaac tacctgttcc atggccaaca

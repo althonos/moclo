@@ -9,6 +9,14 @@ project adheres to `Semantic Versioning <http://semver.org/spec/v2.0.0.html>`_.
 Unreleased_
 -----------
 
+Fixed
+'''''
+- Annotations of ``CmR`` cassette in ``pBP-BBa_B0034``.
+- Add missing sequences to the EcoFlex registry:
+
+  * Promoters: ``pBP-SJM9**`` series.
+
+
 v0.3.1_ - 2018-11-19
 --------------------
 

@@ -66,17 +66,20 @@ FULL_SEQUENCES = {
 }
 
 
-# PROMOTERS = {
-#     "pBP-SJM901": "J23119",
-#     "pBP-SJM911": "J23102",
-#     "pBP-SJM912": "J23101",
-#     "pBP-SJM914": "J23113",
-#     "pBP-SJM915": "J23101",
-#     "pBP-SJM905": "J23112",
-#     "pBP-SJM908": "J23115",
-#     "pBP-SJM906": "J23113",
-#     "pBP-SJM910": "J23101",
-# }
+# Partial sequences from the reference EcoFlex paper
+PROMOTERS = {
+    "pBP-SJM901": "CTATTTTACAGCTAGCTCAGTCCTAGGTATAATGCTAGCGTAC",
+    "pBP-SJM902": "CTATTTTACAGCTAGCTCAGTCCTAGGGATTATGCTAGCGTAC",
+    "pBP-SJM903": "CTATCTTATAGCTAGCTCAGTCCTTGGGATTATGCTAGCGTAC",
+    "pBP-SJM905": "CTATTTTATAGCTAGCTCAGTCCTTGGGATTATGCTAGCGTAC",
+    "pBP-SJM906": "CTATTTGATGGCTAGCTCAGTCCTAGGGATTGTGCTAGCGTAC",
+    "pBP-SJM908": "CTATTTTATAGCTAGCTCAGCCCTTGGTATTATGCTAGCGTAC",
+    "pBP-SJM910": "CTATTTGATGGCTAGCTCAGTCCTTGGTATTATGCTAGCGTAC",
+    "pBP-SJM911": "CTATTTGACAGCTAGCTCAGTCCTTGGTACTGTGCTAGCGTAC",
+    "pBP-SJM912": "CTATTTGATAGCTAGCTCAGTCCTAGGTACTATGCTAGCGTAC",
+    "pBP-SJM914": "CTATTTGATGGCTAGCTCAGTCCTAGGGATTGTGCTAGCGTAC",
+    "pBP-SJM915": "CTATTTTATGGCTAGCTCAGTCCTTGGTATTATGCTAGCGTAC",
+}
 
 
 def translate_color(feature):
@@ -163,6 +166,25 @@ if __name__ == "__main__":
             # Get the Genbank file
             with requests.get(gb_url) as res:
                 gb = CircularRecord(read(io.StringIO(res.text), "gb"))
+
+        # get the pBP-SJM901 sequence and patch it
+        elif id_.startswith("pBP-SJM"):
+            # get pBP-SJM
+            # Load the AddGene sequences page and get the full sequence
+            with requests.get(FULL_SEQUENCES["pBP-SJM901"]) as res:
+                soup = bs.BeautifulSoup(res.text, "html.parser")
+                section = soup.find("section", id="depositor-full")
+                gb_url = soup.find("a", class_="genbank-file-download").get('href')
+            # Get the Genbank file
+            with requests.get(gb_url) as res:
+                gb = CircularRecord(read(io.StringIO(res.text), "gb"))
+            # replace the target sequence
+            gb.seq = Seq(
+                str(gb.seq.upper()).replace(PROMOTERS["pBP-SJM901"], PROMOTERS[id_])
+            )
+            gb.description = gb.description.replace("SJM901", id_[4:])
+            gb.keywords = [id_[4:]]
+
         # get the ZIP sequence
         else:
             path = next(
@@ -199,7 +221,7 @@ if __name__ == "__main__":
         gb.annotations['references'].clear()  # FIXME ?
 
         # quick feature accessor
-        def get_features(label):
+        def get_features_from_label(label):
             return (
                 f for f in gb.features if label in f.qualifiers.get("label", [])
             )
@@ -207,6 +229,12 @@ if __name__ == "__main__":
         def get_features_from_note(note):
             return (
                 f for f in gb.features if note in f.qualifiers.get("note", [])
+            )
+
+        def get_features(name):
+            return itertools.chain(
+                get_features_from_label(name),
+                get_features_from_note(name),
             )
 
         # Correct overlapping features by setting the origin just before the
@@ -225,7 +253,7 @@ if __name__ == "__main__":
         gb <<= pref.location.start - 1
 
         # AmpR recolor and annotations
-        ampr = next(get_features_from_note("AmpR"), None)
+        ampr = next(get_features("AmpR"), None)
         if ampr is not None:
             ampr.qualifiers = {
                 "label": "AmpR",
@@ -254,7 +282,7 @@ if __name__ == "__main__":
             if old_prom is not None:
                 gb.features.remove(old_prom)
 
-            ampr_prom = next(get_features("AmpR promoter"), None)
+            ampr_prom = next(get_features_from_label("AmpR promoter"), None)
             if ampr_prom is None:
                 start, end = AMPR_PROMOTER.search(gb.seq).span()
                 ampr_prom = SeqFeature(FeatureLocation(start, end, -1))
@@ -263,7 +291,7 @@ if __name__ == "__main__":
             ampr_prom.qualifiers["label"] = ["AmpR Promoter"]
             ampr_prom.qualifiers["note"] = ["color: #ff6666"]
 
-            ampr_term = next(get_features("AmpR terminator"), None)
+            ampr_term = next(get_features_from_label("AmpR terminator"), None)
             if ampr_term is None:
                 start, end = AMPR_TERMINATOR.search(gb.seq).span()
                 ampr_term = SeqFeature(FeatureLocation(start, end, -1))
@@ -273,7 +301,7 @@ if __name__ == "__main__":
             ampr_term.qualifiers['note'] = ['color: #ff6666']
 
         # CmR recolor and annotations
-        cmr = next(get_features_from_note('CmR'), None)
+        cmr = next(get_features('CmR'), None)
         if cmr is not None:
             cmr.qualifiers.update(
                 {
@@ -308,7 +336,7 @@ if __name__ == "__main__":
                 }
             )
 
-            cmr_term = next(get_features("CamR Terminator"), None)
+            cmr_term = next(get_features_from_label("CamR Terminator"), None)
             if cmr_term is None:
                 start, end = CMR_TERMINATOR.search(gb.seq).span()
                 cmr_term = SeqFeature(location=FeatureLocation(start, end, -1))
@@ -326,7 +354,7 @@ if __name__ == "__main__":
                 gb.features.remove(old_term)
 
         # GFP recolor and annotations
-        gfp = next(get_features("GFP"), None)
+        gfp = next(get_features_from_label("GFP"), None)
         if gfp is not None:
             gfp.qualifiers.update(
                 {
@@ -352,7 +380,7 @@ if __name__ == "__main__":
             )
 
         # mRFP1 recolor and annotations
-        rfp = next(get_features("mRFP1"), None)
+        rfp = next(get_features_from_label("mRFP1"), None)
         if rfp is not None:
             rfp.qualifiers.update(
                 {
@@ -372,6 +400,21 @@ if __name__ == "__main__":
                     ],
                 }
             )
+
+        # patch pBP-SJM promoters
+        if id_.startswith("pBP-SJM"):
+            promoter = next(get_features_from_label("J23119 promoter"))
+            promoter.type = "promoter"
+            promoter.qualifiers.update({
+                "function": ["strong constitutive promoter"],
+                "note": ["color: #00a1ee; direction: RIGHT"],
+            })
+            if id_ == "pBP-SJM901":
+                promoter.qualifiers['label'] = "J23119 Promoter"
+                promoter.qualifiers['note'].insert(0, "Anderson series consensus promoter")
+            else:
+                promoter.qualifiers['label'] = "{} Promoter".format(id_[4:])
+                promoter.qualifiers['note'].insert(0, "derived from pBP-SJM901 (BBa_J23119)")
 
         # if any(f.location is None for f in gb.features):
         #     continue
