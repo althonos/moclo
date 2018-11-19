@@ -61,7 +61,7 @@ COLOR_REGEX = re.compile(r"color: (#[0-9a-fA-F]{6})")
 
 
 FULL_SEQUENCES = {
-    "pBP_BBa_B0034": "https://www.addgene.org/72980/sequences/",
+    "pBP-BBa_B0034": "https://www.addgene.org/72980/sequences/",
     "pBP-SJM901": "https://www.addgene.org/72966/sequences/",
 }
 
@@ -138,6 +138,10 @@ if __name__ == "__main__":
             name = id_ = id_.replace("_", "-")
         elif id_.startswith("pBP-ORF-"):
             name = id_ = id_.replace("pBP-ORF-", "pBP-")
+        elif id_ == "pBP-HexHis":
+            name = id_ = "pBP-His6"
+        elif id_.startswith("pBP_BBa"):
+            name = id_ = id_.replace("pBP_BBa", "pBP-BBa")
 
         # extract info
         info = {
@@ -169,7 +173,7 @@ if __name__ == "__main__":
                 ),
                 None,
             )
-            if id_ == "pBP-HexHis":
+            if id_ == "pBP-His6":
                 path = "/Level 0/Tags/pBP-His6_tag.gb"
             elif id_ == "pBP-T7-RBS-His6":
                 path = "/Level 0/T7 parts/pBP-T7_RBS_His6.gb"
@@ -179,6 +183,8 @@ if __name__ == "__main__":
                 path = "/Level 0/Tags/pBP-StrepII_tag.gb"
             elif id_ == "pBP-pET-RBS":
                 path = "/Level 0/RBS/pBP-PET_RBS.gb"
+            elif id_ == "pBP-BBa_B0034":
+                path = "/Level 0/Promoters/pBP_BBa_B0034.gb"
             if path is None:
                 print("COULD NOT FIND", id_)
                 continue
