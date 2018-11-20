@@ -13,7 +13,7 @@ as well as examples compiled from Jupyter notebooks at each build.
 
 ## Base module
 
-The base logic is handled by the core [`moclo`](https://github.com/althonos/moclo/tree/master/moclo-ytk)
+The base logic is handled by the core [`moclo`](https://github.com/althonos/moclo/tree/master/moclo)
 module. It embeds an object model of the MoClo system logic, but does not enforce
 any specific sequence structure, and is not usable alone. You must install a kit
 (listed below) to be able to validate and compute assemblies.
