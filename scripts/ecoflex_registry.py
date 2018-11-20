@@ -131,24 +131,24 @@ if __name__ == "__main__":
         # get the online full sequence
         if id_ in FULL_SEQUENCES:
             # Load the AddGene sequences page and get the full sequence
-            with requests.get(FULL_SEQUENCES[id_]) as res:
+            with session.get(FULL_SEQUENCES[id_]) as res:
                 soup = bs.BeautifulSoup(res.text, "html.parser")
                 section = soup.find("section", id="depositor-full")
                 gb_url = soup.find("a", class_="genbank-file-download").get('href')
             # Get the Genbank file
-            with requests.get(gb_url) as res:
+            with session.get(gb_url) as res:
                 gb = CircularRecord(read(io.StringIO(res.text), "gb"))
 
         # get the pBP-SJM901 sequence and patch it
         elif id_.startswith("pBP-SJM"):
             # get pBP-SJM
             # Load the AddGene sequences page and get the full sequence
-            with requests.get(FULL_SEQUENCES["pBP-SJM901"]) as res:
+            with session.get(FULL_SEQUENCES["pBP-SJM901"]) as res:
                 soup = bs.BeautifulSoup(res.text, "html.parser")
                 section = soup.find("section", id="depositor-full")
                 gb_url = soup.find("a", class_="genbank-file-download").get('href')
             # Get the Genbank file
-            with requests.get(gb_url) as res:
+            with session.get(gb_url) as res:
                 gb = CircularRecord(read(io.StringIO(res.text), "gb"))
             # replace the target sequence
             gb.seq = Seq(

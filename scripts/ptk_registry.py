@@ -90,10 +90,8 @@ if __name__ == "__main__":
         # get the addgene full sequence
         section = soup.find("section", id="addgene-full")
         gb_url = section.find("a", class_="genbank-file-download").get("href")
-        with requests.get(gb_url) as res:
-            gbd = info["gb_depositor"] = CircularRecord(
-                read(io.StringIO(res.text), "gb")
-            )
+        with session.get(gb_url) as res:
+            gbd = info["gb_depositor"] = CircularRecord(read(io.StringIO(res.text), "gb"))
 
         # get the AddGene plasmid page
         url = "https://www.addgene.org/{}/".format(info["addgene_id"])
@@ -103,7 +101,7 @@ if __name__ == "__main__":
         # get the deposited record
         section = soup.find("ul", class_="addgene-document-list")
         gb_url = section.find("a").get("href")
-        with requests.get(gb_url) as res:
+        with session.get(gb_url) as res:
             gba = info["gb_addgene"] = CircularRecord(read(io.StringIO(res.text), "gb"))
 
         # Sanity check

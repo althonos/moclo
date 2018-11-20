@@ -111,7 +111,7 @@ if __name__ == "__main__":
         # get the addgene full sequence
         section = soup.find("section", id="depositor-full")
         gb_url = section.find("a", class_="genbank-file-download").get("href")
-        with requests.get(gb_url) as res:
+        with session.get(gb_url) as res:
             gb = info["gb"] = CircularRecord(read(io.StringIO(res.text), "gb"))
 
         if id_ == "PAGM1276":
@@ -199,7 +199,7 @@ if __name__ == "__main__":
         ampr = next(get_features("AmpR"), None)
         if ampr is not None:
             annotate("ampr", ampr, gb.seq)
-             
+
         ampr_prom = next(get_features("AmpR promoter"), None)
         ampr_prom = ampr_prom or next(get_features("AmpR Promoter"), None)
         if ampr_prom is not None:
