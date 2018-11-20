@@ -149,7 +149,7 @@ FEATURES             Location/Qualifiers
      primer_bind     2897..2916
                      /label="pENTR-R"
                      /note="pENTR vectors, reverse primer"
-     terminator      complement(2906..3053)
+     promoter        complement(2906..3053)
                      /label="KanR Promoter"
                      /ApEinfo_fwdcolor="#93ff35"
                      /ApEinfo_revcolor="#93ff35"

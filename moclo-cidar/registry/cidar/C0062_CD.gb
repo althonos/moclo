@@ -33,12 +33,13 @@ FEATURES             Location/Qualifiers
                      /note="BioBrick prefix for parts that do not start with
                      ATG"
      CDS             42..794
-                     /codon_start=1
                      /label="LuxR repressor"
-                     /product="transcription factor LuxR"
-                     /function="represses Lux pL promoter"
+                     /codon_start=1
                      /gene="luxR"
                      /operon="lux"
+                     /product="transcription factor LuxR"
+                     /function="represses Lux pL promoter"
+                     /note="iGEM Part: BBa_R0040"
                      /db_xref="UniProtKB/Swiss-Prot:P12746"
                      /db_xref="GO:0008218"
                      /db_xref="GO:0045893"
@@ -51,14 +52,13 @@ FEATURES             Location/Qualifiers
                      /db_xref="InterPro:IPR036388"
                      /db_xref="PFAM:PF03472"
                      /db_xref="PFAM:PF00196"
-                     /note="iGEM Part: BBa_R0040"
+                     /inference="DESCRIPTION:alignment:blastx:UniProtKB/Swiss-Pr
+                     ot:P12746"
                      /translation="MKNINADDTYRIINKIKACRSNNDINQCLSDMTKMVHCEYYLLAI
                      IYPHSMVKSDISILDNYPKKWRQYYDDANLIKYDPIVDYSNSNHSPINWNIFENNAVNK
                      KSPNVIKEAKTSGLITGFSFPIHTANNGFGMLSFAHSEKDNYIDSLFLHACMNIPLIVP
                      SLVDNYRKINIANNKSNNDLTKREKECLAWACEGKSSWDISKILGCSERTVTFHLTNAQ
                      MKLNTTNRCQSISKAILTGAIDCPYFKN"
-                     /inference="DESCRIPTION:alignment:blastx:UniProtKB/Swiss-Pr
-                     ot:P12746"
      misc_feature    802..2901
                      /label="DVLA"
                      /ApEinfo_revcolor="#6ecff6"

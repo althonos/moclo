@@ -107,9 +107,7 @@ if __name__ == "__main__":
         # extract info
         info = {
             "resistance": resistance,
-            # "name": id_,
             "id": id_,
-            # "type": type_,
             "location": row.find("b").text.strip().replace(" / ", ""),
             "addgene_id": row.find("a").get("href").strip("/"),
         }
@@ -131,13 +129,13 @@ if __name__ == "__main__":
         if id_ in ("DVK_AE", "DVK_AF"):
 
             # Load the DVK_EF page and find the GenBank file link
-            with requests.get("https://www.addgene.org/66069/sequences/") as res:
+            with session.get("https://www.addgene.org/66069/sequences/") as res:
                 soup = bs.BeautifulSoup(res.text, "html.parser")
                 section = soup.find("section", id="depositor-full")
                 gb_url = soup.find("a", class_="genbank-file-download").get('href')
 
             # DVK_EF
-            with requests.get(gb_url) as res:
+            with session.get(gb_url) as res:
                 gb = info["gb"] = CircularRecord(read(io.StringIO(res.text), "gb"))
 
             if id_ == "DVK_AE":
@@ -170,7 +168,7 @@ if __name__ == "__main__":
             # get the addgene full sequence
             section = soup.find("section", id="depositor-full")
             gb_url = section.find("a", class_="genbank-file-download").get("href")
-            with requests.get(gb_url) as res:
+            with session.get(gb_url) as res:
                 gb = info["gb"] = CircularRecord(read(io.StringIO(res.text), "gb"))
 
         # Copy well documented information from one record to the other
@@ -238,38 +236,16 @@ if __name__ == "__main__":
 
         # Add missing Lux pL promoter
         elif id_.startswith("R0063"):
-            start = gb.seq.lower().find(
-                "cctgtacgatcctacaggtgcttatgttaagtaattgt"
-            )
-            plux = SeqFeature(
-                location=FeatureLocation(start, start + 150, 1),
-                type="promoter",
-                qualifiers={
-                    "label": ["Lux pL promoter"],
-                    "gene": "luxR",
-                    "operon": "lux",
-                    "function": ["LuxR repressed weak promoter"],
-                    "note": ["color: #00a1ee", "iGEM Part: BBa_R0063"],
-                },
-            )
+            start = gb.seq.lower().find("cctgtacgatcctacaggtgcttatgttaagtaattgt")
+            plux = SeqFeature(FeatureLocation(start, start + 150, 1))
+            annotate("luxpl", plux, gb.seq)
             gb.features.append(plux)
 
         # Add pTetR promoter
         elif id_.startswith("R0040"):
-            start = gb.seq.find(
-                "TCCCTATCAGTGATAGAGATTGACATCCCTATCAGTGATAGAGATACTGAGCAC"
-            )
-            ptet = SeqFeature(
-                location=FeatureLocation(start, start + 54, 1),
-                type="promoter",
-                qualifiers={
-                    "label": ["Tet promoter"],
-                    "gene": "tetR",
-                    "operon": "tet",
-                    "function": ["TetR repressed medium-strength promoter"],
-                    "note": ["color: #00a1ee", "iGEM Part: BBa_R0040"],
-                },
-            )
+            start = gb.seq.find("TCCCTATCAGTGATAGAGATTGACATCCCTATCAGTGATAGAGATACTGAGCAC")
+            ptet = SeqFeature(FeatureLocation(start, start + 54, 1))
+            annotate("ptet", ptet, gb.seq)
             gb.features.append(ptet)
 
         # Add LacI regulator
@@ -277,19 +253,7 @@ if __name__ == "__main__":
             plac = next(get_features("lac promoter"))
             start = gb.seq.find("CAATACGCAAACCGCCTCTCCCCGCG")
             plac.location = FeatureLocation(start, start + 200, 1)
-            # plac = SeqFeature(
-            # location=
-            # type='promoter',
-            plac.qualifiers.update(
-                {
-                    "label": "Lac regulatory sequence",
-                    "gene": "lacZ",
-                    "operon": "lac",
-                    "function": "LacI repressed promoter",
-                    "note": ["color: #00a1ee", "iGEM Part: BBa_R0010"],
-                }
-            )
-            # gb.features.append(plac)
+            annotate("plac", plac, gb.seq)
 
         # AmpR recolor and annotations
         ampr = next(get_features("AmpR"), None)
@@ -298,52 +262,26 @@ if __name__ == "__main__":
 
         ampr_prom = next(get_features("AmpR promoter"), None)
         if ampr_prom is not None:
-            ampr_prom.qualifiers["label"] = ["AmpR Promoter"]
-            ampr_prom.qualifiers["note"] = ["color: #ff6666"]
-        ampr_term_start = gb.seq.find(AMPR_TERM)
-        if ampr is not None and ampr_term_start >= 0:
-            ampr_term = SeqFeature(
-                location=FeatureLocation(
-                    ampr_term_start, ampr_term_start + 94, -1
-                ),
-                type="terminator",
-                qualifiers={
-                    "label": "AmpR Terminator",
-                    "note": ["color: #ff6666"],
-                },
-            )
+            annotate("ampr-prom", ampr_prom, gb.seq)
+        start = gb.seq.find(AMPR_TERM)
+        if ampr is not None and start >= 0:
+            ampr_term = SeqFeature(FeatureLocation(start, start + 94, -1))
+            annotate("ampr-term", ampr_term, gb.seq)
             gb.features.append(ampr_term)
 
         # KanR recolor and annotations
         kanr = next(get_features("KanR"), None)
         if kanr is not None:
             annotate("kanr", kanr, gb.seq)
-
-        kanr_term_start = gb.seq.find(KANR_TERM)
-        if kanr is not None and kanr_term_start >= 0:
-            kanr_term = SeqFeature(
-                location=FeatureLocation(
-                    kanr_term_start, kanr_term_start + 27, -1
-                ),
-                type="terminator",
-                qualifiers={
-                    "label": ["KanR Terminator"],
-                    "note": ["color: #93ff35"],
-                },
-            )
+        start = gb.seq.find(KANR_TERM)
+        if kanr is not None and start >= 0:
+            kanr_term = SeqFeature(FeatureLocation(start, start + 27, -1))
+            annotate("kanr-term", kanr_term, gb.seq)
             gb.features.append(kanr_term)
-        kanr_prom_start = gb.seq.find(KANR_PROM)
-        if kanr is not None and kanr_prom_start >= 0:
-            kanr_prom = SeqFeature(
-                location=FeatureLocation(
-                    kanr_prom_start, kanr_prom_start + 148, -1
-                ),
-                type="terminator",
-                qualifiers={
-                    "label": ["KanR Promoter"],
-                    "note": ["color: #93ff35"],
-                },
-            )
+        start = gb.seq.find(KANR_PROM, start if start == -1 else 0)
+        if kanr is not None and start >= 0:
+            kanr_prom = SeqFeature(FeatureLocation(start, start + 148, -1))
+            annotate("kanr-prom", kanr_prom, gb.seq)
             gb.features.append(kanr_prom)
 
         # GFP recolor and annotations
@@ -369,9 +307,7 @@ if __name__ == "__main__":
                 loc = FeatureLocation(start, end, feature.location.strand)
                 # remove possibly duplicate annotation
                 if any(f.location == loc for f in gb_archive.features):
-                    other = next(
-                        f for f in gb_archive.features if f.location == loc
-                    )
+                    other = next(f for f in gb_archive.features if f.location == loc)
                     gb_archive.features.remove(other)
                 # add the annotation to the archive record
                 new_feature = copy.deepcopy(feature)

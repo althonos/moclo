@@ -1,0 +1,8 @@
+type: promoter
+label: "Lux pL promoter"
+gene: "luxR"
+operon: "lux"
+function: "LuxR repressed weak promoter"
+note:
+  - "iGEM Part: BBa_R0063"
+  - "color: #00a1ee"

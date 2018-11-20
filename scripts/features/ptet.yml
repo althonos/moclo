@@ -1,0 +1,8 @@
+type: promoter
+label: "Tet promoter"
+gene: "tetR"
+operon: "tet"
+function: "TetR repressed medium-strength promoter"
+note:
+  - "iGEM Part: BBa_R0040"
+  - "color: #00a1ee"

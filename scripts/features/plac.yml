@@ -1,0 +1,8 @@
+type: promoter
+label: "Lac regulatory sequence"
+gene: "lacZ"
+operon: "lac"
+function: "LacI repressed promoter"
+note:
+  - "iGEM Part: BBa_R0010"
+  - "color: #00a1ee"
