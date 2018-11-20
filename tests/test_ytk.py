@@ -12,13 +12,10 @@ from ._utils import AssemblyTestCase, PartsMetaCase, build_registries
 
 # --- Test Suite Metaclass ---------------------------------------------------
 
-_Meta = PartsMetaCase(
-    "YTK", lambda: CombinedRegistry() << YTKRegistry() << PTKRegistry(), __name__
-)
+_registry = lambda: CombinedRegistry() << YTKRegistry() << PTKRegistry()
+_Meta = PartsMetaCase("YTK", _registry, __name__)
 
-
-def exclude_96(item):
-    return item.id == "pYTK096"
+exclude_96 = lambda item: item.id == "pYTK096"
 
 
 # --- Test YTK Parts ---------------------------------------------------------

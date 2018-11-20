@@ -60,6 +60,8 @@ FULL_SEQUENCES = {
     "pBP-BBa_B0034": "https://www.addgene.org/72980/sequences/",
     "pBP-SJM901": "https://www.addgene.org/72966/sequences/",
     "pBP-TL1": "https://www.addgene.org/72985/sequences/",
+    "pTU2-2a": "https://www.addgene.org/73010/sequences/",
+    "pTU2-2b": "https://www.addgene.org/73011/sequences/",
 }
 
 # Partial sequences from the reference EcoFlex paper
@@ -134,6 +136,8 @@ if __name__ == "__main__":
             name = id_ = "pBP-His6"
         elif id_.startswith("pBP_BBa"):
             name = id_ = id_.replace("pBP_BBa", "pBP-BBa")
+        elif id_.startswith("pTU2_"):
+            name = id_ = id_.replace("pTU2_", "pTU2-")
 
         # extract info
         info = {

@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 
 import unittest
+import re
 
 from moclo.kits import cidar
 from moclo.registry.cidar import CIDARRegistry
@@ -14,36 +15,35 @@ from ._utils import PartsMetaCase, AssemblyTestCase, build_registries, expectFai
 
 _Meta = PartsMetaCase("CIDAR", CIDARRegistry, __name__)
 
+exclude_cds = lambda item: item.id == "DVA_CD"
+exclude_prom = lambda item: item.id.startswith("DV") and item.id.endswith("B")
+exclude_term = lambda item: re.match("DV._D.", item.id)
+exclude_rbs = lambda item: item.id == "DVA_BC"
+exclude_dva = lambda item: item.id.startswith("DVA_")
+exclude_dvk = lambda item: item.id.startswith("DVK_")
 
-def exclude_dva(item):
-    return item.id.startswith("DVA_")
-
-
-def exclude_dvk(item):
-    return item.id.startswith("DVK_")
 
 # --- Test CIDAR Parts -------------------------------------------------------
 
-
-TestCIDARPromoter = _Meta(cidar.CIDARPromoter, "Promoter", exclude_dva)
-TestCIDARibosomeBindingSite = _Meta(cidar.CIDARRibosomeBindingSite, "RBS", exclude_dva)
-TestCIDARCodingSequence = _Meta(cidar.CIDARCodingSequence, "CDS", exclude_dva)
-TestCIDARTerminator = _Meta(cidar.CIDARTerminator, "Terminator", exclude_dva)
+TestCIDARPromoter = _Meta(cidar.CIDARPromoter, "Promoter", exclude_prom)
+TestCIDARibosomeBindingSite = _Meta(cidar.CIDARRibosomeBindingSite, "RBS", exclude_rbs)
+TestCIDARCodingSequence = _Meta(cidar.CIDARCodingSequence, "CDS", exclude_cds)
+TestCIDARTerminator = _Meta(cidar.CIDARTerminator, "Terminator", exclude_term)
 
 # Patch expected failures:
 # - R0063_AB contains 3 BsaI sites instead of 2
 expectFailure(TestCIDARPromoter, "test_R0063_AB_is_Promoter")
+
 
 # --- Test CIDAR vectors -----------------------------------------------------
 
 TestCIDAREntryVector = _Meta(cidar.CIDAREntryVector, "EntryVector", exclude_dvk)
 TestCIDARCassetteVector = _Meta(cidar.CIDARCassetteVector, "CassetteVector", exclude_dva)
 
+
 # --- Test CIDAR Assemblies --------------------------------------------------
 
 # Generate test cases based on test assemblies
-
-
 class TestCIDARAssembly(AssemblyTestCase):
     @classmethod
     def setUpClass(cls):
