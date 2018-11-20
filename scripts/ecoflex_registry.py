@@ -49,6 +49,7 @@ CMR_PROMOTER = DNARegex('tttagcttccttagctcctgaaaatctcgataactcaaaaaatacgcccggtagt
 CMR_TERMINATOR = DNARegex('accaataaaaaacgcccggcggcaaccgagcgttctgaacaaatccagatggagttctgaggtcattactggatctatcaacaggagtccaagcgagctcgatatcaaa')
 AMPR_PROMOTER = DNARegex('actcttcctttttcaatattattgaagcatttatcagggttattgtctcatgagcggatacatatttgaatgtatttagaaaaataaacaaataggggttccgcgcacatttccccgaaaagtgccacctg')
 AMPR_TERMINATOR = DNARegex('gattatcaaaaaggatcttcacctagatccttttaaattaaaaatgaagttttaaatcaatctaaagtatatatgagtaaacttggtctgacag')
+GFP = DNARegex("aaaggagaagaacttttcactggagttgtcccaattcttgttgaattagatggtgatgttaatgggcacaaattttctgtcagtggagagggtga")
 
 
 NAME_REGEX = re.compile(r"([^ ]*) \(([^\)]*)\)(_[A-Z]{2})")
@@ -58,6 +59,7 @@ COLOR_REGEX = re.compile(r"color: (#[0-9a-fA-F]{6})")
 FULL_SEQUENCES = {
     "pBP-BBa_B0034": "https://www.addgene.org/72980/sequences/",
     "pBP-SJM901": "https://www.addgene.org/72966/sequences/",
+    "pBP-TL1": "https://www.addgene.org/72985/sequences/",
 }
 
 # Partial sequences from the reference EcoFlex paper
@@ -73,6 +75,21 @@ PROMOTERS = {
     "pBP-SJM912": "CTATTTGATAGCTAGCTCAGTCCTAGGTACTATGCTAGCGTAC",
     "pBP-SJM914": "CTATTTGATGGCTAGCTCAGTCCTAGGGATTGTGCTAGCGTAC",
     "pBP-SJM915": "CTATTTTATGGCTAGCTCAGTCCTTGGTATTATGCTAGCGTAC",
+}
+
+TL = {
+    "pBP-TL1": "GGTCTCAGTACAGATCTAATAATTTTGTTTAACTTTGGGGGGATACATATGAGACC",
+    "pBP-TL2": "GGTCTCAGTACAGATCTAATAATTTTGTTTAACTTTGGGAGGATACATATGAGACC",
+    "pBP-TL3": "GGTCTCAGTACAGATCTAATAATTTTGTTTAACTTTGGGGGAATACATATGAGACC",
+    "pBP-TL4": "GGTCTCAGTACAGATCTAATAATTTTGTTTAACTTTAAGGAGATACATATGAGACC",
+    "pBP-TL5": "GGTCTCAGTACAGATCTAATAATTTTGTTTAACTTTGGAGAAATACATATGAGACC",
+    "pBP-TL6": "GGTCTCAGTACAGATCTAATAATTTTGTTTAACTTTGGGGAAATACATATGAGACC",
+    "pBP-TL7": "GGTCTCAGTACAGATCTAATAATTTTGTTTAACTTTAGGGGAATACATATGAGACC",
+    "pBP-TL8": "GGTCTCAGTACAGATCTAATAATTTTGTTTAACTTTAAAGAGATACATATGAGACC",
+    "pBP-TL9": "GGTCTCAGTACAGATCTAATAATTTTGTTTAACTTTAAAAGGATACATATGAGACC",
+    "pBP-TL10": "GGTCTCAGTACAGATCTAATAATTTTGTTTAACTTTGAAAAAATACATATGAGACC",
+    "pBP-TL11": "GGTCTCAGTACAGATCTAATAATTTTGTTTAACTTTGAAAAAATACATATGAGACC",
+    "pBP-TL12": "GGTCTCAGTACAGATCTAATAATTTTGTTTAACTTTGGGAAGATACATATGAGACC",
 }
 
 
@@ -157,6 +174,19 @@ if __name__ == "__main__":
             gb.description = gb.description.replace("SJM901", id_[4:])
             gb.keywords = [id_[4:]]
 
+        elif id_.startswith("pBP-TL"):
+            # Load the AddGene sequences page and get the full sequence
+            with session.get(FULL_SEQUENCES["pBP-TL1"]) as res:
+                soup = bs.BeautifulSoup(res.text, "html.parser")
+                section = soup.find("section", id="depositor-full")
+                gb_url = soup.find("a", class_="genbank-file-download").get('href')
+            # Get the Genbank file
+            with session.get(gb_url) as res:
+                gb = CircularRecord(read(io.StringIO(res.text), "gb"))
+            # replace the target sequence
+            gb.seq = Seq(str(gb.seq.upper()).replace(TL["pBP-TL1"], TL[id_]))
+
+
         # get the ZIP sequence
         else:
             path = next(
@@ -211,17 +241,10 @@ if __name__ == "__main__":
 
         # Correct overlapping features by setting the origin just before the
         # biobrick prefix
-        pref = next(itertools.chain(
-            get_features("BioBrick prefix"),
-            get_features_from_note("BioBrick prefix")
-        ))
+        pref = next(get_features("BioBrick prefix"))
         if pref.location is None:
-            match = BB_PREFIX.search(gb)
-            pref.location = FeatureLocation(
-                start=match.start(),
-                end=match.end(),
-                strand=1,
-            )
+            start, end = BB_PREFIX.search(gb).span()
+            pref.location = FeatureLocation(start, end, +1)
         gb <<= pref.location.start - 1
 
         # AmpR recolor and annotations
@@ -238,18 +261,14 @@ if __name__ == "__main__":
                 start, end = AMPR_PROMOTER.search(gb.seq).span()
                 ampr_prom = SeqFeature(FeatureLocation(start, end, -1))
                 gb.features.append(ampr_prom)
-            ampr_prom.type = "promoter"
-            ampr_prom.qualifiers["label"] = ["AmpR Promoter"]
-            ampr_prom.qualifiers["note"] = ["color: #ff6666"]
+            annotate("ampr-prom", ampr_prom, gb.seq)
 
             ampr_term = next(get_features_from_label("AmpR terminator"), None)
             if ampr_term is None:
                 start, end = AMPR_TERMINATOR.search(gb.seq).span()
                 ampr_term = SeqFeature(FeatureLocation(start, end, -1))
                 gb.features.append(ampr_term)
-            ampr_term.type = 'terminator'
-            ampr_term.qualifiers['label'] = 'AmpR Terminator'
-            ampr_term.qualifiers['note'] = ['color: #ff6666']
+            annotate("ampr-term", ampr_term, gb.seq)
 
         # CmR recolor and annotations
         cmr = next(get_features('CmR'), None)
@@ -261,26 +280,14 @@ if __name__ == "__main__":
                 start, end = CMR_PROMOTER.search(gb.seq).span()
                 cmr_prom = SeqFeature(location=FeatureLocation(start, end, -1))
                 gb.features.append(cmr_prom)
-            cmr_prom.type = "promoter"
-            cmr_prom.qualifiers.update(
-                {
-                    "label": ["CmR Promoter"],
-                    "note": ["color: #66ccff; direction: LEFT"],
-                }
-            )
+            annotate("cmr-prom", cmr_prom, gb.seq)
 
             cmr_term = next(get_features_from_label("CamR Terminator"), None)
             if cmr_term is None:
                 start, end = CMR_TERMINATOR.search(gb.seq).span()
                 cmr_term = SeqFeature(location=FeatureLocation(start, end, -1))
                 gb.features.append(cmr_term)
-            cmr_term.type = "terminator"
-            cmr_term.qualifiers.update(
-                {
-                    "label": ["CmR Terminator"],
-                    "note": ["color: #66ccff; direction: LEFT"],
-                }
-            )
+            annotate("cmr-term", cmr_term, gb.seq)
 
             old_term = next(get_features_from_note('lambda t0 terminator'), None)
             if old_term is not None:
@@ -289,6 +296,11 @@ if __name__ == "__main__":
         # GFP recolor and annotations
         gfp = next(get_features_from_label("GFP"), None)
         if gfp is not None:
+            if gfp.location is None:
+                match = GFP.search(gb.seq)
+                if match is not None:
+                    start = match.start()
+                    gfp.location = FeatureLocation(start, start+711, +1)
             annotate("gfp", gfp, gb.seq)
 
         # mRFP1 recolor and annotations
@@ -313,9 +325,9 @@ if __name__ == "__main__":
 
         # if any(f.location is None for f in gb.features):
         #     continue
-        for f in gb.features:
-            if f.location is None:
-                print(gb, f)
+        # for f in gb.features:
+        #     if f.location is None:
+        #         print(gb, f)
 
         # sort features by start location, source always first
         gb.features.sort(
