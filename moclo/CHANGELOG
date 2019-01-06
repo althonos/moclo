@@ -9,6 +9,14 @@ project adheres to `Semantic Versioning <http://semver.org/spec/v2.0.0.html>`_.
 Unreleased_
 -----------
 
+
+v0.4.3_ - 2019-01-06
+--------------------
+
+Changed
+'''''''
+- Add ``2.2.0`` to the supported ``fs`` versions.
+
 Added
 '''''
 - Add ``Item.record`` shortcut to ``Item.entity.record`` in ``moclo.registry``.
@@ -113,7 +121,8 @@ v0.1.0_ - 2018-07-12
 
 Initial public release.
 
-.. _Unreleased: https://github.com/althonos/moclo/compare/v0.4.2...HEAD
+.. _Unreleased: https://github.com/althonos/moclo/compare/v0.4.3...HEAD
+.. _v0.4.3: https://github.com/althonos/moclo/compare/v0.4.2...v0.4.3
 .. _v0.4.2: https://github.com/althonos/moclo/compare/v0.4.1...v0.4.2
 .. _v0.4.1: https://github.com/althonos/moclo/compare/v0.4.0...v0.4.1
 .. _v0.4.0: https://github.com/althonos/moclo/compare/v0.3.0...v0.4.0
