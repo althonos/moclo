@@ -2,7 +2,7 @@
 biopython ~=1.71
 cached-property ~=1.4
 configparser                           ; python_version < '3'
-fs ~=2.0.7
+fs ~=2.3.0
 semantic-version ~=2.6
 setuptools >=30.3
 six ~=1.10
