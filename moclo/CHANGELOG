@@ -10,6 +10,13 @@ Unreleased_
 -----------
 
 
+v0.4.4_ - 2019-02-11
+--------------------
+
+Changed
+'''''''
+- Add ``2.3.0`` to the supported ``fs`` versions.
+
 v0.4.3_ - 2019-01-06
 --------------------
 
@@ -121,7 +128,8 @@ v0.1.0_ - 2018-07-12
 
 Initial public release.
 
-.. _Unreleased: https://github.com/althonos/moclo/compare/v0.4.3...HEAD
+.. _Unreleased: https://github.com/althonos/moclo/compare/v0.4.4...HEAD
+.. _v0.4.4: https://github.com/althonos/moclo/compare/v0.4.3...v0.4.4
 .. _v0.4.3: https://github.com/althonos/moclo/compare/v0.4.2...v0.4.3
 .. _v0.4.2: https://github.com/althonos/moclo/compare/v0.4.1...v0.4.2
 .. _v0.4.1: https://github.com/althonos/moclo/compare/v0.4.0...v0.4.1
