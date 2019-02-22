@@ -9,6 +9,9 @@ project adheres to `Semantic Versioning <http://semver.org/spec/v2.0.0.html>`_.
 Unreleased_
 -----------
 
+Fixed
+'''''
+- Support all ``fs`` versions under `3.0`.
 
 v0.4.4_ - 2019-02-11
 --------------------
