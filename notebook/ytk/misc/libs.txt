@@ -4,3 +4,5 @@ freetype-dev
 libxml2-dev
 libxslt-dev
 libstdc++
+linux-headers 
+zeromq-dev
