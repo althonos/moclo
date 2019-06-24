@@ -15,7 +15,7 @@ RUN apk add --no-cache --update $(cat misc/libs.txt) \
 ENV LANG=C.UTF-8
 EXPOSE 8888
 CMD jupyter lab \
-    --ip=* \
+    --ip=0.0.0.0 \
     --port=8888 \
     --no-browser \
     --NotebookApp.token='' \
