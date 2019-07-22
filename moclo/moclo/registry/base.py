@@ -6,12 +6,12 @@ import io
 import typing
 
 import Bio.SeqIO
-import cached_property
 import fs
 import pkg_resources
 import six
 from fs.wrap import read_only
 from fs.path import splitext
+from property_cached import cached_property
 
 from .._impl import bz2, json
 from ..record import CircularRecord
@@ -94,7 +94,7 @@ class EmbeddedRegistry(AbstractRegistry):
     def _load_entity(self, raw, index):
         return self._types[raw["type"]](raw["record"])
 
-    @cached_property.cached_property
+    @cached_property
     def _data(self):
         with pkg_resources.resource_stream(self._module, self._file) as rs:
             with io.TextIOWrapper(bz2.BZ2File(rs)) as decomp:
@@ -141,7 +141,7 @@ class FilesystemRegistry(AbstractRegistry):
         self._extensions = extensions
         self._cache = {}
 
-    @cached_property.cached_property
+    @cached_property
     def _files(self):
         return ["*.{}".format(extension) for extension in self._extensions]
 

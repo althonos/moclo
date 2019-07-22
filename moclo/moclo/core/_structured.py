@@ -5,8 +5,8 @@ from __future__ import unicode_literals
 import abc
 import typing
 
-import cached_property
 import six
+from property_cached import cached_property
 
 from .. import errors
 from ..regex import DNARegex
@@ -43,7 +43,7 @@ class StructuredRecord(object):
             cls._regex = DNARegex(cls.structure())
         return cls._regex
 
-    @cached_property.cached_property
+    @cached_property
     def _match(self):
         # type: () -> SeqMatch[SeqRecord]
         topology = self.record.annotations.get("topology", "circular").lower()

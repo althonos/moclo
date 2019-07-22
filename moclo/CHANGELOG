@@ -9,6 +9,10 @@ project adheres to `Semantic Versioning <http://semver.org/spec/v2.0.0.html>`_.
 Unreleased_
 -----------
 
+Changed
+'''''''
+- Switch from ``cached-property`` to ``property-cached`` in dependencies.
+
 v0.4.5_ - 2019-02-22
 --------------------
 

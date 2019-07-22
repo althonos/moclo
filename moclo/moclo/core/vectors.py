@@ -9,8 +9,8 @@ modules during the Golden Gate assembly.
 
 import typing
 
-import cached_property
 from Bio.Seq import Seq
+from property_cached import cached_property
 
 from .. import errors
 from ._assembly import AssemblyManager
@@ -98,7 +98,7 @@ class AbstractVector(StructuredRecord):
             start, end = self._match.span(1)[0], self._match.span(2)[1]
         return add_as_source(self.record, (self.record << start)[end - start :])
 
-    @cached_property.cached_property
+    @cached_property
     def _match(self):
         _match = super(AbstractVector, self)._match
         if len(self.cutter.catalyse(_match.group(0).seq)) > 3:
