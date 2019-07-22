@@ -82,6 +82,14 @@ class EmbeddedRegistry(AbstractRegistry):
     _file = NotImplemented
     _types = NotImplemented
 
+    def __hash__(self):
+        return hash((EmbeddedRegistry, self._file))
+
+    def __eq__(self, other):
+        if isinstance(other, EmbeddedRegistry):
+            return self._file == other._file
+        return False
+
     def _load_id(self, raw, index):
         return raw["id"]
 
@@ -139,9 +147,8 @@ class FilesystemRegistry(AbstractRegistry):
         self.base = base
         self._recurse = False
         self._extensions = extensions
-        self._cache = {}
 
-    @cached_property
+    @property
     def _files(self):
         return ["*.{}".format(extension) for extension in self._extensions]
 
