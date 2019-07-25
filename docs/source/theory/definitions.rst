@@ -213,4 +213,4 @@ Golden Gate Assembly
 
     The notation for an assembly is:
 
-    .. math:: d_1 + \dots d_m \xrightarrow{\quad e_1, \dots, e_n \quad} a_1 + \dots + a_k
+    .. math:: d_1 + \dots + d_m \xrightarrow{\quad e_1, \dots, e_n \quad} a_1 + \dots + a_k
