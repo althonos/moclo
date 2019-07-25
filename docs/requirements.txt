@@ -1,6 +1,6 @@
 # direct moclo dependencies
 biopython ~=1.71
-cached-property ~=1.4
+property-cached ~=1.4
 configparser                           ; python_version < '3'
 fs ~=2.3.0
 semantic-version ~=2.6
@@ -9,8 +9,8 @@ six ~=1.10
 typing ~=3.6                           ; python_version < '3.6'
 
 # sphinx development version (1.8) and bootstrap theme
-sphinx-bootstrap-theme ~=0.6
-Sphinx ~=1.8
+sphinx-bootstrap-theme ~=0.7
+Sphinx ~=2.1
 
 # nbsphinx dependencies
 nbsphinx
