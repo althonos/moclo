@@ -39,21 +39,13 @@ stages:
 
 jobs:
   include:
-
-    # Tests using the default Travis-CI provided Python
     - python: pypy
       stage: PyPy
       <<: *test-native
-    - env:
-      - IMAGE=pypy:3
+    - python: pypy3
       stage: PyPy
-      <<: *test-docker
-
-    # Tests against CPython using the native Travis-CI Python binaries
-    - python: 2.7
-      stage: CPython
       <<: *test-native
-    - python: 3.4
+    - python: 2.7
       stage: CPython
       <<: *test-native
     - python: 3.5
@@ -61,6 +53,11 @@ jobs:
       <<: *test-native
     - python: 3.6
       stage: CPython
+      <<: *test-native
+    - python: 3.7
+      stage: CPython
+      <<: *test-native
+    - python: 3.8
       <<: *test-native
       before_deploy:
         - python ci/travis/before-deploy.py
@@ -71,13 +68,6 @@ jobs:
         on:
           tags: true
           repo: althonos/moclo
-
-    # Tests using a Docker image
-    - env:
-      - IMAGE=python:3.7
-      stage: CPython
-      <<: *test-docker
-
 
 notifications:
   email:
