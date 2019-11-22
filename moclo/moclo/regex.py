@@ -81,7 +81,7 @@ class DNARegex(object):
         return "".join(target)
 
     def __init__(self, pattern):
-        # type: (Text, bool) -> None
+        # type: (Text) -> None
         self.pattern = pattern
         self.regex = re.compile(self._transcribe(pattern))
 
