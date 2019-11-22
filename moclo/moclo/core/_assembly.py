@@ -51,8 +51,13 @@ class AssemblyManager(object):
         for mod in self.modules:
             m = modmap.setdefault(mod.overhang_start(), mod)
             if m is not mod:
-                details = "same start overhang: '{}'".format(mod.overhang_start())
+                details = "same start overhang: '{}'".format(m.overhang_start())
                 raise errors.DuplicateModules(m, mod, details=details)
+        for overhang in modmap:
+            m = modmap.get(overhang.reverse_complement())
+            if m is not None:
+                details = "reverse-complementing overhangs: '{}'".format(m.overhang_start())
+                raise errors.DuplicateModules(m, modmap[overhang], details=details)
         return modmap
 
     def _get_alphabet(self, modmap):
