@@ -200,7 +200,9 @@ html_theme_options = {
     "navbar_links": [
         ("GitHub", _parser.get("metadata", "home-page").strip(), True)
     ] + [
-        (k, v, True) for k, v in project_urls.items() if k != "Documentation"
+        (k, v, True)
+        for k, v in project_urls.items()
+        if k not in {"Documentation", "Changelog"}
     ],
 }
 
@@ -308,7 +310,7 @@ autoclass_content = "class"
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3/", None),
-    "six": ("http://six.readthedocs.io/", None),
+    "six": ("https://six.readthedocs.io/", None),
 }
 
 # -- Options for todo extension ----------------------------------------------
