@@ -2,72 +2,43 @@ sudo: false
 language: python
 cache: pip
 
-services:
-  - docker
+python:
+  - 2.7
+  - 3.5
+  - 3.6
+  - 3.7
+  - 3.8
+  - pypy
+  - pypy3
 
-stages:
-  - name: CPython
-  - name: PyPy
+before_install:
+  - ci/travis/decrypt-all.sh
+  - pip install -U -r ci/requirements.txt
 
-# .deploy: &deploy
-#   provider: script
-#   script: twine upload --skip-existing dist/*
-#   skip_cleanup: true
-#   on:
-#     tags: true
-#     repo: althonos/moclo
+install:
+  - pip install ./moclo ./moclo-*
 
-.test-native: &test-native
-  before_install:
-    - ci/travis/decrypt-all.sh
-    - pip install -U -r ci/requirements.txt
-  install:
-    - pip install ./moclo ./moclo-ytk ./moclo-cidar ./moclo-ecoflex
-  before_script:
-    - pip install -U -r tests/requirements.txt
-  script:
-    - green -T
-  after_script:
-    - python -m codecov
-    - python -m codacy
+before_script:
+  - pip install -U -r tests/requirements.txt
 
-.test-docker: &test-docker
-  before_script:
-    - docker pull $IMAGE
-  script:
-    - docker run -it -v "$TRAVIS_BUILD_DIR":"/py" -v "$HOME/.cache/pip":"/root/.cache" $IMAGE sh -c /py/ci/travis/test-docker.sh
+script:
+  - green -T
 
-jobs:
-  include:
-    - python: pypy
-      stage: PyPy
-      <<: *test-native
-    - python: pypy3
-      stage: PyPy
-      <<: *test-native
-    - python: 2.7
-      stage: CPython
-      <<: *test-native
-    - python: 3.5
-      stage: CPython
-      <<: *test-native
-    - python: 3.6
-      stage: CPython
-      <<: *test-native
-    - python: 3.7
-      stage: CPython
-      <<: *test-native
-    - python: 3.8
-      <<: *test-native
-      before_deploy:
-        - python ci/travis/before-deploy.py
-      deploy:
-        provider: script
-        script: twine upload --skip-existing dist/*
-        skip_cleanup: true
-        on:
-          tags: true
-          repo: althonos/moclo
+after_script:
+  - python -m codecov
+  - python -m codacy
+
+before_deploy:
+  - python ci/travis/before-deploy.py
+
+deploy:
+  provider: script
+  script: twine upload --skip-existing dist/*
+  skip_cleanup: true
+  on:
+    tags: true
+    python: 3.8
+    repo: althonos/moclo
 
 notifications:
   email:
