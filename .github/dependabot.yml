@@ -1,0 +1,38 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/moclo"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: pip
+  directory: "/moclo-ytk"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: pip
+  directory: "/moclo-ecoflex"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: pip
+  directory: "/moclo-cidar"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: pip
+  directory: "/moclo-ig"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+- package-ecosystem: pip
+  directory: "/moclo-gb3"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
