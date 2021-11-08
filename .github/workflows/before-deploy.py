@@ -7,12 +7,17 @@ import re
 import subprocess
 import sys
 
-tag = os.getenv('TRAVIS_TAG')
-lib = tag.split('/')[0]
+ref = os.getenv('GITHUB_REF')
+if not ref.startswith("refs/tags/"):
+    raise RuntimeError("not a tagged commit: {!r}".format(ref))
 
-libdir = 'moclo-{}'.format(lib)
-if not os.path.exists(libdir):
+if ref.count("/") == 2:
     libdir = 'moclo'
+elif ref.count("/") == 3:
+    lib = tag.split('/')[-2]
+    libdir = 'moclo-{}'.format(lib)
+else:
+    raise RuntimeError("Could not recognize ref: {!r}".format(ref))
 
 args = [
     sys.executable,
