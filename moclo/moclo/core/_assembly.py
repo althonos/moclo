@@ -7,7 +7,6 @@ import warnings
 
 import six
 from Bio import BiopythonWarning
-from Bio.Alphabet import IUPAC
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 
@@ -32,12 +31,11 @@ class AssemblyManager(object):
     @catch_warnings("ignore", category=BiopythonWarning)
     def assemble(self):
         modmap = self._generate_modules_map()
-        alphabet = self._get_alphabet(modmap)
 
         for elem in self.elements:
             self._deref_citations(elem.record)
 
-        assembly = self._generate_assembly(modmap, alphabet)
+        assembly = self._generate_assembly(modmap)
 
         self._annotate_assembly(assembly)
         self._ref_citations(assembly)
@@ -60,19 +58,10 @@ class AssemblyManager(object):
                 raise errors.DuplicateModules(m, modmap[overhang], details=details)
         return modmap
 
-    def _get_alphabet(self, modmap):
-        alphabets = [
-            mod.seq.alphabet
-            for mod in six.itervalues(modmap)
-            if mod.seq.alphabet.letters is not None
-        ]
-        alphabets.append(IUPAC.unambiguous_dna)
-        return max(alphabets, key=lambda a: len(a.letters))
-
-    def _generate_assembly(self, modmap, alphabet):
+    def _generate_assembly(self, modmap):
         try:
             overhang_next = self.vector.overhang_end()
-            assembly = SeqRecord(Seq("", alphabet))
+            assembly = SeqRecord(Seq(""))
             while overhang_next != self.vector.overhang_start():
                 module = modmap.pop(overhang_next)
                 assembly += module.target_sequence()
