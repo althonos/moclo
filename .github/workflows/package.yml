@@ -2,7 +2,13 @@ name: Package
 
 on:
   push:
-    - tags
+    tags:
+      - "*.*.*"
+      - "ecoflex/*.*.*"
+      - "ytk/*.*.*"
+      - "cidar/*.*.*"
+      - "ig/*.*.*"
+      - "gb3/*.*.*"
 
 jobs:
 
@@ -18,11 +24,11 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.9
+    - name: Update pip
+      run: python -m pip install -U pip wheel setuptools docutils
     - name: Build wheels for the right package
-      run:
-      uses: addnab/docker-run-action@v2
-      with: python ci/travis/before-deploy.py
-    - name: Store built wheels
+      run: python .github/workflows/before-deploy.py
+    - name: Store built distributions
       uses: actions/upload-artifact@v2
       with:
         name: dist

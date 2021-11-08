@@ -22,8 +22,6 @@ else:
 args = [
     sys.executable,
     'setup.py',
-    'check',
-    '-rms',
     'sdist',
     '-d',
     os.path.join(os.pardir, 'dist'),
