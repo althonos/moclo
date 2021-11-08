@@ -1,0 +1,9 @@
+codacy-coverage
+codecov
+coverage
+docutils
+green
+Pygments
+setuptools
+twine
+wheel
