@@ -16,7 +16,6 @@ import bs4 as bs
 import six
 import tqdm
 import requests
-from Bio.Alphabet import IUPAC
 from Bio.Seq import Seq, translate
 from Bio.SeqFeature import SeqFeature, FeatureLocation, CompoundLocation, Reference
 from Bio.SeqIO import read, write
@@ -136,11 +135,9 @@ if __name__ == "__main__":
 
         # Copy well documented information from one record to the other
         gb.seq, gb_archive.seq = (gb.seq.upper(), gb_archive.seq.upper())
-        gb.seq.alphabet = gb_archive.seq.alphabet = IUPAC.unambiguous_dna
         gb.id = gb_archive.id = id_
         gb.name = gb_archive.name = name
         gb_archive.description = gb.description
-        # gb.annotations["keywords"] = gb_archive.annotations.get("keywords")
         gb_archive.annotations = copy.deepcopy(gb.annotations)
 
         # quick feature accessor
