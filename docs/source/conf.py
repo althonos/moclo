@@ -21,7 +21,7 @@ from sphinx.util.console import bold, darkgreen, reset
 
 # -- Globals -----------------------------------------------------------------
 
-KITS = ["cidar", "ecoflex", "gb3", "ig", "ytk"]
+KITS = ["cidar", "ecoflex", "gb3", "moclo", "ytk"]
 LIBS = ["moclo"] + ["moclo-{}".format(kit) for kit in KITS]
 LOGGER = sphinx.util.logging.getLogger(__name__)
 

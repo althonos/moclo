@@ -1,5 +1,5 @@
 # coding: utf-8
-"""An implementation of the Icon Genetics ToolKit for the Python MoClo library.
+"""An implementation of the original MoClo ToolKit for the Python MoClo library.
 
 References:
     1. `Weber, E., Engler, C., Gruetzner, R., Werner, S., Marillonnet, S. (2011).
@@ -30,8 +30,8 @@ __version__ = (
 # VECTORS ####################################################################
 
 
-class IGEntryVector(vectors.EntryVector):
-    """An Icon Genetics entry vector.
+class MoCloVector(vectors.EntryVector):
+    """A MoClo entry vector.
 
     References:
         *Weber et al.*, Figure 2A.
@@ -57,8 +57,8 @@ class IGEntryVector(vectors.EntryVector):
         )
 
 
-class IGCassetteVector(vectors.CassetteVector):
-    """An Icon Genetics cassette vector.
+class MoCloCassetteVector(vectors.CassetteVector):
+    """A MoClo cassette vector.
 
     References:
         *Weber et al.*, Figure 4A.
@@ -86,15 +86,15 @@ class IGCassetteVector(vectors.CassetteVector):
         )
 
 
-class IGSingleCassetteVector(vectors.CassetteVector):
-    """An Icon Genetics single cassette vector.
+class MoCloSingleCassetteVector(vectors.CassetteVector):
+    """An original MoClo single cassette vector.
 
     These plasmids allow obtaining plasmids ready for plant transformation
     containing only a single transcription unit, assembled directly from
     entries, without using an intermediate *E. coli* plasmid.
 
     Danger:
-        The resulting plasmid will not be a valid `IGCassette`!
+        The resulting plasmid will not be a valid `MoCloCassette`!
 
     References:
         `AddGene MoClo <https://www.addgene.org/cloning/moclo/marillonnet/>`_
@@ -105,8 +105,8 @@ class IGSingleCassetteVector(vectors.CassetteVector):
     cutter = BsaI
 
 
-class IGDeviceVector(vectors.DeviceVector):
-    """An Icon Genetics device vector.
+class MoCloDeviceVector(vectors.DeviceVector):
+    """An original MoClo device vector.
 
     References:
         *Weber et al.*, Figure 4A.
@@ -119,22 +119,22 @@ class IGDeviceVector(vectors.DeviceVector):
 # MODULES ####################################################################
 
 
-class IGProduct(modules.Product):
-    """An Icon Genetics MoClo product.
+class MoCloProduct(modules.Product):
+    """An original MoClo product.
     """
 
     cutter = BpiI
 
 
-class IGEntry(modules.Entry):
-    """An Icon Genetics MoClo entry.
+class MoCloEntry(modules.Entry):
+    """An original MoClo entry.
     """
 
     cutter = BsaI
 
 
-class IGCassette(modules.Cassette):
-    """An Icon Genetics MoClo cassette.
+class MoCloCassette(modules.Cassette):
+    """An original MoClo cassette.
     """
 
     cutter = BpiI
@@ -145,8 +145,8 @@ class IGCassette(modules.Cassette):
 # Abstract ###################################################################
 
 
-class IGPart(parts.AbstractPart):
-    """An Icon Genetics MoClo standard part.
+class MoCloPart(parts.AbstractPart):
+    """An original MoClo standard part.
 
     A part is a plasmid with standardized flanking overhang sequences
     that allows immediate type recognition.
@@ -159,36 +159,36 @@ class IGPart(parts.AbstractPart):
 # Level 0 ####################################################################
 
 
-class IGPromoter(IGPart, IGEntry):
-    """An Icon Genetics promoter part.
+class MoCloPromoter(MoCloPart, MoCloEntry):
+    """An original MoClo promoter part.
     """
 
     signature = ("GGAG", "TACT")
 
 
-class IGUntranslatedRegion(IGPart, IGEntry):
-    """An Icon Genetics 5' UTR part.
+class MoCloUntranslatedRegion(MoCloPart, MoCloEntry):
+    """An original MoClo 5' UTR part.
     """
 
     signature = ("TACT", "AATG")
 
 
-class IGSignalPeptide(IGPart, IGEntry):
-    """An Icon Genetics signal peptide part.
+class MoCloSignalPeptide(MoCloPart, MoCloEntry):
+    """An original MoClo signal peptide part.
     """
 
     signature = ("AATG", "AGGT")
 
 
-class IGCodingSequence(IGPart, IGEntry):
-    """An Icon Genetics CDS part.
+class MoCloCodingSequence(MoCloPart, MoCloEntry):
+    """An original MoClo CDS part.
     """
 
     signature = ("AGGT", "GCTT")
 
 
-class IGTerminator(IGPart, IGEntry):
-    """An Icon Genetics terminator part.
+class MoCloTerminator(MoCloPart, MoCloEntry):
+    """An original MoClo terminator part.
     """
 
     signature = ("GCTT", "CGCT")
@@ -197,7 +197,7 @@ class IGTerminator(IGPart, IGEntry):
 # Level 0 ####################################################################
 
 
-class IGEndLinker(IGPart, IGCassette):
+class MoCloEndLinker(MoCloPart, MoCloCassette):
     """An Icon Genetic end linker part.
 
     References:
@@ -211,17 +211,17 @@ class IGEndLinker(IGPart, IGCassette):
 # Level M ####################################################################
 
 
-class IGLevelMEndLinker(IGPart, IGCassette):
+class MoCloLevelMEndLinker(MoCloPart, MoCloCassette):
 
     signature = ("NNNN", "GGGA")
 
     # FIXME: add prefix BsaI
     @classmethod
     def structure(cls):
-        return super(IGLevelMEndLinker, cls).structure()
+        return super(MoCloLevelMEndLinker, cls).structure()
 
 
-class IGLevelMVector(IGPart, IGDeviceVector):
+class MoCloLevelMVector(MoCloPart, MoCloDeviceVector):
 
     cutter = BpiI
     signature = ("GGGA", "NNNN")
@@ -229,13 +229,13 @@ class IGLevelMVector(IGPart, IGDeviceVector):
     # FIXME: add prefix BsaI
     @classmethod
     def structure(cls):
-        return super(IGLevelMVector, cls).structure()
+        return super(MoCloLevelMVector, cls).structure()
 
 
 # Level P ####################################################################
 
 
-class IGLevelPEndLinker(IGPart, IGEntry):  # FIXME: hierarchy ?
+class MoCloLevelPEndLinker(MoCloPart, MoCloEntry):  # FIXME: hierarchy ?
 
     cutter = BsaI
     signature = ("NNNN", "GGGA")
@@ -243,10 +243,10 @@ class IGLevelPEndLinker(IGPart, IGEntry):  # FIXME: hierarchy ?
     # FIXME: add prefix BpiI
     @classmethod
     def structure(cls):
-        return super(IGLevelPEndLinker, cls).structure()
+        return super(MoCloLevelPEndLinker, cls).structure()
 
 
-class IGLevelPVector(IGPart, IGCassetteVector):  # FIXME: hierarchy ?
+class MoCloLevelPVector(MoCloPart, MoCloCassetteVector):  # FIXME: hierarchy ?
 
     cutter = BsaI
     signature = ("GGGA", "NNNN")
@@ -254,4 +254,4 @@ class IGLevelPVector(IGPart, IGCassetteVector):  # FIXME: hierarchy ?
     # FIXME: add prefix BpiI
     @classmethod
     def structure(cls):
-        return super(IGLevelPVector, cls).structure()
+        return super(MoCloLevelPVector, cls).structure()

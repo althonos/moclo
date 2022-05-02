@@ -71,7 +71,7 @@ Kits
 
   kits/cidar/index
   kits/ecoflex/index
-  kits/ig/index
+  kits/moclo/index
   kits/ytk/index
 
 
