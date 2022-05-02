@@ -1,4 +1,4 @@
 include COPYING
-include README.rst
+include README.md
 include CHANGELOG
 recursive-include registry *.gb
