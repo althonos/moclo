@@ -1,0 +1,17 @@
+Changelog
+=========
+
+All notable changes to this project will be documented in this file.
+
+The format is based on `Keep a Changelog <http://keepachangelog.com>`_ and this
+project adheres to `Semantic Versioning <http://semver.org/spec/v2.0.0.html>`_.
+
+
+v0.1.0_ - 2018-07-12
+--------------------
+
+Initial public release.
+
+
+.. _Unreleased: https://github.com/althonos/moclo/compare/ig/v0.1.0...HEAD
+.. _v0.1.0: https://github.com/althonos/moclo/compare/20aa50fb2202279215c36e2b687a7e989667e34f...ig/v0.1.0

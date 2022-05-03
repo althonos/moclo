@@ -1,0 +1,4 @@
+include COPYING
+include README.md
+include CHANGELOG
+recursive-include registry *.gb
