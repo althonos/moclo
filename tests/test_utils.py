@@ -2,7 +2,7 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-import collections
+import collections.abc
 import unittest
 
 from moclo._utils import isabstract
@@ -10,7 +10,7 @@ from moclo._utils import isabstract
 
 class TestIsAbstract(unittest.TestCase):
     def test_abstract_method(self):
-        self.assertTrue(isabstract(collections.Iterable))
+        self.assertTrue(isabstract(collections.abc.Iterable))
         self.assertFalse(isabstract(int))
 
     def test_abstract_attribute(self):

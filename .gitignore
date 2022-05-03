@@ -8,6 +8,7 @@ __pycache__/
 
 # Genbank compressed registries
 **/registry/**/*.json.bz2
+**/registry/**/*.tar.gz
 
 # Distribution / packaging
 .Python

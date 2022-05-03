@@ -2,8 +2,10 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
+import abc
 import io
 import typing
+import tarfile
 
 import Bio.SeqIO
 import fs
@@ -74,7 +76,7 @@ class CombinedRegistry(AbstractRegistry):
 class EmbeddedRegistry(AbstractRegistry):
     """An embedded registry, distributed with the library source code.
 
-    Records are stored within a BZ2 compressed JSON file, using standard
+    Records are stored within a GZip compressed Tar archive, using standard
     annotations to allow retrieving features easily.
     """
 
@@ -90,47 +92,48 @@ class EmbeddedRegistry(AbstractRegistry):
             return self._file == other._file
         return False
 
-    def _load_id(self, raw, index):
-        return raw["id"]
+    def _load_name(self, record):
+        return record.name
 
-    def _load_name(self, raw, index):
-        return raw["name"]
+    def _load_resistance(self, record):
+        try:
+            return find_resistance(record)
+        except RuntimeError:
+            msg = "could not find antibiotics resistance of '{}'"
+            six.raise_from(RuntimeError(msg.format(record.id)), None)
 
-    def _load_resistance(self, raw, index):
-        return raw["resistance"]
-
-    def _load_entity(self, raw, index):
-        return self._types[raw["type"]](raw["record"])
+    @abc.abstractmethod
+    def _load_entity(self, record):
+        return NotImplemented
 
     @cached_property
     def _data(self):
+        data = {}
         with pkg_resources.resource_stream(self._module, self._file) as rs:
-            with io.TextIOWrapper(bz2.BZ2File(rs)) as decomp:
-                raw_data = json.load(decomp)
-        for raw in raw_data:
-            record = Bio.SeqIO.read(six.StringIO(raw["gb"]), "gb")
-            raw["record"] = CircularRecord(record)
-        return {
-            item.id: item
-            for item in (
-                Item(
-                    id=self._load_id(raw, index),
-                    name=self._load_name(raw, index),
-                    resistance=self._load_resistance(raw, index),
-                    entity=self._load_entity(raw, index),
-                )
-                for index, raw in enumerate(raw_data)
-            )
-        }
+            with tarfile.open(mode="r:gz", fileobj=rs) as tar:
+                for entry in iter(tar.next, None):
+                    fileobj = io.TextIOWrapper(tar.extractfile(entry))
+                    record = CircularRecord(Bio.SeqIO.read(fileobj, "gb"))
+                    data[record.id] = Item(
+                        id=record.id,
+                        name=self._load_name(record),
+                        resistance=self._load_resistance(record),
+                        entity=self._load_entity(record),
+                    )
+        return data
 
     def __len__(self):
-        return len(self._data)
+        with pkg_resources.resource_stream(self._module, self._file) as rs:
+            with tarfile.open(fileobj=rs) as tar:
+                return len(tar.getmembers())
 
     def __getitem__(self, item):
         return self._data[item]
 
     def __iter__(self):
-        return iter(self._data)
+        with pkg_resources.resource_stream(self._module, self._file) as rs:
+            with tarfile.open(mode="r:gz", fileobj=rs) as tar:
+                yield from (entry.name for entry in iter(tar.next, None))
 
 
 class FilesystemRegistry(AbstractRegistry):
