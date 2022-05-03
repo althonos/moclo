@@ -1,6 +1,6 @@
-# `moclo-ig`
+# `moclo-plant`
 
-*Original MoClo (Icon Genetics) implementation for the base [`moclo`](https://github.com/althonos/moclo/tree/master/moclo>) library*.
+*Plant Parts Kit implementation for the base [`moclo`](https://github.com/althonos/moclo/tree/master/moclo>) library*.
 
 [![Source](https://img.shields.io/badge/source-GitHub-303030.svg?maxAge=3600&style=flat-square)](https://github.com/althonos/moclo/tree/master/moclo-ig)
 [![PyPI](https://img.shields.io/pypi/v/moclo-ig.svg?style=flat-square&maxAge=300)](https://pypi.python.org/pypi/moclo-ig)

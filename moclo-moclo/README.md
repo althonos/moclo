@@ -1,4 +1,4 @@
-# `moclo-ig`
+# `moclo-moclo`
 
 *Original MoClo (Icon Genetics) implementation for the base [`moclo`](https://github.com/althonos/moclo/tree/master/moclo>) library*.
 
@@ -25,7 +25,7 @@ notebooks at each build.
 
 This package is available as a *wheel*, and can be installed with ``pip``:
 ```console
-$ pip install --user moclo-ig
+$ pip install --user moclo-moclo
 ```
 
 To see more ways of installing, head over to the
