@@ -1,4 +1,4 @@
 backports.lzma  ;  python_version < '3.3'
 contexter ~=0.1.0
 fs ~=2.3.0
-fs.archive[tar.xz] ~=0.6.1
+fs.archive ~=0.7.3
