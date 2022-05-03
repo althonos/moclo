@@ -43,7 +43,7 @@ Concepts and Definitions
 ------------------------
 
 .. toctree::
-  :maxdepth: 2
+  :maxdepth: 1
 
   concepts/index
   concepts/definitions
@@ -54,7 +54,7 @@ Library
 -------
 
 .. toctree::
-  :maxdepth: 2
+  :maxdepth: 1
 
   install
   examples/index
@@ -67,7 +67,7 @@ Kits
 ----
 
 .. toctree::
-  :maxdepth: 2
+  :maxdepth: 1
 
   kits/moclo/index
   kits/plant/index

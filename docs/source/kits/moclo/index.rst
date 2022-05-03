@@ -46,11 +46,22 @@ Vector
 Parts
 ^^^^^
 
-.. autoclass:: MoCloPromoter(MoCloPart, MoCloEntry)
-.. autoclass:: MoCloUntranslatedRegion(MoCloPart, MoCloEntry)
-.. autoclass:: MoCloSignalPeptide(MoCloPart, MoCloEntry)
-.. autoclass:: MoCloCodingSequence(MoCloPart, MoCloEntry)
-.. autoclass:: MoCloTerminator(MoCloPart, MoCloEntry)
+.. autoclass:: MoCloPro(MoCloPart, MoCloEntry)
+.. autoclass:: MoClo5U(MoCloPart, MoCloEntry)
+.. autoclass:: MoClo5Uf(MoCloPart, MoCloEntry)
+.. autoclass:: MoCloNTag(MoCloPart, MoCloEntry)
+.. autoclass:: MoCloPro5U(MoCloPart, MoCloEntry)
+.. autoclass:: MoCloPro5Uf(MoCloPart, MoCloEntry)
+.. autoclass:: MoCloCDS1(MoCloPart, MoCloEntry)
+.. autoclass:: MoCloCDS1ns(MoCloPart, MoCloEntry)
+.. autoclass:: MoCloSP(MoCloPart, MoCloEntry)
+.. autoclass:: MoCloCDS2(MoCloPart, MoCloEntry)
+.. autoclass:: MoCloCDS2ns(MoCloPart, MoCloEntry)
+.. autoclass:: MoCloCTag(MoCloPart, MoCloEntry)
+.. autoclass:: MoClo3U(MoCloPart, MoCloEntry)
+.. autoclass:: MoCloTer(MoCloPart, MoCloEntry)
+.. autoclass:: MoClo3UTer(MoCloPart, MoCloEntry)
+.. autoclass:: MoCloGene(MoCloPart, MoCloEntry)
 
 
 Level 1
