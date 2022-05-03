@@ -37,13 +37,12 @@ import six
 
 from ..kits import ytk
 from .base import EmbeddedRegistry
-from ._utils import find_resistance
 
 
 class YTKRegistry(EmbeddedRegistry):
 
     _module = __name__
-    _file = "ytk.json.bz2"
+    _file = "ytk.tar.gz"
 
     _types = {
         "1": ytk.YTKPart1,
@@ -67,28 +66,15 @@ class YTKRegistry(EmbeddedRegistry):
         "entry vector": ytk.YTKEntryVector,
     }
 
-    def _load_name(self, raw, index):
-        return raw["record"].description
-
-    def _load_id(self, raw, index):
-        return raw["record"].id
-
-    def _load_resistance(self, raw, index):
-        try:
-            return find_resistance(raw["record"])
-        except StopIteration:
-            msg = "could not find antibiotics resistance of '{}'"
-            six.raise_from(RuntimeError(msg.format(raw["record"].id)), None)
-
-    def _load_entity(self, raw, index):
-        comments = raw["record"].annotations["comment"].splitlines()
+    def _load_entity(self, record):
+        comments = record.annotations["comment"].splitlines()
         hint = next(c for c in comments if c.startswith("YTK:"))
         comments.remove(hint)
-        raw["record"].annotations["comment"] = "\n".join(comments)
+        record.annotations["comment"] = "\n".join(comments)
         _, type_ = hint.strip().split(":", 1)
-        return self._types[type_](raw["record"])
+        return self._types[type_](record)
 
 
 class PTKRegistry(YTKRegistry):
 
-    _file = "ptk.json.bz2"
+    _file = "ptk.tar.gz"

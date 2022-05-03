@@ -34,20 +34,7 @@ from ._utils import find_resistance
 class EcoFlexRegistry(EmbeddedRegistry):
 
     _module = __name__
-    _file = "ecoflex.json.bz2"
-
-    def _load_name(self, raw, index):
-        return raw["record"].name
-
-    def _load_id(self, raw, index):
-        return raw["record"].id
-
-    def _load_resistance(self, raw, index):
-        try:
-            return find_resistance(raw["record"])
-        except RuntimeError:
-            msg = "could not find antibiotics resistance of '{}'"
-            six.raise_from(RuntimeError(msg.format(raw["record"].id)), None)
+    _file = "ecoflex.tar.gz"
 
     _VECTORS = {
         "pTU1": ecoflex.EcoFlexCassetteVector,
@@ -55,8 +42,8 @@ class EcoFlexRegistry(EmbeddedRegistry):
         "pTU3": ecoflex.EcoFlexCassetteVector,
     }
 
-    def _load_entity(self, raw, index):
+    def _load_entity(self, record):
         for prefix, cls in six.iteritems(self._VECTORS):
-            if raw["record"].id.startswith(prefix):
-                return cls(raw["record"])
-        return ecoflex.EcoFlexPart.characterize(raw["record"])
+            if record.id.startswith(prefix):
+                return cls(record)
+        return ecoflex.EcoFlexPart.characterize(record)

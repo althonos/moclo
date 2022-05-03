@@ -39,21 +39,7 @@ from ._utils import find_resistance
 class CIDARRegistry(EmbeddedRegistry):
 
     _module = __name__
-    _file = "cidar.json.bz2"
-
-    def _load_name(self, raw, index):
-        return raw["record"].name
-
-    def _load_id(self, raw, index):
-        return raw["record"].id
-
-    def _load_resistance(self, raw, index):
-        try:
-            return find_resistance(raw["record"])
-        except RuntimeError:
-            msg = "could not find antibiotics resistance of '{}'"
-            six.raise_from(RuntimeError(msg.format(raw["record"].id)), None)
-        return raw["resistance"]
+    _file = "cidar.tar.gz"
 
     _ENTITY_RX = re.compile(r"MoClo (.*): ([^\-\[\(]*)")
 
@@ -73,17 +59,17 @@ class CIDARRegistry(EmbeddedRegistry):
         "Constitutive promoter": cidar.CIDARPromoter,
     }
 
-    def _load_entity(self, raw, index):
-        match = self._ENTITY_RX.match(raw["record"].description)
+    def _load_entity(self, record):
+        match = self._ENTITY_RX.match(record.description)
         if match is not None:
             class_, type_ = map(six.text_type.strip, match.groups())
             if class_ == "Destination Vector":
-                if raw["id"].startswith("DVA"):
+                if record.id.startswith("DVA"):
                     class_ = "Entry Vector"
-                elif raw["id"].startswith("DVK"):
+                elif record.id.startswith("DVK"):
                     class_ = "Cassette Vector"
             if class_ != "Basic Part":
-                return self._CLASSES[class_](raw["record"])
+                return self._CLASSES[class_](record)
             if type_ in self._TYPES:
-                return self._TYPES[type_](raw["record"])
-        raise RuntimeError("could not find type of '{}'".format(raw["id"]))
+                return self._TYPES[type_](record)
+        raise RuntimeError("could not find type of '{}'".format(record.id))
