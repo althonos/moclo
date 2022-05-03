@@ -3,14 +3,16 @@
 
 Sequences were obtained from two sources:
 * The EcoFlex plasmid files distributed with the kit in a zip archive,
-  available under the *Protocol & Resources* tab of the CIDAR repository.
+  available under the *Protocol & Resources* tab of the EcoFlex repository.
 * The individual plasmid files from their dedicated AddGene webpages, using
-  the *full depositor* sequences. Missing sequences (*DVA_AE* and *DVA_AF*)
-  were obtained by editing the overhangs of *DVA_EF*.
+  the *full depositor* sequences.
+
+In case of mismatch between the two sources, the Zip sequences were used
+preferably.
 
 Plasmids were rotated to share the same origin, using the start of the
 *BioBrick* prefix as a reference location. This ensures no feature overlaps
-the zero coordinate, to ensure a complete ``biopython`` compatibility.
+the zero coordinate, to ensure a complete Biopython compatibility.
 
 Common features were colored using the same palette as in the *Yeast ToolKit*.
 *AmpR* and *CmR* received additional cross-references from Swiss-Prot, as well
