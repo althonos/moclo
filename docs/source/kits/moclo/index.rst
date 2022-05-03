@@ -1,5 +1,5 @@
-Icon Genetics Kit
-=================
+MoClo Kit
+=========
 
 .. currentmodule:: moclo.kits.moclo
 

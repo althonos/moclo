@@ -21,11 +21,11 @@ PyPI + ``pip`` |PyPI|
 .. |PyPI| image:: https://img.shields.io/pypi/v/moclo.svg?style=flat-square&maxAge=3600
    :target: https://pypi.python.org/pypi/moclo
 
-To download the latest release from the Python Package Index:
+To download the latest releases from the Python Package Index:
 
 .. code-block:: console
 
-  $ pip install --user moclo moclo-ytk moclo-cidar
+  $ pip install --user moclo moclo-ytk moclo-cidar moclo-ecoflex
 
 
 GitHub + ``pip`` |Travis|
@@ -42,6 +42,7 @@ a subfolder in the installation command and directly install it:
   $ pip install --user git+https://github.com/althonos/moclo#subdirectory=moclo
   $ pip install --user git+https://github.com/althonos/moclo#subdirectory=moclo-ytk
   $ pip install --user git+https://github.com/althonos/moclo#subdirectory=moclo-cidar
+  $ pip install --user git+https://github.com/althonos/moclo#subdirectory=moclo-ecoflex
 
 Check the CI build is passing, or else you may be installing a broken version of
 the library !

@@ -69,9 +69,10 @@ Kits
 .. toctree::
   :maxdepth: 2
 
+  kits/moclo/index
+  kits/plant/index
   kits/cidar/index
   kits/ecoflex/index
-  kits/moclo/index
   kits/ytk/index
 
 

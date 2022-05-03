@@ -21,7 +21,7 @@ from sphinx.util.console import bold, darkgreen, reset
 
 # -- Globals -----------------------------------------------------------------
 
-KITS = ["cidar", "ecoflex", "gb3", "moclo", "ytk"]
+KITS = ["cidar", "ecoflex", "moclo", "plant", "ytk"]
 LIBS = ["moclo"] + ["moclo-{}".format(kit) for kit in KITS]
 LOGGER = sphinx.util.logging.getLogger(__name__)
 
@@ -52,7 +52,7 @@ from _scripts import ytk_parts, registries
 
 def setup(app):
     # Add custom math admonition classes
-    app.add_stylesheet("bootstrap-math.css")
+    app.add_css_file("bootstrap-math.css")
 
     # Generate SVG files from template SVG
     ytk_parts.generate_svg()
@@ -198,7 +198,7 @@ html_theme_options = {
     "navbar_pagenav": False,
     # A list of tuples containing pages or urls to link to.
     "navbar_links": [
-        ("GitHub", _parser.get("metadata", "home-page").strip(), True)
+        ("GitHub", _parser.get("metadata", "home_page").strip(), True)
     ] + [
         (k, v, True)
         for k, v in project_urls.items()
