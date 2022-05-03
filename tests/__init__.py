@@ -14,7 +14,7 @@ import moclo.kits  # noqa: E402
 import moclo.registry  # noqa: E402
 
 # Load extensions
-for extension in ["cidar", "ytk", "ecoflex", "ig"]:
+for extension in ["cidar", "ytk", "ecoflex", "moclo", "plant"]:
     extension_dir = os.path.join(proj, "moclo-{}".format(extension))
     moclo.kits.__path__.append(os.path.join(extension_dir, "moclo", "kits"))
     moclo.registry.__path__.append(os.path.join(extension_dir, "moclo", "registry"))

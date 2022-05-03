@@ -133,8 +133,8 @@ if __name__ == "__main__":
 
         if id_ == "pICSL30008":
             gb = gb.reverse_complement(True, True, True, True, True, True, True)
-        elif id_ == "pICSL50004":
-            gb_archive = gb_archive.reverse_complement(True, True, True, True, True, True, True)
+        # elif id_ == "pICSL50004":
+            # gb_archive = gb_archive.reverse_complement(True, True, True, True, True, True, True)
 
         # Copy well documented information from one record to the other
         gb.seq, gb_archive.seq = (gb.seq.upper(), gb_archive.seq.upper())

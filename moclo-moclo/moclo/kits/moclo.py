@@ -271,6 +271,12 @@ class MoClo3UTer(MoCloPart, MoCloEntry):
     signature = ("GCTT", "CGCT")
 
 
+class MoCloGene(MoCloPart, MoCloEntry):
+    """An complete transcription unit stored as an original MoClo part.
+    """
+    signature = ("GGAG", "CGCT")
+
+
 # Level 0 ####################################################################
 
 
