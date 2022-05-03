@@ -64,7 +64,7 @@ class DNARegex(object):
         "H": "[ACT]",
         "K": "[GT]",
         "M": "[AC]",
-        "N": "[ACGT]",
+        "N": "[ACGTN]",
         "R": "[AG]",
         "S": "[CG]",
         "V": "[ACG]",
