@@ -25,15 +25,22 @@ FEATURES             Location/Qualifiers
                      /label="mCHerry"
      CDS             12..719
                      /codon_start=1
-                     /product="monomeric derivative of DsRed fluorescent protein
-                     (Shaner et al., 2004)"
+                     /product="mCherry"
                      /label="mCherry"
-                     /note="mammalian codon-optimized"
+                     /note="monomeric derivative of DsRed (Shaner et al., 2004)"
                      /translation="MVSKGEEDNMAIIKEFMRFKVHMEGSVNGHEFEIEGEGEGRPYEG
                      TQTAKLKVTKGGPLPFAWDILSPQFMYGSKAYVKHPADIPDYLKLSFPEGFKWERVMNF
                      EDGGVVTVTQDSSLQDGEFIYKVKLRGTNFPSDGPVMQKKTMGWEASSERMYPEDGALK
                      GEIKQRLKLKDGGHYDAEVKTTYKAKKPVQLPGAYNVNIKLDITSHNEDYTIVEQYERA
                      EGRHSTGGMDELYK"
+                     /db_xref="UniProtKB/Swiss-Prot:A0A4D6FVK6"
+                     /db_xref="GO:0008218"
+                     /db_xref="GO:0006091"
+                     /db_xref="PDB:4ZIN"
+                     /ApEinfo_fwdcolor="#c16969"
+                     /ApEinfo_revcolor="#c16969"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      primer_bind     complement(157..175)
                      /label="mCherry-R"
                      /note="mCherry, reverse primer"
@@ -43,8 +50,12 @@ FEATURES             Location/Qualifiers
      primer_bind     complement(816..833)
                      /label="L4440"
                      /note="L4440 vector, forward primer"
-     Misc._feature   complement(972..1586)
-                     /label="rep (pMB1)"
+     rep_origin      complement(972..1586)
+                     /label="pMB1"
+                     /ApEinfo_fwdcolor="#7f7f7f"
+                     /ApEinfo_revcolor="#7f7f7f"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      Replication_ori 987
                      /label="ORI"
                      /note=" RNaseH cleavage point "
@@ -52,29 +63,21 @@ FEATURES             Location/Qualifiers
                      /label="pBR322ori-F"
                      /note="pBR322 origin, forward primer"
      CDS             complement(1746..2756)
-                     /label="Sm/Sp no DraIII"
-     CDS             complement(1746..2537)
-                     /codon_start=1
+                     /label="SmR"
                      /gene="aadA"
                      /product="aminoglycoside adenylyltransferase"
-                     /label="SmR"
-                     /translation="MREAVIAEVSTQLSEVVGVIERHLEPTLLAVHLYGSAVDGGLKPH
-                     SDIDLLVTVTVRLDETTRRALINDLLETSASPGESEILRAVEVTIVVHDDIIPWRYPAK
-                     RELQFGEWQRNDILAGIFEPATIDIDLAILLTKAREHSVALVGPAAEELFDPVPEQDLF
-                     EALNETLTLWNSPPDWAGDERNVVLTLSRIWYSAVTGKIAPKDVAADWAMERLPAQYQP
-                     VILEARQAYLGQEEDRLASRADQLEEFVHYVKGEITKVVGK"
                      /function="spectinomycin and streptomycin resistance"
-                     /ApEinfo_fwdcolor="#ffff00"
-                     /ApEinfo_revcolor="#ffff00"
+                     /ApEinfo_fwdcolor="#ffc400"
+                     /ApEinfo_revcolor="#ffc400"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      Mutation        complement(1779)
                      /label="G to A"
      promoter        complement(2757..2861)
                      /gene="bla"
-                     /label="AmpR Promoter"
-                     /ApEinfo_fwdcolor="#ff6666"
-                     /ApEinfo_revcolor="#ff6666"
+                     /label="SmR Promoter"
+                     /ApEinfo_fwdcolor="#ffe080"
+                     /ApEinfo_revcolor="#ffe080"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      primer_bind     2929..2947

@@ -27,14 +27,28 @@ FEATURES             Location/Qualifiers
                      /label="AATG 4bp overhang"
      CDS             11..730
                      /codon_start=1
-                     /product="the original enhanced GFP (Yang et al., 1996)"
-                     /label="EGFP"
+                     /product="enhanced green fluorescent protein"
+                     /label="eGFP"
                      /note="mammalian codon-optimized"
                      /translation="MVSKGEELFTGVVPILVELDGDVNGHKFSVSGEGEGDATYGKLTL
                      KFICTTGKLPVPWPTLVTTFSYGVQCFSRYPDHMKQHDFFKSAMPEGYVQERTIFFKDD
                      GNYKTRAEVKFEGDTLVNRIELKGIDFKEDGNILGHKLEYNYNSHNVYIMADKQKNGIK
                      VNFKIRHNIEDGSVQLADHYQQNTPIGDGPVLLPDNHYLSTQSALSKDPNEKRDHMVLL
                      EFVTAAGITHGMDELYK"
+                     /gene="GFP"
+                     /db_xref="PDB:1EMA"
+                     /db_xref="InterPro:IPR009017"
+                     /db_xref="InterPro:IPR011584"
+                     /db_xref="InterPro:IPR000786"
+                     /db_xref="PFAM:PF01353"
+                     /db_xref="GO:0008218"
+                     /db_xref="GO:0006091"
+                     /db_xref="GO:0018298"
+                     /db_xref="UniProtKB/Swiss-Prot:P42212"
+                     /ApEinfo_fwdcolor="#34ff03"
+                     /ApEinfo_revcolor="#34ff03"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      primer_bind     complement(56..77)
                      /label="EGFP-N"
                      /note="EGFP, reverse primer"
@@ -53,32 +67,28 @@ FEATURES             Location/Qualifiers
                      primer"
      promoter        856..960
                      /gene="bla"
-                     /label="AmpR Promoter"
-                     /ApEinfo_fwdcolor="#ff6666"
-                     /ApEinfo_revcolor="#ff6666"
+                     /label="SmR Promoter"
+                     /ApEinfo_fwdcolor="#ffe080"
+                     /ApEinfo_revcolor="#ffe080"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      CDS             961..1971
-                     /label="Sm/Sp no DraIII"
-     CDS             1180..1971
-                     /codon_start=1
+                     /label="SmR"
                      /gene="aadA"
                      /product="aminoglycoside adenylyltransferase"
-                     /label="SmR"
-                     /translation="MREAVIAEVSTQLSEVVGVIERHLEPTLLAVHLYGSAVDGGLKPH
-                     SDIDLLVTVTVRLDETTRRALINDLLETSASPGESEILRAVEVTIVVHDDIIPWRYPAK
-                     RELQFGEWQRNDILAGIFEPATIDIDLAILLTKAREHSVALVGPAAEELFDPVPEQDLF
-                     EALNETLTLWNSPPDWAGDERNVVLTLSRIWYSAVTGKIAPKDVAADWAMERLPAQYQP
-                     VILEARQAYLGQEEDRLASRADQLEEFVHYVKGEITKVVGK"
                      /function="spectinomycin and streptomycin resistance"
-                     /ApEinfo_fwdcolor="#ffff00"
-                     /ApEinfo_revcolor="#ffff00"
+                     /ApEinfo_fwdcolor="#ffc400"
+                     /ApEinfo_revcolor="#ffc400"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      Mutation        1938
                      /label="G to A"
-     Misc._feature   2131..2745
-                     /label="rep (pMB1)"
+     rep_origin      2131..2745
+                     /label="pMB1"
+                     /ApEinfo_fwdcolor="#7f7f7f"
+                     /ApEinfo_revcolor="#7f7f7f"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      rep_origin      2142..2730
                      /direction=RIGHT
                      /label="ori"

@@ -38,36 +38,30 @@ FEATURES             Location/Qualifiers
                      primer"
      promoter        343..447
                      /gene="bla"
-                     /label="AmpR Promoter"
-                     /ApEinfo_fwdcolor="#ff6666"
-                     /ApEinfo_revcolor="#ff6666"
+                     /label="SmR Promoter"
+                     /ApEinfo_fwdcolor="#ffe080"
+                     /ApEinfo_revcolor="#ffe080"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      CDS             448..1458
-                     /dnas_title="Sm/Sp no DraIII"
-                     /label="Sm/Sp no DraIII"
-                     /label="Sm/Sp no DraIII"
-     CDS             667..1458
-                     /codon_start=1
+                     /label="SmR"
                      /gene="aadA"
                      /product="aminoglycoside adenylyltransferase"
-                     /label="SmR"
-                     /translation="MREAVIAEVSTQLSEVVGVIERHLEPTLLAVHLYGSAVDGGLKPH
-                     SDIDLLVTVTVRLDETTRRALINDLLETSASPGESEILRAVEVTIVVHDDIIPWRYPAK
-                     RELQFGEWQRNDILAGIFEPATIDIDLAILLTKAREHSVALVGPAAEELFDPVPEQDLF
-                     EALNETLTLWNSPPDWAGDERNVVLTLSRIWYSAVTGKIAPKDVAADWAMERLPAQYQP
-                     VILEARQAYLGQEEDRLASRADQLEEFVHYVKGEITKVVGK"
                      /function="spectinomycin and streptomycin resistance"
-                     /ApEinfo_fwdcolor="#ffff00"
-                     /ApEinfo_revcolor="#ffff00"
+                     /ApEinfo_fwdcolor="#ffc400"
+                     /ApEinfo_revcolor="#ffc400"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      Mutation        1425
                      /dnas_title="G to A"
                      /label="G to A"
-     Misc._feature   1618..2232
+     rep_origin      1618..2232
                      /dnas_title="rep (pMB1)"
-                     /label="rep (pMB1)"
+                     /label="pMB1"
+                     /ApEinfo_fwdcolor="#7f7f7f"
+                     /ApEinfo_revcolor="#7f7f7f"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      rep_origin      1629..2217
                      /direction=RIGHT
                      /label="ori"

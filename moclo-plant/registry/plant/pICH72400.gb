@@ -26,8 +26,10 @@ FEATURES             Location/Qualifiers
                      /label="GCTT 4bp overhang"
      Terminator      14..229
                      /label="g7 terminator"
+                     /label="color: #ff8eff"
      terminator      29..229
                      /label="gene 7 terminator"
+                     /label="color: #ff8eff"
                      /note="transcription terminator for octopine-type Ti
                      plasmid gene 7"
      Misc._Feature   230..233
@@ -38,32 +40,28 @@ FEATURES             Location/Qualifiers
                      primer"
      promoter        355..459
                      /gene="bla"
-                     /label="AmpR Promoter"
-                     /ApEinfo_fwdcolor="#ff6666"
-                     /ApEinfo_revcolor="#ff6666"
+                     /label="SmR Promoter"
+                     /ApEinfo_fwdcolor="#ffe080"
+                     /ApEinfo_revcolor="#ffe080"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      CDS             460..1470
-                     /label="Sm/Sp no DraIII"
-     CDS             679..1470
-                     /codon_start=1
+                     /label="SmR"
                      /gene="aadA"
                      /product="aminoglycoside adenylyltransferase"
-                     /label="SmR"
-                     /translation="MREAVIAEVSTQLSEVVGVIERHLEPTLLAVHLYGSAVDGGLKPH
-                     SDIDLLVTVTVRLDETTRRALINDLLETSASPGESEILRAVEVTIVVHDDIIPWRYPAK
-                     RELQFGEWQRNDILAGIFEPATIDIDLAILLTKAREHSVALVGPAAEELFDPVPEQDLF
-                     EALNETLTLWNSPPDWAGDERNVVLTLSRIWYSAVTGKIAPKDVAADWAMERLPAQYQP
-                     VILEARQAYLGQEEDRLASRADQLEEFVHYVKGEITKVVGK"
                      /function="spectinomycin and streptomycin resistance"
-                     /ApEinfo_fwdcolor="#ffff00"
-                     /ApEinfo_revcolor="#ffff00"
+                     /ApEinfo_fwdcolor="#ffc400"
+                     /ApEinfo_revcolor="#ffc400"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      Mutation        1437
                      /label="G to A"
-     Misc._feature   1630..2244
-                     /label="rep (pMB1)"
+     rep_origin      1630..2244
+                     /label="pMB1"
+                     /ApEinfo_fwdcolor="#7f7f7f"
+                     /ApEinfo_revcolor="#7f7f7f"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      rep_origin      1641..2229
                      /direction=RIGHT
                      /label="ori"

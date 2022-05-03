@@ -42,38 +42,18 @@ FEATURES             Location/Qualifiers
                      primer"
      promoter        220..324
                      /gene="bla"
-                     /label="AmpR Promoter"
-                     /ApEinfo_fwdcolor="#ff6666"
-                     /ApEinfo_revcolor="#ff6666"
+                     /label="SmR Promoter"
+                     /ApEinfo_fwdcolor="#ffe080"
+                     /ApEinfo_revcolor="#ffe080"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      CDS             325..1335
-                     /codon_start=1
-                     /label="Sm/Sp no DraIII"
-                     /note="Sm/Sp no DraIII"
-                     /translation="MRSRNWSRTLTERSGGNGAVAVFMACYDCFFGVQSMPRASKQQAR
-                     YAVGRCLMLWSSNDVTQQGSRPKTKLNIMREAVIAEVSTQLSEVVGVIERHLEPTLLAV
-                     HLYGSAVDGGLKPHSDIDLLVTVTVRLDETTRRALINDLLETSASPGESEILRAVEVTI
-                     VVHDDIIPWRYPAKRELQFGEWQRNDILAGIFEPATIDIDLAILLTKAREHSVALVGPA
-                     AEELFDPVPEQDLFEALNETLTLWNSPPDWAGDERNVVLTLSRIWYSAVTGKIAPKDVA
-                     ADWAMERLPAQYQPVILEARQAYLGQEEDRLASRADQLEEFVHYVKGEITKVVGK"
-                     /ApEinfo_fwdcolor="#ff9966"
-                     /ApEinfo_revcolor="#ff9966"
-                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
-                     width 5 offset 0"
-     CDS             544..1335
-                     /codon_start=1
+                     /label="SmR"
                      /gene="aadA"
                      /product="aminoglycoside adenylyltransferase"
-                     /label="SmR"
-                     /translation="MREAVIAEVSTQLSEVVGVIERHLEPTLLAVHLYGSAVDGGLKPH
-                     SDIDLLVTVTVRLDETTRRALINDLLETSASPGESEILRAVEVTIVVHDDIIPWRYPAK
-                     RELQFGEWQRNDILAGIFEPATIDIDLAILLTKAREHSVALVGPAAEELFDPVPEQDLF
-                     EALNETLTLWNSPPDWAGDERNVVLTLSRIWYSAVTGKIAPKDVAADWAMERLPAQYQP
-                     VILEARQAYLGQEEDRLASRADQLEEFVHYVKGEITKVVGK"
                      /function="spectinomycin and streptomycin resistance"
-                     /ApEinfo_fwdcolor="#ffff00"
-                     /ApEinfo_revcolor="#ffff00"
+                     /ApEinfo_fwdcolor="#ffc400"
+                     /ApEinfo_revcolor="#ffc400"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      variation       1302
@@ -82,11 +62,10 @@ FEATURES             Location/Qualifiers
                      /ApEinfo_revcolor="#3366cc"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
-     misc_feature    1495..2109
-                     /label="rep (pMB1)"
-                     /note="rep (pMB1)"
-                     /ApEinfo_fwdcolor="#66cc99"
-                     /ApEinfo_revcolor="#66cc99"
+     rep_origin      1495..2109
+                     /label="pMB1"
+                     /ApEinfo_fwdcolor="#7f7f7f"
+                     /ApEinfo_revcolor="#7f7f7f"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      rep_origin      1506..2094

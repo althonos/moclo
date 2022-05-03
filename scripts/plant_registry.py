@@ -34,6 +34,7 @@ UA = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)
 # Part sequence for automatic annotation / annotation relocation
 BSAI = DNARegex("ggtctc")
 BPII = DNARegex("gaagac")
+BSAI_R = DNARegex("gagacc")
 
 # DVK_AF = None
 # DVLA_RX = None
@@ -132,6 +133,8 @@ if __name__ == "__main__":
 
         if id_ == "pICSL30008":
             gb = gb.reverse_complement(True, True, True, True, True, True, True)
+        elif id_ == "pICSL50004":
+            gb_archive = gb_archive.reverse_complement(True, True, True, True, True, True, True)
 
         # Copy well documented information from one record to the other
         gb.seq, gb_archive.seq = (gb.seq.upper(), gb_archive.seq.upper())
@@ -159,19 +162,11 @@ if __name__ == "__main__":
 
         # Check sequences are the same, or skip
         if len(gb) != len(gb_archive):
-            # FIXME: pAGM1276 sequences differ
-            print("lengths differ for", id_, ":", len(gb), "VS", len(gb_archive))
-
-
-            l = min(len(gb), len(gb_archive))
-
-
-            # gb_archive = gb
-            # gb = gb.reverse_complement(True, True, True, True, True, True, True)
+            it.write(f"lengths differ for {id_}: {len(gb)} VS {len(gb_archive)}")
         elif gb.seq != gb_archive.seq:
             for i, (x, y) in enumerate(zip(gb.seq, gb_archive.seq)):
                 if x != y:
-                    print(f"sequences differ for {id_}: at position {i}, direct={x}, archive={y}")
+                    it.write(f"sequences differ for {id_}: at position {i}, direct={x}, archive={y}")
 
         # Copy AddGene annotations to the archive record
         for feature in gb.features:
@@ -203,6 +198,19 @@ if __name__ == "__main__":
             return (
                 f for f in gb_archive.features if note in f.qualifiers.get("note", [])
             )
+
+        # remove duplicate Sm/Sp and SmR
+        sm_sp = next(get_features("Sm/Sp no DraIII"), None) or next(get_features("SpecR"), None)
+        smr = next(get_features("SmR"), None)
+        if sm_sp is not None and smr is not None:
+            gb_archive.features.remove(smr)
+            sm_sp.qualifiers = {
+                'label': ['SmR'],
+                'gene': 'aadA',
+                'product': 'aminoglycoside adenylyltransferase',
+                'function': 'spectinomycin and streptomycin resistance',
+                'note': ['color: #ffc400', 'no DraIII restriction site'],
+            }
 
         # AmpR recolor and annotations
         ampr = next(get_features("AmpR"), None)
@@ -294,84 +302,107 @@ if __name__ == "__main__":
             kanr_prom.qualifiers["label"] = ["KanR Promoter"]
             kanr_prom.qualifiers["note"] = ["color: #93ff35"]
 
-
-        # SpecR recolor and annotations
-        smr = next(get_features('SmR'), None)
+        # SmR recolor and annotations
+        smr = next(get_features('SmR'), None) or next(get_features('SpecR'), None) or next(get_features("Sm/Sp no DraIII"), None)
         if smr is not None:
             smr.qualifiers.update({
                 'label': ['SmR'],
                 'gene': 'aadA',
                 'product': 'aminoglycoside adenylyltransferase',
                 'function': 'spectinomycin and streptomycin resistance',
-                'note': ['color: #ffff00'],
+                'note': ['color: #ffc400'],
             })
+        smr_prom = next(get_features("SmR Promoter"), None)
+        if smr_prom is None and ampr_prom is not None and smr is not None:
+            smr_prom = ampr_prom
+            smr_prom.qualifiers["label"] = ["SmR Promoter"]
+            smr_prom.qualifiers["note"] = ["color: #ffe080"]
 
-        # Remove duplicate crtI
-        if len(list(get_features('crtI'))) == 2:
-            x, y = get_features('crtI')
-            gb_archive.features.remove(x if x.type == 'misc_feature' else y)
+        # # Remove duplicate crtI
+        # if len(list(get_features('crtI'))) == 2:
+        #     x, y = get_features('crtI')
+        #     gb_archive.features.remove(x if x.type == 'misc_feature' else y)
+        #
+        # # Remove duplicate crtB
+        # if len(list(get_features('crtB'))) == 2:
+        #     x, y = get_features('crtB')
+        #     gb_archive.features.remove(x if x.type == 'misc_feature' else y)
+        #
+        # # Remove duplicate oriV
+        # if len(list(get_features('oriV'))) == 2:
+        #     gb_archive.features.remove(min(get_features('oriV'), key=lambda f: len(f.qualifiers)))
 
-        # Remove duplicate crtB
-        if len(list(get_features('crtB'))) == 2:
-            x, y = get_features('crtB')
-            gb_archive.features.remove(x if x.type == 'misc_feature' else y)
+        # eGFP recolor and annotations
+        egfp = next(get_features("eGFP"), None) or next(get_features("EGFP"), None)
+        if egfp is not None:
+            egfp.qualifiers.update(
+                {
+                    "label": "eGFP",
+                    "note": [
+                        "mammalian codon-optimized",
+                        "color: #34ff03",
+                    ],
+                    "product": ["enhanced green fluorescent protein"],
+                    "gene": ["GFP"],
+                    "db_xref": [
+                        "PDB:1EMA",
+                        "InterPro:IPR009017",
+                        "InterPro:IPR011584",
+                        "InterPro:IPR000786",
+                        "PFAM:PF01353",
+                        "GO:0008218",
+                        "GO:0006091",
+                        "GO:0018298",
+                        "UniProtKB/Swiss-Prot:P42212",
+                    ],
+                }
+            )
 
-        # Remove duplicate oriV
-        if len(list(get_features('oriV'))) == 2:
-            gb_archive.features.remove(min(get_features('oriV'), key=lambda f: len(f.qualifiers)))
+        # eYFP
+        eyfp = next(get_features("eYFP"), None)
+        if eyfp is not None:
+            eyfp.qualifiers.update(
+                {
+                    "label": "eYFP",
+                    "note": [
+                        "mammalian codon-optimized",
+                        "color: #ccff00"
+                    ],
+                    "product": ["enhanced yellow fluorescent protein"],
+                    "gene": ["YFP"],
+                    "db_xref": [
+                        "GO:0008218",
+                        "GO:0006091",
+                    ]
+                }
+            )
 
-        # GFP recolor and annotations
-        # gfp = next(get_features("GFP"), None)
-        # if gfp is not None:
-        #     gfp.qualifiers.update(
-        #         {
-        #             "label": "GFP",
-        #             "note": ["color: #34ff03"],
-        #             "product": ["green fluorescent protein"],
-        #             "gene": ["GFP"],
-        #             "db_xref": [
-        #                 "PDB:1H6R",
-        #                 "InterPro:IPR009017",
-        #                 "InterPro:IPR011584",
-        #                 "InterPro:IPR000786",
-        #                 "PFAM:PF01353",
-        #                 "GO:0008218",
-        #                 "GO:0006091",
-        #                 "GO:0018298",
-        #                 "UniProtKB/Swiss-Prot:P42212",
-        #             ],
-        #             "inference": [
-        #                 "DESCRIPTION:alignment:blastx:UniProtKB/Swiss-Prot:P42212"
-        #             ],
-        #         }
-        #     )
+        # mCherry recolor and annotations
+        mcherry = next(get_features("mCherry"), None)
+        if mcherry is not None:
+            mcherry.qualifiers.update(
+                {
+                    "label": "mCherry",
+                    "product": "mCherry",
+                    "note": [
+                        "monomeric derivative of DsRed (Shaner et al., 2004)",
+                        "color: #c16969",
+                    ],
+                    "db_xref": [
+                        "UniProtKB/Swiss-Prot:A0A4D6FVK6",
+                        "GO:0008218",
+                        "GO:0006091",
+                        "PDB:4ZIN",
+                    ],
+                }
+            )
 
-        # mRFP1 recolor and annotations
-        # rfp = next(get_features("mRFP1"), None)
-        # if rfp is not None:
-        #     rfp.qualifiers.update(
-        #         {
-        #             "label": "mRFP",
-        #             "product": "mRFP1",
-        #             "note": [
-        #                 "monomeric derivative of DsRed (Campbell et al., 2002)",
-        #                 "iGEM Part: BBa_E1010",
-        #                 "color: #c16969",
-        #             ],
-        #             "db_xref": [
-        #                 "UniProtKB/Swiss-Prot:Q9U6Y8",
-        #                 "GO:0008218",
-        #                 "GO:0006091",
-        #                 "GO:0018298",
-        #                 "PDB:2H5R",
-        #             ],
-        #         }
-        #     )
-
-        # remove bla annotation since we have a better AmpR
-        # bla = next(get_features("bla"), None)
-        # if bla is not None:
-        #     gb_archive.features.remove(bla)
+        # pMB1 ORI
+        pmb1 = next(get_features("rep (pMB1)"), None)
+        if pmb1 is not None:
+            pmb1.type = "rep_origin"
+            pmb1.qualifiers["label"] = ["pMB1"]
+            pmb1.qualifiers["note"] = ["color: #7f7f7f"]
 
         # Remove bad Sm/Sp
         rm_feats = [
@@ -393,16 +424,41 @@ if __name__ == "__main__":
             for f in get_features(label):
                 gb_archive.features.remove(f)
 
-        # FIXME
-        # have all the plasmids in the same direction, i.e. so that the
-        # antibiotics resistance cassette is always on the reverse strand
-        # antibio = next(x for y in ('AmpR', 'SmR', 'KanR') for x in get_features(y))
-        # if antibio.location.strand != -1:
-        #     gb_archive = gb_archive.reverse_complement(True, True, True, True, True, True, True,)
-
         # Remove all "/vntifkey" feature qualifier
         for feature in gb_archive.features:
             feature.qualifiers.pop("vntifkey", None)
+
+        # recolor promoter features with #00a1ee
+        end_site = BSAI_R.search(gb_archive.seq).span(0)[0]
+        promoter_features = [
+            f
+            for f in gb_archive.features
+            if any ("promoter" in label.lower() for label in f.qualifiers.get("label", []))
+            and f.location.start < end_site
+        ]
+        if promoter_features:
+            for f in promoter_features:
+                f.qualifiers.setdefault("label", [])
+                color = next((label for label in f.qualifiers["label"] if label.startswith("color:")), None)
+                if color is not None:
+                    f.qualifiers["label"].remove(color)
+                f.qualifiers["label"].append("color: #00a1ee")
+
+        # recolor terminator features with #ff8eff
+        end_site = BSAI_R.search(gb_archive.seq).span(0)[0]
+        terminator_features = [
+            f
+            for f in gb_archive.features
+            if any ("terminator" in label.lower() for label in f.qualifiers.get("label", []))
+            and f.location.start < end_site
+        ]
+        if terminator_features:
+            for f in terminator_features:
+                f.qualifiers.setdefault("label", [])
+                color = next((label for label in f.qualifiers["label"] if label.startswith("color:")), None)
+                if color is not None:
+                    f.qualifiers["label"].remove(color)
+                f.qualifiers["label"].append("color: #ff8eff")
 
         # sort features by start location, source always first
         gb_archive.features.sort(

@@ -27,12 +27,15 @@ FEATURES             Location/Qualifiers
      Promoter        14..439
                      /label="35S pro short (no BsaI and BpiI)"
                      /label="CaMV 35S promoter short"
+                     /label="color: #00a1ee"
      promoter        91..436
                      /label="CaMV 35S promoter"
+                     /label="color: #00a1ee"
                      /note="strong constitutive promoter from cauliflower mosaic
                      virus"
      primer_bind     379..399
                      /label="35S promoter"
+                     /label="color: #00a1ee"
                      /note="CaMV 35S promoter, forward primer"
      5'_UTR          456..517
                      /label="Omega leader"
@@ -45,32 +48,28 @@ FEATURES             Location/Qualifiers
                      primer"
      promoter        651..755
                      /gene="bla"
-                     /label="AmpR Promoter"
-                     /ApEinfo_fwdcolor="#ff6666"
-                     /ApEinfo_revcolor="#ff6666"
+                     /label="SmR Promoter"
+                     /ApEinfo_fwdcolor="#ffe080"
+                     /ApEinfo_revcolor="#ffe080"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      CDS             756..1766
-                     /label="Sm/Sp no DraIII"
-     CDS             975..1766
-                     /codon_start=1
+                     /label="SmR"
                      /gene="aadA"
                      /product="aminoglycoside adenylyltransferase"
-                     /label="SmR"
-                     /translation="MREAVIAEVSTQLSEVVGVIERHLEPTLLAVHLYGSAVDGGLKPH
-                     SDIDLLVTVTVRLDETTRRALINDLLETSASPGESEILRAVEVTIVVHDDIIPWRYPAK
-                     RELQFGEWQRNDILAGIFEPATIDIDLAILLTKAREHSVALVGPAAEELFDPVPEQDLF
-                     EALNETLTLWNSPPDWAGDERNVVLTLSRIWYSAVTGKIAPKDVAADWAMERLPAQYQP
-                     VILEARQAYLGQEEDRLASRADQLEEFVHYVKGEITKVVGK"
                      /function="spectinomycin and streptomycin resistance"
-                     /ApEinfo_fwdcolor="#ffff00"
-                     /ApEinfo_revcolor="#ffff00"
+                     /ApEinfo_fwdcolor="#ffc400"
+                     /ApEinfo_revcolor="#ffc400"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      Mutation        1733
                      /label="G to A"
-     Misc._feature   1926..2540
-                     /label="rep (pMB1)"
+     rep_origin      1926..2540
+                     /label="pMB1"
+                     /ApEinfo_fwdcolor="#7f7f7f"
+                     /ApEinfo_revcolor="#7f7f7f"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      rep_origin      1937..2525
                      /direction=RIGHT
                      /label="ori"

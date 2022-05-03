@@ -26,15 +26,22 @@ FEATURES             Location/Qualifiers
                      /label="AATG 4bp overhang"
      CDS             11..721
                      /codon_start=1
-                     /product="monomeric derivative of DsRed fluorescent protein
-                     (Shaner et al., 2004)"
+                     /product="mCherry"
                      /label="mCherry"
-                     /note="mammalian codon-optimized"
+                     /note="monomeric derivative of DsRed (Shaner et al., 2004)"
                      /translation="MVSKGEEDNMAIIKEFMRFKVHMEGSVNGHEFEIEGEGEGRPYEG
                      TQTAKLKVTKGGPLPFAWDILSPQFMYGSKAYVKHPADIPDYLKLSFPEGFKWERVMNF
                      EDGGVVTVTQDSSLQDGEFIYKVKLRGTNFPSDGPVMQKKTMGWEASSERMYPEDGALK
                      GEIKQRLKLKDGGHYDAEVKTTYKAKKPVQLPGAYNVNIKLDITSHNEDYTIVEQYERA
                      EGRHSTGGMDELYK"
+                     /db_xref="UniProtKB/Swiss-Prot:A0A4D6FVK6"
+                     /db_xref="GO:0008218"
+                     /db_xref="GO:0006091"
+                     /db_xref="PDB:4ZIN"
+                     /ApEinfo_fwdcolor="#c16969"
+                     /ApEinfo_revcolor="#c16969"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      primer_bind     complement(156..174)
                      /label="mCherry-R"
                      /note="mCherry, reverse primer"
@@ -46,32 +53,28 @@ FEATURES             Location/Qualifiers
                      primer"
      promoter        847..951
                      /gene="bla"
-                     /label="AmpR Promoter"
-                     /ApEinfo_fwdcolor="#ff6666"
-                     /ApEinfo_revcolor="#ff6666"
+                     /label="SmR Promoter"
+                     /ApEinfo_fwdcolor="#ffe080"
+                     /ApEinfo_revcolor="#ffe080"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      CDS             952..1962
-                     /label="Sm/Sp no DraIII"
-     CDS             1171..1962
-                     /codon_start=1
+                     /label="SmR"
                      /gene="aadA"
                      /product="aminoglycoside adenylyltransferase"
-                     /label="SmR"
-                     /translation="MREAVIAEVSTQLSEVVGVIERHLEPTLLAVHLYGSAVDGGLKPH
-                     SDIDLLVTVTVRLDETTRRALINDLLETSASPGESEILRAVEVTIVVHDDIIPWRYPAK
-                     RELQFGEWQRNDILAGIFEPATIDIDLAILLTKAREHSVALVGPAAEELFDPVPEQDLF
-                     EALNETLTLWNSPPDWAGDERNVVLTLSRIWYSAVTGKIAPKDVAADWAMERLPAQYQP
-                     VILEARQAYLGQEEDRLASRADQLEEFVHYVKGEITKVVGK"
                      /function="spectinomycin and streptomycin resistance"
-                     /ApEinfo_fwdcolor="#ffff00"
-                     /ApEinfo_revcolor="#ffff00"
+                     /ApEinfo_fwdcolor="#ffc400"
+                     /ApEinfo_revcolor="#ffc400"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      Mutation        1929
                      /label="G to A"
-     Misc._feature   2122..2736
-                     /label="rep (pMB1)"
+     rep_origin      2122..2736
+                     /label="pMB1"
+                     /ApEinfo_fwdcolor="#7f7f7f"
+                     /ApEinfo_revcolor="#7f7f7f"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      rep_origin      2133..2721
                      /direction=RIGHT
                      /label="ori"

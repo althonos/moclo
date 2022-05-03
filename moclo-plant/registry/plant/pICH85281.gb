@@ -28,8 +28,10 @@ FEATURES             Location/Qualifiers
                      /label="mas prom"
                      /label="mas promoter and 5' UTR (Agrobacterium
                      tumefaciens)"
+                     /label="color: #00a1ee"
      promoter        16..396
                      /label="MAS promoter"
+                     /label="color: #00a1ee"
                      /note="mannopine synthase promoter (Velten et al., 1984)"
      Misc._Feature   397..400
                      /label="AATG 4bp overhang"
@@ -39,32 +41,28 @@ FEATURES             Location/Qualifiers
                      primer"
      promoter        522..626
                      /gene="bla"
-                     /label="AmpR Promoter"
-                     /ApEinfo_fwdcolor="#ff6666"
-                     /ApEinfo_revcolor="#ff6666"
+                     /label="SmR Promoter"
+                     /ApEinfo_fwdcolor="#ffe080"
+                     /ApEinfo_revcolor="#ffe080"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      CDS             627..1637
-                     /label="Sm/Sp no DraIII"
-     CDS             846..1637
-                     /codon_start=1
+                     /label="SmR"
                      /gene="aadA"
                      /product="aminoglycoside adenylyltransferase"
-                     /label="SmR"
-                     /translation="MREAVIAEVSTQLSEVVGVIERHLEPTLLAVHLYGSAVDGGLKPH
-                     SDIDLLVTVTVRLDETTRRALINDLLETSASPGESEILRAVEVTIVVHDDIIPWRYPAK
-                     RELQFGEWQRNDILAGIFEPATIDIDLAILLTKAREHSVALVGPAAEELFDPVPEQDLF
-                     EALNETLTLWNSPPDWAGDERNVVLTLSRIWYSAVTGKIAPKDVAADWAMERLPAQYQP
-                     VILEARQAYLGQEEDRLASRADQLEEFVHYVKGEITKVVGK"
                      /function="spectinomycin and streptomycin resistance"
-                     /ApEinfo_fwdcolor="#ffff00"
-                     /ApEinfo_revcolor="#ffff00"
+                     /ApEinfo_fwdcolor="#ffc400"
+                     /ApEinfo_revcolor="#ffc400"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      Mutation        1604
                      /label="G to A"
-     Misc._feature   1797..2411
-                     /label="rep (pMB1)"
+     rep_origin      1797..2411
+                     /label="pMB1"
+                     /ApEinfo_fwdcolor="#7f7f7f"
+                     /ApEinfo_revcolor="#7f7f7f"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      rep_origin      1808..2396
                      /direction=RIGHT
                      /label="ori"

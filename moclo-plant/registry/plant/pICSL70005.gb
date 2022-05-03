@@ -23,19 +23,24 @@ FEATURES             Location/Qualifiers
                      /label="GGAG 4bp overhang"
      Promoter        14..280
                      /label="Nos promoter (Agrobacterium tumefaciens)"
+                     /label="color: #00a1ee"
      promoter        88..266
                      /label="NOS promoter"
+                     /label="color: #00a1ee"
                      /note="nopaline synthase promoter"
      promoter        120..302
                      /function="NOS promoter"
                      /label="NOS promoter"
+                     /label="color: #00a1ee"
                      /note="nopaline synthase promoter"
      CDS             323..874
                      /label="Bar (phosphinothricin N-acetyltransferase)"
      Terminator      875..1173
                      /label="Nos terminator (Agrobacterium tumefaciens)"
+                     /label="color: #ff8eff"
      terminator      902..1154
                      /label="NOS terminator"
+                     /label="color: #ff8eff"
                      /note="nopaline synthase terminator and poly(A) signal"
      MIsc._Feature   1174..1177
                      /label="CGCT 4bp overhang"
@@ -45,32 +50,28 @@ FEATURES             Location/Qualifiers
                      primer"
      promoter        1299..1403
                      /gene="bla"
-                     /label="AmpR Promoter"
-                     /ApEinfo_fwdcolor="#ff6666"
-                     /ApEinfo_revcolor="#ff6666"
+                     /label="SmR Promoter"
+                     /ApEinfo_fwdcolor="#ffe080"
+                     /ApEinfo_revcolor="#ffe080"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      CDS             1404..2414
-                     /label="Sm/Sp no DraIII"
-     CDS             1623..2414
-                     /codon_start=1
+                     /label="SmR"
                      /gene="aadA"
                      /product="aminoglycoside adenylyltransferase"
-                     /label="SmR"
-                     /translation="MREAVIAEVSTQLSEVVGVIERHLEPTLLAVHLYGSAVDGGLKPH
-                     SDIDLLVTVTVRLDETTRRALINDLLETSASPGESEILRAVEVTIVVHDDIIPWRYPAK
-                     RELQFGEWQRNDILAGIFEPATIDIDLAILLTKAREHSVALVGPAAEELFDPVPEQDLF
-                     EALNETLTLWNSPPDWAGDERNVVLTLSRIWYSAVTGKIAPKDVAADWAMERLPAQYQP
-                     VILEARQAYLGQEEDRLASRADQLEEFVHYVKGEITKVVGK"
                      /function="spectinomycin and streptomycin resistance"
-                     /ApEinfo_fwdcolor="#ffff00"
-                     /ApEinfo_revcolor="#ffff00"
+                     /ApEinfo_fwdcolor="#ffc400"
+                     /ApEinfo_revcolor="#ffc400"
                      /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
                      width 5 offset 0"
      Mutation        2381
                      /label="G to A"
-     Misc._feature   2574..3188
-                     /label="rep (pMB1)"
+     rep_origin      2574..3188
+                     /label="pMB1"
+                     /ApEinfo_fwdcolor="#7f7f7f"
+                     /ApEinfo_revcolor="#7f7f7f"
+                     /ApEinfo_graphicformat="arrow_data {{0 1 2 0 0 -1} {} 0}
+                     width 5 offset 0"
      primer_bind     3074..3093
                      /label="pBR322ori-F"
                      /note="pBR322 origin, forward primer"
