@@ -10,6 +10,7 @@ References:
        Fast track assembly of multigene constructs using Golden Gate cloning
        and the MoClo system. Bioengineered, 3(1), 38–43.
        <https://doi.org/10.4161/bbug.3.1.18223>`_
+
 """
 from __future__ import absolute_import
 from __future__ import unicode_literals
@@ -21,7 +22,7 @@ from ..core import parts, modules, vectors
 __author__ = "Martin Larralde <martin.larralde@ens-paris-saclay.fr>"
 __version__ = (
     __import__("pkg_resources")
-    .resource_string(__name__, "ig.version")
+    .resource_string(__name__, "moclo.version")
     .strip()
     .decode("ascii")
 )
@@ -30,7 +31,7 @@ __version__ = (
 # VECTORS ####################################################################
 
 
-class MoCloVector(vectors.EntryVector):
+class MoCloEntryVector(vectors.EntryVector):
     """A MoClo entry vector.
 
     References:
@@ -174,8 +175,7 @@ class MoCloUntranslatedRegion(MoCloPart, MoCloEntry):
 
 
 class MoCloSignalPeptide(MoCloPart, MoCloEntry):
-    """An original MoClo signal peptide part.
-    """
+    """An original MoClo signal peptide part."""
 
     signature = ("AATG", "AGGT")
 
@@ -192,6 +192,13 @@ class MoCloTerminator(MoCloPart, MoCloEntry):
     """
 
     signature = ("GCTT", "CGCT")
+
+
+class MoCloGene(MoCloPart, MoCloEntry):
+    """An original MoClo part composed of an entire gene.
+    """
+
+    signature = ("GGAG", "CGCT")
 
 
 # Level 0 ####################################################################

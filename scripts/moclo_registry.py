@@ -97,6 +97,8 @@ if __name__ == "__main__":
 
         # Find a name / ID
         id_ = name = row_text
+        if name == "pAGM1311" or name == "pAGM9121":
+            continue
 
         # Update the progress bar
         it.set_description(id_)
@@ -125,8 +127,7 @@ if __name__ == "__main__":
             soup = bs.BeautifulSoup(res.text, "html.parser")
 
         # get the addgene full sequence
-        section = soup.find("section", id="depositor-full")
-        gb_url = section.find("a", class_="genbank-file-download").get("href")
+        gb_url = soup.find("a", class_="genbank-file-download").get("href")
         with requests.get(gb_url) as res:
             gb = info["gb"] = CircularRecord(read(io.StringIO(res.text), "gb"))
 
@@ -147,36 +148,15 @@ if __name__ == "__main__":
         def get_features_from_note(note):
             return (f for f in gb.features if note in f.qualifiers.get("note", []))
 
-        # Correct overlapping features by setting the origin just before the
-        # biobrick prefix
-        # pref = next(get_features("BioBrick prefix"))
-        # gb <<= pref.location.start - 1
-
-        # Check sequences are the same, or warn the user
+        # Check sequences are the same, or skip
         if len(gb) != len(gb_archive):
             # FIXME: pAGM1276 sequences differ
             print("lengths differ for", id_, ":", len(gb), "VS", len(gb_archive))
-
-            gb = gb.reverse_complement(True, True, True, True, True, True, True)
-
-            # anchor = gb.seq.lower().find("gcctcgtgatacgcctatt")
-            # anchor_archive = gb_archive.seq.lower().find("gcctcgtgatacgcctatt")
-            #
-            # assert anchor != -1 and anchor_archive != -1
-            #
-            # gb <<= anchor - 1
-            # gb_archive <<= anchor_archive - 1
-            #
-            # from Bio.SeqIO import write
-            # with open('/tmp/archive.gb', 'w') as f:
-            #     write(gb_archive, f, 'gb')
-            # with open('/tmp/full.gb', 'w') as f:
-            #     write(gb, f, 'gb')
-            #
-            # continue
-
-        else:
-            assert gb.seq == gb_archive.seq
+            # gb = gb.reverse_complement(True, True, True, True, True, True, True)
+            continue
+        elif gb.seq != gb_archive.seq:
+            print("sequences differ for", id_, ":", len(gb))
+            continue
 
         # Copy AddGene annotations to the archive record
         for feature in gb.features:
@@ -285,6 +265,7 @@ if __name__ == "__main__":
                 qualifiers={"label": ["KanR Terminator"], "note": ["color: #93ff35"]},
             )
             gb.features.append(kanr_term)
+        kanr_prom = next(get_features("KanR Promoter"), None)
         kanr_prom_start = gb.seq.find(KANR_PROM)
         if kanr is not None and kanr_prom_start >= 0:
             kanr_prom = SeqFeature(
@@ -293,6 +274,11 @@ if __name__ == "__main__":
                 qualifiers={"label": ["KanR Promoter"], "note": ["color: #93ff35"]},
             )
             gb.features.append(kanr_prom)
+        if kanr_prom is None and ampr_prom is not None and kanr is not None:
+            kanr_prom = ampr_prom
+            kanr_prom.qualifiers["label"] = ["KanR Promoter"]
+            kanr_prom.qualifiers["note"] = ["color: #93ff35"]
+
 
         # SpecR recolor and annotations
         smr = next(get_features('SmR'), None)
@@ -424,7 +410,7 @@ if __name__ == "__main__":
 
         # write the final record
         dst_dir = os.path.abspath(
-            os.path.join(__file__, "..", "..", "moclo-ig", "registry", "ig")
+            os.path.join(__file__, "..", "..", "moclo-moclo", "registry", "moclo")
         )
         dst_file = os.path.join(dst_dir, "{}.gb").format(info["id"])
         write(gb_archive, dst_file, "gb")
